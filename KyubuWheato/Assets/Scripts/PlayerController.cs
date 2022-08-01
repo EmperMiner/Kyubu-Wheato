@@ -3,9 +3,10 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public float tileMoveSpeed = 5f;
-    public Transform movePoint;
-    public LayerMask whatStopsMovement;
+
+    public float MoveSpeed = 3f;
+    public Rigidbody2D playerRB ;
+    Vector2 movement;
 
     public int maxHealth = 15;
     public int playerHealth;
@@ -21,9 +22,8 @@ public class PlayerController : MonoBehaviour
     public GameObject crosshair;
     public GameObject diceThrower;
 
-    private void Start(){
-        movePoint.parent = null;
-
+    private void Start()
+    {
         playerHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
 
@@ -32,31 +32,13 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
     }
 
     private void FixedUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, tileMoveSpeed * Time.deltaTime);
-
-        if(Vector3.Distance(transform.position, movePoint.position) <= .05f && diceThrowScript.inCooldown == false) 
-        {
-            if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
-            {   
-                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f), .2f, whatStopsMovement))
-                {
-                    movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
-                    diceThrowScript.inCooldown = true;
-                }
-            }  else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
-                {
-                    if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), .2f, whatStopsMovement))
-                    {
-                        movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f);
-                        diceThrowScript.inCooldown = true;
-                    }
-                }
-        }
+            playerRB.MovePosition(playerRB.position + movement * MoveSpeed * Time.fixedDeltaTime);
     }
 
     void TakeDamage(int damage)
