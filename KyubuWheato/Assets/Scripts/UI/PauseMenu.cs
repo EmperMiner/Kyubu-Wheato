@@ -1,14 +1,18 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
     private int MainMenu = 0;
+    private int LoadingGameToMenu = 2;
 
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
     public GameObject HUD;
+
+    private static Action onIngameLoaderCallback;
 
     private void Update() 
     {
@@ -49,11 +53,18 @@ public class PauseMenu : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene(MainMenu);
+        onIngameLoaderCallback = () => { SceneManager.LoadScene(MainMenu); };
+
+        SceneManager.LoadScene(LoadingGameToMenu);
     }
 
-    
-
-    
+    public static void IngameLoaderCallback()
+    {
+        if (onIngameLoaderCallback!=null)
+        {
+            onIngameLoaderCallback();
+            onIngameLoaderCallback = null;
+        }
+    }   
 }
 
