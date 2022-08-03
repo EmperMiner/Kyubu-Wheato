@@ -14,6 +14,7 @@ TagManager:
   - 6sidedDice5
   - 6sidedDice6
   - Wheat
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Water
   - UI
   - StopMovement
-  - 
+  - Player
   - 
   - 
   - 

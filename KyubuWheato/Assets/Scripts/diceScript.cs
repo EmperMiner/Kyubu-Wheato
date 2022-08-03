@@ -5,8 +5,8 @@ public class diceScript : MonoBehaviour
     private Vector3 mousePos;
     private Camera mainCam;
     private Rigidbody2D rb;
-    public float fireForce = 5;
-    public float spinForce = 1;
+    public float fireForce = 12;
+    public float spinForce = 1000;
 
     void Start()
     {
