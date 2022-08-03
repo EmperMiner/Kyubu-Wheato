@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float MoveSpeed = 3f;
     public Rigidbody2D playerRB ;
     Vector2 movement;
+    public Animator animator;
 
     public int maxHealth = 15;
     public int playerHealth;
@@ -34,6 +35,11 @@ public class PlayerController : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+
+        if ( movement.x!=0 ) { animator.SetFloat("Horizontal", movement.x); }
+        animator.SetFloat("Speed", movement.sqrMagnitude);
+        Debug.Log("Horizontal is " + movement.x);
+        Debug.Log("Speed is" + movement.sqrMagnitude);
     }
 
     private void FixedUpdate()

@@ -130,7 +130,7 @@ Transform:
   m_GameObject: {fileID: 3396991805667019771}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 19.5, y: 10.6, z: -2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3396991805466466345}
@@ -227,7 +227,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.96, y: 0.96}
+    oldSize: {x: 3, y: 3}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -252,6 +252,7 @@ MonoBehaviour:
   bossHealth: 0
   player: {fileID: 0}
   BossHealthCounterNumber: {fileID: 3396991807124306524}
+  DiceCounterNumber: {fileID: 0}
   diceThrowScript: {fileID: 0}
 --- !u!1 &3396991807124306525
 GameObject:
