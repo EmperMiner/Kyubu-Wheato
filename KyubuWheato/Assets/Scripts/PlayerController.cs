@@ -38,8 +38,6 @@ public class PlayerController : MonoBehaviour
 
         if ( movement.x!=0 ) { animator.SetFloat("Horizontal", movement.x); }
         animator.SetFloat("Speed", movement.sqrMagnitude);
-        Debug.Log("Horizontal is " + movement.x);
-        Debug.Log("Speed is" + movement.sqrMagnitude);
     }
 
     private void FixedUpdate()

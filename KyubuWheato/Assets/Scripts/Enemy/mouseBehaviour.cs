@@ -10,16 +10,13 @@ public class mouseBehaviour : MonoBehaviour
 
     public int maxMouseHealth = 5;
     public int mouseHealth;
-    public float mouseSpeed = 1f;
 
     private bool alreadyDamaged;
 
-    public PlayerController player;
-    public Transform playerTransform;
+    private PlayerController player;
+    private Transform playerTransform;
     private Rigidbody2D mouseRB;
     private Vector2 movement;
-
-    public Text MouseHealthCounterNumber;
 
     private void Start()
     {
@@ -31,7 +28,6 @@ public class mouseBehaviour : MonoBehaviour
         agent.updateUpAxis = false;
 
         mouseHealth = maxMouseHealth;
-        MouseHealthCounterNumber.text = mouseHealth.ToString();
         alreadyDamaged = false;
 
         mouseRB = this.GetComponent<Rigidbody2D>();
@@ -56,7 +52,6 @@ public class mouseBehaviour : MonoBehaviour
     {
         i = (int)Mathf.Round(i * player.strength);
         mouseHealth -= i;
-        MouseHealthCounterNumber.text = mouseHealth.ToString();
         alreadyDamaged = true;
     }
 

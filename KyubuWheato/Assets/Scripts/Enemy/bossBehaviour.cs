@@ -2,28 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class bossBehaviour : MonoBehaviour
 {
-    public int maxBossHealth = 20;
+    private NavMeshAgent agent;
+
+    public int maxBossHealth = 5;
     public int bossHealth;
+    public float bossSpeed = 1f;
+
     private bool alreadyDamaged;
 
-    public PlayerController player;
+    private PlayerController player;
+    private DiceThrow diceThrowScript;
+    private Text DiceCounterNumber;
+    private Transform playerTransform;
+    private Rigidbody2D bossRB;
+    private Vector2 movement;
+
     public Text BossHealthCounterNumber;
-    public Text DiceCounterNumber;
 
-    public DiceThrow diceThrowScript;
-
-    void Start()
+    private void Start()
     {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        diceThrowScript = GameObject.FindGameObjectWithTag("DiceLogic").GetComponent<DiceThrow>();
+        DiceCounterNumber = GameObject.FindGameObjectWithTag("DiceNumberCounter").GetComponent<Text>();
+
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+
         bossHealth = maxBossHealth;
         BossHealthCounterNumber.text = bossHealth.ToString();
         alreadyDamaged = false;
+
+        bossRB = this.GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
+        
+
         if(bossHealth <= 0)
         {
             Destroy(gameObject);
@@ -32,8 +53,14 @@ public class bossBehaviour : MonoBehaviour
         }
     }
 
+    private void FixedUpdate() 
+    {
+        agent.SetDestination(playerTransform.position);
+    }
+
     private void bossTakeDamage(int i)
     {
+        i = (int)Mathf.Round(i * player.strength);
         bossHealth -= i;
         BossHealthCounterNumber.text = bossHealth.ToString();
         alreadyDamaged = true;

@@ -2,33 +2,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class snakeBehaviour : MonoBehaviour
 {
-    public int maxSnakeHealth = 8;
+    private NavMeshAgent agent;
+
+    public int maxSnakeHealth = 5;
     public int snakeHealth;
+    public float snakeSpeed = 1f;
+
     private bool alreadyDamaged;
 
-    public PlayerController player;
+    private PlayerController player;
+    private Transform playerTransform;
+    private Rigidbody2D snakeRB;
+    private Vector2 movement;
+
     public Text SnakeHealthCounterNumber;
 
-    void Start()
+    private void Start()
     {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+
         snakeHealth = maxSnakeHealth;
         SnakeHealthCounterNumber.text = snakeHealth.ToString();
         alreadyDamaged = false;
+
+        snakeRB = this.GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
+        
+
         if(snakeHealth <= 0)
         {
             Destroy(gameObject);
         }
     }
 
+    private void FixedUpdate() 
+    {
+        agent.SetDestination(playerTransform.position);
+    }
+
     private void snakeTakeDamage(int i)
     {
+        i = (int)Mathf.Round(i * player.strength);
         snakeHealth -= i;
         SnakeHealthCounterNumber.text = snakeHealth.ToString();
         alreadyDamaged = true;
