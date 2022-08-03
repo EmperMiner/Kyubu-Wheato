@@ -10,11 +10,15 @@ public class mouseBehaviour : MonoBehaviour
 
     public int maxMouseHealth = 5;
     public int mouseHealth;
+    [SerializeField] private int mouseStrength = 1;
+    [SerializeField] private float mouseAttackSpeed = 1f;
+    private float mouseCanAttack;
 
     private bool alreadyDamaged;
 
     private PlayerController player;
     private Transform playerTransform;
+    private HealthBar healthBar;
     private Rigidbody2D mouseRB;
     private Vector2 movement;
 
@@ -35,8 +39,6 @@ public class mouseBehaviour : MonoBehaviour
 
     private void Update()
     {
-        
-
         if(mouseHealth <= 0)
         {
             Destroy(gameObject);
@@ -50,7 +52,7 @@ public class mouseBehaviour : MonoBehaviour
 
     private void mouseTakeDamage(int i)
     {
-        i = (int)Mathf.Round(i * player.strength);
+        i = (int) (i * player.strength);
         mouseHealth -= i;
         alreadyDamaged = true;
     }
@@ -66,10 +68,29 @@ public class mouseBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "6sidedDice5") { mouseTakeDamage(5); }
             if (collider.gameObject.tag == "6sidedDice6") { mouseTakeDamage(6); }        
         }
+        if (collider.gameObject.tag == "Player") { mouseCanAttack = 1f; }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {   
+        if (other.gameObject.tag != "Player") return;
+
+        if (mouseCanAttack >= mouseAttackSpeed)
+        {
+            player.UpdateHealth(-mouseStrength);
+            mouseCanAttack = 0f;
+        }
+
+        mouseCanAttack += Time.deltaTime; 
     }
 
     private void OnTriggerExit2D(Collider2D collider)
     {
-        alreadyDamaged = false;
+        if (collider.gameObject.tag == "6sidedDice1") { alreadyDamaged = false; }
+        if (collider.gameObject.tag == "6sidedDice2") { alreadyDamaged = false; } 
+        if (collider.gameObject.tag == "6sidedDice3") { alreadyDamaged = false; }
+        if (collider.gameObject.tag == "6sidedDice4") { alreadyDamaged = false; }
+        if (collider.gameObject.tag == "6sidedDice5") { alreadyDamaged = false; }
+        if (collider.gameObject.tag == "6sidedDice6") { alreadyDamaged = false; }     
     }
 }

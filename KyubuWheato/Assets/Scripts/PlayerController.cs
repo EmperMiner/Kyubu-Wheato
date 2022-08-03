@@ -45,10 +45,18 @@ public class PlayerController : MonoBehaviour
             playerRB.MovePosition(playerRB.position + movement * MoveSpeed * Time.fixedDeltaTime);
     }
 
-    void TakeDamage(int damage)
+    public void UpdateHealth(int mod)
     {
-        playerHealth -= damage;
+        playerHealth += mod;
         healthBar.SetHealth(playerHealth);
+
+        if (playerHealth > maxHealth)
+        {
+            playerHealth = maxHealth;
+        } else if (playerHealth <= 0)
+        {
+            playerHealth = 0;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -59,10 +67,6 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.tag == "6sidedDice4") { IncreaseDiceNumber(); } 
         if (collider.gameObject.tag == "6sidedDice5") { IncreaseDiceNumber(); } 
         if (collider.gameObject.tag == "6sidedDice6") { IncreaseDiceNumber(); } 
-
-        if (collider.gameObject.tag == "enemyMouse") { TakeDamage(1);}
-        if (collider.gameObject.tag == "enemySnake") { TakeDamage(1);}
-        if (collider.gameObject.tag == "enemyBoss") { TakeDamage(2);}
 
         if (collider.gameObject.tag == "Wheat") 
         { 

@@ -15,6 +15,7 @@ TagManager:
   - 6sidedDice6
   - Wheat
   - Wall
+  - HealthBar
   layers:
   - Default
   - TransparentFX
