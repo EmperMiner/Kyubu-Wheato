@@ -16,6 +16,8 @@ TagManager:
   - Wheat
   - Wall
   - HealthBar
+  - Blue PosFlower
+  - Orange PosFlower
   layers:
   - Default
   - TransparentFX
