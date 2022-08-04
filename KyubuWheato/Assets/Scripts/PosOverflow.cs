@@ -7,7 +7,10 @@ public class PosOverflow : MonoBehaviour
     private Transform posOverflowDestination;
 
     public bool isOrange;
-    public float distance = 0.2f;
+    private float distance = 0.2f;
+
+    private Rigidbody2D enteredRigidbody;
+    private float enterVelocity, exitVelocity;
 
     private string nameOfDestination;
 
@@ -26,7 +29,34 @@ public class PosOverflow : MonoBehaviour
     {
         if (Vector2.Distance(transform.position, other.transform.position) > distance)
         {
-            other.transform.position = new Vector2 (posOverflowDestination.position.x + 0.1f, posOverflowDestination.position.y + 0.1f);
+            if (other.gameObject.tag == "Player")
+            {
+                if (isOrange)
+                {
+                    other.transform.position = new Vector2 (posOverflowDestination.position.x + 1f, posOverflowDestination.position.y + 0.5f);
+                }
+                else
+                {
+                    other.transform.position = new Vector2 (posOverflowDestination.position.x - 1f, posOverflowDestination.position.y + 0.5f);
+                }
+            }
+            else if (other.gameObject.tag != "Player")
+            {
+                if (isOrange)
+                {
+                    other.transform.position = new Vector2 (posOverflowDestination.position.x + 1.5f, posOverflowDestination.position.y + 0.1f);
+                    enteredRigidbody = other.gameObject.GetComponent<Rigidbody2D>();
+                    enteredRigidbody.velocity = new Vector2(15, 0);
+                }
+                else
+                {
+                    other.transform.position = new Vector2 (posOverflowDestination.position.x - 1.5f, posOverflowDestination.position.y + 0.1f);
+                    enteredRigidbody = other.gameObject.GetComponent<Rigidbody2D>();
+                    enteredRigidbody.velocity = new Vector2(-15, 0);
+                }
+                
+            }
         }
+       
     }
 }
