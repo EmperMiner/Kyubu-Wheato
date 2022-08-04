@@ -11,15 +11,16 @@ public class PlayerController : MonoBehaviour
 
     public int maxHealth = 15;
     public int playerHealth;
-
     public float strength = 1f;
+
+    public int Wheat = 0;
 
     public HealthBar healthBar;
 
     public DiceThrow diceThrowScript;
     public Text DiceCounterNumber;
+    public Text WheatCounterNumber;
 
-    public Text victoryScreen;
     public GameObject crosshair;
     public GameObject diceThrower;
 
@@ -27,8 +28,6 @@ public class PlayerController : MonoBehaviour
     {
         playerHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
-
-        victoryScreen.enabled = false;
     }
 
     private void Update()
@@ -45,9 +44,27 @@ public class PlayerController : MonoBehaviour
             playerRB.MovePosition(playerRB.position + movement * MoveSpeed * Time.fixedDeltaTime);
     }
 
-    public void UpdateHealth(int mod)
+    
+
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        playerHealth += mod;
+        if (collider.gameObject.tag == "6sidedDice1") { IncreaseDiceNumber(); } 
+        if (collider.gameObject.tag == "6sidedDice2") { IncreaseDiceNumber(); } 
+        if (collider.gameObject.tag == "6sidedDice3") { IncreaseDiceNumber(); } 
+        if (collider.gameObject.tag == "6sidedDice4") { IncreaseDiceNumber(); } 
+        if (collider.gameObject.tag == "6sidedDice5") { IncreaseDiceNumber(); } 
+        if (collider.gameObject.tag == "6sidedDice6") { IncreaseDiceNumber(); } 
+    }
+
+    private void IncreaseDiceNumber()
+    {
+        diceThrowScript.diceNumber++;
+        DiceCounterNumber.text = diceThrowScript.diceNumber.ToString();
+    }
+
+    public void UpdateHealth(int healthMod)
+    {
+        playerHealth += healthMod;
         healthBar.SetHealth(playerHealth);
 
         if (playerHealth > maxHealth)
@@ -59,27 +76,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    public void UpdateWheat(int wheatMod) 
     {
-        if (collider.gameObject.tag == "6sidedDice1") { IncreaseDiceNumber(); } 
-        if (collider.gameObject.tag == "6sidedDice2") { IncreaseDiceNumber(); } 
-        if (collider.gameObject.tag == "6sidedDice3") { IncreaseDiceNumber(); } 
-        if (collider.gameObject.tag == "6sidedDice4") { IncreaseDiceNumber(); } 
-        if (collider.gameObject.tag == "6sidedDice5") { IncreaseDiceNumber(); } 
-        if (collider.gameObject.tag == "6sidedDice6") { IncreaseDiceNumber(); } 
-
-        if (collider.gameObject.tag == "Wheat") 
-        { 
-            victoryScreen.enabled = true;
-            Time.timeScale = 0f;
-            crosshair.SetActive(false);
-            diceThrower.SetActive(false);
-        }
+        Wheat += wheatMod;
+        WheatCounterNumber.text = Wheat.ToString();
     }
 
-    private void IncreaseDiceNumber()
+    public void GameOver()
     {
-        diceThrowScript.diceNumber++;
-        DiceCounterNumber.text = diceThrowScript.diceNumber.ToString();
+        Time.timeScale = 0f;
+        crosshair.SetActive(false);
+        diceThrower.SetActive(false);
     }
 }

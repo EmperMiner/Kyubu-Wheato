@@ -21,6 +21,7 @@ public class mouseBehaviour : MonoBehaviour
     private HealthBar healthBar;
     private Rigidbody2D mouseRB;
     private Vector2 movement;
+    public GameObject wheatDrop;
 
     private void Start()
     {
@@ -40,7 +41,10 @@ public class mouseBehaviour : MonoBehaviour
     private void Update()
     {
         if(mouseHealth <= 0)
-        {
+        {   
+            int RNGWheat = Random.Range(0, 2);
+            Debug.Log(RNGWheat);
+            if (RNGWheat == 1) { Instantiate(wheatDrop, transform.position, Quaternion.Euler(0, 0, 10)); }
             Destroy(gameObject);
         }
     }

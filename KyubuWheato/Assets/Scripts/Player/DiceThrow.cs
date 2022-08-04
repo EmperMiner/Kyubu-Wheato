@@ -40,6 +40,7 @@ public class DiceThrow : MonoBehaviour
                 {
                     inCooldown = false;
                     cooldownTimer = 0;
+                    cooldownBar.CooldownBarInvisible();
                 }
             }
 
