@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public GameObject crosshair;
     public GameObject diceThrower;
 
-    private void Start()
+    private void Awake()
     {
         playerHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);

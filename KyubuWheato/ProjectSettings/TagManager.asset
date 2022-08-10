@@ -18,6 +18,7 @@ TagManager:
   - HealthBar
   - Blue PosFlower
   - Orange PosFlower
+  - DiceManager
   layers:
   - Default
   - TransparentFX
