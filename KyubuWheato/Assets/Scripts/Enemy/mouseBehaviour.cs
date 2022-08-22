@@ -10,7 +10,7 @@ public class mouseBehaviour : MonoBehaviour
 
     public int maxMouseHealth = 5;
     public int mouseHealth;
-    [SerializeField] private int mouseStrength = 1;
+    [SerializeField] private int mouseStrength = 10;
     [SerializeField] private float mouseAttackSpeed = 1f;
     private float mouseCanAttack;
 
@@ -42,9 +42,8 @@ public class mouseBehaviour : MonoBehaviour
     {
         if(mouseHealth <= 0)
         {   
-            int RNGWheat = Random.Range(0, 2);
-            Debug.Log(RNGWheat);
-            if (RNGWheat == 1) { Instantiate(wheatDrop, transform.position, Quaternion.Euler(0, 0, 10)); }
+            float RNGWheat = Random.Range(0, 10);
+            if (RNGWheat <= player.wheatDroprate/10) { Instantiate(wheatDrop, transform.position, Quaternion.Euler(0, 0, 10)); }
             Destroy(gameObject);
         }
     }
@@ -81,7 +80,7 @@ public class mouseBehaviour : MonoBehaviour
 
         if (mouseCanAttack >= mouseAttackSpeed)
         {
-            player.UpdateHealth(-mouseStrength);
+            player.UpdateHealth(-mouseStrength + Mathf.RoundToInt((mouseStrength * player.defense)/10));
             mouseCanAttack = 0f;
         }
 

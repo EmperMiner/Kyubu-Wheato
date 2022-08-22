@@ -1,16 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class CooldownBar : MonoBehaviour
 {
     public Slider cooldownSlider;
     [SerializeField] private GameObject cooldownFill;
     [SerializeField] private GameObject cooldownBorder;
+    private float CDBarPlayerCooldownTime;
 
     void Start()
     {
-        cooldownSlider.maxValue = 1f;
-        cooldownSlider.value = 1f;
+        LoadData();
+        cooldownSlider.maxValue = CDBarPlayerCooldownTime;
+        cooldownSlider.value = CDBarPlayerCooldownTime;
         CooldownBarInvisible();
     }    
 
@@ -25,5 +28,17 @@ public class CooldownBar : MonoBehaviour
     {
         cooldownFill.GetComponent<Image>().color = new Color32(140, 140, 150, 0);
         cooldownBorder.GetComponent<Image>().color = new Color32(30, 0, 0, 0);
+    }
+
+    private void LoadData()
+    {
+        string json = File.ReadAllText(Application.dataPath + "/gameSaveData.json");
+        PlayerData loadedPlayerData = JsonUtility.FromJson<PlayerData>(json);
+
+        CDBarPlayerCooldownTime = loadedPlayerData.playerCooldownTime;
+    }   
+    private class PlayerData
+    {
+        public float playerCooldownTime;
     }
 }

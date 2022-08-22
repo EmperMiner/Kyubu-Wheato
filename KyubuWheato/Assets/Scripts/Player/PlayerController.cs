@@ -9,7 +9,8 @@ public class PlayerController : MonoBehaviour
     public int maxHealth;
     public int playerHealth;
     public float strength;
-    public float defense = 1f;
+    public float defense;
+    public float wheatDroprate;
     public int Wheat = 0;
 
     public Rigidbody2D playerRB ;
@@ -39,8 +40,6 @@ public class PlayerController : MonoBehaviour
 
         if ( movement.x!=0 ) { animator.SetFloat("Horizontal", movement.x); }
         animator.SetFloat("Speed", movement.sqrMagnitude);
-
-        if (Input.GetKeyDown(KeyCode.O)) {Debug.Log(strength);}
     }
 
     private void FixedUpdate()
@@ -56,6 +55,8 @@ public class PlayerController : MonoBehaviour
         MoveSpeed = loadedPlayerData.MoveSpeed;
         maxHealth = loadedPlayerData.maxHealth;
         strength = loadedPlayerData.strength;
+        defense = loadedPlayerData.defense;
+        wheatDroprate = loadedPlayerData.wheatDroprate;
     }
 
 
@@ -107,6 +108,8 @@ public class PlayerController : MonoBehaviour
         public float MoveSpeed;
         public int maxHealth;
         public float strength;
+        public float defense;
+        public float wheatDroprate;
         public int Wheat;
     }
 }

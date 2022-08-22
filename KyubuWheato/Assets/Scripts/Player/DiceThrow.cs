@@ -9,10 +9,10 @@ public class DiceThrow : MonoBehaviour
     public Text DiceCounterNumber;
     public GameObject[] dicetypes;
     public Transform diceTransform;
-    public int diceNumber = 3;
+    public int diceNumber;
     public bool inCooldown = false;
     private float cooldownTimer;
-    public float playerCooldownTime = 1f;
+    public float playerCooldownTime;
 
     public CooldownBar cooldownBar;
     
@@ -36,9 +36,9 @@ public class DiceThrow : MonoBehaviour
 
             if (inCooldown)
             {   
-                cooldownBar.SetCooldown(cooldownTimer);
+                cooldownBar.SetCooldown(cooldownTimer*10);
                 cooldownTimer += Time.deltaTime; 
-                if (cooldownTimer > playerCooldownTime)
+                if (cooldownTimer > playerCooldownTime/10)
                 {
                     inCooldown = false;
                     cooldownTimer = 0;
