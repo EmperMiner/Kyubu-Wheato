@@ -16,9 +16,15 @@ public class ShopManager : MonoBehaviour
     public int[] upgradePrices;
     public Text[] upgradePriceText;
 
+    public Image[] UpgradesImage;
+    public Sprite[] UpgradesSpritesVariants;
+
+    private int refundLoops;
+
     private void Start()
     {
         LoadData();
+        UpdateUpgradeUI(420);
     }
 
     private void Update()
@@ -34,7 +40,6 @@ public class ShopManager : MonoBehaviour
             ShopWheatCounterNumber.text = shopWheat.ToString();
             SaveData();
         }
-        if (shopStrength == 1.0) {}
     }
 
     public void Buy(int UpgradeValue)
@@ -66,16 +71,44 @@ public class ShopManager : MonoBehaviour
                 shopStrength = 5f;
                 shopWheat -= upgradePrices[4];
             }
-            else if (shopStrength == 5)
-            {
-                Debug.Log("Maximum Strength Upgrade Unlocked");
-            }
-            else 
-            {
-                Debug.Log("You Do Not Have Enough Wheat!");
-            }
+            else if (shopStrength == 5) { Debug.Log("Maximum Strength Upgrade Unlocked"); }
+            else { Debug.Log("You Do Not Have Enough Wheat!"); }
+            UpdateUpgradeUI(0);
             ShopWheatCounterNumber.text = shopWheat.ToString();
             SaveData();
+        }
+    }
+
+    public void Refund(int RefundValue)
+    {
+        if (RefundValue == 0)
+        {
+            if (shopStrength == 1.0) { Debug.Log("You haven't purchased this!"); }
+            else if (shopStrength == 1.5) { refundLoops = 1; }
+            else if (shopStrength == 2) { refundLoops = 2; }
+            else if (shopStrength == 2.5) { refundLoops = 3; }
+            else if (shopStrength == 3) { refundLoops = 4; }
+            else if (shopStrength == 5) { refundLoops = 5; }
+            else { Debug.Log("Error In Refunding");}
+            for (int i; i < refundLoops; i++) { shopWheat += upgradePrices[i] }            
+            shopStrength = 1f;
+            ShopWheatCounterNumber.text = shopWheat.ToString();
+            UpdateUpgradeUI(0);
+            SaveData();
+        }
+    }
+
+    public void UpdateUpgradeUI(int UpdateUpgradeUI)
+    {
+        if (UpdateUpgradeUI == 0 || UpdateUpgradeUI == 420)
+        {
+            if (shopStrength == 1.0) { UpgradesImage[0].sprite = UpgradesSpritesVariants[0]; upgradePriceText[0].text = upgradePrices[0].ToString(); }
+            else if (shopStrength == 1.5) { UpgradesImage[0].sprite = UpgradesSpritesVariants[1]; upgradePriceText[0].text = upgradePrices[1].ToString();}
+            else if (shopStrength == 2) { UpgradesImage[0].sprite = UpgradesSpritesVariants[2]; upgradePriceText[0].text = upgradePrices[2].ToString();}
+            else if (shopStrength == 2.5) { UpgradesImage[0].sprite = UpgradesSpritesVariants[3]; upgradePriceText[0].text = upgradePrices[3].ToString();}
+            else if (shopStrength == 3) { UpgradesImage[0].sprite = UpgradesSpritesVariants[4]; upgradePriceText[0].text = upgradePrices[4].ToString();}
+            else if (shopStrength == 5) { UpgradesImage[0].sprite = UpgradesSpritesVariants[5]; upgradePriceText[0].text = "Maxed";}
+            else { Debug.Log("Error in Updating UI");}
         }
     }
 
