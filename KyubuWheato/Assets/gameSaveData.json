@@ -1,1 +1,1 @@
-{"MoveSpeed":1.0,"maxHealth":15,"playerHealth":15,"strength":5.0,"Wheat":4,"diceNumber":3,"playerCooldownTime":1.0,"defense":5.0}
+{"MoveSpeed":1.5,"maxHealth":150,"playerHealth":15,"strength":5.0,"Wheat":10,"diceNumber":15,"playerCooldownTime":0.5,"defense":5.0,"wheatDroprate":100.0}
