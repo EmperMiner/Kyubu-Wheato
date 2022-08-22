@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class PurchaseBar : MonoBehaviour
 {
-    public GameObject shopItem;
+    public GameObject currentShopItem;
+    public GameObject currentBuyButton;
+    public GameObject currentRefundButton;
     void Start()
     {
 
@@ -14,7 +16,8 @@ public class PurchaseBar : MonoBehaviour
 
     void Update()
     {
-        if (EventSystem.current.currentSelectedGameObject != shopItem)
+        GameObject pressed = EventSystem.current.currentSelectedGameObject;
+        if (pressed != currentShopItem && pressed != currentBuyButton && pressed != currentRefundButton)
         {
             this.gameObject.SetActive(false);
         } else

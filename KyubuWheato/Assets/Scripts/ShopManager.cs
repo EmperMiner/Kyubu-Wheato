@@ -13,6 +13,9 @@ public class ShopManager : MonoBehaviour
     private float shopPlayerCooldownTime;
     public Text ShopWheatCounterNumber;
 
+    public int[] upgradePrices;
+    public Text[] upgradePriceText;
+
     private void Start()
     {
         LoadData();
@@ -28,6 +31,49 @@ public class ShopManager : MonoBehaviour
         } else if (Input.GetKeyDown(KeyCode.R))
         {
             shopWheat -= 1;
+            ShopWheatCounterNumber.text = shopWheat.ToString();
+            SaveData();
+        }
+        if (shopStrength == 1.0) {}
+    }
+
+    public void Buy(int UpgradeValue)
+    {
+        if (UpgradeValue == 0)
+        {
+            if (shopStrength == 1.0 && shopWheat >= upgradePrices[0])
+            {
+                shopStrength = 1.5f;
+                shopWheat -= upgradePrices[0];
+            }
+            else if (shopStrength == 1.5 && shopWheat >= upgradePrices[1])
+            {
+                shopStrength = 2f;
+                shopWheat -= upgradePrices[1];
+            }
+            else if (shopStrength == 2 && shopWheat >= upgradePrices[2])
+            {
+                shopStrength = 2.5f;
+                shopWheat -= upgradePrices[2];
+            }
+            else if (shopStrength == 2.5 && shopWheat >= upgradePrices[3])
+            {
+                shopStrength = 3f;
+                shopWheat -= upgradePrices[3];
+            }
+            else if (shopStrength == 3 && shopWheat >= upgradePrices[4])
+            {
+                shopStrength = 5f;
+                shopWheat -= upgradePrices[4];
+            }
+            else if (shopStrength == 5)
+            {
+                Debug.Log("Maximum Strength Upgrade Unlocked");
+            }
+            else 
+            {
+                Debug.Log("You Do Not Have Enough Wheat!");
+            }
             ShopWheatCounterNumber.text = shopWheat.ToString();
             SaveData();
         }

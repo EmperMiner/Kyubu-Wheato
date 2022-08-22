@@ -681,6 +681,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShopWheatCounterNumber: {fileID: 8575883395977606021}
+  upgradePrices: 020000000400000006000000080000000a000000
+  upgradePriceText:
+  - {fileID: 208887518}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &208887516
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,8 +1472,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 0.7882353}
-    m_SelectedColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 0.7882353}
+    m_PressedColor: {r: 0.7725491, g: 0.7725491, b: 0.7725491, a: 1}
+    m_SelectedColor: {r: 0.7725491, g: 0.7725491, b: 0.7725491, a: 1}
     m_DisabledColor: {r: 0.5283019, g: 0, b: 0, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.2
@@ -2428,6 +2437,7 @@ GameObject:
   - component: {fileID: 1047973200}
   - component: {fileID: 1047973199}
   - component: {fileID: 1047973198}
+  - component: {fileID: 1047973201}
   m_Layer: 5
   m_Name: StrengthButton
   m_TagString: Untagged
@@ -2549,6 +2559,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1047973196}
   m_CullTransparentMesh: 1
+--- !u!114 &1047973201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047973196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46cd35709713f0049bf64c6cceb102cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpgradesImage: {fileID: 0}
+  UpgradesSpritesVariants: []
 --- !u!1 &1189131713
 GameObject:
   m_ObjectHideFlags: 0
@@ -3441,7 +3465,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0bdfc078a4e924aa3ee571dc1ab627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shopItem: {fileID: 1047973196}
+  currentShopItem: {fileID: 1047973196}
+  currentBuyButton: {fileID: 2008249609}
+  currentRefundButton: {fileID: 609730368}
 --- !u!1 &1674587504
 GameObject:
   m_ObjectHideFlags: 0
@@ -3967,8 +3993,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 0.7882353}
-    m_SelectedColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 0.7882353}
+    m_PressedColor: {r: 0.7725491, g: 0.7725491, b: 0.7725491, a: 1}
+    m_SelectedColor: {r: 0.7725491, g: 0.7725491, b: 0.7725491, a: 1}
     m_DisabledColor: {r: 0.5283019, g: 0, b: 0, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.2
@@ -3987,7 +4013,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2008249612}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 195166940}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: Buy
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2008249612
 MonoBehaviour:
   m_ObjectHideFlags: 0

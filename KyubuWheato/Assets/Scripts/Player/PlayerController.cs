@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         playerHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        
     }
 
     private void Update()
