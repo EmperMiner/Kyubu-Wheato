@@ -74,6 +74,7 @@ public class ShopManager : MonoBehaviour
             else if (shopStrength == 5) { Debug.Log("Maximum Strength Upgrade Unlocked"); }
             else { Debug.Log("You Do Not Have Enough Wheat!"); }
             UpdateUpgradeUI(0);
+
             ShopWheatCounterNumber.text = shopWheat.ToString();
             SaveData();
         }
@@ -83,17 +84,18 @@ public class ShopManager : MonoBehaviour
     {
         if (RefundValue == 0)
         {
-            if (shopStrength == 1.0) { Debug.Log("You haven't purchased this!"); }
+            if (shopStrength == 1.0) { refundLoops = 0; Debug.Log("You haven't purchased this!"); }
             else if (shopStrength == 1.5) { refundLoops = 1; }
             else if (shopStrength == 2) { refundLoops = 2; }
             else if (shopStrength == 2.5) { refundLoops = 3; }
             else if (shopStrength == 3) { refundLoops = 4; }
             else if (shopStrength == 5) { refundLoops = 5; }
-            else { Debug.Log("Error In Refunding");}
-            for (int i; i < refundLoops; i++) { shopWheat += upgradePrices[i] }            
+            else { Debug.Log("Error In Refunding"); }
+            for (int i = 0; i < refundLoops; i++) { shopWheat += upgradePrices[i]; }            
             shopStrength = 1f;
-            ShopWheatCounterNumber.text = shopWheat.ToString();
             UpdateUpgradeUI(0);
+
+            ShopWheatCounterNumber.text = shopWheat.ToString();
             SaveData();
         }
     }
