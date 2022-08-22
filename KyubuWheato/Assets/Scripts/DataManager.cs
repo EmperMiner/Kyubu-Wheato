@@ -8,22 +8,7 @@ public class DataManager : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        diceManager =  GameObject.FindGameObjectWithTag("DiceManager").GetComponent<DiceThrow>();
         
-        PlayerData playerData = new PlayerData();
-        playerData.MoveSpeed = player.MoveSpeed;
-        playerData.maxHealth = player.maxHealth;
-        playerData.playerHealth = player.playerHealth;
-        playerData.strength = player.strength;
-        playerData.Wheat = player.Wheat;
-        playerData.diceNumber = diceManager.diceNumber;
-        playerData.playerCooldownTime = diceManager.playerCooldownTime;
-
-        string json = JsonUtility.ToJson(playerData);
-        Debug.Log(json);
-
-        File.WriteAllText(Application.dataPath + "/gameSaveData.json", json);        
     }
 
     private void ReadSaveData()

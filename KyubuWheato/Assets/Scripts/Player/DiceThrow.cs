@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class DiceThrow : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class DiceThrow : MonoBehaviour
     
     void Start()
     {
+        LoadData();
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>(); 
         DiceCounterNumber.text = diceNumber.ToString();
     }
@@ -51,6 +53,22 @@ public class DiceThrow : MonoBehaviour
                 inCooldown = true;
                 Instantiate(dicetypes[Random.Range(0,dicetypes.Length)],diceTransform.position, Random.rotation);
             }
-        }     
+        }  
+    }
+
+    private void LoadData()
+    {
+        string json = File.ReadAllText(Application.dataPath + "/gameSaveData.json");
+        PlayerData loadedPlayerData = JsonUtility.FromJson<PlayerData>(json);
+
+        diceNumber = loadedPlayerData.diceNumber;
+        playerCooldownTime = loadedPlayerData.playerCooldownTime;
+    }   
+    
+
+    private class PlayerData
+    {
+        public int diceNumber;
+        public float playerCooldownTime;
     }
 }

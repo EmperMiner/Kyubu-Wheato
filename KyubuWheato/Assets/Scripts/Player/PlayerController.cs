@@ -1,19 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 public class PlayerController : MonoBehaviour
 {
 
-    public float MoveSpeed = 3f;
+    public float MoveSpeed;
+    public int maxHealth;
+    public int playerHealth;
+    public float strength;
+    public float defense = 1f;
+    public int Wheat = 0;
+
     public Rigidbody2D playerRB ;
     Vector2 movement;
     public Animator animator;
-
-    public int maxHealth = 15;
-    public int playerHealth;
-    public float strength = 1f;
-
-    public int Wheat = 0;
 
     public HealthBar healthBar;
 
@@ -25,10 +26,10 @@ public class PlayerController : MonoBehaviour
     public GameObject diceThrower;
 
     private void Awake()
-    {
+    {       
+        LoadData();
         playerHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
-        
     }
 
     private void Update()
@@ -38,6 +39,8 @@ public class PlayerController : MonoBehaviour
 
         if ( movement.x!=0 ) { animator.SetFloat("Horizontal", movement.x); }
         animator.SetFloat("Speed", movement.sqrMagnitude);
+
+        if (Input.GetKeyDown(KeyCode.O)) {Debug.Log(strength);}
     }
 
     private void FixedUpdate()
@@ -45,7 +48,16 @@ public class PlayerController : MonoBehaviour
             playerRB.MovePosition(playerRB.position + movement * MoveSpeed * Time.fixedDeltaTime);
     }
 
-    
+    private void LoadData()
+    {
+        string json = File.ReadAllText(Application.dataPath + "/gameSaveData.json");
+        PlayerData loadedPlayerData = JsonUtility.FromJson<PlayerData>(json);
+
+        MoveSpeed = loadedPlayerData.MoveSpeed;
+        maxHealth = loadedPlayerData.maxHealth;
+        strength = loadedPlayerData.strength;
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -88,5 +100,13 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 0f;
         crosshair.SetActive(false);
         diceThrower.SetActive(false);
+    }
+
+    private class PlayerData
+    {
+        public float MoveSpeed;
+        public int maxHealth;
+        public float strength;
+        public int Wheat;
     }
 }

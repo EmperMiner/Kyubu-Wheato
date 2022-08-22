@@ -8608,12 +8608,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 3
-  playerRB: {fileID: 1405087411}
-  animator: {fileID: 1405087412}
   maxHealth: 15
   playerHealth: 0
   strength: 1
+  defense: 1
   Wheat: 0
+  playerRB: {fileID: 1405087411}
+  animator: {fileID: 1405087412}
   healthBar: {fileID: 1005547201}
   diceThrowScript: {fileID: 1194601116}
   DiceCounterNumber: {fileID: 1170444456}
