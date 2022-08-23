@@ -107,6 +107,14 @@ public class PlayerController : MonoBehaviour
         diceThrower.SetActive(false);
     }
 
+    IEnumerator FlashingHealthBar()
+    {
+        healthBar.HealthBarFlash(true);
+        yield return new WaitForSeconds(0.25f);
+        healthBar.HealthBarFlash(false);
+        yield return null;
+    }
+
     private class PlayerData
     {
         public float MoveSpeed;
@@ -115,13 +123,10 @@ public class PlayerController : MonoBehaviour
         public float defense;
         public float wheatDroprate;
         public int Wheat;
-    }
-
-    IEnumerator FlashingHealthBar()
-    {
-        healthBar.HealthBarFlash(true);
-        yield return new WaitForSeconds(0.25f);
-        healthBar.HealthBarFlash(false);
-        yield return null;
+        public bool havePizza;
+        public bool haveCarrotCake;
+        public bool haveFlan;
+        public bool haveCremeBrulee;
+        public bool haveBanhmi;
     }
 }

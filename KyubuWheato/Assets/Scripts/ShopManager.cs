@@ -15,6 +15,11 @@ public class ShopManager : MonoBehaviour
     private float shopPlayerCooldownTime;
     private float shopDefense;
     private float shopWheatDroprate;
+    private bool shopHavePizza;
+    private bool shopHaveCarrotCake;
+    private bool shopHaveFlan;
+    private bool shopHaveCremeBrulee;
+    private bool shopHaveBanhmi;
 
     public Text ShopWheatCounterNumber;
     public int[] upgradePrices;
@@ -377,6 +382,11 @@ public class ShopManager : MonoBehaviour
         shopPlayerCooldownTime = loadedPlayerData.playerCooldownTime;
         shopDefense = loadedPlayerData.defense;
         shopWheatDroprate = loadedPlayerData.wheatDroprate;
+        shopHavePizza = loadedPlayerData.havePizza;
+        shopHaveCarrotCake = loadedPlayerData.haveCarrotCake;
+        shopHaveFlan = loadedPlayerData.haveFlan;
+        shopHaveCremeBrulee = loadedPlayerData.haveCremeBrulee;
+        shopHaveBanhmi = loadedPlayerData.haveBanhmi;
 
         ShopWheatCounterNumber.text = shopWheat.ToString();
     }
@@ -393,6 +403,11 @@ public class ShopManager : MonoBehaviour
         savingPlayerData.playerCooldownTime = shopPlayerCooldownTime;
         savingPlayerData.defense = shopDefense;
         savingPlayerData.wheatDroprate = shopWheatDroprate;
+        savingPlayerData.havePizza = shopHavePizza;
+        savingPlayerData.haveCarrotCake = shopHaveCarrotCake;
+        savingPlayerData.haveFlan = shopHaveFlan;
+        savingPlayerData.haveCremeBrulee = shopHaveCremeBrulee;
+        savingPlayerData.haveBanhmi = shopHaveBanhmi;
 
         string json = JsonUtility.ToJson(savingPlayerData);
         Debug.Log(json);
@@ -411,5 +426,10 @@ public class ShopManager : MonoBehaviour
         public float playerCooldownTime;
         public float defense;
         public float wheatDroprate;
+        public bool havePizza;
+        public bool haveCarrotCake;
+        public bool haveFlan;
+        public bool haveCremeBrulee;
+        public bool haveBanhmi;
     }
 }
