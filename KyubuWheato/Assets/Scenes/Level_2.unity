@@ -3955,6 +3955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 1005547202}
+  healthFill: {fileID: 1543193269}
 --- !u!114 &1005547202
 MonoBehaviour:
   m_ObjectHideFlags: 0

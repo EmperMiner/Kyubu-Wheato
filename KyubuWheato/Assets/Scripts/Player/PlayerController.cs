@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
@@ -81,6 +83,7 @@ public class PlayerController : MonoBehaviour
     {
         playerHealth += healthMod;
         healthBar.SetHealth(playerHealth);
+        StartCoroutine(FlashingHealthBar());
 
         if (playerHealth > maxHealth)
         {
@@ -112,5 +115,13 @@ public class PlayerController : MonoBehaviour
         public float defense;
         public float wheatDroprate;
         public int Wheat;
+    }
+
+    IEnumerator FlashingHealthBar()
+    {
+        healthBar.HealthBarFlash(true);
+        yield return new WaitForSeconds(0.25f);
+        healthBar.HealthBarFlash(false);
+        yield return null;
     }
 }

@@ -4,7 +4,7 @@ using System.IO;
 
 public class CooldownBar : MonoBehaviour
 {
-    public Slider cooldownSlider;
+    [SerializeField] private Slider cooldownSlider;
     [SerializeField] private GameObject cooldownFill;
     [SerializeField] private GameObject cooldownBorder;
     private float CDBarPlayerCooldownTime;

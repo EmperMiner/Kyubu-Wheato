@@ -3,7 +3,13 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider healthSlider;
+    [SerializeField] private Slider healthSlider;
+    [SerializeField] private GameObject healthFill;
+
+    private void Start()
+    {
+        HealthBarFlash(false);
+    }
 
     public void SetMaxHealth(int playerHealth) 
     {
@@ -15,4 +21,10 @@ public class HealthBar : MonoBehaviour
     {
         healthSlider.value = playerHealth;
     } 
+
+    public void HealthBarFlash(bool flashIndex)
+    {
+        if (flashIndex) { healthFill.GetComponent<Image>().color = new Color32(170, 70, 70, 200); }
+        else { healthFill.GetComponent<Image>().color = new Color32(135, 0, 0, 200); }
+    }
 }
