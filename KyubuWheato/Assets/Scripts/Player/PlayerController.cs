@@ -16,8 +16,9 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D playerRB ;
     Vector2 movement;
     public Animator animator;
+    public Renderer spriteRenderer;
 
-    public HealthBar healthBar;
+    [SerializeField] private HealthBar healthBar;
 
     public DiceThrow diceThrowScript;
     public Text DiceCounterNumber;

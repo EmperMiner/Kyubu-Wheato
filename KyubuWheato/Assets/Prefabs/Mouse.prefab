@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4514144088407996266}
   - component: {fileID: 4514144088407996267}
   - component: {fileID: 4514144088407996264}
+  - component: {fileID: 6622152514414753538}
   - component: {fileID: 4514144088407996265}
   - component: {fileID: 4514144088407996270}
   - component: {fileID: 4514144088407996271}
@@ -100,11 +101,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82677489f74b72244a69cbe380bda90c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMouseHealth: 5
+  maxMouseHealth: 50
   mouseHealth: 0
   mouseStrength: 1
   mouseAttackSpeed: 1
+  mouseSpriteRenderer: {fileID: 4514144088407996267}
   wheatDrop: {fileID: 6133570875003662420, guid: 47d5b60bfb15aea49839d118dac8f86c, type: 3}
+  damagePopupScript: {fileID: 6622152514414753538}
+--- !u!114 &6622152514414753538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4514144088407996268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f95f391df8103f409607b9da03660c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mousePosition: {fileID: 4514144088407996266}
+  pfDamagePopup: {fileID: 8306074147551307625, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
+  pfDamagePopupText: {fileID: 1889332445406764888, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
 --- !u!195 &4514144088407996265
 NavMeshAgent:
   m_ObjectHideFlags: 0

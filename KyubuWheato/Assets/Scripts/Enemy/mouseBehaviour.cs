@@ -8,13 +8,14 @@ public class mouseBehaviour : MonoBehaviour
 {
     private NavMeshAgent agent;
 
-    public int maxMouseHealth = 5;
+    public int maxMouseHealth = 50;
     public int mouseHealth;
     [SerializeField] private int mouseStrength = 10;
     [SerializeField] private float mouseAttackSpeed = 1f;
     private float mouseCanAttack;
 
     private bool alreadyDamaged;
+    [SerializeField] private Renderer mouseSpriteRenderer;
 
     private PlayerController player;
     private Transform playerTransform;
@@ -22,6 +23,7 @@ public class mouseBehaviour : MonoBehaviour
     private Rigidbody2D mouseRB;
     private Vector2 movement;
     public GameObject wheatDrop;
+    [SerializeField] private DamagePopup damagePopupScript;
 
     private void Start()
     {
@@ -56,7 +58,9 @@ public class mouseBehaviour : MonoBehaviour
     private void mouseTakeDamage(int i)
     {
         i = (int) (i * player.strength);
+        damagePopupScript.CreateDamagePopup(i);
         mouseHealth -= i;
+        mouseSpriteRenderer.material.color = new Color32(255, 150, 150, 255); 
         alreadyDamaged = true;
     }
 
@@ -82,18 +86,21 @@ public class mouseBehaviour : MonoBehaviour
         {
             player.UpdateHealth(-mouseStrength + Mathf.RoundToInt((mouseStrength * player.defense)/10));
             mouseCanAttack = 0f;
-        }
+        }    
 
         mouseCanAttack += Time.deltaTime; 
+        if (mouseCanAttack <= 0.3f) {player.spriteRenderer.material.color = new Color32(255, 150, 150, 255);}
+        else { player.spriteRenderer.material.color = new Color32(255, 255, 255, 255); }
     }
 
     private void OnTriggerExit2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "6sidedDice1") { alreadyDamaged = false; }
-        if (collider.gameObject.tag == "6sidedDice2") { alreadyDamaged = false; } 
-        if (collider.gameObject.tag == "6sidedDice3") { alreadyDamaged = false; }
-        if (collider.gameObject.tag == "6sidedDice4") { alreadyDamaged = false; }
-        if (collider.gameObject.tag == "6sidedDice5") { alreadyDamaged = false; }
-        if (collider.gameObject.tag == "6sidedDice6") { alreadyDamaged = false; }     
+        if (collider.gameObject.tag == "6sidedDice1") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
+        if (collider.gameObject.tag == "6sidedDice2") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); } 
+        if (collider.gameObject.tag == "6sidedDice3") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
+        if (collider.gameObject.tag == "6sidedDice4") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
+        if (collider.gameObject.tag == "6sidedDice5") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
+        if (collider.gameObject.tag == "6sidedDice6") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
+        if (collider.gameObject.tag == "Player") { player.spriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
     }
 }
