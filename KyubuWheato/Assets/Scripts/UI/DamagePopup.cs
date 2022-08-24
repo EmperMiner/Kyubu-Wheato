@@ -5,9 +5,6 @@ using TMPro;
 
 public class DamagePopup : MonoBehaviour
 {
-    [SerializeField] private Transform mousePosition;
-    [SerializeField] private Transform pfDamagePopup;
-    [SerializeField] private TextMeshPro pfDamagePopupText;
 
     private void Awake()
     {
@@ -19,9 +16,5 @@ public class DamagePopup : MonoBehaviour
         
     }
 
-    public void CreateDamagePopup(int damageAmount)
-    {
-        pfDamagePopupText.text = damageAmount.ToString();
-        Instantiate(pfDamagePopup, mousePosition.transform.position, Quaternion.identity);
-    }
+    
 }

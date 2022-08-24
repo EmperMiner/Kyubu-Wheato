@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using TMPro;
 
 public class mouseBehaviour : MonoBehaviour
 {
@@ -22,8 +23,9 @@ public class mouseBehaviour : MonoBehaviour
     private HealthBar healthBar;
     private Rigidbody2D mouseRB;
     private Vector2 movement;
-    public GameObject wheatDrop;
-    [SerializeField] private DamagePopup damagePopupScript;
+    [SerializeField] private GameObject wheatDrop;
+    [SerializeField] private Transform pfDamagePopup;
+    [SerializeField] private TextMeshPro pfDamagePopupText;
 
     private void Start()
     {
@@ -58,10 +60,16 @@ public class mouseBehaviour : MonoBehaviour
     private void mouseTakeDamage(int i)
     {
         i = (int) (i * player.strength);
-        damagePopupScript.CreateDamagePopup(i);
+        CreateDamagePopup(i);
         mouseHealth -= i;
         mouseSpriteRenderer.material.color = new Color32(255, 150, 150, 255); 
         alreadyDamaged = true;
+    }
+
+    private void CreateDamagePopup(int damageAmount)
+    {
+        pfDamagePopupText.text = damageAmount.ToString();
+        Instantiate(pfDamagePopup, transform.position, Quaternion.identity);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
