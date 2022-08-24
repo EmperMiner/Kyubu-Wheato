@@ -27,10 +27,13 @@ public class mouseBehaviour : MonoBehaviour
     [SerializeField] private Transform pfDamagePopup;
     [SerializeField] private TextMeshPro pfDamagePopupText;
 
+    private UltimateBarCharge ultimateBar;
+
     private void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
 
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.updateRotation = false;
@@ -59,6 +62,7 @@ public class mouseBehaviour : MonoBehaviour
 
     private void mouseTakeDamage(int i)
     {
+        ultimateBar.IncreaseUltimateCharge(7-i);
         i = (int) (i * player.strength);
         CreateDamagePopup(i);
         mouseHealth -= i;

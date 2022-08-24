@@ -19,6 +19,7 @@ TagManager:
   - Blue PosFlower
   - Orange PosFlower
   - DiceManager
+  - Ultimate Bar
   layers:
   - Default
   - TransparentFX
