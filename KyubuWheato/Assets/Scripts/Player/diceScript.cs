@@ -5,8 +5,12 @@ public class diceScript : MonoBehaviour
     private Vector3 mousePos;
     private Camera mainCam;
     private Rigidbody2D rb;
-    public float fireForce = 12;
-    public float spinForce = 1000;
+    private float fireForce = 12;
+    private float spinForce = 1000;
+    private float rot;
+    [SerializeField] private bool DiceIsMultishot;
+    [SerializeField] private bool DiceIsFakeMultishotLeft;
+    [SerializeField] private bool DiceIsFakeMultishotRight;
 
     void Start()
     {
@@ -17,17 +21,33 @@ public class diceScript : MonoBehaviour
         Vector3 direction = mousePos - transform.position;
         Vector3 rotation = transform.position - mousePos;
 
-        rb.velocity = new Vector2(direction.x, direction.y).normalized * fireForce;
-        AddTorqueImpulse(spinForce);
+        if (DiceIsFakeMultishotLeft) { rb.velocity = Quaternion.Euler(0, 0, -20) * new Vector2(direction.x, direction.y).normalized * fireForce; }
+        else if (DiceIsFakeMultishotRight) { rb.velocity = Quaternion.Euler(0, 0, 20) * new Vector2(direction.x, direction.y).normalized * fireForce; }
+        else { rb.velocity = new Vector2(direction.x, direction.y).normalized * fireForce; }
 
-        float rot = (Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg) - 90f;
+        if (DiceIsMultishot) { rot = (Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg) - 60f; }
+        else { rot = (Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg) - 90f; }
+
+        AddTorqueImpulse(spinForce);
         transform.rotation = Quaternion.Euler(0, 0, rot);
+
+        if (gameObject.tag == "FakeDice1") { DestroyFakeDice(); }
+        if (gameObject.tag == "FakeDice2") { DestroyFakeDice(); }
+        if (gameObject.tag == "FakeDice3") { DestroyFakeDice(); }
+        if (gameObject.tag == "FakeDice4") { DestroyFakeDice(); }
+        if (gameObject.tag == "FakeDice5") { DestroyFakeDice(); }
+        if (gameObject.tag == "FakeDice6") { DestroyFakeDice(); }
     }
 
     
-    public void AddTorqueImpulse(float angularChangeInDegrees)
+    private void AddTorqueImpulse(float angularChangeInDegrees)
     {
         var impulse = (angularChangeInDegrees * Mathf.Deg2Rad) * rb.inertia;
         rb.AddTorque(impulse, ForceMode2D.Impulse);
+    }
+
+    private void DestroyFakeDice()
+    {
+        Destroy(gameObject, 1.5f);
     }
 }

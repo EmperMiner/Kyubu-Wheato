@@ -62,7 +62,7 @@ public class mouseBehaviour : MonoBehaviour
 
     private void mouseTakeDamage(int i)
     {
-        ultimateBar.IncreaseUltimateCharge(7-i);
+        if (ultimateBar.havePizza == true) { ultimateBar.IncreaseUltimateCharge(7-i); }
         i = (int) (i * player.strength);
         CreateDamagePopup(i);
         mouseHealth -= i;
@@ -86,6 +86,13 @@ public class mouseBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "6sidedDice4") { mouseTakeDamage(4); }
             if (collider.gameObject.tag == "6sidedDice5") { mouseTakeDamage(5); }
             if (collider.gameObject.tag == "6sidedDice6") { mouseTakeDamage(6); }        
+
+            if (collider.gameObject.tag == "FakeDice1") { mouseTakeDamage(1); }
+            if (collider.gameObject.tag == "FakeDice2") { mouseTakeDamage(2); } 
+            if (collider.gameObject.tag == "FakeDice3") { mouseTakeDamage(3); }
+            if (collider.gameObject.tag == "FakeDice4") { mouseTakeDamage(4); }
+            if (collider.gameObject.tag == "FakeDice5") { mouseTakeDamage(5); }
+            if (collider.gameObject.tag == "FakeDice6") { mouseTakeDamage(6); }      
         }
         if (collider.gameObject.tag == "Player") { mouseCanAttack = 1f; }
     }
@@ -113,6 +120,14 @@ public class mouseBehaviour : MonoBehaviour
         if (collider.gameObject.tag == "6sidedDice4") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
         if (collider.gameObject.tag == "6sidedDice5") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
         if (collider.gameObject.tag == "6sidedDice6") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
+
+        if (collider.gameObject.tag == "FakeDice1") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
+        if (collider.gameObject.tag == "FakeDice2") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); } 
+        if (collider.gameObject.tag == "FakeDice3") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
+        if (collider.gameObject.tag == "FakeDice4") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
+        if (collider.gameObject.tag == "FakeDice5") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
+        if (collider.gameObject.tag == "FakeDice6") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
+
         if (collider.gameObject.tag == "Player") { player.spriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
     }
 }

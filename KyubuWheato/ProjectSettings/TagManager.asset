@@ -20,6 +20,12 @@ TagManager:
   - Orange PosFlower
   - DiceManager
   - Ultimate Bar
+  - FakeDice1
+  - FakeDice2
+  - FakeDice3
+  - FakeDice4
+  - FakeDice5
+  - FakeDice6
   layers:
   - Default
   - TransparentFX

@@ -162,7 +162,8 @@ public class ShopManager : MonoBehaviour
         }
         if (UpgradeValue == 104)
         {
-            if (shopHaveCremeBrulee == false && shopWheat >= upgradePrices[5]) { shopHaveCremeBrulee = true; shopWheat -= upgradePrices[5]; StartCoroutine(NotifTextBuySuccess()); }
+            if (shopHaveFlan == false) { StartCoroutine(NotifTextNeedFlan()); }
+            else if (shopHaveCremeBrulee == false && shopWheat >= upgradePrices[5]) { shopHaveCremeBrulee = true; shopWheat -= upgradePrices[5]; StartCoroutine(NotifTextBuySuccess()); }
             else if (shopHaveCremeBrulee == true) { StartCoroutine(NotifTextAlreadyBought()); }
             else { StartCoroutine(NotifTextNotEnoughMoney()); }
         }
@@ -290,7 +291,16 @@ public class ShopManager : MonoBehaviour
         if (RefundValue == 103)
         {
             if (shopHaveFlan == false) { StartCoroutine(NotifTextHaveNotBought()); }
-            else { shopWheat += upgradePrices[5]; }
+            else 
+            { 
+                shopWheat += upgradePrices[5]; 
+                if(shopHaveCremeBrulee) 
+                { 
+                    shopWheat += upgradePrices[5]; 
+                    shopHaveCremeBrulee = false; 
+                    UpdateUpgradeUI(RefundValue + 1); 
+                } 
+            }
             shopHaveFlan = false;
         }
         if (RefundValue == 104)
@@ -468,6 +478,20 @@ public class ShopManager : MonoBehaviour
         {
             NotifTextHaveNotBoughtDisplayed = true;
             NotifText.text = "Have Not Bought!";
+            NotifText.color = new Color32(200, 0, 0, 255);
+            yield return new WaitForSeconds(1f);
+            NotifTextHaveNotBoughtDisplayed = false;
+            NotifText.text = "";
+            yield return null;
+        }
+    }
+
+    IEnumerator NotifTextNeedFlan()
+    {
+        if (NotifTextHaveNotBoughtDisplayed == false)
+        {
+            NotifTextHaveNotBoughtDisplayed = true;
+            NotifText.text = "This requires Flan";
             NotifText.color = new Color32(200, 0, 0, 255);
             yield return new WaitForSeconds(1f);
             NotifTextHaveNotBoughtDisplayed = false;
