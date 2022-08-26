@@ -11,6 +11,9 @@ public class diceScript : MonoBehaviour
     [SerializeField] private bool DiceIsMultishot;
     [SerializeField] private bool DiceIsFakeMultishotLeft;
     [SerializeField] private bool DiceIsFakeMultishotRight;
+    [SerializeField] private bool DiceIsKyubuTile6;
+    [SerializeField] private float directionX;
+    [SerializeField] private float directionY;
 
     void Start()
     {
@@ -23,6 +26,7 @@ public class diceScript : MonoBehaviour
 
         if (DiceIsFakeMultishotLeft) { rb.velocity = Quaternion.Euler(0, 0, -20) * new Vector2(direction.x, direction.y).normalized * fireForce; }
         else if (DiceIsFakeMultishotRight) { rb.velocity = Quaternion.Euler(0, 0, 20) * new Vector2(direction.x, direction.y).normalized * fireForce; }
+        else if (DiceIsKyubuTile6) { rb.velocity = new Vector2(directionX, directionY).normalized * 4; }
         else { rb.velocity = new Vector2(direction.x, direction.y).normalized * fireForce; }
 
         if (DiceIsMultishot) { rot = (Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg) - 60f; }

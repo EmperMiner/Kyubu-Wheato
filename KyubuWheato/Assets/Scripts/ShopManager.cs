@@ -22,12 +22,12 @@ public class ShopManager : MonoBehaviour
     private bool shopHaveCremeBrulee;
     private bool shopHaveBanhmi;
 
-    public Text ShopWheatCounterNumber;
-    public int[] upgradePrices;
-    public Text[] upgradePriceText;
-    public Image[] UpgradesImage;
-    public Sprite[] UpgradesSpritesVariants;
-    public Text NotifText;
+    [SerializeField] private Text ShopWheatCounterNumber;
+    [SerializeField] private int[] upgradePrices;
+    [SerializeField] private Text[] upgradePriceText;
+    [SerializeField] private Image[] UpgradesImage;
+    [SerializeField] private Sprite[] UpgradesSpritesVariants;
+    [SerializeField] private Text NotifText;
 
     private bool NotifTextBuySuccessDisplayed = false;
     private bool NotifTextNotEnoughMoneyDisplayed = false;
@@ -169,7 +169,8 @@ public class ShopManager : MonoBehaviour
         }
         if (UpgradeValue == 105)
         {
-            if (shopHaveBanhmi == false && shopWheat >= upgradePrices[5]) { shopHaveBanhmi = true; shopWheat -= upgradePrices[5]; StartCoroutine(NotifTextBuySuccess()); }
+            if (shopDicePreviewerLevel == 0) { StartCoroutine(NotifTextNeedDicePreviewer()); }
+            else if (shopHaveBanhmi == false && shopWheat >= upgradePrices[5]) { shopHaveBanhmi = true; shopWheat -= upgradePrices[5]; StartCoroutine(NotifTextBuySuccess()); }
             else if (shopHaveBanhmi == true) { StartCoroutine(NotifTextAlreadyBought()); }
             else { StartCoroutine(NotifTextNotEnoughMoney()); }
         }
@@ -273,7 +274,13 @@ public class ShopManager : MonoBehaviour
             else if (shopDicePreviewerLevel == 4) { refundLoops = 4; }
             else if (shopDicePreviewerLevel == 5) { refundLoops = 5; }
             else { Debug.Log("Error In Refunding"); }   
-            for (int i = 0; i < refundLoops; i++) { shopWheat += upgradePrices[i]; }     
+            for (int i = 0; i < refundLoops; i++) { shopWheat += upgradePrices[i]; }    
+            if(shopHaveBanhmi) 
+                { 
+                    shopWheat += upgradePrices[5]; 
+                    shopHaveBanhmi = false; 
+                    UpdateUpgradeUI(RefundValue + 98); 
+                } 
             shopDicePreviewerLevel = 0;
         }
         if (RefundValue == 101)
@@ -455,7 +462,6 @@ public class ShopManager : MonoBehaviour
             NotifText.text = "";
             yield return null;
         }
-        
     }
 
     IEnumerator NotifTextAlreadyBought()
@@ -491,7 +497,21 @@ public class ShopManager : MonoBehaviour
         if (NotifTextHaveNotBoughtDisplayed == false)
         {
             NotifTextHaveNotBoughtDisplayed = true;
-            NotifText.text = "This requires Flan";
+            NotifText.text = "Need Flan";
+            NotifText.color = new Color32(200, 0, 0, 255);
+            yield return new WaitForSeconds(1f);
+            NotifTextHaveNotBoughtDisplayed = false;
+            NotifText.text = "";
+            yield return null;
+        }
+    }
+
+    IEnumerator NotifTextNeedDicePreviewer()
+    {
+        if (NotifTextHaveNotBoughtDisplayed == false)
+        {
+            NotifTextHaveNotBoughtDisplayed = true;
+            NotifText.text = "Need Dice Previewer";
             NotifText.color = new Color32(200, 0, 0, 255);
             yield return new WaitForSeconds(1f);
             NotifTextHaveNotBoughtDisplayed = false;
