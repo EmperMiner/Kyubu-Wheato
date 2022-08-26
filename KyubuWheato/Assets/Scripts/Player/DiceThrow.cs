@@ -29,7 +29,8 @@ public class DiceThrow : MonoBehaviour
     private bool haveFlan;
     private bool haveCremeBrulee;
     private bool haveBanhmi;
-
+    private bool havePizza;
+    private bool haveCarrotCake;
     
     private int[] DiceValues = new int[6];
     private int[] PreviousDiceValues = new int[6];
@@ -86,13 +87,6 @@ public class DiceThrow : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha2) && dicePreviewerLevel >= 3 && haveBanhmi == true) { DiceHotkey(2); }
             if (Input.GetKeyDown(KeyCode.Alpha3) && dicePreviewerLevel >= 4 && haveBanhmi == true) { DiceHotkey(3); }
             if (Input.GetKeyDown(KeyCode.Alpha4) && dicePreviewerLevel >= 5 && haveBanhmi == true) { DiceHotkey(4); }
-            if (Input.GetKeyDown(KeyCode.Keypad7)) { StartCoroutine(KyubuKombo(1)); }
-            if (Input.GetKeyDown(KeyCode.Keypad8)) { StartCoroutine(KyubuKombo(2)); }
-            if (Input.GetKeyDown(KeyCode.Keypad9)) { StartCoroutine(KyubuKombo(3)); }
-            if (Input.GetKeyDown(KeyCode.Keypad4)) { StartCoroutine(KyubuKombo(4)); }
-            if (Input.GetKeyDown(KeyCode.Keypad5)) { StartCoroutine(KyubuKombo(5)); }
-            if (Input.GetKeyDown(KeyCode.Keypad6)) { StartCoroutine(KyubuKombo(6)); }
-            if (Input.GetKeyDown(KeyCode.Keypad1)) { StartCoroutine(KyubuKombo(7)); }
         }  
     }
 
@@ -191,33 +185,40 @@ public class DiceThrow : MonoBehaviour
 
     private void KyubuKomboCheck()
     {
-        if (PreviousDiceValues[5] == 0 && PreviousDiceValues[4] == 0) { StartCoroutine(KyubuKombo(1)); }
-        if (PreviousDiceValues[5] == 1 && PreviousDiceValues[4] == 1) { StartCoroutine(KyubuKombo(2)); }
-        if (PreviousDiceValues[5] == 2 && PreviousDiceValues[4] == 2) { StartCoroutine(KyubuKombo(3)); }
-        if (PreviousDiceValues[5] == 3 && PreviousDiceValues[4] == 3) { StartCoroutine(KyubuKombo(4)); }
-        if (PreviousDiceValues[5] == 4 && PreviousDiceValues[4] == 4) { StartCoroutine(KyubuKombo(5)); }
-        if (PreviousDiceValues[5] == 5 && PreviousDiceValues[4] == 5) { StartCoroutine(KyubuKombo(6)); }
-        if (PreviousDiceValues[5] == 5 && PreviousDiceValues[4] == 4 && PreviousDiceValues[3] == 3 && PreviousDiceValues[2] == 2 && PreviousDiceValues[1] == 1 && PreviousDiceValues[0] == 0) 
-        { 
-            StartCoroutine(KyubuKombo(7)); 
-        }
-        if (PreviousDiceValues[5] == 0 && PreviousDiceValues[4] == 1 && PreviousDiceValues[3] == 2 && PreviousDiceValues[2] == 3 && PreviousDiceValues[1] == 4 && PreviousDiceValues[0] == 5) 
-        { 
-            StartCoroutine(KyubuKombo(7)); 
-        }
-        if (FakePreviousDiceValues[5] == 0 && FakePreviousDiceValues[4] == 0) { StartCoroutine(KyubuKombo(1)); }
-        if (FakePreviousDiceValues[5] == 1 && FakePreviousDiceValues[4] == 1) { StartCoroutine(KyubuKombo(2)); }
-        if (FakePreviousDiceValues[5] == 2 && FakePreviousDiceValues[4] == 2) { StartCoroutine(KyubuKombo(3)); }
-        if (FakePreviousDiceValues[5] == 3 && FakePreviousDiceValues[4] == 3) { StartCoroutine(KyubuKombo(4)); }
-        if (FakePreviousDiceValues[5] == 4 && FakePreviousDiceValues[4] == 4) { StartCoroutine(KyubuKombo(5)); }
-        if (FakePreviousDiceValues[5] == 5 && FakePreviousDiceValues[4] == 5) { StartCoroutine(KyubuKombo(6)); }
-        if (FakePreviousDiceValues[5] == 5 && FakePreviousDiceValues[4] == 4 && FakePreviousDiceValues[3] == 3 && FakePreviousDiceValues[2] == 2 && FakePreviousDiceValues[1] == 1 && FakePreviousDiceValues[0] == 0) 
-        { 
-            StartCoroutine(KyubuKombo(7)); 
-        }
-        if (FakePreviousDiceValues[5] == 0 && FakePreviousDiceValues[4] == 1 && FakePreviousDiceValues[3] == 2 && FakePreviousDiceValues[2] == 3 && FakePreviousDiceValues[1] == 4 && FakePreviousDiceValues[0] == 5) 
-        { 
-            StartCoroutine(KyubuKombo(7)); 
+        if (haveCarrotCake)
+        {
+            if (PreviousDiceValues[5] == 0 && PreviousDiceValues[4] == 0) { StartCoroutine(KyubuKombo(1)); }
+            if (PreviousDiceValues[5] == 1 && PreviousDiceValues[4] == 1) { StartCoroutine(KyubuKombo(2)); }
+            if (PreviousDiceValues[5] == 2 && PreviousDiceValues[4] == 2) { StartCoroutine(KyubuKombo(3)); }
+            if (PreviousDiceValues[5] == 3 && PreviousDiceValues[4] == 3) { StartCoroutine(KyubuKombo(4)); }
+            if (PreviousDiceValues[5] == 4 && PreviousDiceValues[4] == 4) { StartCoroutine(KyubuKombo(5)); }
+            if (PreviousDiceValues[5] == 5 && PreviousDiceValues[4] == 5) { StartCoroutine(KyubuKombo(6)); }
+            if (PreviousDiceValues[5] == 5 && PreviousDiceValues[4] == 4 && PreviousDiceValues[3] == 3 && PreviousDiceValues[2] == 2 && PreviousDiceValues[1] == 1 && PreviousDiceValues[0] == 0) 
+            { 
+                StartCoroutine(KyubuKombo(7)); 
+            }
+            if (PreviousDiceValues[5] == 0 && PreviousDiceValues[4] == 1 && PreviousDiceValues[3] == 2 && PreviousDiceValues[2] == 3 && PreviousDiceValues[1] == 4 && PreviousDiceValues[0] == 5) 
+            { 
+                StartCoroutine(KyubuKombo(7)); 
+            }
+
+            if (havePizza)
+            {
+                if (FakePreviousDiceValues[5] == 0 && FakePreviousDiceValues[4] == 0) { StartCoroutine(KyubuKombo(1)); }
+                if (FakePreviousDiceValues[5] == 1 && FakePreviousDiceValues[4] == 1) { StartCoroutine(KyubuKombo(2)); }
+                if (FakePreviousDiceValues[5] == 2 && FakePreviousDiceValues[4] == 2) { StartCoroutine(KyubuKombo(3)); }
+                if (FakePreviousDiceValues[5] == 3 && FakePreviousDiceValues[4] == 3) { StartCoroutine(KyubuKombo(4)); }
+                if (FakePreviousDiceValues[5] == 4 && FakePreviousDiceValues[4] == 4) { StartCoroutine(KyubuKombo(5)); }
+                if (FakePreviousDiceValues[5] == 5 && FakePreviousDiceValues[4] == 5) { StartCoroutine(KyubuKombo(6)); }
+                if (FakePreviousDiceValues[5] == 5 && FakePreviousDiceValues[4] == 4 && FakePreviousDiceValues[3] == 3 && FakePreviousDiceValues[2] == 2 && FakePreviousDiceValues[1] == 1 && FakePreviousDiceValues[0] == 0) 
+                { 
+                    StartCoroutine(KyubuKombo(7)); 
+                }
+                if (FakePreviousDiceValues[5] == 0 && FakePreviousDiceValues[4] == 1 && FakePreviousDiceValues[3] == 2 && FakePreviousDiceValues[2] == 3 && FakePreviousDiceValues[1] == 4 && FakePreviousDiceValues[0] == 5) 
+                { 
+                    StartCoroutine(KyubuKombo(7)); 
+                }
+            }
         }
     }
 
@@ -380,6 +381,8 @@ public class DiceThrow : MonoBehaviour
         haveFlan = loadedPlayerData.haveFlan;
         haveCremeBrulee = loadedPlayerData.haveCremeBrulee;
         haveBanhmi = loadedPlayerData.haveBanhmi;
+        havePizza = loadedPlayerData.haveCremeBrulee;
+        haveCarrotCake = loadedPlayerData.haveBanhmi;
     }   
     
     private class PlayerData
@@ -390,5 +393,7 @@ public class DiceThrow : MonoBehaviour
         public bool haveFlan;
         public bool haveCremeBrulee;
         public bool haveBanhmi;
+        public bool havePizza;
+        public bool haveCarrotCake;
     }
 }
