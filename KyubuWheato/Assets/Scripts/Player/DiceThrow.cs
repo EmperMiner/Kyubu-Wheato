@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
@@ -33,10 +34,14 @@ public class DiceThrow : MonoBehaviour
     private int[] DiceValues = new int[6];
     private int[] PreviousDiceValues = new int[6];
     
+    private int FakeDiceValue;
+    private int[] FakePreviousDiceValues = new int[6];
+
     void Start()
     {
         LoadData();
         GenerateRandomDiceArray();
+        GenerateRandomFakeArray();
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>(); 
         DiceCounterNumber.text = diceNumber.ToString();
     }
@@ -81,18 +86,24 @@ public class DiceThrow : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha2) && dicePreviewerLevel >= 3 && haveBanhmi == true) { DiceHotkey(2); }
             if (Input.GetKeyDown(KeyCode.Alpha3) && dicePreviewerLevel >= 4 && haveBanhmi == true) { DiceHotkey(3); }
             if (Input.GetKeyDown(KeyCode.Alpha4) && dicePreviewerLevel >= 5 && haveBanhmi == true) { DiceHotkey(4); }
-            if (Input.GetKeyDown(KeyCode.Alpha5)) { StartCoroutine(KyubuKombo(6)); }
+            if (Input.GetKeyDown(KeyCode.Keypad7)) { StartCoroutine(KyubuKombo(1)); }
+            if (Input.GetKeyDown(KeyCode.Keypad8)) { StartCoroutine(KyubuKombo(2)); }
+            if (Input.GetKeyDown(KeyCode.Keypad9)) { StartCoroutine(KyubuKombo(3)); }
+            if (Input.GetKeyDown(KeyCode.Keypad4)) { StartCoroutine(KyubuKombo(4)); }
+            if (Input.GetKeyDown(KeyCode.Keypad5)) { StartCoroutine(KyubuKombo(5)); }
+            if (Input.GetKeyDown(KeyCode.Keypad6)) { StartCoroutine(KyubuKombo(6)); }
+            if (Input.GetKeyDown(KeyCode.Keypad1)) { StartCoroutine(KyubuKombo(7)); }
         }  
     }
 
     private void GenerateRandomDiceArray()
     {
-        DiceValues[0] = Random.Range(0,dicetypes.Length);
-        DiceValues[1] = Random.Range(0,dicetypes.Length);
-        DiceValues[2] = Random.Range(0,dicetypes.Length);
-        DiceValues[3] = Random.Range(0,dicetypes.Length);
-        DiceValues[4] = Random.Range(0,dicetypes.Length);
-        DiceValues[5] = Random.Range(0,dicetypes.Length);
+        DiceValues[0] = UnityEngine.Random.Range(0,dicetypes.Length);
+        DiceValues[1] = UnityEngine.Random.Range(0,dicetypes.Length);
+        DiceValues[2] = UnityEngine.Random.Range(0,dicetypes.Length);
+        DiceValues[3] = UnityEngine.Random.Range(0,dicetypes.Length);
+        DiceValues[4] = UnityEngine.Random.Range(0,dicetypes.Length);
+        DiceValues[5] = UnityEngine.Random.Range(0,dicetypes.Length);
         PreviousDiceValues[0] = 10;
         PreviousDiceValues[1] = 10;
         PreviousDiceValues[2] = 10;
@@ -114,8 +125,31 @@ public class DiceThrow : MonoBehaviour
         DiceValues[1] = DiceValues[2];
         DiceValues[2] = DiceValues[3];
         DiceValues[3] = DiceValues[4];
-        DiceValues[4] = Random.Range(0,dicetypes.Length);
+        DiceValues[4] = UnityEngine.Random.Range(0,dicetypes.Length);
         UpdateDicePreviewerUI();
+        KyubuKomboCheck();
+    }
+
+    private void GenerateRandomFakeArray()
+    {
+        FakeDiceValue = UnityEngine.Random.Range(0,dicetypes.Length);
+        FakePreviousDiceValues[0] = 10;
+        FakePreviousDiceValues[1] = 10;
+        FakePreviousDiceValues[2] = 10;
+        FakePreviousDiceValues[3] = 10;
+        FakePreviousDiceValues[4] = 10;
+        FakePreviousDiceValues[5] = 10;
+    }
+
+    private void CycleThroughFakeArray()
+    {
+        FakePreviousDiceValues[0] = FakePreviousDiceValues[1];
+        FakePreviousDiceValues[1] = FakePreviousDiceValues[2];
+        FakePreviousDiceValues[2] = FakePreviousDiceValues[3];
+        FakePreviousDiceValues[3] = FakePreviousDiceValues[4];
+        FakePreviousDiceValues[4] = FakePreviousDiceValues[5];
+        FakePreviousDiceValues[5] =  FakeDiceValue;
+        FakeDiceValue = UnityEngine.Random.Range(0,dicetypes.Length);;
         KyubuKomboCheck();
     }
 
@@ -158,20 +192,125 @@ public class DiceThrow : MonoBehaviour
     private void KyubuKomboCheck()
     {
         if (PreviousDiceValues[5] == 0 && PreviousDiceValues[4] == 0) { StartCoroutine(KyubuKombo(1)); }
+        if (PreviousDiceValues[5] == 1 && PreviousDiceValues[4] == 1) { StartCoroutine(KyubuKombo(2)); }
+        if (PreviousDiceValues[5] == 2 && PreviousDiceValues[4] == 2) { StartCoroutine(KyubuKombo(3)); }
+        if (PreviousDiceValues[5] == 3 && PreviousDiceValues[4] == 3) { StartCoroutine(KyubuKombo(4)); }
+        if (PreviousDiceValues[5] == 4 && PreviousDiceValues[4] == 4) { StartCoroutine(KyubuKombo(5)); }
         if (PreviousDiceValues[5] == 5 && PreviousDiceValues[4] == 5) { StartCoroutine(KyubuKombo(6)); }
+        if (PreviousDiceValues[5] == 5 && PreviousDiceValues[4] == 4 && PreviousDiceValues[3] == 3 && PreviousDiceValues[2] == 2 && PreviousDiceValues[1] == 1 && PreviousDiceValues[0] == 0) 
+        { 
+            StartCoroutine(KyubuKombo(7)); 
+        }
+        if (PreviousDiceValues[5] == 0 && PreviousDiceValues[4] == 1 && PreviousDiceValues[3] == 2 && PreviousDiceValues[2] == 3 && PreviousDiceValues[1] == 4 && PreviousDiceValues[0] == 5) 
+        { 
+            StartCoroutine(KyubuKombo(7)); 
+        }
+        if (FakePreviousDiceValues[5] == 0 && FakePreviousDiceValues[4] == 0) { StartCoroutine(KyubuKombo(1)); }
+        if (FakePreviousDiceValues[5] == 1 && FakePreviousDiceValues[4] == 1) { StartCoroutine(KyubuKombo(2)); }
+        if (FakePreviousDiceValues[5] == 2 && FakePreviousDiceValues[4] == 2) { StartCoroutine(KyubuKombo(3)); }
+        if (FakePreviousDiceValues[5] == 3 && FakePreviousDiceValues[4] == 3) { StartCoroutine(KyubuKombo(4)); }
+        if (FakePreviousDiceValues[5] == 4 && FakePreviousDiceValues[4] == 4) { StartCoroutine(KyubuKombo(5)); }
+        if (FakePreviousDiceValues[5] == 5 && FakePreviousDiceValues[4] == 5) { StartCoroutine(KyubuKombo(6)); }
+        if (FakePreviousDiceValues[5] == 5 && FakePreviousDiceValues[4] == 4 && FakePreviousDiceValues[3] == 3 && FakePreviousDiceValues[2] == 2 && FakePreviousDiceValues[1] == 1 && FakePreviousDiceValues[0] == 0) 
+        { 
+            StartCoroutine(KyubuKombo(7)); 
+        }
+        if (FakePreviousDiceValues[5] == 0 && FakePreviousDiceValues[4] == 1 && FakePreviousDiceValues[3] == 2 && FakePreviousDiceValues[2] == 3 && FakePreviousDiceValues[1] == 4 && FakePreviousDiceValues[0] == 5) 
+        { 
+            StartCoroutine(KyubuKombo(7)); 
+        }
     }
 
     IEnumerator KyubuKombo(int KyubuTileValue)
     {
-        if (KyubuTileValue == 1) { Instantiate(KyubuTiles[0], new Vector3(transform.position.x, transform.position.y + 15.5f, transform.position.z), Quaternion.identity); }
-        if (KyubuTileValue == 6) { Instantiate(KyubuTiles[5], new Vector3(transform.position.x + 9f, transform.position.y + 6f, transform.position.z), Quaternion.identity); }
+        if (KyubuTileValue == 1) 
+        { 
+            try
+            { 
+                Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
+                Instantiate(KyubuTiles[0], new Vector3(enemyPosition.position.x + UnityEngine.Random.Range(-1f, 1f), enemyPosition.position.y + 15.5f + UnityEngine.Random.Range(-1f, 1f), enemyPosition.position.z), Quaternion.identity); 
+            }
+            catch (NullReferenceException) 
+            { 
+                Instantiate(KyubuTiles[0], new Vector3(transform.position.x, transform.position.y + 15.5f, transform.position.z), Quaternion.identity); ; 
+            }
+        }
+        if (KyubuTileValue == 2) 
+        { 
+            try {
+                Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>();
+                int dafuq = UnityEngine.Random.Range(0,2);
+                if (dafuq < 1) 
+                { 
+                    float randomOffset = UnityEngine.Random.Range(-1.5f, 1.5f);
+                    Instantiate(KyubuTiles[1], new Vector3(enemyPosition.position.x - 22.63f, enemyPosition.position.y + randomOffset, enemyPosition.position.z), Quaternion.identity); 
+                    Instantiate(KyubuTiles[2], new Vector3(enemyPosition.position.x + 22.63f, enemyPosition.position.y + randomOffset, enemyPosition.position.z), Quaternion.identity);  
+                }
+                else 
+                { 
+                    float randomOffset2 = UnityEngine.Random.Range(-1.5f, 1.5f);
+                    Instantiate(KyubuTiles[3], new Vector3(enemyPosition.position.x + randomOffset2, enemyPosition.position.y + 13.63f, enemyPosition.position.z), Quaternion.identity); 
+                    Instantiate(KyubuTiles[4], new Vector3(enemyPosition.position.x + randomOffset2, enemyPosition.position.y - 13.63f, enemyPosition.position.z), Quaternion.identity);  
+                }
+            }
+            catch (NullReferenceException) 
+            { 
+                int dafuq = UnityEngine.Random.Range(0,2);
+                if (dafuq < 1) 
+                { 
+                    Instantiate(KyubuTiles[1], new Vector3(transform.position.x - 22.63f, transform.position.y, transform.position.z), Quaternion.identity); 
+                    Instantiate(KyubuTiles[2], new Vector3(transform.position.x + 22.63f, transform.position.y, transform.position.z), Quaternion.identity);  
+                }
+                else 
+                { 
+                    Instantiate(KyubuTiles[3], new Vector3(transform.position.x, transform.position.y + 13.63f, transform.position.z), Quaternion.identity); 
+                    Instantiate(KyubuTiles[4], new Vector3(transform.position.x, transform.position.y - 13.63f, transform.position.z), Quaternion.identity);  
+                }
+            }
+        }
+        if (KyubuTileValue == 3) { Instantiate(KyubuTiles[UnityEngine.Random.Range(5,7)], transform.position, Quaternion.identity); }
+        if (KyubuTileValue == 4) { for (int i = 11; i < 15; i++) { Instantiate(KyubuTiles[i], transform.position, Quaternion.identity); } }
+        if (KyubuTileValue == 5) 
+        { 
+            try  
+            { 
+                Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
+                Instantiate(KyubuTiles[UnityEngine.Random.Range(7,9)], new Vector3(enemyPosition.position.x + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.y + 12.5f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.z), Quaternion.identity); 
+            }
+            catch (NullReferenceException) 
+            { Instantiate(KyubuTiles[UnityEngine.Random.Range(7,9)], new Vector3(transform.position.x, transform.position.y + 12.5f, transform.position.z), Quaternion.identity); }
+        }
+        if (KyubuTileValue == 6) 
+        { 
+            try 
+            {
+                Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
+                int bruh = UnityEngine.Random.Range(0,2);
+                if (bruh < 1) { Instantiate(KyubuTiles[9], new Vector3(enemyPosition.position.x + 9f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.y + 6f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.z), Quaternion.identity); }
+                else { Instantiate(KyubuTiles[10], new Vector3(enemyPosition.position.x - 22f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.y + 12f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.z), Quaternion.identity); }
+            }
+            catch (NullReferenceException) 
+            { 
+                int bruh = UnityEngine.Random.Range(0,2);
+                if (bruh < 1) { Instantiate(KyubuTiles[9], new Vector3(transform.position.x + 9f, transform.position.y + 6f, transform.position.z), Quaternion.identity); }
+                else { Instantiate(KyubuTiles[10], new Vector3(transform.position.x - 22f, transform.position.y + 12f, transform.position.z), Quaternion.identity); }
+            }
+        }
+        if (KyubuTileValue == 7)
+        {
+            for (int i = 0; i < 50; i++) 
+            { 
+                StartCoroutine(KyubuKombo(UnityEngine.Random.Range(0, 7)));
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
         yield return null;
     }
 
     private void ShootOneDice()
     {
         diceNumber--;
-        Instantiate(dicetypes[DiceValues[0]], diceTransform.position, Random.rotation);
+        Instantiate(dicetypes[DiceValues[0]], diceTransform.position, UnityEngine.Random.rotation);
         CycleThroughDiceValueArray();
     }
     private void ShootTwoDice()
@@ -181,7 +320,7 @@ public class DiceThrow : MonoBehaviour
             diceNumber -= 2;
             for (int i = 0; i < 2; i++) 
             { 
-                Instantiate(MultishotDiceTypes[DiceValues[0]], diceTransform.position, Random.rotation); 
+                Instantiate(MultishotDiceTypes[DiceValues[0]], diceTransform.position, UnityEngine.Random.rotation); 
                 CycleThroughDiceValueArray();
             }
         }
@@ -194,7 +333,7 @@ public class DiceThrow : MonoBehaviour
             diceNumber -= 3;
             for (int i = 0; i < 3; i++) 
             { 
-                Instantiate(MultishotDiceTypes[DiceValues[0]], diceTransform.position, Random.rotation); 
+                Instantiate(MultishotDiceTypes[DiceValues[0]], diceTransform.position, UnityEngine.Random.rotation); 
                 CycleThroughDiceValueArray();
             }
         }
@@ -209,16 +348,21 @@ public class DiceThrow : MonoBehaviour
         {
             if (haveFlan == true && haveCremeBrulee == false) 
             { 
-                Instantiate(FakeMultishotLeftDiceTypes[Random.Range(0,FakeMultishotLeftDiceTypes.Length)], diceTransform.position, Random.rotation);
-                Instantiate(FakeMultishotRightDiceTypes[Random.Range(0,FakeMultishotRightDiceTypes.Length)], diceTransform.position, Random.rotation);
+                Instantiate(FakeMultishotLeftDiceTypes[FakeDiceValue], diceTransform.position, UnityEngine.Random.rotation);
+                CycleThroughFakeArray();
+                Instantiate(FakeMultishotRightDiceTypes[FakeDiceValue], diceTransform.position, UnityEngine.Random.rotation);
+                CycleThroughFakeArray();
             }
             else if (haveCremeBrulee) 
             { 
-                Instantiate(fakeDiceTypes[Random.Range(0,fakeDiceTypes.Length)], diceTransform.position, Random.rotation);
-                Instantiate(FakeMultishotLeftDiceTypes[Random.Range(0,FakeMultishotLeftDiceTypes.Length)], diceTransform.position, Random.rotation);
-                Instantiate(FakeMultishotRightDiceTypes[Random.Range(0,FakeMultishotRightDiceTypes.Length)], diceTransform.position, Random.rotation);
+                Instantiate(fakeDiceTypes[FakeDiceValue], diceTransform.position, UnityEngine.Random.rotation);
+                CycleThroughFakeArray();
+                Instantiate(FakeMultishotLeftDiceTypes[FakeDiceValue], diceTransform.position, UnityEngine.Random.rotation);
+                CycleThroughFakeArray();
+                Instantiate(FakeMultishotRightDiceTypes[FakeDiceValue], diceTransform.position, UnityEngine.Random.rotation);
+                CycleThroughFakeArray();
             }
-            else { Instantiate(fakeDiceTypes[Random.Range(0,fakeDiceTypes.Length)], diceTransform.position, Random.rotation); }
+            else { Instantiate(fakeDiceTypes[FakeDiceValue], diceTransform.position, UnityEngine.Random.rotation); CycleThroughFakeArray(); }
             yield return new WaitForSeconds(0.2f);
         }
         ultimateBar.ultimateInProgress = false;

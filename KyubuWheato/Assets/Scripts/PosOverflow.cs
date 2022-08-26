@@ -42,21 +42,23 @@ public class PosOverflow : MonoBehaviour
             }
             else if (other.gameObject.tag != "Player")
             {
-                if (isOrange)
-                {
-                    other.transform.position = new Vector2 (posOverflowDestination.position.x + 1.5f, posOverflowDestination.position.y + 0.1f);
-                    enteredRigidbody = other.gameObject.GetComponent<Rigidbody2D>();
-                    enteredRigidbody.velocity = new Vector2(15, 0);
+                if (other.gameObject.tag == "6sidedDice1" || other.gameObject.tag == "6sidedDice2" || other.gameObject.tag == "6sidedDice3" || other.gameObject.tag == "6sidedDice4" || other.gameObject.tag == "6sidedDice5" || other.gameObject.tag == "6sidedDice6") 
+                { 
+                    if (isOrange)
+                    {
+                        other.transform.position = new Vector2 (posOverflowDestination.position.x + 1.5f, posOverflowDestination.position.y + 0.1f);
+                        enteredRigidbody = other.gameObject.GetComponent<Rigidbody2D>();
+                        enteredRigidbody.velocity = new Vector2(15, 0);
+                    }
+                    else
+                    {
+                        other.transform.position = new Vector2 (posOverflowDestination.position.x - 1.5f, posOverflowDestination.position.y + 0.1f);
+                        enteredRigidbody = other.gameObject.GetComponent<Rigidbody2D>();
+                        enteredRigidbody.velocity = new Vector2(-15, 0);
+                    }
                 }
-                else
-                {
-                    other.transform.position = new Vector2 (posOverflowDestination.position.x - 1.5f, posOverflowDestination.position.y + 0.1f);
-                    enteredRigidbody = other.gameObject.GetComponent<Rigidbody2D>();
-                    enteredRigidbody.velocity = new Vector2(-15, 0);
-                }
-                
             }
+            else { Debug.Log("This message will probably never be read except for those snooping around my code lmao");}
         }
-       
     }
 }
