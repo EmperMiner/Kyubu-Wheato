@@ -28,9 +28,9 @@ public class PlayerController : MonoBehaviour
     public float strength;
     public float defense;
     public float wheatDroprate;
-    public int Wheat = 0;
+    public int Wheat;
 
-    private bool playerAlive = true;
+    public bool playerAlive;
 
     [SerializeField] private Rigidbody2D playerRB ;
     private Vector2 movement;
@@ -42,14 +42,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private DiceThrow diceThrowScript;
     [SerializeField] private Text DiceCounterNumber;
     [SerializeField] private Text WheatCounterNumber;
+    [SerializeField] private GameOverScreen gameOverScript;
 
     [SerializeField] private GameObject crosshair;
     [SerializeField] private GameObject diceThrower;
+    
 
     private void Awake()
     {       
         LoadData();
+        Time.timeScale = 1f;
+        playerAlive = true;
         playerHealth = maxHealth;
+        crosshair.SetActive(true);
+        diceThrower.SetActive(true);
+        Wheat = 0;
         healthBar.SetMaxHealth(maxHealth);
     }
 
@@ -124,6 +131,7 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 0f;
         crosshair.SetActive(false);
         diceThrower.SetActive(false);
+        gameOverScript.GameOverTrigger(Wheat);
     }
 
     IEnumerator FlashingHealthBar()

@@ -6,17 +6,24 @@ public class PauseMenu : MonoBehaviour
 {
     private int MainMenu = 0;
     private int LoadingGameToMenu = 2;
+    private int Level_2 = 3;
 
     public static bool GameIsPaused = false;
 
-    public GameObject pauseMenuUI;
-    public GameObject HUD;
+    private PlayerController player;
+    [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private GameObject HUD;
 
     private static Action onIngameLoaderCallback;
 
+    private void Start() 
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+    }
+
     private void Update() 
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && player.playerAlive == true)
         {
             if (GameIsPaused)
             {
@@ -49,6 +56,13 @@ public class PauseMenu : MonoBehaviour
     public void SettingsInGameMenu()
     {
         
+    }
+
+    public void Restart()
+    {
+        onIngameLoaderCallback = () => { SceneManager.LoadScene(Level_2); };
+
+        SceneManager.LoadScene(LoadingGameToMenu);
     }
 
     public void BackToMainMenu()

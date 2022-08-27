@@ -102,7 +102,7 @@ public class mouseBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "FakeDice5") { mouseTakeDamage(5); }
             if (collider.gameObject.tag == "FakeDice6") { mouseTakeDamage(6); }      
         }
-        if (collider.gameObject.tag == "Player") { mouseCanAttack = 1f; }
+        if (collider.gameObject.tag == "Player") { mouseCanAttack = mouseAttackSpeed; }
     }
 
     private void OnTriggerStay2D(Collider2D other)
