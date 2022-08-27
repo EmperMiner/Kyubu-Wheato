@@ -32,19 +32,19 @@ public class PlayerController : MonoBehaviour
 
     private bool playerAlive = true;
 
-    public Rigidbody2D playerRB ;
-    Vector2 movement;
-    public Animator animator;
+    [SerializeField] private Rigidbody2D playerRB ;
+    private Vector2 movement;
+    [SerializeField] private Animator animator;
     public Renderer spriteRenderer;
 
     [SerializeField] private HealthBar healthBar;
 
-    public DiceThrow diceThrowScript;
-    public Text DiceCounterNumber;
-    public Text WheatCounterNumber;
+    [SerializeField] private DiceThrow diceThrowScript;
+    [SerializeField] private Text DiceCounterNumber;
+    [SerializeField] private Text WheatCounterNumber;
 
-    public GameObject crosshair;
-    public GameObject diceThrower;
+    [SerializeField] private GameObject crosshair;
+    [SerializeField] private GameObject diceThrower;
 
     private void Awake()
     {       

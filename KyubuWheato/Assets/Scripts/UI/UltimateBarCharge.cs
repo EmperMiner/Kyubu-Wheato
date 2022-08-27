@@ -10,7 +10,7 @@ public class UltimateBarCharge : MonoBehaviour
     [SerializeField] private GameObject ultimateCharge;
     [SerializeField] private GameObject ultimateBorder;
 
-    public int maxUltimateCharge = 200;
+    public int maxUltimateCharge = 3000;
     public int currentUltimateCharge = 0;
     public bool ultimateInProgress = false;
 

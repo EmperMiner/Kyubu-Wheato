@@ -9,8 +9,8 @@ public class mouseBehaviour : MonoBehaviour
 {
     private NavMeshAgent agent;
 
-    public int maxMouseHealth = 50;
-    public int mouseHealth;
+    [SerializeField] private int maxMouseHealth = 50;
+    private int mouseHealth;
     [SerializeField] private int mouseStrength = 10;
     [SerializeField] private float mouseAttackSpeed = 1f;
     private float mouseCanAttack;
@@ -23,6 +23,7 @@ public class mouseBehaviour : MonoBehaviour
     private HealthBar healthBar;
     private Rigidbody2D mouseRB;
     private Vector2 movement;
+    [SerializeField] private Animator animator;
     [SerializeField] private GameObject wheatDrop;
     [SerializeField] private Transform pfDamagePopup;
     [SerializeField] private TextMeshPro pfDamagePopupText;
@@ -47,6 +48,9 @@ public class mouseBehaviour : MonoBehaviour
 
     private void Update()
     {
+        if (playerTransform.position.x > transform.position.x) { animator.SetFloat("moveX", 1); }
+        else { animator.SetFloat("moveX", -1);  }
+
         if(mouseHealth <= 0)
         {   
             float RNGWheat = Random.Range(0, 10);
@@ -62,7 +66,6 @@ public class mouseBehaviour : MonoBehaviour
 
     private void mouseTakeDamage(int i)
     {
-        if (ultimateBar.havePizza == true) { ultimateBar.IncreaseUltimateCharge(7-i); }
         i = (int) (i * player.strength);
         CreateDamagePopup(i);
         mouseHealth -= i;
@@ -76,16 +79,21 @@ public class mouseBehaviour : MonoBehaviour
         Instantiate(pfDamagePopup, transform.position, Quaternion.identity);
     }
 
+    private void ChargeUlt(int ChargeAmount)
+    {
+        if (ultimateBar.havePizza == true) { ultimateBar.IncreaseUltimateCharge(ChargeAmount); }
+    }
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (alreadyDamaged == false)
         {
-            if (collider.gameObject.tag == "6sidedDice1") { mouseTakeDamage(1); }
-            if (collider.gameObject.tag == "6sidedDice2") { mouseTakeDamage(2); } 
-            if (collider.gameObject.tag == "6sidedDice3") { mouseTakeDamage(3); }
-            if (collider.gameObject.tag == "6sidedDice4") { mouseTakeDamage(4); }
-            if (collider.gameObject.tag == "6sidedDice5") { mouseTakeDamage(5); }
-            if (collider.gameObject.tag == "6sidedDice6") { mouseTakeDamage(6); }        
+            if (collider.gameObject.tag == "6sidedDice1") { mouseTakeDamage(1); ChargeUlt(6); }
+            if (collider.gameObject.tag == "6sidedDice2") { mouseTakeDamage(2); ChargeUlt(5); } 
+            if (collider.gameObject.tag == "6sidedDice3") { mouseTakeDamage(3); ChargeUlt(4); }
+            if (collider.gameObject.tag == "6sidedDice4") { mouseTakeDamage(4); ChargeUlt(3); }
+            if (collider.gameObject.tag == "6sidedDice5") { mouseTakeDamage(5); ChargeUlt(2); }
+            if (collider.gameObject.tag == "6sidedDice6") { mouseTakeDamage(6); ChargeUlt(1); }        
 
             if (collider.gameObject.tag == "FakeDice1") { mouseTakeDamage(1); }
             if (collider.gameObject.tag == "FakeDice2") { mouseTakeDamage(2); } 
