@@ -27,7 +27,7 @@ public class diceScript : MonoBehaviour
 
         if (DiceIsFakeMultishotLeft) { rb.velocity = Quaternion.Euler(0, 0, -20) * new Vector2(direction.x, direction.y).normalized * fireForce; }
         else if (DiceIsFakeMultishotRight) { rb.velocity = Quaternion.Euler(0, 0, 20) * new Vector2(direction.x, direction.y).normalized * fireForce; }
-        else if (DiceIsKyubuTile3) { rb.velocity = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 70; }
+        else if (DiceIsKyubuTile3) { rb.velocity = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 40; }
         else if (DiceIsKyubuTile6) { rb.velocity = new Vector2(directionX, directionY).normalized * 4; }
         else { rb.velocity = new Vector2(direction.x, direction.y).normalized * fireForce; }
 

@@ -212,11 +212,11 @@ public class DiceThrow : MonoBehaviour
                 if (FakePreviousDiceValues[5] == 5 && FakePreviousDiceValues[4] == 5) { StartCoroutine(KyubuKombo(6)); }
                 if (FakePreviousDiceValues[5] == 5 && FakePreviousDiceValues[4] == 4 && FakePreviousDiceValues[3] == 3 && FakePreviousDiceValues[2] == 2 && FakePreviousDiceValues[1] == 1 && FakePreviousDiceValues[0] == 0) 
                 { 
-                    StartCoroutine(KyubuKombo(7)); 
+                    StartCoroutine(KyubuKombo(100)); 
                 }
                 if (FakePreviousDiceValues[5] == 0 && FakePreviousDiceValues[4] == 1 && FakePreviousDiceValues[3] == 2 && FakePreviousDiceValues[2] == 3 && FakePreviousDiceValues[1] == 4 && FakePreviousDiceValues[0] == 5) 
                 { 
-                    StartCoroutine(KyubuKombo(7)); 
+                    StartCoroutine(KyubuKombo(100)); 
                 }
             }
         }
@@ -297,7 +297,7 @@ public class DiceThrow : MonoBehaviour
                 else { Instantiate(KyubuTiles[10], new Vector3(transform.position.x - 22f, transform.position.y + 12f, transform.position.z), Quaternion.identity); }
             }
         }
-        if (KyubuTileValue == 7)
+        if (KyubuTileValue == 100)
         {
             for (int i = 0; i < 50; i++) 
             { 

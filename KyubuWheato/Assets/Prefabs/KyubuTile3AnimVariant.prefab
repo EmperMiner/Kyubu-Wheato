@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 6518503413716656164}
   m_Layer: 0
   m_Name: KyubuTile3AnimVariant
-  m_TagString: Untagged
+  m_TagString: FakeDice3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

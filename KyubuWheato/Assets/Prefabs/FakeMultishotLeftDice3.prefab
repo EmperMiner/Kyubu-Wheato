@@ -149,3 +149,7 @@ MonoBehaviour:
   DiceIsMultishot: 0
   DiceIsFakeMultishotLeft: 1
   DiceIsFakeMultishotRight: 0
+  DiceIsKyubuTile3: 0
+  DiceIsKyubuTile6: 0
+  directionX: 0
+  directionY: 0

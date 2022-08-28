@@ -31,7 +31,8 @@ public class PlayerController : MonoBehaviour
     public int Wheat;
 
     public bool playerAlive;
-
+    
+    private Transform mainCam;
     [SerializeField] private Rigidbody2D playerRB ;
     private Vector2 movement;
     [SerializeField] private Animator animator;
@@ -58,12 +59,14 @@ public class PlayerController : MonoBehaviour
         diceThrower.SetActive(true);
         Wheat = 0;
         healthBar.SetMaxHealth(maxHealth);
+        mainCam = GameObject.FindGameObjectWithTag("MainCamera").transform; 
     }
 
     private void Update()
     {
         if (playerAlive)
         {
+            mainCam.position = new Vector3(12f+21f*(Mathf.FloorToInt((transform.position.x-1.5f)/21f)), 10f+11.87f*(Mathf.FloorToInt((transform.position.y-4f)/11.87f)), -10);
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
 
