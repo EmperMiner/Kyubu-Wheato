@@ -54,7 +54,7 @@ public class mouseBehaviour : MonoBehaviour
         if(mouseHealth <= 0)
         {   
             float RNGWheat = Random.Range(0, 10);
-            if (RNGWheat <= player.wheatDroprate/10) { Instantiate(wheatDrop, transform.position, Quaternion.Euler(0, 0, 10)); }
+            if (RNGWheat <= player.wheatDroprate/10) { Instantiate(wheatDrop, transform.position, Quaternion.identity); }
             Destroy(gameObject);
         }
     }

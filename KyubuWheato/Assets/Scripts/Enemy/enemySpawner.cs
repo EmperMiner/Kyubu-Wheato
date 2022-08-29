@@ -4,23 +4,35 @@ using UnityEngine;
 
 public class enemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject mousePrefab;
-    [SerializeField] private int enemyLimit = 5;
-    [SerializeField] private float mouseInterval = 4f;
+    [SerializeField] private GameObject[] enemy;
+    [SerializeField] private int[] enemyLimit;
+    [SerializeField] private float[] enemyInterval;
+    [SerializeField] private int waveNumbers;
+    [SerializeField] private float[] waveInterval;
 
-    int i = 0;
+    private int wave = 0;
+    private int enemyCounter = 0;
     
     void Start()
     {
-        StartCoroutine(spawnEnemy(mouseInterval, mousePrefab));
+        StartCoroutine(callWave());
     }
 
     // Update is called once per frame
-    private IEnumerator spawnEnemy(float interval, GameObject enemy)
+    private IEnumerator spawnEnemy()
     {       
-        GameObject newEnemy = Instantiate(mousePrefab, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(interval);
-        i++;
-        if ( i < enemyLimit ) { StartCoroutine(spawnEnemy(interval, enemy)); }
+        Instantiate(enemy[wave], transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(enemyInterval[wave]);
+        enemyCounter++;
+        if ( enemyCounter < enemyLimit[wave]) { StartCoroutine(spawnEnemy()); }
+        else { wave++; StartCoroutine(callWave()); }
+    }
+
+    private IEnumerator callWave()
+    {
+        yield return new WaitForSeconds(waveInterval[wave]);
+        if (wave < waveNumbers) { enemyCounter = 0; StartCoroutine(spawnEnemy()); }
+        else { Destroy(gameObject); } 
+        yield return null;
     }
 }

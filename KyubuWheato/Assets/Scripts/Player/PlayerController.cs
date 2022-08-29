@@ -33,6 +33,10 @@ public class PlayerController : MonoBehaviour
     public bool playerAlive;
     
     private Transform mainCam;
+    [SerializeField] private float LeftCamLimit;
+    [SerializeField] private float RightCamLimit;
+    [SerializeField] private float UpperCamLimit;
+    [SerializeField] private float LowerCamLimit;
     [SerializeField] private Rigidbody2D playerRB ;
     private Vector2 movement;
     [SerializeField] private Animator animator;
@@ -66,7 +70,7 @@ public class PlayerController : MonoBehaviour
     {
         if (playerAlive)
         {
-            mainCam.position = new Vector3(12f+21f*(Mathf.FloorToInt((transform.position.x-1.5f)/21f)), 10f+11.87f*(Mathf.FloorToInt((transform.position.y-4f)/11.87f)), -10);
+            LimitCamera();
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
 
@@ -91,6 +95,19 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.tag == "6sidedDice4") { IncreaseDiceNumber(); } 
         if (collider.gameObject.tag == "6sidedDice5") { IncreaseDiceNumber(); } 
         if (collider.gameObject.tag == "6sidedDice6") { IncreaseDiceNumber(); } 
+    }
+
+    private void LimitCamera()
+    {
+        if (transform.position.x > RightCamLimit && transform.position.y > UpperCamLimit) { mainCam.position = new Vector3(RightCamLimit, UpperCamLimit, -10); }
+        else if (transform.position.x < LeftCamLimit && transform.position.y > UpperCamLimit) { mainCam.position = new Vector3(LeftCamLimit, UpperCamLimit, -10); }
+        else if (transform.position.x > RightCamLimit && transform.position.y < LowerCamLimit) { mainCam.position = new Vector3(RightCamLimit, LowerCamLimit, -10); }
+        else if (transform.position.x < LeftCamLimit && transform.position.y < LowerCamLimit) { mainCam.position = new Vector3(LeftCamLimit, LowerCamLimit, -10); }
+        else if (transform.position.x > RightCamLimit) { mainCam.position = new Vector3(RightCamLimit, transform.position.y, -10); }
+        else if (transform.position.x < LeftCamLimit) { mainCam.position = new Vector3(LeftCamLimit, transform.position.y, -10); }
+        else if (transform.position.y > UpperCamLimit) { mainCam.position = new Vector3(transform.position.x, UpperCamLimit, -10); }
+        else if (transform.position.y < LowerCamLimit) { mainCam.position = new Vector3(transform.position.x, LowerCamLimit, -10); }
+        else {}
     }
 
     private void CraftBread()
