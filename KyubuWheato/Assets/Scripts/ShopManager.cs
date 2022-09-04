@@ -16,11 +16,16 @@ public class ShopManager : MonoBehaviour
     private float shopDefense;
     private float shopWheatDroprate;
     private int shopDicePreviewerLevel;
+    private int shopDiceDroprate;
     private bool shopHavePizza;
     private bool shopHaveCarrotCake;
     private bool shopHaveFlan;
     private bool shopHaveCremeBrulee;
     private bool shopHaveBanhmi;
+    private bool shopHaveCupcake;
+    private bool shopHaveChickenNuggets;
+    private bool shopHavePastelDeChoclo;
+    private bool shopHaveGarlicBread;
 
     [SerializeField] private Text ShopWheatCounterNumber;
     [SerializeField] private int[] upgradePrices;
@@ -535,11 +540,16 @@ public class ShopManager : MonoBehaviour
         shopDefense = loadedPlayerData.defense;
         shopWheatDroprate = loadedPlayerData.wheatDroprate;
         shopDicePreviewerLevel = loadedPlayerData.dicePreviewerLevel;
+        shopDiceDroprate = loadedPlayerData.diceDroprate;
         shopHavePizza = loadedPlayerData.havePizza;
         shopHaveCarrotCake = loadedPlayerData.haveCarrotCake;
         shopHaveFlan = loadedPlayerData.haveFlan;
         shopHaveCremeBrulee = loadedPlayerData.haveCremeBrulee;
         shopHaveBanhmi = loadedPlayerData.haveBanhmi;
+        shopHaveCupcake = loadedPlayerData.haveCupcake;
+        shopHaveChickenNuggets = loadedPlayerData.haveChickenNuggets;
+        shopHavePastelDeChoclo = loadedPlayerData.havePastelDeChoclo;
+        shopHaveGarlicBread = loadedPlayerData.haveGarlicBread;
 
         ShopWheatCounterNumber.text = shopWheat.ToString();
     }
@@ -557,11 +567,16 @@ public class ShopManager : MonoBehaviour
         savingPlayerData.defense = shopDefense;
         savingPlayerData.wheatDroprate = shopWheatDroprate;
         savingPlayerData.dicePreviewerLevel = shopDicePreviewerLevel;
+        savingPlayerData.diceDroprate = shopDiceDroprate;
         savingPlayerData.havePizza = shopHavePizza;
         savingPlayerData.haveCarrotCake = shopHaveCarrotCake;
         savingPlayerData.haveFlan = shopHaveFlan;
         savingPlayerData.haveCremeBrulee = shopHaveCremeBrulee;
         savingPlayerData.haveBanhmi = shopHaveBanhmi;
+        savingPlayerData.haveCupcake = shopHaveCupcake;
+        savingPlayerData.haveChickenNuggets = shopHaveChickenNuggets;
+        savingPlayerData.havePastelDeChoclo = shopHavePastelDeChoclo;
+        savingPlayerData.haveGarlicBread = shopHaveGarlicBread;
 
         string json = JsonUtility.ToJson(savingPlayerData);
         Debug.Log(json);
@@ -581,10 +596,15 @@ public class ShopManager : MonoBehaviour
         public float defense;
         public float wheatDroprate;
         public int dicePreviewerLevel;
+        public int diceDroprate;
         public bool havePizza;
         public bool haveCarrotCake;
         public bool haveFlan;
         public bool haveCremeBrulee;
         public bool haveBanhmi;
+        public bool haveCupcake;
+        public bool haveChickenNuggets;
+        public bool havePastelDeChoclo;
+        public bool haveGarlicBread;
     }
 }
