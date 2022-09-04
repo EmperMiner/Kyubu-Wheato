@@ -147,6 +147,16 @@ public class ShopManager : MonoBehaviour
             else if (shopDicePreviewerLevel == 5) { StartCoroutine(NotifTextAlreadyBought()); }
             else { StartCoroutine(NotifTextNotEnoughMoney()); }
         }
+        if (UpgradeValue == 8)
+        {
+            if (shopDiceDroprate == 1000 && shopWheat >= upgradePrices[0]) { shopDiceDroprate = 500; shopWheat -= upgradePrices[0]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopDiceDroprate == 500 && shopWheat >= upgradePrices[1]) { shopDiceDroprate = 400; shopWheat -= upgradePrices[1]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopDiceDroprate == 400 && shopWheat >= upgradePrices[2]) { shopDiceDroprate = 300; shopWheat -= upgradePrices[2]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopDiceDroprate == 300 && shopWheat >= upgradePrices[3]) { shopDiceDroprate = 200; shopWheat -= upgradePrices[3]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopDiceDroprate == 200 && shopWheat >= upgradePrices[4]) { shopDiceDroprate = 100; shopWheat -= upgradePrices[4]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopDiceDroprate == 100) { StartCoroutine(NotifTextAlreadyBought()); }
+            else { StartCoroutine(NotifTextNotEnoughMoney()); }
+        }
         if (UpgradeValue == 101)
         {
             if (shopHavePizza == false && shopWheat >= upgradePrices[5]) { shopHavePizza = true; shopWheat -= upgradePrices[5]; StartCoroutine(NotifTextBuySuccess()); }
@@ -178,6 +188,30 @@ public class ShopManager : MonoBehaviour
             else if (shopHaveBanhmi == false && shopWheat >= upgradePrices[5]) { shopHaveBanhmi = true; shopWheat -= upgradePrices[5]; StartCoroutine(NotifTextBuySuccess()); }
             else if (shopHaveBanhmi == true) { StartCoroutine(NotifTextAlreadyBought()); }
             else { StartCoroutine(NotifTextNotEnoughMoney()); }
+        }
+        if (UpgradeValue == 106)
+        {
+            if (shopHaveCupcake == false && shopWheat >= upgradePrices[5]) { shopHaveCupcake = true; shopWheat -= upgradePrices[5]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopHaveCupcake == true) { StartCoroutine(NotifTextAlreadyBought()); }
+            else { StartCoroutine(NotifTextNotEnoughMoney()); }  
+        }
+        if (UpgradeValue == 107)
+        {
+            if (shopHaveChickenNuggets == false && shopWheat >= upgradePrices[5]) { shopHaveChickenNuggets = true; shopWheat -= upgradePrices[5]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopHaveChickenNuggets == true) { StartCoroutine(NotifTextAlreadyBought()); }
+            else { StartCoroutine(NotifTextNotEnoughMoney()); }  
+        }
+        if (UpgradeValue == 108)
+        {
+            if (shopHavePastelDeChoclo == false && shopWheat >= upgradePrices[5]) { shopHavePastelDeChoclo = true; shopWheat -= upgradePrices[5]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopHavePastelDeChoclo == true) { StartCoroutine(NotifTextAlreadyBought()); }
+            else { StartCoroutine(NotifTextNotEnoughMoney()); }  
+        }
+        if (UpgradeValue == 109)
+        {
+            if (shopHaveGarlicBread == false && shopWheat >= upgradePrices[5]) { shopHaveGarlicBread = true; shopWheat -= upgradePrices[5]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopHaveGarlicBread == true) { StartCoroutine(NotifTextAlreadyBought()); }
+            else { StartCoroutine(NotifTextNotEnoughMoney()); }  
         }
         UpdateUpgradeUI(UpgradeValue);   
         ShopWheatCounterNumber.text = shopWheat.ToString();
@@ -272,7 +306,7 @@ public class ShopManager : MonoBehaviour
         }
         if (RefundValue == 7)
         {
-            if (shopDicePreviewerLevel == 0) { refundLoops = 0; StartCoroutine(NotifTextHaveNotBought()); }
+            if (shopDicePreviewerLevel == 0) { refundLoops = 0; StartCoroutine(NotifTextHaveNotBought());}
             else if (shopDicePreviewerLevel == 1) { refundLoops = 1; }
             else if (shopDicePreviewerLevel == 2) { refundLoops = 2; }
             else if (shopDicePreviewerLevel == 3) { refundLoops = 3; }
@@ -287,6 +321,18 @@ public class ShopManager : MonoBehaviour
                     UpdateUpgradeUI(RefundValue + 98); 
                 } 
             shopDicePreviewerLevel = 0;
+        }
+        if (RefundValue == 8)
+        {
+            if (shopDiceDroprate == 1000) { refundLoops = 0; StartCoroutine(NotifTextHaveNotBought()); }
+            else if (shopDiceDroprate == 500) { refundLoops = 1; }
+            else if (shopDiceDroprate == 400) { refundLoops = 2; }
+            else if (shopDiceDroprate == 300) { refundLoops = 3; }
+            else if (shopDiceDroprate == 200) { refundLoops = 4; }
+            else if (shopDiceDroprate == 100) { refundLoops = 5; }
+            else { Debug.Log("Error In Refunding"); }   
+            for (int i = 0; i < refundLoops; i++) { shopWheat += upgradePrices[i]; }    
+            shopDiceDroprate = 1000;
         }
         if (RefundValue == 101)
         {
@@ -326,6 +372,30 @@ public class ShopManager : MonoBehaviour
             if (shopHaveBanhmi == false) { StartCoroutine(NotifTextHaveNotBought()); }
             else { shopWheat += upgradePrices[5]; }
             shopHaveBanhmi = false;
+        }
+        if (RefundValue == 106)
+        {
+            if (shopHaveCupcake == false) { StartCoroutine(NotifTextHaveNotBought()); }
+            else { shopWheat += upgradePrices[5]; }
+            shopHaveCupcake = false;
+        }
+        if (RefundValue == 107)
+        {
+            if (shopHaveChickenNuggets == false) { StartCoroutine(NotifTextHaveNotBought()); }
+            else { shopWheat += upgradePrices[5]; }
+            shopHaveChickenNuggets = false;
+        }
+        if (RefundValue == 108)
+        {
+            if (shopHavePastelDeChoclo == false) { StartCoroutine(NotifTextHaveNotBought()); }
+            else { shopWheat += upgradePrices[5]; }
+            shopHavePastelDeChoclo = false;
+        }
+        if (RefundValue == 109)
+        {
+            if (shopHaveGarlicBread == false) { StartCoroutine(NotifTextHaveNotBought()); }
+            else { shopWheat += upgradePrices[5]; }
+            shopHaveGarlicBread = false;
         }
         UpdateUpgradeUI(RefundValue);
         ShopWheatCounterNumber.text = shopWheat.ToString();
@@ -414,6 +484,16 @@ public class ShopManager : MonoBehaviour
             else if (shopDicePreviewerLevel == 5) { UpgradesImage[7].sprite = UpgradesSpritesVariants[47]; upgradePriceText[7].text = MaxBought;}
             else { Debug.Log("Error in Updating UI");}
         }
+        if (UpdateUpgradeUI == 8 || UpdateUpgradeUI == 420)
+        {
+            if (shopDiceDroprate == 1000) { UpgradesImage[13].sprite = UpgradesSpritesVariants[58]; upgradePriceText[13].text = upgradePrices[0].ToString(); }
+            else if (shopDiceDroprate == 500) { UpgradesImage[13].sprite = UpgradesSpritesVariants[59]; upgradePriceText[13].text = upgradePrices[1].ToString();}
+            else if (shopDiceDroprate == 400) { UpgradesImage[13].sprite = UpgradesSpritesVariants[60]; upgradePriceText[13].text = upgradePrices[2].ToString();}
+            else if (shopDiceDroprate == 300) { UpgradesImage[13].sprite = UpgradesSpritesVariants[61]; upgradePriceText[13].text = upgradePrices[3].ToString();}
+            else if (shopDiceDroprate == 200) { UpgradesImage[13].sprite = UpgradesSpritesVariants[62]; upgradePriceText[13].text = upgradePrices[4].ToString();}
+            else if (shopDiceDroprate == 100) { UpgradesImage[13].sprite = UpgradesSpritesVariants[63]; upgradePriceText[13].text = MaxBought;}
+            else { Debug.Log("Error in Updating UI");}
+        }
         if (UpdateUpgradeUI == 101 || UpdateUpgradeUI == 420)
         {
             if (shopHavePizza) { UpgradesImage[8].sprite = UpgradesSpritesVariants[49]; upgradePriceText[8].text = MaxBought; }
@@ -438,6 +518,26 @@ public class ShopManager : MonoBehaviour
         {
             if (shopHaveBanhmi) { UpgradesImage[12].sprite = UpgradesSpritesVariants[57]; upgradePriceText[12].text = MaxBought; }
             else { UpgradesImage[12].sprite = UpgradesSpritesVariants[56]; upgradePriceText[12].text = upgradePrices[5].ToString(); }
+        }
+        if (UpdateUpgradeUI == 106 || UpdateUpgradeUI == 420)
+        {
+            if (shopHaveCupcake) { UpgradesImage[14].sprite = UpgradesSpritesVariants[65]; upgradePriceText[14].text = MaxBought; }
+            else { UpgradesImage[14].sprite = UpgradesSpritesVariants[64]; upgradePriceText[14].text = upgradePrices[5].ToString(); }
+        }
+        if (UpdateUpgradeUI == 107 || UpdateUpgradeUI == 420)
+        {
+            if (shopHaveChickenNuggets) { UpgradesImage[15].sprite = UpgradesSpritesVariants[67]; upgradePriceText[15].text = MaxBought; }
+            else { UpgradesImage[15].sprite = UpgradesSpritesVariants[66]; upgradePriceText[15].text = upgradePrices[5].ToString(); }
+        }
+        if (UpdateUpgradeUI == 108 || UpdateUpgradeUI == 420)
+        {
+            if (shopHavePastelDeChoclo) { UpgradesImage[16].sprite = UpgradesSpritesVariants[69]; upgradePriceText[16].text = MaxBought; }
+            else { UpgradesImage[16].sprite = UpgradesSpritesVariants[68]; upgradePriceText[16].text = upgradePrices[5].ToString(); }
+        }
+        if (UpdateUpgradeUI == 109 || UpdateUpgradeUI == 420)
+        {
+            if (shopHaveGarlicBread) { UpgradesImage[17].sprite = UpgradesSpritesVariants[71]; upgradePriceText[17].text = MaxBought; }
+            else { UpgradesImage[17].sprite = UpgradesSpritesVariants[70]; upgradePriceText[17].text = upgradePrices[5].ToString(); }
         }
     }
 
