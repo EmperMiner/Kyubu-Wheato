@@ -119,12 +119,12 @@ public class ShopManager : MonoBehaviour
         }
         if (UpgradeValue == 5)
         {
-            if (shopDiceNumber == 3 && shopWheat >= upgradePrices[0]) { shopDiceNumber = 4; shopWheat -= upgradePrices[0]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopDiceNumber == 4 && shopWheat >= upgradePrices[1]) { shopDiceNumber = 6; shopWheat -= upgradePrices[1]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopDiceNumber == 6 && shopWheat >= upgradePrices[2]) { shopDiceNumber = 8; shopWheat -= upgradePrices[2]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopDiceNumber == 8 && shopWheat >= upgradePrices[3]) { shopDiceNumber = 11; shopWheat -= upgradePrices[3]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopDiceNumber == 11 && shopWheat >= upgradePrices[4]) { shopDiceNumber = 15; shopWheat -= upgradePrices[4]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopDiceNumber == 15) { StartCoroutine(NotifTextAlreadyBought()); }
+            if (shopDiceNumber == 6 && shopWheat >= upgradePrices[0]) { shopDiceNumber = 9; shopWheat -= upgradePrices[0]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopDiceNumber == 9 && shopWheat >= upgradePrices[1]) { shopDiceNumber = 12; shopWheat -= upgradePrices[1]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopDiceNumber == 12 && shopWheat >= upgradePrices[2]) { shopDiceNumber = 18; shopWheat -= upgradePrices[2]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopDiceNumber == 18 && shopWheat >= upgradePrices[3]) { shopDiceNumber = 24; shopWheat -= upgradePrices[3]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopDiceNumber == 24 && shopWheat >= upgradePrices[4]) { shopDiceNumber = 30; shopWheat -= upgradePrices[4]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopDiceNumber == 30) { StartCoroutine(NotifTextAlreadyBought()); }
             else { StartCoroutine(NotifTextNotEnoughMoney()); } 
         }
         if (UpgradeValue == 6)
@@ -282,15 +282,15 @@ public class ShopManager : MonoBehaviour
         }
         if (RefundValue == 5)
         {
-            if (shopDiceNumber == 3) { refundLoops = 0; StartCoroutine(NotifTextHaveNotBought()); }
-            else if (shopDiceNumber == 4) { refundLoops = 1; }
-            else if (shopDiceNumber == 6) { refundLoops = 2; }
-            else if (shopDiceNumber == 8) { refundLoops = 3; }
-            else if (shopDiceNumber == 11) { refundLoops = 4; }
-            else if (shopDiceNumber == 15) { refundLoops = 5; }
+            if (shopDiceNumber == 6) { refundLoops = 0; StartCoroutine(NotifTextHaveNotBought()); }
+            else if (shopDiceNumber == 9) { refundLoops = 1; }
+            else if (shopDiceNumber == 12) { refundLoops = 2; }
+            else if (shopDiceNumber == 18) { refundLoops = 3; }
+            else if (shopDiceNumber == 24) { refundLoops = 4; }
+            else if (shopDiceNumber == 30) { refundLoops = 5; }
             else { Debug.Log("Error In Refunding"); }         
             for (int i = 0; i < refundLoops; i++) { shopWheat += upgradePrices[i]; }  
-            shopDiceNumber = 3;
+            shopDiceNumber = 6;
         }
         if (RefundValue == 6)
         {
@@ -456,12 +456,12 @@ public class ShopManager : MonoBehaviour
         }
         if (UpdateUpgradeUI == 5 || UpdateUpgradeUI == 420)
         {
-            if (shopDiceNumber == 3) { UpgradesImage[5].sprite = UpgradesSpritesVariants[30]; upgradePriceText[5].text = upgradePrices[0].ToString(); }
-            else if (shopDiceNumber == 4) { UpgradesImage[5].sprite = UpgradesSpritesVariants[31]; upgradePriceText[5].text = upgradePrices[1].ToString();}
-            else if (shopDiceNumber == 6) { UpgradesImage[5].sprite = UpgradesSpritesVariants[32]; upgradePriceText[5].text = upgradePrices[2].ToString();}
-            else if (shopDiceNumber == 8) { UpgradesImage[5].sprite = UpgradesSpritesVariants[33]; upgradePriceText[5].text = upgradePrices[3].ToString();}
-            else if (shopDiceNumber == 11) { UpgradesImage[5].sprite = UpgradesSpritesVariants[34]; upgradePriceText[5].text = upgradePrices[4].ToString();}
-            else if (shopDiceNumber == 15) { UpgradesImage[5].sprite = UpgradesSpritesVariants[35]; upgradePriceText[5].text = MaxBought;}
+            if (shopDiceNumber == 6) { UpgradesImage[5].sprite = UpgradesSpritesVariants[30]; upgradePriceText[5].text = upgradePrices[0].ToString(); }
+            else if (shopDiceNumber == 9) { UpgradesImage[5].sprite = UpgradesSpritesVariants[31]; upgradePriceText[5].text = upgradePrices[1].ToString();}
+            else if (shopDiceNumber == 12) { UpgradesImage[5].sprite = UpgradesSpritesVariants[32]; upgradePriceText[5].text = upgradePrices[2].ToString();}
+            else if (shopDiceNumber == 18) { UpgradesImage[5].sprite = UpgradesSpritesVariants[33]; upgradePriceText[5].text = upgradePrices[3].ToString();}
+            else if (shopDiceNumber == 24) { UpgradesImage[5].sprite = UpgradesSpritesVariants[34]; upgradePriceText[5].text = upgradePrices[4].ToString();}
+            else if (shopDiceNumber == 30) { UpgradesImage[5].sprite = UpgradesSpritesVariants[35]; upgradePriceText[5].text = MaxBought;}
             else { Debug.Log("Error in Updating UI");}
         }
         if (UpdateUpgradeUI == 6 || UpdateUpgradeUI == 420)

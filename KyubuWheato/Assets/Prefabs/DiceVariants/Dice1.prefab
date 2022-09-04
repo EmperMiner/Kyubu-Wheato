@@ -106,7 +106,8 @@ GameObject:
   - component: {fileID: 4282968103210090301}
   - component: {fileID: 4199391813813738215}
   - component: {fileID: 2770760805150258120}
-  - component: {fileID: 6524015617789721108}
+  - component: {fileID: 2109995753}
+  - component: {fileID: 1617532854847528084}
   m_Layer: 0
   m_Name: Dice1
   m_TagString: 6sidedDice1
@@ -229,7 +230,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.42, y: 0.41}
   m_EdgeRadius: 0
---- !u!114 &6524015617789721108
+--- !u!195 &2109995753
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5705092907752739581}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.2
+  m_Speed: 10
+  m_Acceleration: 100
+  avoidancePriority: 50
+  m_AngularSpeed: 10
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.2
+  m_BaseOffset: 0.1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &1617532854847528084
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -238,8 +261,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5705092907752739581}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de50014e02f1daf4089afc54a013e1aa, type: 3}
+  m_Script: {fileID: 11500000, guid: f2c22fe904a94054f93ebbcca3a7a2ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireForce: 12
-  spinForce: 1000
+  DiceIsMultishot: 0
+  DiceIsFakeMultishotLeft: 0
+  DiceIsFakeMultishotRight: 0
+  DiceIsKyubuTile3: 0
+  DiceIsKyubuTile6: 0
+  Magnetizable: 1
+  directionX: 0
+  directionY: 0

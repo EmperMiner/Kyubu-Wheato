@@ -7,7 +7,7 @@ using TMPro;
 
 public class mouseBehaviour : MonoBehaviour
 {
-    private NavMeshAgent agent;
+    private UnityEngine.AI.NavMeshAgent agent;
 
     [SerializeField] private int maxMouseHealth = 50;
     private int mouseHealth;
