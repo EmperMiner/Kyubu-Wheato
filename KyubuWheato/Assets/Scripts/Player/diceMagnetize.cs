@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class diceMagnetize : MonoBehaviour
 {
@@ -14,16 +15,15 @@ public class diceMagnetize : MonoBehaviour
     private UnityEngine.AI.NavMeshAgent agent;
     private bool Magnetized = false;
     [SerializeField] private bool DiceIsMultishot;
-    [SerializeField] private bool DiceIsFakeMultishotLeft;
-    [SerializeField] private bool DiceIsFakeMultishotRight;
-    [SerializeField] private bool DiceIsKyubuTile3;
-    [SerializeField] private bool DiceIsKyubuTile6;
     [SerializeField] private bool Magnetizable;
     [SerializeField] private float directionX;
     [SerializeField] private float directionY;
+    [SerializeField] private float knockbackStrength;
+    private bool haveCupcake;
 
     void Start()
     {
+        LoadData();
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>(); 
         rb = GetComponent<Rigidbody2D>();
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
@@ -32,11 +32,7 @@ public class diceMagnetize : MonoBehaviour
         Vector3 direction = mousePos - transform.position;
         Vector3 rotation = transform.position - mousePos;
 
-        if (DiceIsFakeMultishotLeft) { rb.velocity = Quaternion.Euler(0, 0, -20) * new Vector2(direction.x, direction.y).normalized * fireForce; }
-        else if (DiceIsFakeMultishotRight) { rb.velocity = Quaternion.Euler(0, 0, 20) * new Vector2(direction.x, direction.y).normalized * fireForce; }
-        else if (DiceIsKyubuTile3) { rb.velocity = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized * 40; }
-        else if (DiceIsKyubuTile6) { rb.velocity = new Vector2(directionX, directionY).normalized * 4; }
-        else { rb.velocity = new Vector2(direction.x, direction.y).normalized * fireForce; }
+        rb.velocity = new Vector2(direction.x, direction.y).normalized * fireForce;
 
         if (DiceIsMultishot) { rot = (Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg) - 60f; }
         else { rot = (Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg) - 90f; }
@@ -55,7 +51,7 @@ public class diceMagnetize : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
-        if (Magnetizable) 
+        if (Magnetizable && haveCupcake) 
         {
             StartCoroutine(Wait());
         }
@@ -82,6 +78,18 @@ public class diceMagnetize : MonoBehaviour
         yield return new WaitForSeconds(5f);
         Magnetized = true;
         yield return null;
+    }
+    private void LoadData()
+    {
+        string json = File.ReadAllText(Application.dataPath + "/gameSaveData.json");
+        PlayerData loadedPlayerData = JsonUtility.FromJson<PlayerData>(json);
+        
+        haveCupcake = loadedPlayerData.haveCupcake;
+    }   
+
+    private class PlayerData
+    {
+        public bool haveCupcake;
     }
 }
 

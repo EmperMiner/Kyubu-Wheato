@@ -251,7 +251,7 @@ NavMeshAgent:
   m_Height: 0.2
   m_BaseOffset: 0.1
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &7642962136533341859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,10 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DiceIsMultishot: 0
-  DiceIsFakeMultishotLeft: 0
-  DiceIsFakeMultishotRight: 0
-  DiceIsKyubuTile3: 0
-  DiceIsKyubuTile6: 0
   Magnetizable: 1
   directionX: 0
   directionY: 0
+  knockbackStrength: 0

@@ -381,8 +381,8 @@ public class DiceThrow : MonoBehaviour
         haveFlan = loadedPlayerData.haveFlan;
         haveCremeBrulee = loadedPlayerData.haveCremeBrulee;
         haveBanhmi = loadedPlayerData.haveBanhmi;
-        havePizza = loadedPlayerData.haveCremeBrulee;
-        haveCarrotCake = loadedPlayerData.haveBanhmi;
+        havePizza = loadedPlayerData.havePizza;
+        haveCarrotCake = loadedPlayerData.haveCarrotCake;
     }   
     
     private class PlayerData
