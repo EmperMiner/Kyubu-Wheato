@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject crosshair;
     [SerializeField] private GameObject diceThrower;
     
-
+    [SerializeField] private GameObject[] DiceRayTest;
     private void Awake()
     {       
         LoadData();
@@ -78,6 +78,13 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("Speed", movement.sqrMagnitude);
 
             if (Input.GetKeyDown(KeyCode.E)) { CraftBread(); }
+            if (Input.GetKeyDown(KeyCode.R)) { DiceRay(0); }
+            if (Input.GetKeyDown(KeyCode.T)) { DiceRay(1); }
+            if (Input.GetKeyDown(KeyCode.Y)) { DiceRay(2); }
+            if (Input.GetKeyDown(KeyCode.U)) { DiceRay(3); }
+            if (Input.GetKeyDown(KeyCode.I)) { DiceRay(4); }
+            if (Input.GetKeyDown(KeyCode.O)) { DiceRay(5); }
+            if (Input.GetKeyDown(KeyCode.P)) { DiceRay(6); }
             if (playerHealth == 0) { GameOver(); }
         }
     }
@@ -115,6 +122,11 @@ public class PlayerController : MonoBehaviour
         if (Wheat >= 3 && playerHealth < maxHealth) { UpdateWheat(-3); UpdateHealth(10); }
         else if (playerHealth == maxHealth) { Debug.Log("You're At Full Health"); }
         else { Debug.Log("You Don't Have Enough Wheat To Craft Bread"); }
+    }
+
+    private void DiceRay(int i)
+    {
+        Instantiate(DiceRayTest[i], transform.position, Quaternion.identity);
     }
 
     private void IncreaseDiceNumber()
