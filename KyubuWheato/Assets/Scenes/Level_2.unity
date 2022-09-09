@@ -7782,7 +7782,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -8914,7 +8914,7 @@ MonoBehaviour:
   ultimateChargeSlider: {fileID: 997799013}
   ultimateCharge: {fileID: 1969402243}
   ultimateBorder: {fileID: 659590141}
-  maxUltimateCharge: 10
+  maxUltimateCharge: 1000
   currentUltimateCharge: 0
   ultimateInProgress: 0
   havePizza: 0
@@ -9856,6 +9856,7 @@ MonoBehaviour:
   - {fileID: 7128060687376789456, guid: 28532801f4758c344976709d5edfe059, type: 3}
   diceNumber: 3
   KyubuStack: 0
+  inKyubuKombo100: 0
 --- !u!1 &1213499310
 GameObject:
   m_ObjectHideFlags: 0
@@ -26415,7 +26416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82677489f74b72244a69cbe380bda90c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMouseHealth: 500
+  maxMouseHealth: 50
   mouseStrength: 1
   mouseAttackSpeed: 1
   mouseSpriteRenderer: {fileID: 4514144089389992950}
