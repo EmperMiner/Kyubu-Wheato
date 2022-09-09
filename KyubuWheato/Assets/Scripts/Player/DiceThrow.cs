@@ -31,6 +31,14 @@ public class DiceThrow : MonoBehaviour
     private bool haveBanhmi;
     private bool havePizza;
     private bool haveCarrotCake;
+    private bool havePastelDeChoclo;
+
+    public int KyubuStack = 0;
+    private int KyubuStackMax = 20;
+    private float KyubuStackTimer = 5f;
+    private float KyubuStackTimerLimit = 5f;
+    private bool triggeredKyubuStack = false;
+    public bool inKyubuKombo100 = false;
     
     private int[] DiceValues = new int[6];
     private int[] PreviousDiceValues = new int[6];
@@ -67,6 +75,16 @@ public class DiceThrow : MonoBehaviour
                     inCooldown = false;
                     cooldownTimer = 0;
                     cooldownBar.CooldownBarInvisible();
+                }
+            }
+
+            if (triggeredKyubuStack)
+            {
+                KyubuStackTimer += Time.deltaTime; 
+                if (KyubuStackTimer > KyubuStackTimerLimit)
+                {
+                    triggeredKyubuStack = false;
+                    KyubuStack = 0;
                 }
             }
 
@@ -224,6 +242,15 @@ public class DiceThrow : MonoBehaviour
 
     IEnumerator KyubuKombo(int KyubuTileValue)
     {
+        if (havePastelDeChoclo) 
+        { 
+            if (KyubuStack < KyubuStackMax) { KyubuStack++; }
+            else { KyubuStack = KyubuStackMax;}
+            KyubuStackTimer = 0f;
+            triggeredKyubuStack = true;
+            Debug.Log(KyubuStack);
+        }
+
         if (KyubuTileValue == 1) 
         { 
             try
@@ -233,7 +260,7 @@ public class DiceThrow : MonoBehaviour
             }
             catch (NullReferenceException) 
             { 
-                Instantiate(KyubuTiles[0], new Vector3(transform.position.x, transform.position.y + 15.5f, transform.position.z), Quaternion.identity); ; 
+                Instantiate(KyubuTiles[0], new Vector3(transform.position.x, transform.position.y + 15.5f, transform.position.z), Quaternion.identity); 
             }
         }
         if (KyubuTileValue == 2) 
@@ -299,11 +326,13 @@ public class DiceThrow : MonoBehaviour
         }
         if (KyubuTileValue == 100)
         {
+            inKyubuKombo100 = true;
             for (int i = 0; i < 50; i++) 
             { 
                 StartCoroutine(KyubuKombo(UnityEngine.Random.Range(0, 7)));
                 yield return new WaitForSeconds(0.1f);
             }
+            inKyubuKombo100 = false;
         }
         yield return null;
     }
@@ -383,6 +412,7 @@ public class DiceThrow : MonoBehaviour
         haveBanhmi = loadedPlayerData.haveBanhmi;
         havePizza = loadedPlayerData.havePizza;
         haveCarrotCake = loadedPlayerData.haveCarrotCake;
+        havePastelDeChoclo = loadedPlayerData.havePastelDeChoclo;
     }   
     
     private class PlayerData
@@ -395,5 +425,6 @@ public class DiceThrow : MonoBehaviour
         public bool haveBanhmi;
         public bool havePizza;
         public bool haveCarrotCake;
+        public bool havePastelDeChoclo;
     }
 }

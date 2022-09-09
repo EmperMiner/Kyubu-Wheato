@@ -149,6 +149,15 @@ MonoBehaviour:
   DiceIsMultishot: 0
   DiceIsFakeMultishotLeft: 0
   DiceIsFakeMultishotRight: 0
+  DiceIsKyubuTile3: 0
   DiceIsKyubuTile6: 1
   directionX: -0.5
   directionY: -1
+  DiceRayPrefabs:
+  - {fileID: 8816122030464988229, guid: cfa4a5e76397f4e45986f661215e5a0a, type: 3}
+  - {fileID: 4263314310715272535, guid: ee1938e1e1135524ea3415162dab489d, type: 3}
+  - {fileID: 9094439772502423185, guid: dbb5b8a6d6b16b941be36ef9bc0bc3fa, type: 3}
+  - {fileID: 2359204401960091588, guid: f2cd2715f43098846bbcb1aaeb05d1c6, type: 3}
+  - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
+  - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
+  - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}

@@ -85,6 +85,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.I)) { DiceRay(4); }
             if (Input.GetKeyDown(KeyCode.O)) { DiceRay(5); }
             if (Input.GetKeyDown(KeyCode.P)) { DiceRay(6); }
+            if (diceThrowScript.inKyubuKombo100) { UpdateHealth(maxHealth); }
             if (playerHealth == 0) { GameOver(); }
         }
     }
@@ -129,7 +130,7 @@ public class PlayerController : MonoBehaviour
         Instantiate(DiceRayTest[i], transform.position, Quaternion.identity);
     }
 
-    private void IncreaseDiceNumber()
+    public void IncreaseDiceNumber()
     {
         diceThrowScript.diceNumber++;
         DiceCounterNumber.text = diceThrowScript.diceNumber.ToString();

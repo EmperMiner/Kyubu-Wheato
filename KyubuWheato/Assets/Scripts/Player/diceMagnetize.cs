@@ -1,5 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
+using System;
 using UnityEngine;
 using System.IO;
 
@@ -11,6 +12,8 @@ public class diceMagnetize : MonoBehaviour
     private float fireForce = 12;
     private float spinForce = 1000;
     private float rot;
+    private PlayerController player;
+    private DiceThrow diceThrowScript;
     private Transform playerTransform;
     private UnityEngine.AI.NavMeshAgent agent;
     private bool Magnetized = false;
@@ -18,8 +21,11 @@ public class diceMagnetize : MonoBehaviour
     [SerializeField] private bool Magnetizable;
     [SerializeField] private float directionX;
     [SerializeField] private float directionY;
-    [SerializeField] private float knockbackStrength;
+    [SerializeField] private GameObject[] DiceRayPrefabs;
     private bool haveCupcake;
+    private bool havePastelDeChoclo;
+    private Vector2 enemyTargetVector;
+    private float DiceRayAngleOffset;
 
     void Start()
     {
@@ -27,6 +33,8 @@ public class diceMagnetize : MonoBehaviour
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>(); 
         rb = GetComponent<Rigidbody2D>();
         mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        diceThrowScript = GameObject.FindGameObjectWithTag("DiceManager").GetComponent<DiceThrow>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         Vector3 direction = mousePos - transform.position;
@@ -39,6 +47,8 @@ public class diceMagnetize : MonoBehaviour
 
         AddTorqueImpulse(spinForce);
         transform.rotation = Quaternion.Euler(0, 0, rot);
+
+        if (havePastelDeChoclo) { StartCoroutine(RollExplosionChance()); }
 
         if (gameObject.tag == "FakeDice1") { DestroyFakeDice(); }
         if (gameObject.tag == "FakeDice2") { DestroyFakeDice(); }
@@ -79,17 +89,82 @@ public class diceMagnetize : MonoBehaviour
         Magnetized = true;
         yield return null;
     }
+    
+    IEnumerator RollExplosionChance()
+    {
+        yield return new WaitForSeconds(1f);
+        int i = UnityEngine.Random.Range(0,100);
+        if (i < 10 + diceThrowScript.KyubuStack) { Explode(); }
+        yield return null;
+    }
+
+    private void Explode()
+    {
+        player.IncreaseDiceNumber(); 
+        if (this.gameObject.tag == "6sidedDice1") { Instantiate(DiceRayPrefabs[0], transform.position, Quaternion.identity); }
+        if (this.gameObject.tag == "6sidedDice2") 
+        { 
+            try
+            { 
+                Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
+                enemyTargetVector = enemyPosition.position - transform.position;
+                DiceRayAngleOffset = Vector2.Angle(Vector2.left, enemyTargetVector);
+                if (enemyPosition.position.y > transform.position.y) { Instantiate(DiceRayPrefabs[1], transform.position, Quaternion.Euler(0, 0, 360 - DiceRayAngleOffset)); }
+                else { Instantiate(DiceRayPrefabs[1], transform.position, Quaternion.Euler(0, 0, DiceRayAngleOffset)); }
+            }
+            catch (NullReferenceException) 
+            { 
+                Instantiate(DiceRayPrefabs[1], transform.position, Quaternion.identity); 
+            }
+        }
+        if (this.gameObject.tag == "6sidedDice3") { Instantiate(DiceRayPrefabs[2], transform.position, Quaternion.Euler(0, 0 , UnityEngine.Random.Range(0f,360f))); }
+        if (this.gameObject.tag == "6sidedDice4") { Instantiate(DiceRayPrefabs[UnityEngine.Random.Range(3,5)], transform.position, Quaternion.Euler(0, 0 , UnityEngine.Random.Range(0f,360f))); }
+        if (this.gameObject.tag == "6sidedDice5") 
+        { 
+            try
+            { 
+                Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
+                enemyTargetVector = enemyPosition.position - transform.position;
+                DiceRayAngleOffset = Vector2.Angle(Vector2.left, enemyTargetVector);
+                if (enemyPosition.position.y > transform.position.y) { Instantiate(DiceRayPrefabs[5], transform.position, Quaternion.Euler(0, 0, 180 - DiceRayAngleOffset)); }
+                else { Instantiate(DiceRayPrefabs[5], transform.position, Quaternion.Euler(0, 0, DiceRayAngleOffset + 180)); }
+            }
+            catch (NullReferenceException) 
+            { 
+                Instantiate(DiceRayPrefabs[1], transform.position, Quaternion.identity); 
+            }
+        }
+        if (this.gameObject.tag == "6sidedDice6") 
+        { 
+            try
+            { 
+                Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
+                enemyTargetVector = enemyPosition.position - transform.position;
+                DiceRayAngleOffset = Vector2.Angle(Vector2.left, enemyTargetVector);
+                if (enemyPosition.position.y > transform.position.y) { Instantiate(DiceRayPrefabs[6], transform.position, Quaternion.Euler(0, 0, 180 - DiceRayAngleOffset)); }
+                else { Instantiate(DiceRayPrefabs[6], transform.position, Quaternion.Euler(0, 0, DiceRayAngleOffset + 180)); }
+            }
+            catch (NullReferenceException) 
+            { 
+                Instantiate(DiceRayPrefabs[1], transform.position, Quaternion.identity); 
+            }
+        }
+        Destroy(gameObject);
+    }
+
     private void LoadData()
     {
         string json = File.ReadAllText(Application.dataPath + "/gameSaveData.json");
         PlayerData loadedPlayerData = JsonUtility.FromJson<PlayerData>(json);
         
         haveCupcake = loadedPlayerData.haveCupcake;
+        havePastelDeChoclo = loadedPlayerData.havePastelDeChoclo;
     }   
 
     private class PlayerData
     {
         public bool haveCupcake;
+        public bool havePastelDeChoclo;
     }
 }
 
