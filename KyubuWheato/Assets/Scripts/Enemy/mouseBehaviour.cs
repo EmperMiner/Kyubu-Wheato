@@ -27,6 +27,7 @@ public class mouseBehaviour : MonoBehaviour
     [SerializeField] private GameObject wheatDrop;
     [SerializeField] private Transform pfDamagePopup;
     [SerializeField] private TextMeshPro pfDamagePopupText;
+    [SerializeField] private GameObject[] dicetypes;
 
     private UltimateBarCharge ultimateBar;
 
@@ -53,8 +54,11 @@ public class mouseBehaviour : MonoBehaviour
 
         if(mouseHealth <= 0)
         {   
-            float RNGWheat = Random.Range(0, 10);
+            if (player.InHealMode == true) { player.UpdateHealth(5); }
+            float RNGWheat = Random.Range(0f, 10f);
             if (RNGWheat <= player.wheatDroprate/10) { Instantiate(wheatDrop, transform.position, Quaternion.identity); }
+            int RNGDice = Random.Range(0, player.diceDroprate);
+            if (RNGDice == 0) { Instantiate(dicetypes[Random.Range(0,dicetypes.Length)], transform.position, Quaternion.identity); }
             Destroy(gameObject);
         }
     }

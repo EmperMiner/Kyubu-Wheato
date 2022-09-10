@@ -35,7 +35,6 @@ public class DicePadSpawner : MonoBehaviour
 
     private void SpawnPad()
     {
-        Debug.Log("Spawned Pad");
         Instantiate(DicePadTypes[Random.Range(0,DicePadTypes.Length)], new Vector3(Random.Range(LeftMapLimit,RightMapLimit), Random.Range(LowerMapLimit, UpperMapLimit), 0), Quaternion.identity);
     }
 

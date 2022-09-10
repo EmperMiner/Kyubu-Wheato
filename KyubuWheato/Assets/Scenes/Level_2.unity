@@ -9180,7 +9180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2952340937594393216, guid: a9bf1af990dd47249b339c733a882119, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2952340937594393222, guid: a9bf1af990dd47249b339c733a882119, type: 3}
       propertyPath: m_RootOrder
@@ -25214,14 +25214,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4f1d547069c9e498576a2b8993933c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 3
-  maxHealth: 15
-  playerHealth: 0
   strength: 1
   defense: 1
   wheatDroprate: 0
-  Wheat: 0
   playerAlive: 1
+  CurrentMode: 0
+  InHealMode: 0
   LeftCamLimit: -12.5
   RightCamLimit: 15.5
   UpperCamLimit: 25
@@ -25236,14 +25234,11 @@ MonoBehaviour:
   gameOverScript: {fileID: 1120570389}
   crosshair: {fileID: 714086819}
   diceThrower: {fileID: 1194601114}
-  DiceRayTest:
-  - {fileID: 8816122030464988229, guid: cfa4a5e76397f4e45986f661215e5a0a, type: 3}
-  - {fileID: 4263314310715272535, guid: ee1938e1e1135524ea3415162dab489d, type: 3}
-  - {fileID: 9094439772502423185, guid: dbb5b8a6d6b16b941be36ef9bc0bc3fa, type: 3}
-  - {fileID: 2359204401960091588, guid: f2cd2715f43098846bbcb1aaeb05d1c6, type: 3}
-  - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
-  - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
-  - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  BroomPrefabs:
+  - {fileID: 2933156990235791690, guid: 8d8d9483c1af6c64d99c89c575e86bbe, type: 3}
+  - {fileID: 5239859770946935951, guid: f46ea0f2afa0b2940b3786118d244bee, type: 3}
+  - {fileID: 5396133291258826019, guid: 5bdf55b8ec639c148b6611460db56feb, type: 3}
+  - {fileID: 2769717467776701167, guid: 070fe10a68849be4aa992458d826d626, type: 3}
 --- !u!4 &1405087408
 Transform:
   m_ObjectHideFlags: 0
@@ -25252,7 +25247,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1405087406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.05, y: 15.35, z: -2}
+  m_LocalPosition: {x: 0, y: 15, z: -2}
   m_LocalScale: {x: 1.8, y: 1.8, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25506,7 +25501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2952340937594393216, guid: a9bf1af990dd47249b339c733a882119, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2952340937594393222, guid: a9bf1af990dd47249b339c733a882119, type: 3}
       propertyPath: m_RootOrder
@@ -25942,7 +25937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2952340937594393216, guid: a9bf1af990dd47249b339c733a882119, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2952340937594393222, guid: a9bf1af990dd47249b339c733a882119, type: 3}
       propertyPath: m_RootOrder
@@ -26075,7 +26070,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2952340937594393216, guid: a9bf1af990dd47249b339c733a882119, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2952340937594393222, guid: a9bf1af990dd47249b339c733a882119, type: 3}
       propertyPath: m_RootOrder
@@ -26733,7 +26728,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4514144089389992945}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.51, y: 13.3, z: 0}
+  m_LocalPosition: {x: 5.92, y: 13.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

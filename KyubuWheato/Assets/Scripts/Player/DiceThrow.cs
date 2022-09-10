@@ -21,16 +21,19 @@ public class DiceThrow : MonoBehaviour
     [SerializeField] private Image[] DicePreviewerImage;
     [SerializeField] private Sprite[] DiceSprites;
     [SerializeField] private GameObject[] KyubuTiles;
-    public int diceNumber;
+    
     private bool inCooldown = false;
     private float cooldownTimer;
+    
+    public int diceNumber;
     private float playerCooldownTime;
     private int dicePreviewerLevel;
+    private bool havePizza;
+    private bool haveCarrotCake;
     private bool haveFlan;
     private bool haveCremeBrulee;
     private bool haveBanhmi;
-    private bool havePizza;
-    private bool haveCarrotCake;
+    
     private bool havePastelDeChoclo;
 
     public int KyubuStack = 0;
@@ -288,7 +291,6 @@ public class DiceThrow : MonoBehaviour
             else { KyubuStack = KyubuStackMax;}
             KyubuStackTimer = 0f;
             triggeredKyubuStack = true;
-            Debug.Log(KyubuStack);
         }
 
         if (KyubuTileValue == 1) 

@@ -27,15 +27,23 @@ public class PlayerController : MonoBehaviour
     private bool shopHavePastelDeChoclo;
     private bool shopHaveGarlicBread;
 
-    public float MoveSpeed;
-    public int maxHealth;
-    public int playerHealth;
+    private float MoveSpeed;
+    private int maxHealth;
+    private int playerHealth;
     public float strength;
     public float defense;
     public float wheatDroprate;
-    public int Wheat;
+    private int Wheat;
+    public int diceDroprate;
+    private bool haveGarlicBread;
 
     public bool playerAlive;
+
+    public int CurrentMode;
+    private bool triggeredBroom = false;
+    private bool BroomInMode = false;
+    public bool InHealMode = false;
+    private bool RegenStop = true;
     
     private Transform mainCam;
     [SerializeField] private float LeftCamLimit;
@@ -57,7 +65,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject crosshair;
     [SerializeField] private GameObject diceThrower;
     
-    [SerializeField] private GameObject[] DiceRayTest;
+    [SerializeField] private GameObject[] BroomPrefabs;
+
     private void Awake()
     {       
         LoadData();
@@ -83,6 +92,11 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("Speed", movement.sqrMagnitude);
 
             if (Input.GetKeyDown(KeyCode.E)) { CraftBread(); }
+
+            if (haveGarlicBread && triggeredBroom == false) { StartCoroutine(RollMode());}
+            if (CurrentMode == 1 && BroomInMode == false) { StartCoroutine(AttackMode());}
+            if (CurrentMode == 2 && BroomInMode == false) { StartCoroutine(HealMode());}
+            if (CurrentMode == 3 && BroomInMode == false) { StartCoroutine(StatBuffMode());}
             
             if (diceThrowScript.inKyubuKombo100) { UpdateHealth(maxHealth); }
             if (playerHealth == 0) { GameOver(); }
@@ -188,6 +202,74 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator RollMode()
+    {
+        triggeredBroom = true;
+        if (playerAlive) 
+        {
+            CurrentMode = UnityEngine.Random.Range(1,4);
+            BroomInMode = false;
+            if (CurrentMode > 1) { Instantiate(BroomPrefabs[CurrentMode], new Vector3(transform.position.x - 1.5f, transform.position.y + 1f, 0), Quaternion.identity, this.gameObject.transform); }
+        }
+        yield return null;
+    }
+    IEnumerator AttackMode()
+    {
+        if (playerAlive) 
+        {
+            BroomInMode = true;
+            for (int a = 0; a < 10; a++)
+            {
+                Instantiate(BroomPrefabs[UnityEngine.Random.Range(0,2)], new Vector3(transform.position.x - 10f, transform.position.y + UnityEngine.Random.Range(-5f,5f), transform.position.z), Quaternion.identity);
+                yield return new WaitForSeconds(UnityEngine.Random.Range(2f,6f));
+            }
+            StartCoroutine(RollMode()); 
+        }
+        yield return null;
+    }
+    IEnumerator HealMode()
+    {
+        if (playerAlive) {
+            BroomInMode = true;
+            InHealMode = true;
+            yield return new WaitForSeconds(UnityEngine.Random.Range(20f,60f));
+            InHealMode = false;
+            StartCoroutine(RollMode());
+        }
+        yield return null;
+    }
+    IEnumerator StatBuffMode()
+    {
+        if (playerAlive) 
+        {
+            BroomInMode = true;
+            for (int b = 0; b < 5; b++)
+            {
+                int PickRandomStat = UnityEngine.Random.Range(0,5);
+                if (PickRandomStat == 0) { strength += 2f; }
+                if (PickRandomStat == 1) { defense += 2f; }
+                if (PickRandomStat == 2) { MoveSpeed += 1f; }
+                if (PickRandomStat == 3) { IncreaseDiceNumber(); }
+                if (PickRandomStat == 4) { RegenStop = false; StartCoroutine(Regen()); }
+                yield return new WaitForSeconds(UnityEngine.Random.Range(4f,12f));
+                if (PickRandomStat == 0) { strength -= 2f; }
+                if (PickRandomStat == 1) { defense -= 2f; }
+                if (PickRandomStat == 2) { MoveSpeed -= 1f; }
+                if (PickRandomStat == 4) { RegenStop = true; }
+            }
+            StartCoroutine(RollMode());
+        }
+        yield return null;
+    }
+
+    IEnumerator Regen()
+    {
+        UpdateHealth(2);
+        yield return new WaitForSeconds(UnityEngine.Random.Range(2f,4f));
+        if (RegenStop == false) { StartCoroutine(Regen()); }
+        yield return null;
+    }
+
     private void LoadData()
     {
         string json = File.ReadAllText(Application.dataPath + "/gameSaveData.json");
@@ -198,7 +280,9 @@ public class PlayerController : MonoBehaviour
         strength = loadedPlayerData.strength;
         defense = loadedPlayerData.defense;
         wheatDroprate = loadedPlayerData.wheatDroprate;
-
+        haveGarlicBread = loadedPlayerData.haveGarlicBread;
+        diceDroprate = loadedPlayerData.diceDroprate;
+        
         shopMoveSpeed = loadedPlayerData.MoveSpeed;
         shopMaxHealth = loadedPlayerData.maxHealth;
         shopPlayerHealth = loadedPlayerData.playerHealth;
