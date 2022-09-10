@@ -16,11 +16,16 @@ public class PlayerController : MonoBehaviour
     private float shopDefense;
     private float shopWheatDroprate;
     private int shopDicePreviewerLevel;
+    private int shopDiceDroprate;
     private bool shopHavePizza;
     private bool shopHaveCarrotCake;
     private bool shopHaveFlan;
     private bool shopHaveCremeBrulee;
     private bool shopHaveBanhmi;
+    private bool shopHaveCupcake;
+    private bool shopHaveChickenNuggets;
+    private bool shopHavePastelDeChoclo;
+    private bool shopHaveGarlicBread;
 
     public float MoveSpeed;
     public int maxHealth;
@@ -78,13 +83,7 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("Speed", movement.sqrMagnitude);
 
             if (Input.GetKeyDown(KeyCode.E)) { CraftBread(); }
-            if (Input.GetKeyDown(KeyCode.R)) { DiceRay(0); }
-            if (Input.GetKeyDown(KeyCode.T)) { DiceRay(1); }
-            if (Input.GetKeyDown(KeyCode.Y)) { DiceRay(2); }
-            if (Input.GetKeyDown(KeyCode.U)) { DiceRay(3); }
-            if (Input.GetKeyDown(KeyCode.I)) { DiceRay(4); }
-            if (Input.GetKeyDown(KeyCode.O)) { DiceRay(5); }
-            if (Input.GetKeyDown(KeyCode.P)) { DiceRay(6); }
+            
             if (diceThrowScript.inKyubuKombo100) { UpdateHealth(maxHealth); }
             if (playerHealth == 0) { GameOver(); }
         }
@@ -103,6 +102,25 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.tag == "6sidedDice4") { IncreaseDiceNumber(); } 
         if (collider.gameObject.tag == "6sidedDice5") { IncreaseDiceNumber(); } 
         if (collider.gameObject.tag == "6sidedDice6") { IncreaseDiceNumber(); } 
+    }
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "DiceTile1") { diceThrowScript.isOnDiceTile1 = true; }
+        if (other.gameObject.tag == "DiceTile2") { diceThrowScript.isOnDiceTile2 = true; }
+        if (other.gameObject.tag == "DiceTile3") { diceThrowScript.isOnDiceTile3 = true; }
+        if (other.gameObject.tag == "DiceTile4") { diceThrowScript.isOnDiceTile4 = true; }
+        if (other.gameObject.tag == "DiceTile5") { diceThrowScript.isOnDiceTile5 = true; }
+        if (other.gameObject.tag == "DiceTile6") { diceThrowScript.isOnDiceTile6 = true; }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "DiceTile1") { diceThrowScript.isOnDiceTile1 = false; }
+        if (other.gameObject.tag == "DiceTile2") { diceThrowScript.isOnDiceTile2 = false; }
+        if (other.gameObject.tag == "DiceTile3") { diceThrowScript.isOnDiceTile3 = false; }
+        if (other.gameObject.tag == "DiceTile4") { diceThrowScript.isOnDiceTile4 = false; }
+        if (other.gameObject.tag == "DiceTile5") { diceThrowScript.isOnDiceTile5 = false; }
+        if (other.gameObject.tag == "DiceTile6") { diceThrowScript.isOnDiceTile6 = false; }
     }
 
     private void LimitCamera()
@@ -123,11 +141,6 @@ public class PlayerController : MonoBehaviour
         if (Wheat >= 3 && playerHealth < maxHealth) { UpdateWheat(-3); UpdateHealth(10); }
         else if (playerHealth == maxHealth) { Debug.Log("You're At Full Health"); }
         else { Debug.Log("You Don't Have Enough Wheat To Craft Bread"); }
-    }
-
-    private void DiceRay(int i)
-    {
-        Instantiate(DiceRayTest[i], transform.position, Quaternion.identity);
     }
 
     public void IncreaseDiceNumber()
@@ -196,11 +209,16 @@ public class PlayerController : MonoBehaviour
         shopDefense = loadedPlayerData.defense;
         shopWheatDroprate = loadedPlayerData.wheatDroprate;
         shopDicePreviewerLevel = loadedPlayerData.dicePreviewerLevel;
+        shopDiceDroprate = loadedPlayerData.diceDroprate;
         shopHavePizza = loadedPlayerData.havePizza;
         shopHaveCarrotCake = loadedPlayerData.haveCarrotCake;
         shopHaveFlan = loadedPlayerData.haveFlan;
         shopHaveCremeBrulee = loadedPlayerData.haveCremeBrulee;
         shopHaveBanhmi = loadedPlayerData.haveBanhmi;
+        shopHaveCupcake = loadedPlayerData.haveCupcake;
+        shopHaveChickenNuggets = loadedPlayerData.haveChickenNuggets;
+        shopHavePastelDeChoclo = loadedPlayerData.havePastelDeChoclo;
+        shopHaveGarlicBread = loadedPlayerData.haveGarlicBread;
     }
 
     private void SaveData()
@@ -217,11 +235,16 @@ public class PlayerController : MonoBehaviour
         savingPlayerData.defense = shopDefense;
         savingPlayerData.wheatDroprate = shopWheatDroprate;
         savingPlayerData.dicePreviewerLevel = shopDicePreviewerLevel;
+        savingPlayerData.diceDroprate = shopDiceDroprate;
         savingPlayerData.havePizza = shopHavePizza;
         savingPlayerData.haveCarrotCake = shopHaveCarrotCake;
         savingPlayerData.haveFlan = shopHaveFlan;
         savingPlayerData.haveCremeBrulee = shopHaveCremeBrulee;
         savingPlayerData.haveBanhmi = shopHaveBanhmi;
+        savingPlayerData.haveCupcake = shopHaveCupcake;
+        savingPlayerData.haveChickenNuggets = shopHaveChickenNuggets;
+        savingPlayerData.havePastelDeChoclo = shopHavePastelDeChoclo;
+        savingPlayerData.haveGarlicBread = shopHaveGarlicBread;
 
 
         string json = JsonUtility.ToJson(savingPlayerData);
@@ -242,10 +265,15 @@ public class PlayerController : MonoBehaviour
         public float defense;
         public float wheatDroprate;
         public int dicePreviewerLevel;
+        public int diceDroprate;
         public bool havePizza;
         public bool haveCarrotCake;
         public bool haveFlan;
         public bool haveCremeBrulee;
         public bool haveBanhmi;
+        public bool haveCupcake;
+        public bool haveChickenNuggets;
+        public bool havePastelDeChoclo;
+        public bool haveGarlicBread;
     }
 }

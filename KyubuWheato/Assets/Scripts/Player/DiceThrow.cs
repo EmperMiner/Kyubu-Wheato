@@ -35,10 +35,19 @@ public class DiceThrow : MonoBehaviour
 
     public int KyubuStack = 0;
     private int KyubuStackMax = 20;
-    private float KyubuStackTimer = 5f;
-    private float KyubuStackTimerLimit = 5f;
+    private float KyubuStackTimer = 10f;
+    private float KyubuStackTimerLimit = 10f;
     private bool triggeredKyubuStack = false;
     public bool inKyubuKombo100 = false;
+    private int RandomDiceValue;
+    private int RandomFakeDiceValue;
+
+    public bool isOnDiceTile1;
+    public bool isOnDiceTile2;
+    public bool isOnDiceTile3;
+    public bool isOnDiceTile4;
+    public bool isOnDiceTile5;
+    public bool isOnDiceTile6;
     
     private int[] DiceValues = new int[6];
     private int[] PreviousDiceValues = new int[6];
@@ -105,7 +114,25 @@ public class DiceThrow : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha2) && dicePreviewerLevel >= 3 && haveBanhmi == true) { DiceHotkey(2); }
             if (Input.GetKeyDown(KeyCode.Alpha3) && dicePreviewerLevel >= 4 && haveBanhmi == true) { DiceHotkey(3); }
             if (Input.GetKeyDown(KeyCode.Alpha4) && dicePreviewerLevel >= 5 && haveBanhmi == true) { DiceHotkey(4); }
+            if (Input.GetKeyDown(KeyCode.R)) { KyubuKombo(100); }
+            if (Input.GetKeyDown(KeyCode.T)) { }
+            if (Input.GetKeyDown(KeyCode.Y)) { }
+            if (Input.GetKeyDown(KeyCode.U)) { }
+            if (Input.GetKeyDown(KeyCode.I)) { }
+            if (Input.GetKeyDown(KeyCode.O)) { }
+            if (Input.GetKeyDown(KeyCode.P)) { }
         }  
+    }
+
+    private void GetDiceValue()
+    {
+        if (isOnDiceTile6) { RandomDiceValue = 5; }
+        else if (isOnDiceTile5) { RandomDiceValue = 4; }
+        else if (isOnDiceTile4) { RandomDiceValue = 3; }
+        else if (isOnDiceTile3) { RandomDiceValue = 2; }
+        else if (isOnDiceTile2) { RandomDiceValue = 1; }
+        else if (isOnDiceTile1) { RandomDiceValue = 0; }
+        else { RandomDiceValue = UnityEngine.Random.Range(0,dicetypes.Length); }
     }
 
     private void GenerateRandomDiceArray()
@@ -137,9 +164,21 @@ public class DiceThrow : MonoBehaviour
         DiceValues[1] = DiceValues[2];
         DiceValues[2] = DiceValues[3];
         DiceValues[3] = DiceValues[4];
-        DiceValues[4] = UnityEngine.Random.Range(0,dicetypes.Length);
+        GetDiceValue();
+        DiceValues[4] = RandomDiceValue;
         UpdateDicePreviewerUI();
         KyubuKomboCheck();
+    }
+
+    private void GetFakeDiceValue()
+    {
+        if (isOnDiceTile6) { RandomFakeDiceValue = 5; }
+        else if (isOnDiceTile5) { RandomFakeDiceValue = 4; }
+        else if (isOnDiceTile4) { RandomFakeDiceValue = 3; }
+        else if (isOnDiceTile3) { RandomFakeDiceValue = 2; }
+        else if (isOnDiceTile2) { RandomFakeDiceValue = 1; }
+        else if (isOnDiceTile1) { RandomFakeDiceValue = 0; }
+        else { RandomFakeDiceValue = UnityEngine.Random.Range(0,dicetypes.Length); }
     }
 
     private void GenerateRandomFakeArray()
@@ -161,7 +200,8 @@ public class DiceThrow : MonoBehaviour
         FakePreviousDiceValues[3] = FakePreviousDiceValues[4];
         FakePreviousDiceValues[4] = FakePreviousDiceValues[5];
         FakePreviousDiceValues[5] =  FakeDiceValue;
-        FakeDiceValue = UnityEngine.Random.Range(0,dicetypes.Length);;
+        GetFakeDiceValue();
+        FakeDiceValue = RandomFakeDiceValue;
         KyubuKomboCheck();
     }
 

@@ -26,6 +26,14 @@ TagManager:
   - FakeDice4
   - FakeDice5
   - FakeDice6
+  - MapCollider
+  - DicePadManager
+  - DiceTile1
+  - DiceTile2
+  - DiceTile3
+  - DiceTile4
+  - DiceTile5
+  - DiceTile6
   layers:
   - Default
   - TransparentFX
