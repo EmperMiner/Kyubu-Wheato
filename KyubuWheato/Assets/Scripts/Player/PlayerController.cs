@@ -218,10 +218,10 @@ public class PlayerController : MonoBehaviour
         if (playerAlive) 
         {
             BroomInMode = true;
-            for (int a = 0; a < 10; a++)
+            for (int a = 0; a < 20; a++)
             {
                 Instantiate(BroomPrefabs[UnityEngine.Random.Range(0,2)], new Vector3(transform.position.x - 10f, transform.position.y + UnityEngine.Random.Range(-5f,5f), transform.position.z), Quaternion.identity);
-                yield return new WaitForSeconds(UnityEngine.Random.Range(2f,6f));
+                yield return new WaitForSeconds(UnityEngine.Random.Range(1f,3f));
             }
             StartCoroutine(RollMode()); 
         }
