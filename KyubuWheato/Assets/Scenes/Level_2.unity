@@ -25217,9 +25217,22 @@ MonoBehaviour:
   strength: 1
   defense: 1
   wheatDroprate: 0
+  diceDroprate: 0
+  diceNumber: 0
+  playerCooldownTime: 0
+  dicePreviewerLevel: 0
+  havePizza: 0
+  haveCarrotCake: 0
+  haveFlan: 0
+  haveCremeBrulee: 0
+  haveBanhmi: 0
+  haveCupcake: 0
+  haveChickenNuggets: 0
+  havePastelDeChoclo: 0
   playerAlive: 1
   CurrentMode: 0
   InHealMode: 0
+  FirstLevelSave: 1
   LeftCamLimit: -12.5
   RightCamLimit: 15.5
   UpperCamLimit: 25
@@ -25229,6 +25242,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1405087413}
   healthBar: {fileID: 1005547201}
   diceThrowScript: {fileID: 1194601116}
+  dicePadSpawnerScript: {fileID: 1508249893}
+  ultimateScript: {fileID: 997799014}
   DiceCounterNumber: {fileID: 1170444456}
   WheatCounterNumber: {fileID: 918725121}
   gameOverScript: {fileID: 1120570389}
@@ -26668,6 +26683,7 @@ MonoBehaviour:
   wheatDrop: {fileID: 6133570875003662420, guid: 47d5b60bfb15aea49839d118dac8f86c, type: 3}
   pfDamagePopup: {fileID: 6478138214433248903, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
   pfDamagePopupText: {fileID: 62537061617949394, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
+  dicetypes: []
 --- !u!212 &4514144089389992950
 SpriteRenderer:
   m_ObjectHideFlags: 0

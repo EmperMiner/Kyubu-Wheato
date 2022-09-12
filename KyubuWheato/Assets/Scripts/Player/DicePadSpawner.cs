@@ -16,7 +16,7 @@ public class DicePadSpawner : MonoBehaviour
 
     void Start()
     {
-        LoadData();
+        DicePadLoadData();
     }
 
     
@@ -38,9 +38,9 @@ public class DicePadSpawner : MonoBehaviour
         Instantiate(DicePadTypes[Random.Range(0,DicePadTypes.Length)], new Vector3(Random.Range(LeftMapLimit,RightMapLimit), Random.Range(LowerMapLimit, UpperMapLimit), 0), Quaternion.identity);
     }
 
-    private void LoadData()
+    public void DicePadLoadData()
     {
-        string json = File.ReadAllText(Application.dataPath + "/gameSaveData.json");
+        string json = File.ReadAllText(Application.dataPath + "/ingameSaveData.json");
         PlayerData loadedPlayerData = JsonUtility.FromJson<PlayerData>(json);
         
         haveChickenNuggets = loadedPlayerData.haveChickenNuggets;

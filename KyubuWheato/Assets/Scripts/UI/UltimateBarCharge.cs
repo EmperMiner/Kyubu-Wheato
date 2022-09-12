@@ -19,7 +19,7 @@ public class UltimateBarCharge : MonoBehaviour
 
     private void Start()
     {
-        LoadData();
+        UltimateLoadData();
         ultimateCharge.GetComponent<Image>().color = new Color32(255, 255, 255, 0);
         ultimateBorder.GetComponent<Image>().color = new Color32(224, 83, 83, 0);
     }
@@ -64,9 +64,9 @@ public class UltimateBarCharge : MonoBehaviour
         else { ultimateCharge.GetComponent<Image>().color = new Color32(255, 255, 255, 200); }
     }
 
-    private void LoadData()
+    public void UltimateLoadData()
     {
-        string json = File.ReadAllText(Application.dataPath + "/gameSaveData.json");
+        string json = File.ReadAllText(Application.dataPath + "/ingameSaveData.json");
         PlayerData loadedPlayerData = JsonUtility.FromJson<PlayerData>(json);
 
         havePizza = loadedPlayerData.havePizza;

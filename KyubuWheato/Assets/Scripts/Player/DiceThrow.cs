@@ -9,6 +9,7 @@ public class DiceThrow : MonoBehaviour
 {
     private Camera mainCam;
     private Vector3 mousePos;
+    private PlayerController player;
     [SerializeField] private Text DiceCounterNumber;
     [SerializeField] private GameObject[] fakeDiceTypes;
     [SerializeField] private GameObject[] dicetypes;
@@ -33,7 +34,6 @@ public class DiceThrow : MonoBehaviour
     private bool haveFlan;
     private bool haveCremeBrulee;
     private bool haveBanhmi;
-    
     private bool havePastelDeChoclo;
 
     public int KyubuStack = 0;
@@ -60,7 +60,8 @@ public class DiceThrow : MonoBehaviour
 
     void Start()
     {
-        LoadData();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        DiceThrowLoadData();
         GenerateRandomDiceArray();
         GenerateRandomFakeArray();
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>(); 
@@ -117,13 +118,6 @@ public class DiceThrow : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha2) && dicePreviewerLevel >= 3 && haveBanhmi == true) { DiceHotkey(2); }
             if (Input.GetKeyDown(KeyCode.Alpha3) && dicePreviewerLevel >= 4 && haveBanhmi == true) { DiceHotkey(3); }
             if (Input.GetKeyDown(KeyCode.Alpha4) && dicePreviewerLevel >= 5 && haveBanhmi == true) { DiceHotkey(4); }
-            if (Input.GetKeyDown(KeyCode.R)) { KyubuKombo(100); }
-            if (Input.GetKeyDown(KeyCode.T)) { }
-            if (Input.GetKeyDown(KeyCode.Y)) { }
-            if (Input.GetKeyDown(KeyCode.U)) { }
-            if (Input.GetKeyDown(KeyCode.I)) { }
-            if (Input.GetKeyDown(KeyCode.O)) { }
-            if (Input.GetKeyDown(KeyCode.P)) { }
         }  
     }
 
@@ -382,6 +376,7 @@ public class DiceThrow : MonoBehaviour
     private void ShootOneDice()
     {
         diceNumber--;
+        SaveDiceNumber();
         Instantiate(dicetypes[DiceValues[0]], diceTransform.position, UnityEngine.Random.rotation);
         CycleThroughDiceValueArray();
     }
@@ -390,6 +385,7 @@ public class DiceThrow : MonoBehaviour
         if (diceNumber >= 2)
         {
             diceNumber -= 2;
+            SaveDiceNumber();
             for (int i = 0; i < 2; i++) 
             { 
                 Instantiate(MultishotDiceTypes[DiceValues[0]], diceTransform.position, UnityEngine.Random.rotation); 
@@ -403,6 +399,7 @@ public class DiceThrow : MonoBehaviour
         if (diceNumber >= 3)
         {
             diceNumber -= 3;
+            SaveDiceNumber();
             for (int i = 0; i < 3; i++) 
             { 
                 Instantiate(MultishotDiceTypes[DiceValues[0]], diceTransform.position, UnityEngine.Random.rotation); 
@@ -441,9 +438,15 @@ public class DiceThrow : MonoBehaviour
         yield return null;
     }
 
-    private void LoadData()
+    private void SaveDiceNumber()
     {
-        string json = File.ReadAllText(Application.dataPath + "/gameSaveData.json");
+        player.diceNumber = diceNumber;
+        player.LatterIngameSaveData();
+    }
+
+    public void DiceThrowLoadData()
+    {
+        string json = File.ReadAllText(Application.dataPath + "/ingameSaveData.json");
         PlayerData loadedPlayerData = JsonUtility.FromJson<PlayerData>(json);
 
         diceNumber = loadedPlayerData.diceNumber;

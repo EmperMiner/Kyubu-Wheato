@@ -37,6 +37,18 @@ public class PlayerController : MonoBehaviour
     public int diceDroprate;
     private bool haveGarlicBread;
 
+    public int diceNumber;
+    public float playerCooldownTime;
+    public int dicePreviewerLevel;
+    public bool havePizza;
+    public bool haveCarrotCake;
+    public bool haveFlan;
+    public bool haveCremeBrulee;
+    public bool haveBanhmi;
+    public bool haveCupcake;
+    public bool haveChickenNuggets;
+    public bool havePastelDeChoclo;
+
     public bool playerAlive;
 
     public int CurrentMode;
@@ -46,6 +58,7 @@ public class PlayerController : MonoBehaviour
     private bool RegenStop = true;
     
     private Transform mainCam;
+    [SerializeField] private bool FirstLevelSave;
     [SerializeField] private float LeftCamLimit;
     [SerializeField] private float RightCamLimit;
     [SerializeField] private float UpperCamLimit;
@@ -58,6 +71,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private HealthBar healthBar;
 
     [SerializeField] private DiceThrow diceThrowScript;
+    [SerializeField] private DicePadSpawner dicePadSpawnerScript;
+    [SerializeField] private UltimateBarCharge ultimateScript;
     [SerializeField] private Text DiceCounterNumber;
     [SerializeField] private Text WheatCounterNumber;
     [SerializeField] private GameOverScreen gameOverScript;
@@ -69,7 +84,12 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {       
-        LoadData();
+        if (FirstLevelSave) 
+        { 
+            LoadData();
+            FirstIngameSaveData(); 
+        }
+        IngameLoadData();
         Time.timeScale = 1f;
         playerAlive = true;
         playerHealth = maxHealth;
@@ -91,7 +111,7 @@ public class PlayerController : MonoBehaviour
             if ( movement.x!=0 ) { animator.SetFloat("Horizontal", movement.x); }
             animator.SetFloat("Speed", movement.sqrMagnitude);
 
-            if (Input.GetKeyDown(KeyCode.E)) { CraftBread(); }
+            if (Input.GetKeyDown(KeyCode.R)) { CraftBread(); }
 
             if (haveGarlicBread && triggeredBroom == false) { StartCoroutine(RollMode());}
             if (CurrentMode == 1 && BroomInMode == false) { StartCoroutine(AttackMode());}
@@ -101,6 +121,14 @@ public class PlayerController : MonoBehaviour
             if (diceThrowScript.inKyubuKombo100) { UpdateHealth(maxHealth); }
             if (playerHealth == 0) { GameOver(); }
         }
+    }
+
+    private void UpdateValues()
+    {
+        LatterIngameSaveData();
+        diceThrowScript.DiceThrowLoadData();
+        dicePadSpawnerScript.DicePadLoadData();
+        ultimateScript.UltimateLoadData();
     }
 
     private void FixedUpdate()
@@ -152,15 +180,16 @@ public class PlayerController : MonoBehaviour
 
     private void CraftBread()
     {
-        if (Wheat >= 3 && playerHealth < maxHealth) { UpdateWheat(-3); UpdateHealth(10); }
+        if (Wheat >= 3 && playerHealth < maxHealth) { UpdateWheat(-3); UpdateHealth(10); LatterIngameSaveData();}
         else if (playerHealth == maxHealth) { Debug.Log("You're At Full Health"); }
         else { Debug.Log("You Don't Have Enough Wheat To Craft Bread"); }
     }
 
     public void IncreaseDiceNumber()
     {
-        diceThrowScript.diceNumber++;
-        DiceCounterNumber.text = diceThrowScript.diceNumber.ToString();
+        diceNumber++;
+        DiceCounterNumber.text = diceNumber.ToString();
+        UpdateValues();
     }
 
     public void UpdateHealth(int healthMod)
@@ -182,6 +211,7 @@ public class PlayerController : MonoBehaviour
     {
         Wheat += wheatMod;
         WheatCounterNumber.text = Wheat.ToString();
+        LatterIngameSaveData();
     }
 
     public void GameOver()
@@ -275,14 +305,6 @@ public class PlayerController : MonoBehaviour
         string json = File.ReadAllText(Application.dataPath + "/gameSaveData.json");
         PlayerData loadedPlayerData = JsonUtility.FromJson<PlayerData>(json);
 
-        MoveSpeed = loadedPlayerData.MoveSpeed;
-        maxHealth = loadedPlayerData.maxHealth;
-        strength = loadedPlayerData.strength;
-        defense = loadedPlayerData.defense;
-        wheatDroprate = loadedPlayerData.wheatDroprate;
-        haveGarlicBread = loadedPlayerData.haveGarlicBread;
-        diceDroprate = loadedPlayerData.diceDroprate;
-        
         shopMoveSpeed = loadedPlayerData.MoveSpeed;
         shopMaxHealth = loadedPlayerData.maxHealth;
         shopPlayerHealth = loadedPlayerData.playerHealth;
@@ -336,6 +358,93 @@ public class PlayerController : MonoBehaviour
 
         File.WriteAllText(Application.dataPath + "/gameSaveData.json", json);    
     }
+
+    private void IngameLoadData()
+    {
+        string json = File.ReadAllText(Application.dataPath + "/ingameSaveData.json");
+        PlayerData loadedPlayerData = JsonUtility.FromJson<PlayerData>(json);
+
+        MoveSpeed = loadedPlayerData.MoveSpeed;
+        maxHealth = loadedPlayerData.maxHealth;
+        strength = loadedPlayerData.strength;
+        Wheat = loadedPlayerData.Wheat;
+        diceNumber = loadedPlayerData.diceNumber;
+        playerCooldownTime = loadedPlayerData.playerCooldownTime;
+        defense = loadedPlayerData.defense;
+        wheatDroprate = loadedPlayerData.wheatDroprate;
+        dicePreviewerLevel = loadedPlayerData.dicePreviewerLevel;
+        diceDroprate = loadedPlayerData.diceDroprate;
+        havePizza = loadedPlayerData.havePizza;
+        haveCarrotCake = loadedPlayerData.haveCarrotCake;
+        haveFlan = loadedPlayerData.haveFlan;
+        haveCremeBrulee = loadedPlayerData.haveCremeBrulee;
+        haveBanhmi = loadedPlayerData.haveBanhmi;
+        haveCupcake = loadedPlayerData.haveCupcake;
+        haveChickenNuggets = loadedPlayerData.haveChickenNuggets;
+        havePastelDeChoclo = loadedPlayerData.havePastelDeChoclo;
+        haveGarlicBread = loadedPlayerData.haveGarlicBread;
+    }
+    private void FirstIngameSaveData()
+    {
+        PlayerData savingPlayerData = new PlayerData();
+
+        savingPlayerData.MoveSpeed = shopMoveSpeed;
+        savingPlayerData.maxHealth = shopMaxHealth;
+        savingPlayerData.playerHealth = shopPlayerHealth;
+        savingPlayerData.strength = shopStrength;
+        savingPlayerData.Wheat = 0;
+        savingPlayerData.diceNumber = shopDiceNumber;
+        savingPlayerData.playerCooldownTime = shopPlayerCooldownTime;
+        savingPlayerData.defense = shopDefense;
+        savingPlayerData.wheatDroprate = shopWheatDroprate;
+        savingPlayerData.dicePreviewerLevel = shopDicePreviewerLevel;
+        savingPlayerData.diceDroprate = shopDiceDroprate;
+        savingPlayerData.havePizza = shopHavePizza;
+        savingPlayerData.haveCarrotCake = shopHaveCarrotCake;
+        savingPlayerData.haveFlan = shopHaveFlan;
+        savingPlayerData.haveCremeBrulee = shopHaveCremeBrulee;
+        savingPlayerData.haveBanhmi = shopHaveBanhmi;
+        savingPlayerData.haveCupcake = shopHaveCupcake;
+        savingPlayerData.haveChickenNuggets = shopHaveChickenNuggets;
+        savingPlayerData.havePastelDeChoclo = shopHavePastelDeChoclo;
+        savingPlayerData.haveGarlicBread = shopHaveGarlicBread;
+
+        string json = JsonUtility.ToJson(savingPlayerData);
+        Debug.Log(json);
+
+        File.WriteAllText(Application.dataPath + "/ingameSaveData.json", json);    
+    }
+    public void LatterIngameSaveData()
+    {
+        PlayerData savingPlayerData = new PlayerData();
+
+        savingPlayerData.MoveSpeed = MoveSpeed;
+        savingPlayerData.maxHealth = maxHealth;
+        savingPlayerData.playerHealth = playerHealth;
+        savingPlayerData.strength = strength;
+        savingPlayerData.Wheat = Wheat;
+        savingPlayerData.diceNumber = diceNumber;
+        savingPlayerData.playerCooldownTime = playerCooldownTime;
+        savingPlayerData.defense = defense;
+        savingPlayerData.wheatDroprate = wheatDroprate;
+        savingPlayerData.dicePreviewerLevel = dicePreviewerLevel;
+        savingPlayerData.diceDroprate = diceDroprate;
+        savingPlayerData.havePizza = havePizza;
+        savingPlayerData.haveCarrotCake = haveCarrotCake;
+        savingPlayerData.haveFlan = haveFlan;
+        savingPlayerData.haveCremeBrulee = haveCremeBrulee;
+        savingPlayerData.haveBanhmi = haveBanhmi;
+        savingPlayerData.haveCupcake = haveCupcake;
+        savingPlayerData.haveChickenNuggets = haveChickenNuggets;
+        savingPlayerData.havePastelDeChoclo = havePastelDeChoclo;
+        savingPlayerData.haveGarlicBread = haveGarlicBread;
+
+        string json = JsonUtility.ToJson(savingPlayerData);
+        Debug.Log(json);
+
+        File.WriteAllText(Application.dataPath + "/ingameSaveData.json", json);    
+    }
+    
 
     private class PlayerData
     {

@@ -94,7 +94,7 @@ public class diceMagnetize : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         int i = UnityEngine.Random.Range(0,100);
-        if (i < 10 + diceThrowScript.KyubuStack) { Explode(); }
+        if (i < 10  + diceThrowScript.KyubuStack) { Explode(); }
         yield return null;
     }
 
@@ -154,7 +154,7 @@ public class diceMagnetize : MonoBehaviour
 
     private void LoadData()
     {
-        string json = File.ReadAllText(Application.dataPath + "/gameSaveData.json");
+        string json = File.ReadAllText(Application.dataPath + "/ingameSaveData.json");
         PlayerData loadedPlayerData = JsonUtility.FromJson<PlayerData>(json);
         
         haveCupcake = loadedPlayerData.haveCupcake;
