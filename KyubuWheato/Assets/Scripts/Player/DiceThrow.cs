@@ -202,7 +202,7 @@ public class DiceThrow : MonoBehaviour
         KyubuKomboCheck();
     }
 
-    private void UpdateDicePreviewerUI()
+    public void UpdateDicePreviewerUI()
     {
         DicePreviewerImage[0].sprite = DiceSprites[DiceValues[0]];
         DicePreviewerImage[1].sprite = DiceSprites[DiceValues[1]];

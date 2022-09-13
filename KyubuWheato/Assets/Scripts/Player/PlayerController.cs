@@ -27,15 +27,15 @@ public class PlayerController : MonoBehaviour
     private bool shopHavePastelDeChoclo;
     private bool shopHaveGarlicBread;
 
-    private float MoveSpeed;
-    private int maxHealth;
+    public float MoveSpeed;
+    public int maxHealth;
     private int playerHealth;
     public float strength;
     public float defense;
     public float wheatDroprate;
-    private int Wheat;
+    public int Wheat;
     public int diceDroprate;
-    private bool haveGarlicBread;
+    public bool haveGarlicBread;
 
     public int diceNumber;
     public float playerCooldownTime;
@@ -68,11 +68,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
     public Renderer spriteRenderer;
 
-    [SerializeField] private HealthBar healthBar;
+    public HealthBar healthBar;
 
     [SerializeField] private DiceThrow diceThrowScript;
     [SerializeField] private DicePadSpawner dicePadSpawnerScript;
     [SerializeField] private UltimateBarCharge ultimateScript;
+    [SerializeField] private CooldownBar cooldownBarScript;
     [SerializeField] private Text DiceCounterNumber;
     [SerializeField] private Text WheatCounterNumber;
     [SerializeField] private GameOverScreen gameOverScript;
@@ -81,6 +82,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject diceThrower;
     
     [SerializeField] private GameObject[] BroomPrefabs;
+    public bool AllEntrees = false;
 
     private void Awake()
     {       
@@ -119,16 +121,20 @@ public class PlayerController : MonoBehaviour
             if (CurrentMode == 3 && BroomInMode == false) { StartCoroutine(StatBuffMode());}
             
             if (diceThrowScript.inKyubuKombo100) { UpdateHealth(maxHealth); }
+            if (havePizza && haveCarrotCake && haveFlan && haveCremeBrulee && haveBanhmi && haveCupcake && haveChickenNuggets && havePastelDeChoclo && haveGarlicBread) { AllEntrees = true; }
+            else { AllEntrees = false; }
+
             if (playerHealth == 0) { GameOver(); }
         }
     }
 
-    private void UpdateValues()
+    public void UpdateValues()
     {
         LatterIngameSaveData();
         diceThrowScript.DiceThrowLoadData();
         dicePadSpawnerScript.DicePadLoadData();
         ultimateScript.UltimateLoadData();
+        cooldownBarScript.CooldownBarLoadData();
     }
 
     private void FixedUpdate()

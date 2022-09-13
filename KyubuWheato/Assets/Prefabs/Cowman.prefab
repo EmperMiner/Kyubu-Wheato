@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 230e14b4efa678c4f90356d49aeedb1e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -110,6 +110,7 @@ MonoBehaviour:
   wheatDrop: {fileID: 6133570875003662420, guid: 47d5b60bfb15aea49839d118dac8f86c, type: 3}
   pfDamagePopup: {fileID: 6478138214433248903, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
   pfDamagePopupText: {fileID: 62537061617949394, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
+  dicetypes: []
 --- !u!114 &3454434577241454623
 MonoBehaviour:
   m_ObjectHideFlags: 0

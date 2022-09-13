@@ -11,9 +11,7 @@ public class CooldownBar : MonoBehaviour
 
     void Start()
     {
-        LoadData();
-        cooldownSlider.maxValue = CDBarPlayerCooldownTime;
-        cooldownSlider.value = CDBarPlayerCooldownTime;
+        CooldownBarLoadData();
         CooldownBarInvisible();
     }    
 
@@ -30,12 +28,14 @@ public class CooldownBar : MonoBehaviour
         cooldownBorder.GetComponent<Image>().color = new Color32(30, 0, 0, 0);
     }
 
-    private void LoadData()
+    public void CooldownBarLoadData()
     {
-        string json = File.ReadAllText(Application.dataPath + "/gameSaveData.json");
+        string json = File.ReadAllText(Application.dataPath + "/ingameSaveData.json");
         PlayerData loadedPlayerData = JsonUtility.FromJson<PlayerData>(json);
 
         CDBarPlayerCooldownTime = loadedPlayerData.playerCooldownTime;
+        cooldownSlider.maxValue = CDBarPlayerCooldownTime;
+        cooldownSlider.value = CDBarPlayerCooldownTime;
     }   
     private class PlayerData
     {
