@@ -20,6 +20,7 @@ public class TreasureChestScript : MonoBehaviour
     [SerializeField] private Sprite[] UpgradeSpritePopup;
     [SerializeField] private SpriteRenderer ImagePopup;
     [SerializeField] private GameObject ImagePopupObject;
+    [SerializeField] private bool prePlaced;
 
     private void Start()
     {  
@@ -60,7 +61,7 @@ public class TreasureChestScript : MonoBehaviour
 
     private void OpenTreasureChest()
     {
-        chestSpawnerScript.ChestSpawned--;
+        if (prePlaced == false) { chestSpawnerScript.ChestSpawned--; }
         player.UpdateWheat(-WheatCost);
         if (player.AllEntrees) 
         {
