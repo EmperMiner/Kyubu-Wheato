@@ -63,6 +63,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float RightCamLimit;
     [SerializeField] private float UpperCamLimit;
     [SerializeField] private float LowerCamLimit;
+
+    [SerializeField] public float LeftMapLimit;
+    [SerializeField] public float RightMapLimit;
+    [SerializeField] public float UpperMapLimit;
+    [SerializeField] public float LowerMapLimit;
+
     [SerializeField] private Rigidbody2D playerRB ;
     private Vector2 movement;
     [SerializeField] private Animator animator;
@@ -82,7 +88,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject diceThrower;
     
     [SerializeField] private GameObject[] BroomPrefabs;
+    private bool HasStrengthTemporaryBuff;
+    private bool HasDefenseTemporaryBuff;
+    private bool HasSpeedTemporaryBuff;
     public bool AllEntrees = false;
+
+    
 
     private void Awake()
     {       
@@ -90,6 +101,10 @@ public class PlayerController : MonoBehaviour
         { 
             LoadData();
             FirstIngameSaveData(); 
+        }
+        else
+        {
+            SubtractTemporaryBuff();
         }
         IngameLoadData();
         Time.timeScale = 1f;
@@ -282,20 +297,25 @@ public class PlayerController : MonoBehaviour
             for (int b = 0; b < 5; b++)
             {
                 int PickRandomStat = UnityEngine.Random.Range(0,5);
-                if (PickRandomStat == 0) { strength += 2f; }
-                if (PickRandomStat == 1) { defense += 2f; }
-                if (PickRandomStat == 2) { MoveSpeed += 1f; }
+                if (PickRandomStat == 0) { strength += 2f; HasStrengthTemporaryBuff = true; LatterIngameSaveData(); }
+                if (PickRandomStat == 1) { defense += 2f; HasDefenseTemporaryBuff = true; LatterIngameSaveData(); }
+                if (PickRandomStat == 2) { MoveSpeed += 1f; HasSpeedTemporaryBuff = true; LatterIngameSaveData(); }
                 if (PickRandomStat == 3) { IncreaseDiceNumber(); }
                 if (PickRandomStat == 4) { RegenStop = false; StartCoroutine(Regen()); }
                 yield return new WaitForSeconds(UnityEngine.Random.Range(4f,12f));
-                if (PickRandomStat == 0) { strength -= 2f; }
-                if (PickRandomStat == 1) { defense -= 2f; }
-                if (PickRandomStat == 2) { MoveSpeed -= 1f; }
+                SubtractTemporaryBuff();
                 if (PickRandomStat == 4) { RegenStop = true; }
             }
             StartCoroutine(RollMode());
         }
         yield return null;
+    }
+
+    private void SubtractTemporaryBuff()
+    {
+        if (HasStrengthTemporaryBuff) { strength -= 2f; HasStrengthTemporaryBuff = false; LatterIngameSaveData(); }
+        if (HasDefenseTemporaryBuff) { defense -= 2f; HasDefenseTemporaryBuff = false; LatterIngameSaveData(); }
+        if (HasSpeedTemporaryBuff) { MoveSpeed -= 1f; HasSpeedTemporaryBuff = false; LatterIngameSaveData(); }
     }
 
     IEnumerator Regen()

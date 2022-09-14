@@ -6,21 +6,19 @@ using System.IO;
 public class DicePadSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] DicePadTypes;
-    [SerializeField] private float LeftMapLimit;
-    [SerializeField] private float RightMapLimit;
-    [SerializeField] private float UpperMapLimit;
-    [SerializeField] private float LowerMapLimit;
+    private PlayerController player;
 
     private bool haveChickenNuggets;
     private bool triggeredSpawnPadCycle = false;
 
-    void Start()
+    private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         DicePadLoadData();
     }
 
     
-    void Update()
+    private void Update()
     {
         if (haveChickenNuggets && triggeredSpawnPadCycle == false) { StartCoroutine(SpawnPadCycle()); }
     }
@@ -28,14 +26,14 @@ public class DicePadSpawner : MonoBehaviour
     IEnumerator SpawnPadCycle()
     {
         triggeredSpawnPadCycle = true;
-        yield return new WaitForSeconds(Random.Range(15f, 45f));
+        yield return new WaitForSeconds(Random.Range(45f, 90f));
         SpawnPad();
         StartCoroutine(SpawnPadCycle());
     }
 
     private void SpawnPad()
     {
-        Instantiate(DicePadTypes[Random.Range(0,DicePadTypes.Length)], new Vector3(Random.Range(LeftMapLimit,RightMapLimit), Random.Range(LowerMapLimit, UpperMapLimit), 0), Quaternion.identity);
+        Instantiate(DicePadTypes[Random.Range(0,DicePadTypes.Length)], new Vector3(Random.Range(player.LeftMapLimit,player.RightMapLimit), Random.Range(player.LowerMapLimit, player.UpperMapLimit), 0), Quaternion.identity);
     }
 
     public void DicePadLoadData()

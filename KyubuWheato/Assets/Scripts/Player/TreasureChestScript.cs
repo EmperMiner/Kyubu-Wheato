@@ -6,41 +6,50 @@ using TMPro;
 public class TreasureChestScript : MonoBehaviour
 {
     private bool CloseEnoughToChest;
-    private PlayerController player;
+    private PlayerController player; 
     private DiceThrow diceThrowScript;
+    private TreasureChestSpawner chestSpawnerScript; 
+
+    private bool CheckForValidSpawn = true;
     
-    [SerializeField] private Transform SmallTextPopup;
-    [SerializeField] private TextMeshPro SmallText;
+    [SerializeField] private GameObject[] ChestTypes;
+
+    private TextMeshProUGUI SmallText;
     [SerializeField] private int WheatCost;
     [SerializeField] private int StatChance;
     [SerializeField] private Sprite[] UpgradeSpritePopup;
     [SerializeField] private SpriteRenderer ImagePopup;
     [SerializeField] private GameObject ImagePopupObject;
 
-
-    void Start()
-    {
+    private void Start()
+    {  
+        SmallText = GameObject.FindGameObjectWithTag("IngameNotifText").GetComponent<TextMeshProUGUI>();
+        SmallText.text = "";
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         diceThrowScript = GameObject.FindGameObjectWithTag("DiceManager").GetComponent<DiceThrow>();
+        chestSpawnerScript = GameObject.FindGameObjectWithTag("ChestManager").GetComponent<TreasureChestSpawner>();
         CloseEnoughToChest = false;
+        StartCoroutine(ValidSpawn());
     }
 
     
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && CloseEnoughToChest) 
         { 
             if (player.Wheat >= WheatCost) { OpenTreasureChest(); }
-            else 
-            { 
-                SmallText.text = "Not Enough Wheat";
-                Instantiate(SmallTextPopup, transform.position, Quaternion.identity);
-            }
+            else { StartCoroutine(NotifTextWarning()); }
         }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        bool TouchIllegalObject = other.gameObject.tag == "MapCollider" || other.gameObject.tag == "enemyMouse" || other.gameObject.tag == "chest";
+        if (TouchIllegalObject && CheckForValidSpawn) 
+        { 
+            Instantiate(ChestTypes[Random.Range(0,ChestTypes.Length)], new Vector3(Random.Range(player.LeftMapLimit,player.RightMapLimit), Random.Range(player.LowerMapLimit, player.UpperMapLimit), 0), Quaternion.identity);
+            Destroy(gameObject);
+        }
         if (other.gameObject.tag == "Player") { CloseEnoughToChest = true; }
     }
 
@@ -51,6 +60,7 @@ public class TreasureChestScript : MonoBehaviour
 
     private void OpenTreasureChest()
     {
+        chestSpawnerScript.ChestSpawned--;
         player.UpdateWheat(-WheatCost);
         if (player.AllEntrees) 
         {
@@ -72,8 +82,8 @@ public class TreasureChestScript : MonoBehaviour
         if (EntreeGachaRoll == 0 && player.havePizza == false) { player.havePizza = true; CreateImagePopup(0); }
         else if (EntreeGachaRoll == 1 && player.haveCarrotCake == false) { player.haveCarrotCake = true; CreateImagePopup(1); }
         else if (EntreeGachaRoll == 2 && player.haveFlan == false) { player.haveFlan = true; CreateImagePopup(2); }
-        else if (EntreeGachaRoll == 3 && player.haveCremeBrulee == false) { player.haveCremeBrulee = true; CreateImagePopup(3); }
-        else if (EntreeGachaRoll == 4 && player.haveBanhmi == false) { player.haveBanhmi = true; CreateImagePopup(4); }
+        else if (EntreeGachaRoll == 3 && player.haveCremeBrulee == false && player.haveFlan == true) { player.haveCremeBrulee = true; CreateImagePopup(3); }
+        else if (EntreeGachaRoll == 4 && player.haveBanhmi == false && player.dicePreviewerLevel > 0) { player.haveBanhmi = true; CreateImagePopup(4); }
         else if (EntreeGachaRoll == 5 && player.haveCupcake == false) { player.haveCupcake = true; CreateImagePopup(5); }
         else if (EntreeGachaRoll == 6 && player.haveChickenNuggets == false) { player.haveChickenNuggets = true; CreateImagePopup(6); }
         else if (EntreeGachaRoll == 7 && player.havePastelDeChoclo == false) { player.havePastelDeChoclo = true; CreateImagePopup(7); }
@@ -95,10 +105,25 @@ public class TreasureChestScript : MonoBehaviour
         else if (StatGachaRoll <= 19 && player.dicePreviewerLevel < 5) { player.dicePreviewerLevel += 1; diceThrowScript.UpdateDicePreviewerUI(); CreateImagePopup(17); }
         else { ChooseStat(); }
     }
-
+    
     private void CreateImagePopup(int i)
     {
         ImagePopup.sprite = UpgradeSpritePopup[i];
         Instantiate(ImagePopupObject, player.transform.position, Quaternion.identity, player.transform);
+    }
+
+    private IEnumerator NotifTextWarning()
+    {
+        SmallText.text = "Needs " + WheatCost + " Wheat";
+        yield return new WaitForSeconds(1f);
+        SmallText.text = "";
+        yield return null;
+    }
+
+    private IEnumerator ValidSpawn()
+    {
+        yield return new WaitForSeconds(0.1f);
+        CheckForValidSpawn = false;
+        yield return null;
     }
 }

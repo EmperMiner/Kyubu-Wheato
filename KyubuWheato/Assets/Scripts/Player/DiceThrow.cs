@@ -413,6 +413,7 @@ public class DiceThrow : MonoBehaviour
     IEnumerator ActivateUltimate()
     {
         ultimateBar.ultimateInProgress = true;
+        yield return new WaitForSeconds(1f);
         for (float i = 0; i < 5f; i += 0.2f)
         {
             if (haveFlan == true && haveCremeBrulee == false) 

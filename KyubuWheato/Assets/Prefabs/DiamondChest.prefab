@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 709161147729212537}
   m_Layer: 0
   m_Name: DiamondChest
-  m_TagString: Untagged
+  m_TagString: chest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,8 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7442ced09dab4444c90406aadc11185b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SmallTextPopup: {fileID: 6478138214433248903, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
-  SmallText: {fileID: 62537061617949394, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
+  ChestTypes:
+  - {fileID: 7592814316219585266, guid: d8abd4c52bceec54dbc898f74bdc399e, type: 3}
+  - {fileID: 751358360935569434, guid: 5b63d21339c6e0849837b7787b6287e5, type: 3}
+  - {fileID: 709161147729212536}
+  SmallText: {fileID: 0}
   WheatCost: 70
   StatChance: 75
   UpgradeSpritePopup:
@@ -158,7 +161,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.026585639, y: 0.10093802}
+  m_Offset: {x: 0.026585639, y: 0.18273625}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -169,5 +172,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8440243, y: 0.79723966}
+  m_Size: {x: 0.8440243, y: 0.9608361}
   m_EdgeRadius: 0

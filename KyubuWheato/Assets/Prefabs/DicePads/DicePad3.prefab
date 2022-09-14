@@ -104,6 +104,17 @@ MonoBehaviour:
   DiceTileSprites:
   - {fileID: 21300000, guid: 6ccdea9f297cfb44681a91363cf74518, type: 3}
   - {fileID: 21300000, guid: 0e32bdf1d2791ad42a622fe3bb25a1fc, type: 3}
+  DicePadTypes:
+  - {fileID: 3694905502999201198, guid: 0d43d65cf4c859d48abb6304a37fb275, type: 3}
+  - {fileID: 6462974866552430710, guid: 6aac7fe8f1cb9fe4dabfec2addb0c2bc, type: 3}
+  - {fileID: 3471150781695914247}
+  - {fileID: 9047026231800584673, guid: 536b21876453a024ca14e3cb9a69709f, type: 3}
+  - {fileID: 3040201228406327737, guid: da370ad89e7bb04498e4a94261936bb7, type: 3}
+  - {fileID: 6984295473616759616, guid: e5ef59c1f7a339343875ad5479682232, type: 3}
+  LeftMapLimit: 0
+  RightMapLimit: 0
+  UpperMapLimit: 0
+  LowerMapLimit: 0
 --- !u!50 &3471150781695914245
 Rigidbody2D:
   serializedVersion: 4
