@@ -7221,13 +7221,9 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 659
     m_Data: {fileID: 11400000, guid: e1303f3c21576644f88cf00c04140d9c, type: 2}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 659
     m_Data: {fileID: -456324328, guid: 14fff21a5583b7f449751c48e70c04a9, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 659
     m_Data:
@@ -25238,6 +25234,8 @@ MonoBehaviour:
   CurrentMode: 0
   InHealMode: 0
   FirstLevelSave: 1
+  XSpawnpoints: []
+  YSpawnpoints: []
   LeftCamLimit: -10.5
   RightCamLimit: 13.5
   UpperCamLimit: 24
@@ -25458,7 +25456,7 @@ MonoBehaviour:
   m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
   m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 23800000, guid: 9b0e107c34b22e248b6e4113664458e2, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 74c9e91f4cf35694e88a317b17d3536d, type: 2}
 --- !u!1 &1508249892
 GameObject:
   m_ObjectHideFlags: 0
@@ -26635,7 +26633,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 3359456767
-  m_fontColor: {r: 1, g: 0.24056602, b: 0.24056602, a: 0.78431374}
+  m_fontColor: {r: 0.8235294, g: 0.050980393, b: 0.050980393, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

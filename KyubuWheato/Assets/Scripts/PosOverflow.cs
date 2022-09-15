@@ -5,8 +5,9 @@ using UnityEngine;
 public class PosOverflow : MonoBehaviour
 {
     private Transform posOverflowDestination;
+    private PlayerController player;
 
-    public bool isOrange;
+    [SerializeField] private bool isOrange;
     private float distance = 0.2f;
 
     private Rigidbody2D enteredRigidbody;
@@ -16,6 +17,7 @@ public class PosOverflow : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         if (isOrange)
         {
             posOverflowDestination = GameObject.FindGameObjectWithTag("Blue PosFlower").GetComponent<Transform>();
@@ -40,25 +42,6 @@ public class PosOverflow : MonoBehaviour
                     other.transform.position = new Vector2 (posOverflowDestination.position.x - 1f, posOverflowDestination.position.y + 0.5f);
                 }
             }
-            else if (other.gameObject.tag != "Player")
-            {
-                if (other.gameObject.tag == "6sidedDice1" || other.gameObject.tag == "6sidedDice2" || other.gameObject.tag == "6sidedDice3" || other.gameObject.tag == "6sidedDice4" || other.gameObject.tag == "6sidedDice5" || other.gameObject.tag == "6sidedDice6") 
-                { 
-                    if (isOrange)
-                    {
-                        other.transform.position = new Vector2 (posOverflowDestination.position.x + 1.5f, posOverflowDestination.position.y + 0.1f);
-                        enteredRigidbody = other.gameObject.GetComponent<Rigidbody2D>();
-                        enteredRigidbody.velocity = new Vector2(15, 0);
-                    }
-                    else
-                    {
-                        other.transform.position = new Vector2 (posOverflowDestination.position.x - 1.5f, posOverflowDestination.position.y + 0.1f);
-                        enteredRigidbody = other.gameObject.GetComponent<Rigidbody2D>();
-                        enteredRigidbody.velocity = new Vector2(-15, 0);
-                    }
-                }
-            }
-            else { Debug.Log("This message will probably never be read except for those snooping around my code lmao");}
         }
     }
 }

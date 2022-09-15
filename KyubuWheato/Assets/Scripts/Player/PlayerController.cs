@@ -59,6 +59,8 @@ public class PlayerController : MonoBehaviour
     
     private Transform mainCam;
     [SerializeField] private bool FirstLevelSave;
+    [SerializeField] private float[] XSpawnpoints;
+    [SerializeField] private float[] YSpawnpoints;
     [SerializeField] private float LeftCamLimit;
     [SerializeField] private float RightCamLimit;
     [SerializeField] private float UpperCamLimit;
@@ -73,7 +75,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement;
     [SerializeField] private Animator animator;
     public Renderer spriteRenderer;
-
     public HealthBar healthBar;
 
     [SerializeField] private DiceThrow diceThrowScript;
@@ -107,6 +108,13 @@ public class PlayerController : MonoBehaviour
             SubtractTemporaryBuff();
         }
         IngameLoadData();
+
+        if (XSpawnpoints.Length > 0)
+        {
+            int ChooseSpawn = UnityEngine.Random.Range(0, XSpawnpoints.Length);
+            transform.position = new Vector3(XSpawnpoints[ChooseSpawn], YSpawnpoints[ChooseSpawn] , -2);
+        }
+        
         Time.timeScale = 1f;
         playerAlive = true;
         playerHealth = maxHealth;
@@ -154,7 +162,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-            playerRB.MovePosition(playerRB.position + movement * MoveSpeed * Time.fixedDeltaTime);
+        playerRB.MovePosition(playerRB.position + movement * MoveSpeed * Time.fixedDeltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -258,6 +266,8 @@ public class PlayerController : MonoBehaviour
         triggeredBroom = true;
         if (playerAlive) 
         {
+            CurrentMode = 0;
+            yield return new WaitForSeconds(0.05f);
             CurrentMode = UnityEngine.Random.Range(1,4);
             BroomInMode = false;
             if (CurrentMode > 1) { Instantiate(BroomPrefabs[CurrentMode], new Vector3(transform.position.x - 1.5f, transform.position.y + 1f, 0), Quaternion.identity, this.gameObject.transform); }

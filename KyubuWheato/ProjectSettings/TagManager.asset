@@ -37,6 +37,8 @@ TagManager:
   - ChestManager
   - chest
   - IngameNotifText
+  - Blue PosFlower 2
+  - Orange PosFlower 2
   layers:
   - Default
   - TransparentFX

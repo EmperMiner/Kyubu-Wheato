@@ -5,8 +5,9 @@ using UnityEngine;
 public class PosOverflowerVertical : MonoBehaviour
 {
     private Transform posOverflowDestination;
+    private PlayerController player;
 
-    public bool isOrange;
+    [SerializeField] private bool isOrange;
     private float distance = 0.2f;
 
     private Rigidbody2D enteredRigidbody;
@@ -16,12 +17,13 @@ public class PosOverflowerVertical : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         if (isOrange)
         {
-            posOverflowDestination = GameObject.FindGameObjectWithTag("Blue PosFlower").GetComponent<Transform>();
+            posOverflowDestination = GameObject.FindGameObjectWithTag("Blue PosFlower 2").GetComponent<Transform>();
         } else
         {
-            posOverflowDestination = GameObject.FindGameObjectWithTag("Orange PosFlower").GetComponent<Transform>();
+            posOverflowDestination = GameObject.FindGameObjectWithTag("Orange PosFlower 2").GetComponent<Transform>();
         }
     }
 
@@ -37,26 +39,9 @@ public class PosOverflowerVertical : MonoBehaviour
                 }
                 else
                 {
-                    other.transform.position = new Vector2 (posOverflowDestination.position.x + 0.5f, posOverflowDestination.position.y + 1f);
+                    other.transform.position = new Vector2 (posOverflowDestination.position.x, posOverflowDestination.position.y + 1f);
                 }
-            }
-            else if (other.gameObject.tag != "Player")
-            {
-                if (isOrange)
-                {
-                    other.transform.position = new Vector2 (posOverflowDestination.position.x + 0.1f, posOverflowDestination.position.y - 1.5f);
-                    enteredRigidbody = other.gameObject.GetComponent<Rigidbody2D>();
-                    enteredRigidbody.velocity = new Vector2(0, -15);
-                }
-                else
-                {
-                    other.transform.position = new Vector2 (posOverflowDestination.position.x + 0.1f, posOverflowDestination.position.y + 1.5f);
-                    enteredRigidbody = other.gameObject.GetComponent<Rigidbody2D>();
-                    enteredRigidbody.velocity = new Vector2(0, 15);
-                }
-                
             }
         }
-       
     }
 }

@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class DiceHitbox : MonoBehaviour
 {
-    public GameObject dice;
+    [SerializeField] private GameObject dice;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
+    private void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, dice.transform.position, .03f);
     }
@@ -20,8 +15,8 @@ public class DiceHitbox : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
-            Destroy(gameObject);
             Destroy(dice);
+            Destroy(gameObject);
         } 
     }
 }
