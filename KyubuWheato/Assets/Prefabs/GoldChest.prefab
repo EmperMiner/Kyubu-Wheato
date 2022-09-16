@@ -51,7 +51,6 @@ MonoBehaviour:
   - {fileID: 7592814316219585266, guid: d8abd4c52bceec54dbc898f74bdc399e, type: 3}
   - {fileID: 751358360935569434}
   - {fileID: 709161147729212536, guid: 2d74b0eee7093094198110476acd32e3, type: 3}
-  SmallText: {fileID: 0}
   WheatCost: 40
   StatChance: 88
   UpgradeSpritePopup:
@@ -75,6 +74,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6fcb542c4f8438a44bd4c2fe9747a406, type: 3}
   ImagePopup: {fileID: 5822004289717855711, guid: d2dc4dfb1ee8b0c4192e981fb9e19882, type: 3}
   ImagePopupObject: {fileID: 3641310022112643465, guid: d2dc4dfb1ee8b0c4192e981fb9e19882, type: 3}
+  prePlaced: 0
 --- !u!212 &751358360935569433
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -115,7 +115,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 48331329866ef1d49a5fef36f3b774b1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
