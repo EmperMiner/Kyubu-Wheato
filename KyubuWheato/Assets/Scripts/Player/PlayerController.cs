@@ -66,10 +66,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float UpperCamLimit;
     [SerializeField] private float LowerCamLimit;
 
-    [SerializeField] public float LeftMapLimit;
-    [SerializeField] public float RightMapLimit;
-    [SerializeField] public float UpperMapLimit;
-    [SerializeField] public float LowerMapLimit;
+    public float LeftMapLimit;
+    public float RightMapLimit;
+    public float UpperMapLimit;
+    public float LowerMapLimit;
 
     [SerializeField] private Rigidbody2D playerRB ;
     private Vector2 movement;
@@ -123,6 +123,11 @@ public class PlayerController : MonoBehaviour
         Wheat = 0;
         healthBar.SetMaxHealth(maxHealth);
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").transform; 
+
+        LeftMapLimit = LeftCamLimit - 7.5f;
+        RightMapLimit = RightCamLimit + 7.5f;
+        UpperMapLimit = UpperCamLimit + 3f;
+        LowerMapLimit = LowerCamLimit - 3f;
     }
 
     private void Update()
