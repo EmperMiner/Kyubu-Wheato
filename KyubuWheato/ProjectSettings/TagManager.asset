@@ -39,6 +39,7 @@ TagManager:
   - IngameNotifText
   - Blue PosFlower 2
   - Orange PosFlower 2
+  - AudioManager
   layers:
   - Default
   - TransparentFX

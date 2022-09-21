@@ -48,7 +48,6 @@ public class TreasureChestScript : MonoBehaviour
         bool TouchIllegalObject = other.gameObject.tag == "MapCollider" || other.gameObject.tag == "enemyMouse" || other.gameObject.tag == "chest";
         if (TouchIllegalObject && CheckForValidSpawn) 
         { 
-            Debug.Log("Is it even colliding?");
             Instantiate(ChestTypes[Random.Range(0,ChestTypes.Length)], new Vector3(Random.Range(player.LeftMapLimit,player.RightMapLimit), Random.Range(player.LowerMapLimit, player.UpperMapLimit), 0), Quaternion.identity);
             Destroy(gameObject);
         }

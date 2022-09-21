@@ -10,6 +10,7 @@ public class DiceThrow : MonoBehaviour
     private Camera mainCam;
     private Vector3 mousePos;
     private PlayerController player;
+    private AudioManager AudioPlayer;
     [SerializeField] private Text DiceCounterNumber;
     [SerializeField] private GameObject[] fakeDiceTypes;
     [SerializeField] private GameObject[] dicetypes;
@@ -22,6 +23,8 @@ public class DiceThrow : MonoBehaviour
     [SerializeField] private Image[] DicePreviewerImage;
     [SerializeField] private Sprite[] DiceSprites;
     [SerializeField] private GameObject[] KyubuTiles;
+
+    [SerializeField] private int whichever;
     
     private bool inCooldown = false;
     private float cooldownTimer;
@@ -61,6 +64,7 @@ public class DiceThrow : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        AudioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         DiceThrowLoadData();
         GenerateRandomDiceArray();
         GenerateRandomFakeArray();
@@ -118,6 +122,7 @@ public class DiceThrow : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha2) && dicePreviewerLevel >= 3 && haveBanhmi == true) { DiceHotkey(2); }
             if (Input.GetKeyDown(KeyCode.Alpha3) && dicePreviewerLevel >= 4 && haveBanhmi == true) { DiceHotkey(3); }
             if (Input.GetKeyDown(KeyCode.Alpha4) && dicePreviewerLevel >= 5 && haveBanhmi == true) { DiceHotkey(4); }
+            if (Input.GetKeyDown(KeyCode.U)) { StartCoroutine(KyubuKombo(whichever)); }
         }  
     }
 
@@ -333,7 +338,14 @@ public class DiceThrow : MonoBehaviour
             }
         }
         if (KyubuTileValue == 3) { Instantiate(KyubuTiles[UnityEngine.Random.Range(5,7)], transform.position, Quaternion.identity); }
-        if (KyubuTileValue == 4) { for (int i = 11; i < 15; i++) { Instantiate(KyubuTiles[i], transform.position, Quaternion.identity); } }
+        if (KyubuTileValue == 4) 
+        { 
+            for (int i = 11; i < 15; i++) 
+            { 
+                Instantiate(KyubuTiles[i], transform.position, Quaternion.identity); 
+            } 
+            AudioPlayer.PlaySound("KK4");
+        }
         if (KyubuTileValue == 5) 
         { 
             try  
