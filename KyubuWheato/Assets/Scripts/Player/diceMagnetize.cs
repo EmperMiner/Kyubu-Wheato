@@ -94,13 +94,21 @@ public class diceMagnetize : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         int i = UnityEngine.Random.Range(0,100);
-        if (i < 10  + diceThrowScript.KyubuStack) { Explode(); }
+        if (i <= 100  + diceThrowScript.KyubuStack) { Explode(); }
         yield return null;
     }
 
     private void Explode()
     {
         player.IncreaseDiceNumber(); 
+        if (this.gameObject.tag == "6sidedDice5")
+        {
+            FindObjectOfType<AudioManager>().PlaySound("DiceRayNot5");
+        }
+        else 
+        {
+            FindObjectOfType<AudioManager>().PlaySound("DiceRayNot5");
+        }
         if (this.gameObject.tag == "6sidedDice1") { Instantiate(DiceRayPrefabs[0], transform.position, Quaternion.identity); }
         if (this.gameObject.tag == "6sidedDice2") 
         { 
@@ -131,7 +139,7 @@ public class diceMagnetize : MonoBehaviour
             }
             catch (NullReferenceException) 
             { 
-                Instantiate(DiceRayPrefabs[1], transform.position, Quaternion.identity); 
+                Instantiate(DiceRayPrefabs[5], transform.position, Quaternion.identity); 
             }
         }
         if (this.gameObject.tag == "6sidedDice6") 
@@ -146,7 +154,7 @@ public class diceMagnetize : MonoBehaviour
             }
             catch (NullReferenceException) 
             { 
-                Instantiate(DiceRayPrefabs[1], transform.position, Quaternion.identity); 
+                Instantiate(DiceRayPrefabs[6], transform.position, Quaternion.identity); 
             }
         }
         Destroy(gameObject);

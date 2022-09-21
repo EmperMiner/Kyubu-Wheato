@@ -77,6 +77,14 @@ public class diceScript : MonoBehaviour
 
     private void Explode()
     {
+        if (this.gameObject.tag == "FakeDice5")
+        {
+            FindObjectOfType<AudioManager>().PlaySound("DiceRayNot5");
+        }
+        else 
+        {
+            FindObjectOfType<AudioManager>().PlaySound("DiceRayNot5");
+        }
         if (this.gameObject.tag == "FakeDice1") { Instantiate(DiceRayPrefabs[0], transform.position, Quaternion.identity); }
         if (this.gameObject.tag == "FakeDice2") 
         { 

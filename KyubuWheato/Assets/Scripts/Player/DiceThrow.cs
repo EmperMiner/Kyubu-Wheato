@@ -122,7 +122,7 @@ public class DiceThrow : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha2) && dicePreviewerLevel >= 3 && haveBanhmi == true) { DiceHotkey(2); }
             if (Input.GetKeyDown(KeyCode.Alpha3) && dicePreviewerLevel >= 4 && haveBanhmi == true) { DiceHotkey(3); }
             if (Input.GetKeyDown(KeyCode.Alpha4) && dicePreviewerLevel >= 5 && haveBanhmi == true) { DiceHotkey(4); }
-            if (Input.GetKeyDown(KeyCode.U)) { StartCoroutine(KyubuKombo(whichever)); }
+            if (Input.GetKeyDown(KeyCode.T)) {  }
         }  
     }
 
