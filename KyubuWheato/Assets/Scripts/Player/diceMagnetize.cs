@@ -103,7 +103,11 @@ public class diceMagnetize : MonoBehaviour
         player.IncreaseDiceNumber(); 
         if (this.gameObject.tag == "6sidedDice5")
         {
-            FindObjectOfType<AudioManager>().PlaySound("DiceRayNot5");
+            FindObjectOfType<AudioManager>().PlaySound("DiceRay5");
+        }
+        else if (this.gameObject.tag == "6sidedDice3")
+        {
+            FindObjectOfType<AudioManager>().PlaySound("DiceRay3");
         }
         else 
         {

@@ -79,7 +79,11 @@ public class diceScript : MonoBehaviour
     {
         if (this.gameObject.tag == "FakeDice5")
         {
-            FindObjectOfType<AudioManager>().PlaySound("DiceRayNot5");
+            FindObjectOfType<AudioManager>().PlaySound("DiceRay5");
+        }
+        else if (this.gameObject.tag == "FakeDice3")
+        {
+            FindObjectOfType<AudioManager>().PlaySound("DiceRay3");
         }
         else 
         {

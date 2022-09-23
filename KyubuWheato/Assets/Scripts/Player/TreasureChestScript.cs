@@ -62,6 +62,7 @@ public class TreasureChestScript : MonoBehaviour
     private void OpenTreasureChest()
     {
         if (prePlaced == false) { chestSpawnerScript.ChestSpawned--; }
+        FindObjectOfType<AudioManager>().PlaySound("ChestOpening");
         player.UpdateWheat(-WheatCost);
         if (player.AllEntrees) 
         {

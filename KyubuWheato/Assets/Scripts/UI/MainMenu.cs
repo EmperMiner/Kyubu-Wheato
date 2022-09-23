@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour
 {
 
     private int LoadingMenuToGame = 1;
-    private int Level_2 = 3;
+    private int Level_2 = 12;
 
     private static Action onLoaderCallback;
 
