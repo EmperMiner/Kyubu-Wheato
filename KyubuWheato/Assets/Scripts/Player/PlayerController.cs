@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
     public bool InHealMode = false;
     private bool RegenStop = true;
     
+    private AudioManager AudioPlayer;
     private Transform mainCam;
     [SerializeField] private bool FirstLevelSave;
     [SerializeField] private float[] XSpawnpoints;
@@ -98,6 +99,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {       
+        AudioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         if (FirstLevelSave) 
         { 
             LoadData();
@@ -172,12 +174,19 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "6sidedDice1") { IncreaseDiceNumber(); } 
-        if (collider.gameObject.tag == "6sidedDice2") { IncreaseDiceNumber(); } 
-        if (collider.gameObject.tag == "6sidedDice3") { IncreaseDiceNumber(); } 
-        if (collider.gameObject.tag == "6sidedDice4") { IncreaseDiceNumber(); } 
-        if (collider.gameObject.tag == "6sidedDice5") { IncreaseDiceNumber(); } 
-        if (collider.gameObject.tag == "6sidedDice6") { IncreaseDiceNumber(); } 
+        if (collider.gameObject.tag == "6sidedDice1") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
+        if (collider.gameObject.tag == "6sidedDice2") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
+        if (collider.gameObject.tag == "6sidedDice3") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
+        if (collider.gameObject.tag == "6sidedDice4") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
+        if (collider.gameObject.tag == "6sidedDice5") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
+        if (collider.gameObject.tag == "6sidedDice6") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
+
+        if (collider.gameObject.tag == "DiceTile1") { AudioPlayer.PlaySound("DicePad"); }
+        if (collider.gameObject.tag == "DiceTile2") { AudioPlayer.PlaySound("DicePad"); }
+        if (collider.gameObject.tag == "DiceTile3") { AudioPlayer.PlaySound("DicePad"); }
+        if (collider.gameObject.tag == "DiceTile4") { AudioPlayer.PlaySound("DicePad"); }
+        if (collider.gameObject.tag == "DiceTile5") { AudioPlayer.PlaySound("DicePad"); }
+        if (collider.gameObject.tag == "DiceTile6") { AudioPlayer.PlaySound("DicePad"); }
     }
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -191,12 +200,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.tag == "DiceTile1") { diceThrowScript.isOnDiceTile1 = false; }
-        if (other.gameObject.tag == "DiceTile2") { diceThrowScript.isOnDiceTile2 = false; }
-        if (other.gameObject.tag == "DiceTile3") { diceThrowScript.isOnDiceTile3 = false; }
-        if (other.gameObject.tag == "DiceTile4") { diceThrowScript.isOnDiceTile4 = false; }
-        if (other.gameObject.tag == "DiceTile5") { diceThrowScript.isOnDiceTile5 = false; }
-        if (other.gameObject.tag == "DiceTile6") { diceThrowScript.isOnDiceTile6 = false; }
+        if (other.gameObject.tag == "DiceTile1") { diceThrowScript.isOnDiceTile1 = false; AudioPlayer.PlaySound("DicePad"); }
+        if (other.gameObject.tag == "DiceTile2") { diceThrowScript.isOnDiceTile2 = false; AudioPlayer.PlaySound("DicePad"); }
+        if (other.gameObject.tag == "DiceTile3") { diceThrowScript.isOnDiceTile3 = false; AudioPlayer.PlaySound("DicePad"); }
+        if (other.gameObject.tag == "DiceTile4") { diceThrowScript.isOnDiceTile4 = false; AudioPlayer.PlaySound("DicePad"); }
+        if (other.gameObject.tag == "DiceTile5") { diceThrowScript.isOnDiceTile5 = false; AudioPlayer.PlaySound("DicePad"); }
+        if (other.gameObject.tag == "DiceTile6") { diceThrowScript.isOnDiceTile6 = false; AudioPlayer.PlaySound("DicePad"); }
     }
 
     private void LimitCamera()
@@ -286,6 +295,12 @@ public class PlayerController : MonoBehaviour
             BroomInMode = true;
             for (int a = 0; a < 20; a++)
             {
+                int hi = UnityEngine.Random.Range(0,4);
+                if (hi == 0) { AudioPlayer.PlaySound("BroomZoom1"); }
+                if (hi == 1) { AudioPlayer.PlaySound("BroomZoom2"); }
+                if (hi == 2) { AudioPlayer.PlaySound("BroomZoom3"); }
+                if (hi == 3) { AudioPlayer.PlaySound("BroomZoom4"); }
+
                 Instantiate(BroomPrefabs[UnityEngine.Random.Range(0,2)], new Vector3(transform.position.x - 10f, transform.position.y + UnityEngine.Random.Range(-5f,5f), transform.position.z), Quaternion.identity);
                 yield return new WaitForSeconds(UnityEngine.Random.Range(1f,3f));
             }
@@ -311,6 +326,7 @@ public class PlayerController : MonoBehaviour
             BroomInMode = true;
             for (int b = 0; b < 5; b++)
             {
+                AudioPlayer.PlaySound("BroomBuff");
                 int PickRandomStat = UnityEngine.Random.Range(0,5);
                 if (PickRandomStat == 0) { strength += 2f; HasStrengthTemporaryBuff = true; LatterIngameSaveData(); }
                 if (PickRandomStat == 1) { defense += 2f; HasDefenseTemporaryBuff = true; LatterIngameSaveData(); }

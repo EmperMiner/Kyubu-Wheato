@@ -86,6 +86,7 @@ public class diceMagnetize : MonoBehaviour
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(5f);
+        FindObjectOfType<AudioManager>().PlaySound("MagnetizedDice");
         Magnetized = true;
         yield return null;
     }
@@ -94,7 +95,7 @@ public class diceMagnetize : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         int i = UnityEngine.Random.Range(0,100);
-        if (i <= 100  + diceThrowScript.KyubuStack) { Explode(); }
+        if (i < 10  + diceThrowScript.KyubuStack) { Explode(); }
         yield return null;
     }
 

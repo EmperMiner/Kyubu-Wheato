@@ -115,6 +115,7 @@ public class mouseBehaviour : MonoBehaviour
 
         if (mouseCanAttack >= mouseAttackSpeed)
         {
+            FindObjectOfType<AudioManager>().PlaySound("PlayerHurt");
             player.UpdateHealth(-mouseStrength + Mathf.RoundToInt((mouseStrength * player.defense)/10));
             mouseCanAttack = 0f;
         }    

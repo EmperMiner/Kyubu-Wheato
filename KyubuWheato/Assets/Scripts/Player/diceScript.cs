@@ -119,7 +119,7 @@ public class diceScript : MonoBehaviour
             }
             catch (NullReferenceException) 
             { 
-                Instantiate(DiceRayPrefabs[1], transform.position, Quaternion.identity); 
+                Instantiate(DiceRayPrefabs[5], transform.position, Quaternion.identity); 
             }
         }
         if (this.gameObject.tag == "FakeDice6") 
@@ -134,7 +134,7 @@ public class diceScript : MonoBehaviour
             }
             catch (NullReferenceException) 
             { 
-                Instantiate(DiceRayPrefabs[1], transform.position, Quaternion.identity); 
+                Instantiate(DiceRayPrefabs[6], transform.position, Quaternion.identity); 
             }
         }
         Destroy(gameObject);

@@ -27,6 +27,7 @@ public class DamagePopupDestroy : MonoBehaviour
     IEnumerator Summon3Dice(float offset)
     {
         yield return new WaitForSeconds(0.7f);
+        FindObjectOfType<AudioManager>().PlaySound("KK3Explode");
         for (int i = 0; i < 3; i++) { Instantiate(Dice3, new Vector3(transform.position.x + offset, transform.position.y, transform.position.z), Random.rotation);  }
         yield return null;
     }
@@ -34,6 +35,7 @@ public class DamagePopupDestroy : MonoBehaviour
     IEnumerator Summon6Dice()
     {
         yield return new WaitForSeconds(2.85f);
+        FindObjectOfType<AudioManager>().PlaySound("KK6Land");
         for (int i = 0; i < 6; i++) { Instantiate(Dice6[i], transform.position, Random.rotation);  }
         yield return null;
     }

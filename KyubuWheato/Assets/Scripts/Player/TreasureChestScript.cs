@@ -116,6 +116,7 @@ public class TreasureChestScript : MonoBehaviour
 
     private IEnumerator NotifTextWarning()
     {
+        FindObjectOfType<AudioManager>().PlaySound("UIButtonError");
         SmallText.text = "Needs " + WheatCost + " Wheat";
         yield return new WaitForSeconds(1f);
         SmallText.text = "";

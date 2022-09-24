@@ -27,6 +27,7 @@ public class ShopManager : MonoBehaviour
     private bool shopHavePastelDeChoclo;
     private bool shopHaveGarlicBread;
 
+    private AudioManager AudioPlayer;
     [SerializeField] private Text ShopWheatCounterNumber;
     [SerializeField] private int[] upgradePrices;
     [SerializeField] private Text[] upgradePriceText;
@@ -46,6 +47,7 @@ public class ShopManager : MonoBehaviour
     private void Start()
     {
         LoadData();
+        AudioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         UpdateUpgradeUI(420);
         NotifText.text = "";
     }
@@ -397,6 +399,7 @@ public class ShopManager : MonoBehaviour
             else { shopWheat += upgradePrices[5]; }
             shopHaveGarlicBread = false;
         }
+        if (refundLoops > 0) { AudioPlayer.PlaySound("RefundShop"); }
         UpdateUpgradeUI(RefundValue);
         ShopWheatCounterNumber.text = shopWheat.ToString();
         SaveData();
@@ -543,6 +546,7 @@ public class ShopManager : MonoBehaviour
 
     IEnumerator NotifTextBuySuccess()
     {
+        AudioPlayer.PlaySound("PurchaseShop");
         if (NotifTextBuySuccessDisplayed == false)
         {
             NotifTextBuySuccessDisplayed = true;
@@ -557,6 +561,7 @@ public class ShopManager : MonoBehaviour
 
     IEnumerator NotifTextNotEnoughMoney()
     {
+        AudioPlayer.PlaySound("UIButtonError");
         if (NotifTextNotEnoughMoneyDisplayed == false)
         {
             NotifTextNotEnoughMoneyDisplayed = true;
@@ -571,6 +576,7 @@ public class ShopManager : MonoBehaviour
 
     IEnumerator NotifTextAlreadyBought()
     {
+        AudioPlayer.PlaySound("UIButtonError");
         if (NotifTextAlreadyBoughtDisplayed == false)
         {
             NotifTextAlreadyBoughtDisplayed = true;
@@ -585,6 +591,7 @@ public class ShopManager : MonoBehaviour
 
     IEnumerator NotifTextHaveNotBought()
     {
+        AudioPlayer.PlaySound("UIButtonError");
         if (NotifTextHaveNotBoughtDisplayed == false)
         {
             NotifTextHaveNotBoughtDisplayed = true;
@@ -599,6 +606,7 @@ public class ShopManager : MonoBehaviour
 
     IEnumerator NotifTextNeedFlan()
     {
+        AudioPlayer.PlaySound("UIButtonError");
         if (NotifTextHaveNotBoughtDisplayed == false)
         {
             NotifTextHaveNotBoughtDisplayed = true;
@@ -613,6 +621,7 @@ public class ShopManager : MonoBehaviour
 
     IEnumerator NotifTextNeedDicePreviewer()
     {
+        AudioPlayer.PlaySound("UIButtonError");
         if (NotifTextHaveNotBoughtDisplayed == false)
         {
             NotifTextHaveNotBoughtDisplayed = true;

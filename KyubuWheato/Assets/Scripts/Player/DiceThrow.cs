@@ -105,14 +105,17 @@ public class DiceThrow : MonoBehaviour
                 }
             }
 
-            if (Input.GetMouseButton(0) && diceNumber > 0 && inCooldown==false && ultimateBar.ultimateInProgress == false)
+            if (Input.GetMouseButton(0) && diceNumber > 0 && inCooldown == false && ultimateBar.ultimateInProgress == false)
             {
+                AudioPlayer.PlaySound("ThrowDice");
                 inCooldown = true;
                 if (haveFlan == true && haveCremeBrulee == false) { ShootTwoDice(); }
                 else if (haveCremeBrulee) { ShootThreeDice(); }
                 else { ShootOneDice(); }
                 DiceCounterNumber.text = diceNumber.ToString();
             }
+            else if (Input.GetMouseButtonDown(0)) { AudioPlayer.PlaySound("ThrowDiceDisabled"); }
+
             if (Input.GetKeyDown(KeyCode.Q) && ultimateBar.currentUltimateCharge == ultimateBar.maxUltimateCharge && ultimateBar.havePizza == true)
             {
                 ultimateBar.IncreaseUltimateCharge(-ultimateBar.maxUltimateCharge);
@@ -122,7 +125,12 @@ public class DiceThrow : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha2) && dicePreviewerLevel >= 3 && haveBanhmi == true) { DiceHotkey(2); }
             if (Input.GetKeyDown(KeyCode.Alpha3) && dicePreviewerLevel >= 4 && haveBanhmi == true) { DiceHotkey(3); }
             if (Input.GetKeyDown(KeyCode.Alpha4) && dicePreviewerLevel >= 5 && haveBanhmi == true) { DiceHotkey(4); }
-            if (Input.GetKeyDown(KeyCode.T)) {  }
+            if (Input.GetKeyDown(KeyCode.Z)) { StartCoroutine(KyubuKombo(1)); } 
+            if (Input.GetKeyDown(KeyCode.X)) { StartCoroutine(KyubuKombo(2)); }
+            if (Input.GetKeyDown(KeyCode.C)) { StartCoroutine(KyubuKombo(3)); }
+            if (Input.GetKeyDown(KeyCode.V)) { StartCoroutine(KyubuKombo(4)); }
+            if (Input.GetKeyDown(KeyCode.B)) { StartCoroutine(KyubuKombo(5)); }
+            if (Input.GetKeyDown(KeyCode.N)) { StartCoroutine(KyubuKombo(6)); }
         }  
     }
 
@@ -237,6 +245,7 @@ public class DiceThrow : MonoBehaviour
 
     private void DiceHotkey(int ChangingWithDice)
     {
+        AudioPlayer.PlaySound("DiceHotkey");
         int mock = DiceValues[0];
         DiceValues[0] = DiceValues[ChangingWithDice];
         DiceValues[ChangingWithDice] = mock;
@@ -294,6 +303,7 @@ public class DiceThrow : MonoBehaviour
 
         if (KyubuTileValue == 1) 
         { 
+            AudioPlayer.PlaySound("KK1");
             try
             { 
                 Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
@@ -306,6 +316,7 @@ public class DiceThrow : MonoBehaviour
         }
         if (KyubuTileValue == 2) 
         { 
+            AudioPlayer.PlaySound("KK2");
             try {
                 Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>();
                 int dafuq = UnityEngine.Random.Range(0,2);
@@ -337,7 +348,11 @@ public class DiceThrow : MonoBehaviour
                 }
             }
         }
-        if (KyubuTileValue == 3) { Instantiate(KyubuTiles[UnityEngine.Random.Range(5,7)], transform.position, Quaternion.identity); }
+        if (KyubuTileValue == 3) 
+        { 
+            AudioPlayer.PlaySound("KK3Throw");
+            Instantiate(KyubuTiles[UnityEngine.Random.Range(5,7)], transform.position, Quaternion.identity); 
+        }
         if (KyubuTileValue == 4) 
         { 
             for (int i = 11; i < 15; i++) 
@@ -348,16 +363,20 @@ public class DiceThrow : MonoBehaviour
         }
         if (KyubuTileValue == 5) 
         { 
+            int rand = UnityEngine.Random.Range(7,9);
+            if (rand == 7) { AudioPlayer.PlaySound("KK5Var"); }
+            else { AudioPlayer.PlaySound("KK5"); }
             try  
             { 
                 Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
-                Instantiate(KyubuTiles[UnityEngine.Random.Range(7,9)], new Vector3(enemyPosition.position.x + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.y + 12.5f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.z), Quaternion.identity); 
+                Instantiate(KyubuTiles[rand], new Vector3(enemyPosition.position.x + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.y + 12.5f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.z), Quaternion.identity); 
             }
             catch (NullReferenceException) 
-            { Instantiate(KyubuTiles[UnityEngine.Random.Range(7,9)], new Vector3(transform.position.x, transform.position.y + 12.5f, transform.position.z), Quaternion.identity); }
+            { Instantiate(KyubuTiles[rand], new Vector3(transform.position.x, transform.position.y + 12.5f, transform.position.z), Quaternion.identity); }
         }
         if (KyubuTileValue == 6) 
         { 
+            AudioPlayer.PlaySound("KK6Hang");
             try 
             {
                 Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
@@ -428,6 +447,7 @@ public class DiceThrow : MonoBehaviour
         yield return new WaitForSeconds(1f);
         for (float i = 0; i < 5f; i += 0.2f)
         {
+            AudioPlayer.PlaySound("ThrowDice");
             if (haveFlan == true && haveCremeBrulee == false) 
             { 
                 Instantiate(FakeMultishotLeftDiceTypes[FakeDiceValue], diceTransform.position, UnityEngine.Random.rotation);
