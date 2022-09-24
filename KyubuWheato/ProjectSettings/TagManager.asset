@@ -5,8 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - enemyMouse
-  - enemySnake
-  - enemyBoss
   - 6sidedDice1
   - 6sidedDice2
   - 6sidedDice3
@@ -40,6 +38,16 @@ TagManager:
   - Blue PosFlower 2
   - Orange PosFlower 2
   - AudioManager
+  - CooldownBar
+  - WheatCounter
+  - DiceCounter
+  - GameOverScreen
+  - DicePreviewer1
+  - DicePreviewer2
+  - DicePreviewer3
+  - DicePreviewer4
+  - DicePreviewer5
+  - BroomBuffImage
   layers:
   - Default
   - TransparentFX

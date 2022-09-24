@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 4977885905274350270}
   m_Layer: 0
   m_Name: DiceRay6Instantiate
-  m_TagString: Untagged
+  m_TagString: FakeDice6
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -141,8 +141,20 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: DicePad
-    clip: {fileID: 8300000, guid: b78fb7f2629a65840bb0bf68aaa579e0, type: 3}
+  - name: PadOn
+    clip: {fileID: 8300000, guid: 3ab65864938b01c4eb837f738017d30c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PadOff
+    clip: {fileID: 8300000, guid: 1a1fa289dd07bf64096c550c24819a2d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PadDestroy
+    clip: {fileID: 8300000, guid: 983abc90be7a3ab4283c0d14d8da7d5f, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -190,13 +202,19 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: BroomBuff
-    clip: {fileID: 8300000, guid: aad8ebee1edf3e243a3e523c085f72a2, type: 3}
+    clip: {fileID: 8300000, guid: e2c49d478f239f448b86ab69f6646bf7, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: UIButtonPress
     clip: {fileID: 8300000, guid: 5805ba218b6adaa4e953f4af1f2b038e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: UIButtonHover
+    clip: {fileID: 8300000, guid: 77c38c07799691e4a89d8bfda2361558, type: 3}
     volume: 1
     pitch: 1
     loop: 0

@@ -111,10 +111,6 @@ MonoBehaviour:
   - {fileID: 9047026231800584673, guid: 536b21876453a024ca14e3cb9a69709f, type: 3}
   - {fileID: 3040201228406327737, guid: da370ad89e7bb04498e4a94261936bb7, type: 3}
   - {fileID: 6984295473616759616}
-  LeftMapLimit: 0
-  RightMapLimit: 0
-  UpperMapLimit: 0
-  LowerMapLimit: 0
 --- !u!50 &6984295473616759618
 Rigidbody2D:
   serializedVersion: 4

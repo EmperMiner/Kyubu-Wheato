@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8926498354624675502}
   m_Layer: 0
   m_Name: KyubuTile5Variant
-  m_TagString: Untagged
+  m_TagString: FakeDice5
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBeforeDestroy: 2
+  isKyubuTile3Left: 0
+  isKyubuTile3Right: 0
   isKyubuTile6: 0
+  Dice3: {fileID: 0}
   Dice6: []
 --- !u!1 &8267901062024733587
 GameObject:

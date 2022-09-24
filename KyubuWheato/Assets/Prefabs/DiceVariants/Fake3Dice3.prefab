@@ -154,6 +154,7 @@ MonoBehaviour:
   DiceIsKyubuTile6: 0
   directionX: 0
   directionY: 0
+  DiceRayPrefabs: []
 --- !u!114 &5939119155120805969
 MonoBehaviour:
   m_ObjectHideFlags: 0

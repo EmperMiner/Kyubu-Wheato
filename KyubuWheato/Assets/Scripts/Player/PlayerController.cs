@@ -77,14 +77,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
     public Renderer spriteRenderer;
     public HealthBar healthBar;
-
     [SerializeField] private DiceThrow diceThrowScript;
     [SerializeField] private DicePadSpawner dicePadSpawnerScript;
-    [SerializeField] private UltimateBarCharge ultimateScript;
-    [SerializeField] private CooldownBar cooldownBarScript;
-    [SerializeField] private Text DiceCounterNumber;
-    [SerializeField] private Text WheatCounterNumber;
-    [SerializeField] private GameOverScreen gameOverScript;
+    private UltimateBarCharge ultimateScript;
+    private CooldownBar cooldownBarScript;
+    private Text DiceCounterNumber;
+    private Text WheatCounterNumber;
+    private GameOverScreen gameOverScript;
 
     [SerializeField] private GameObject crosshair;
     [SerializeField] private GameObject diceThrower;
@@ -94,12 +93,25 @@ public class PlayerController : MonoBehaviour
     private bool HasDefenseTemporaryBuff;
     private bool HasSpeedTemporaryBuff;
     public bool AllEntrees = false;
+    private Image BroomBuffImage;
+    [SerializeField] private Sprite[] BroomBuffIcons;
+    
 
     
 
     private void Awake()
     {       
         AudioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>();
+        ultimateScript = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
+        cooldownBarScript = GameObject.FindGameObjectWithTag("CooldownBar").GetComponent<CooldownBar>();
+        DiceCounterNumber = GameObject.FindGameObjectWithTag("DiceCounter").GetComponent<Text>();
+        WheatCounterNumber = GameObject.FindGameObjectWithTag("WheatCounter").GetComponent<Text>();
+        gameOverScript = GameObject.FindGameObjectWithTag("GameOverScreen").GetComponent<GameOverScreen>();
+        BroomBuffImage = GameObject.FindGameObjectWithTag("BroomBuffImage").GetComponent<Image>();
+
+        BroomBuffImage.color = new Color32(255, 255, 255, 0);
+
         if (FirstLevelSave) 
         { 
             LoadData();
@@ -181,12 +193,12 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.tag == "6sidedDice5") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
         if (collider.gameObject.tag == "6sidedDice6") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
 
-        if (collider.gameObject.tag == "DiceTile1") { AudioPlayer.PlaySound("DicePad"); }
-        if (collider.gameObject.tag == "DiceTile2") { AudioPlayer.PlaySound("DicePad"); }
-        if (collider.gameObject.tag == "DiceTile3") { AudioPlayer.PlaySound("DicePad"); }
-        if (collider.gameObject.tag == "DiceTile4") { AudioPlayer.PlaySound("DicePad"); }
-        if (collider.gameObject.tag == "DiceTile5") { AudioPlayer.PlaySound("DicePad"); }
-        if (collider.gameObject.tag == "DiceTile6") { AudioPlayer.PlaySound("DicePad"); }
+        if (collider.gameObject.tag == "DiceTile1") { AudioPlayer.PlaySound("PadOn"); }
+        if (collider.gameObject.tag == "DiceTile2") { AudioPlayer.PlaySound("PadOn"); }
+        if (collider.gameObject.tag == "DiceTile3") { AudioPlayer.PlaySound("PadOn"); }
+        if (collider.gameObject.tag == "DiceTile4") { AudioPlayer.PlaySound("PadOn"); }
+        if (collider.gameObject.tag == "DiceTile5") { AudioPlayer.PlaySound("PadOn"); }
+        if (collider.gameObject.tag == "DiceTile6") { AudioPlayer.PlaySound("PadOn"); }
     }
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -200,12 +212,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.tag == "DiceTile1") { diceThrowScript.isOnDiceTile1 = false; AudioPlayer.PlaySound("DicePad"); }
-        if (other.gameObject.tag == "DiceTile2") { diceThrowScript.isOnDiceTile2 = false; AudioPlayer.PlaySound("DicePad"); }
-        if (other.gameObject.tag == "DiceTile3") { diceThrowScript.isOnDiceTile3 = false; AudioPlayer.PlaySound("DicePad"); }
-        if (other.gameObject.tag == "DiceTile4") { diceThrowScript.isOnDiceTile4 = false; AudioPlayer.PlaySound("DicePad"); }
-        if (other.gameObject.tag == "DiceTile5") { diceThrowScript.isOnDiceTile5 = false; AudioPlayer.PlaySound("DicePad"); }
-        if (other.gameObject.tag == "DiceTile6") { diceThrowScript.isOnDiceTile6 = false; AudioPlayer.PlaySound("DicePad"); }
+        if (other.gameObject.tag == "DiceTile1") { diceThrowScript.isOnDiceTile1 = false; AudioPlayer.PlaySound("PadOff"); }
+        if (other.gameObject.tag == "DiceTile2") { diceThrowScript.isOnDiceTile2 = false; AudioPlayer.PlaySound("PadOff"); }
+        if (other.gameObject.tag == "DiceTile3") { diceThrowScript.isOnDiceTile3 = false; AudioPlayer.PlaySound("PadOff"); }
+        if (other.gameObject.tag == "DiceTile4") { diceThrowScript.isOnDiceTile4 = false; AudioPlayer.PlaySound("PadOff"); }
+        if (other.gameObject.tag == "DiceTile5") { diceThrowScript.isOnDiceTile5 = false; AudioPlayer.PlaySound("PadOff"); }
+        if (other.gameObject.tag == "DiceTile6") { diceThrowScript.isOnDiceTile6 = false; AudioPlayer.PlaySound("PadOff"); }
     }
 
     private void LimitCamera()
@@ -323,20 +335,22 @@ public class PlayerController : MonoBehaviour
     {
         if (playerAlive) 
         {
+            BroomBuffImage.color = new Color32(255, 255, 255, 255);
             BroomInMode = true;
             for (int b = 0; b < 5; b++)
             {
                 AudioPlayer.PlaySound("BroomBuff");
                 int PickRandomStat = UnityEngine.Random.Range(0,5);
-                if (PickRandomStat == 0) { strength += 2f; HasStrengthTemporaryBuff = true; LatterIngameSaveData(); }
-                if (PickRandomStat == 1) { defense += 2f; HasDefenseTemporaryBuff = true; LatterIngameSaveData(); }
-                if (PickRandomStat == 2) { MoveSpeed += 1f; HasSpeedTemporaryBuff = true; LatterIngameSaveData(); }
-                if (PickRandomStat == 3) { IncreaseDiceNumber(); }
-                if (PickRandomStat == 4) { RegenStop = false; StartCoroutine(Regen()); }
+                if (PickRandomStat == 0) { strength += 2f; HasStrengthTemporaryBuff = true; LatterIngameSaveData(); BroomBuffImage.sprite = BroomBuffIcons[0]; }
+                if (PickRandomStat == 1) { defense += 2f; HasDefenseTemporaryBuff = true; LatterIngameSaveData(); BroomBuffImage.sprite = BroomBuffIcons[1]; }
+                if (PickRandomStat == 2) { MoveSpeed += 1f; HasSpeedTemporaryBuff = true; LatterIngameSaveData(); BroomBuffImage.sprite = BroomBuffIcons[2]; }
+                if (PickRandomStat == 3) { IncreaseDiceNumber(); BroomBuffImage.sprite = BroomBuffIcons[3]; }
+                if (PickRandomStat == 4) { RegenStop = false; StartCoroutine(Regen()); BroomBuffImage.sprite = BroomBuffIcons[4]; }
                 yield return new WaitForSeconds(UnityEngine.Random.Range(4f,12f));
                 SubtractTemporaryBuff();
                 if (PickRandomStat == 4) { RegenStop = true; }
             }
+            BroomBuffImage.color = new Color32(255, 255, 255, 0);
             StartCoroutine(RollMode());
         }
         yield return null;

@@ -11,16 +11,16 @@ public class DiceThrow : MonoBehaviour
     private Vector3 mousePos;
     private PlayerController player;
     private AudioManager AudioPlayer;
-    [SerializeField] private Text DiceCounterNumber;
+    private Text DiceCounterNumber;
     [SerializeField] private GameObject[] fakeDiceTypes;
     [SerializeField] private GameObject[] dicetypes;
     [SerializeField] private GameObject[] MultishotDiceTypes;
     [SerializeField] private GameObject[] FakeMultishotLeftDiceTypes;
     [SerializeField] private GameObject[] FakeMultishotRightDiceTypes;
     [SerializeField] private Transform diceTransform;
-    [SerializeField] private CooldownBar cooldownBar;
-    [SerializeField] private UltimateBarCharge ultimateBar;
-    [SerializeField] private Image[] DicePreviewerImage;
+    private CooldownBar cooldownBar;
+    private UltimateBarCharge ultimateBar;
+    private Image[] DicePreviewerImage = new Image[5];
     [SerializeField] private Sprite[] DiceSprites;
     [SerializeField] private GameObject[] KyubuTiles;
 
@@ -65,6 +65,14 @@ public class DiceThrow : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         AudioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
+        cooldownBar = GameObject.FindGameObjectWithTag("CooldownBar").GetComponent<CooldownBar>();
+        DiceCounterNumber = GameObject.FindGameObjectWithTag("DiceCounter").GetComponent<Text>();
+        DicePreviewerImage[0] = GameObject.FindGameObjectWithTag("DicePreviewer1").GetComponent<Image>();
+        DicePreviewerImage[1] = GameObject.FindGameObjectWithTag("DicePreviewer2").GetComponent<Image>();
+        DicePreviewerImage[2] = GameObject.FindGameObjectWithTag("DicePreviewer3").GetComponent<Image>();
+        DicePreviewerImage[3] = GameObject.FindGameObjectWithTag("DicePreviewer4").GetComponent<Image>();
+        DicePreviewerImage[4] = GameObject.FindGameObjectWithTag("DicePreviewer5").GetComponent<Image>();
         DiceThrowLoadData();
         GenerateRandomDiceArray();
         GenerateRandomFakeArray();
