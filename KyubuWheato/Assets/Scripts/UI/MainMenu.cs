@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private AudioManager AudioPlayer;
     private int LoadingMenuToGame = 1;
-    private int Level_2 = 12;
+    private int Level_2 = 9;
 
     private static Action onLoaderCallback;
     

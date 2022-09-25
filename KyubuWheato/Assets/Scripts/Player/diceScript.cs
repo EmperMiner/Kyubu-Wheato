@@ -71,7 +71,7 @@ public class diceScript : MonoBehaviour
         
         yield return new WaitForSeconds(1f);
         int i = UnityEngine.Random.Range(0,100);
-        if (i < 40 + diceThrowScript.KyubuStack) { Explode(); }
+        if (i < 30 + diceThrowScript.KyubuStack) { Explode(); }
         yield return null;
     }
 

@@ -243,3 +243,34 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: MainMenu
+    clip: {fileID: 8300000, guid: b73aadfe9989d6742ba4103e53979f20, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: ErsteFirst
+    clip: {fileID: 8300000, guid: 8411ecaa0e3fb58408c3f45e1109041b, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: ErsteLoop
+    clip: {fileID: 8300000, guid: a176512c94a37344a9b26fd72f8a86d7, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: GameOver
+    clip: {fileID: 8300000, guid: c3e9043ff770fa443a734b8ee50ff32e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Victory
+    clip: {fileID: 8300000, guid: 92ce87f4838dc074299c61a969f293a3, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  isMainMenu: 0

@@ -271,6 +271,7 @@ public class PlayerController : MonoBehaviour
 
     public void GameOver()
     {
+        AudioPlayer.PlayJingle("GameOver");
         playerAlive = false;
         SaveData();
         Time.timeScale = 0f;
