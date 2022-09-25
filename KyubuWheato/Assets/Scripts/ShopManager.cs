@@ -339,13 +339,13 @@ public class ShopManager : MonoBehaviour
         if (RefundValue == 101)
         {
             if (shopHavePizza == false) { StartCoroutine(NotifTextHaveNotBought()); }
-            else { shopWheat += upgradePrices[5]; }
+            else { shopWheat += upgradePrices[5]; AudioPlayer.PlaySound("RefundShop"); }
             shopHavePizza = false;
         }
         if (RefundValue == 102)
         {
             if (shopHaveCarrotCake == false) { StartCoroutine(NotifTextHaveNotBought()); }
-            else { shopWheat += upgradePrices[5]; }
+            else { shopWheat += upgradePrices[5]; AudioPlayer.PlaySound("RefundShop"); }
             shopHaveCarrotCake = false;
         }
         if (RefundValue == 103)
@@ -353,6 +353,7 @@ public class ShopManager : MonoBehaviour
             if (shopHaveFlan == false) { StartCoroutine(NotifTextHaveNotBought()); }
             else 
             { 
+                AudioPlayer.PlaySound("RefundShop");
                 shopWheat += upgradePrices[5]; 
                 if(shopHaveCremeBrulee) 
                 { 
@@ -366,37 +367,37 @@ public class ShopManager : MonoBehaviour
         if (RefundValue == 104)
         {
             if (shopHaveCremeBrulee == false) { StartCoroutine(NotifTextHaveNotBought()); }
-            else { shopWheat += upgradePrices[5]; }
+            else { shopWheat += upgradePrices[5]; AudioPlayer.PlaySound("RefundShop"); }
             shopHaveCremeBrulee = false;
         }
         if (RefundValue == 105)
         {
             if (shopHaveBanhmi == false) { StartCoroutine(NotifTextHaveNotBought()); }
-            else { shopWheat += upgradePrices[5]; }
+            else { shopWheat += upgradePrices[5]; AudioPlayer.PlaySound("RefundShop"); }
             shopHaveBanhmi = false;
         }
         if (RefundValue == 106)
         {
             if (shopHaveCupcake == false) { StartCoroutine(NotifTextHaveNotBought()); }
-            else { shopWheat += upgradePrices[5]; }
+            else { shopWheat += upgradePrices[5]; AudioPlayer.PlaySound("RefundShop"); }
             shopHaveCupcake = false;
         }
         if (RefundValue == 107)
         {
             if (shopHaveChickenNuggets == false) { StartCoroutine(NotifTextHaveNotBought()); }
-            else { shopWheat += upgradePrices[5]; }
+            else { shopWheat += upgradePrices[5]; AudioPlayer.PlaySound("RefundShop"); }
             shopHaveChickenNuggets = false;
         }
         if (RefundValue == 108)
         {
             if (shopHavePastelDeChoclo == false) { StartCoroutine(NotifTextHaveNotBought()); }
-            else { shopWheat += upgradePrices[5]; }
+            else { shopWheat += upgradePrices[5]; AudioPlayer.PlaySound("RefundShop"); }
             shopHavePastelDeChoclo = false;
         }
         if (RefundValue == 109)
         {
             if (shopHaveGarlicBread == false) { StartCoroutine(NotifTextHaveNotBought()); }
-            else { shopWheat += upgradePrices[5]; }
+            else { shopWheat += upgradePrices[5]; AudioPlayer.PlaySound("RefundShop"); }
             shopHaveGarlicBread = false;
         }
         if (refundLoops > 0) { AudioPlayer.PlaySound("RefundShop"); }

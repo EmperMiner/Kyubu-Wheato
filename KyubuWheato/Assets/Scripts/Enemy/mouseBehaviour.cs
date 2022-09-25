@@ -40,8 +40,6 @@ public class mouseBehaviour : MonoBehaviour
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-        agent.radius = 0.0001f;
-        agent.height = 0.0001f;
 
         mouseHealth = maxMouseHealth;
         alreadyDamaged = false;
