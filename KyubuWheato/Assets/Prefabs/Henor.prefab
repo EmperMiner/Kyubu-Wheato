@@ -110,7 +110,13 @@ MonoBehaviour:
   wheatDrop: {fileID: 6133570875003662420, guid: 47d5b60bfb15aea49839d118dac8f86c, type: 3}
   pfDamagePopup: {fileID: 6478138214433248903, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
   pfDamagePopupText: {fileID: 62537061617949394, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
-  dicetypes: []
+  dicetypes:
+  - {fileID: 5705092907752739581, guid: 6c2e6dd266c647a4ca2e1eb8f9f91cc5, type: 3}
+  - {fileID: 8172298123866409655, guid: 973684b318644fe4ebe66418d1493f38, type: 3}
+  - {fileID: 1459828089717397112, guid: 20a5c520404d5c54f9238f54ae3abe9f, type: 3}
+  - {fileID: 7114270211502127729, guid: a9df15953e839184faf791adef183d66, type: 3}
+  - {fileID: 1588563766128724097, guid: d88cb4d72b7b4ed46a133bae597b899d, type: 3}
+  - {fileID: 3542439814215799712, guid: 769ce80170bc8a34ebeb3878c9745121, type: 3}
 --- !u!114 &5731797234627875183
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -220,7 +220,7 @@ public class DiceThrow : MonoBehaviour
         FakePreviousDiceValues[5] =  FakeDiceValue;
         GetFakeDiceValue();
         FakeDiceValue = RandomFakeDiceValue;
-        KyubuKomboCheck();
+        FakeKyubuKomboCheck();
     }
 
     public void UpdateDicePreviewerUI()
@@ -278,10 +278,14 @@ public class DiceThrow : MonoBehaviour
             { 
                 StartCoroutine(KyubuKombo(7)); 
             }
+        }
+    }
 
-            if (havePizza)
-            {
-                if (FakePreviousDiceValues[5] == 0 && FakePreviousDiceValues[4] == 0) { StartCoroutine(KyubuKombo(1)); }
+    private void FakeKyubuKomboCheck()
+    {
+        if (haveCarrotCake && havePizza)
+        {
+            if (FakePreviousDiceValues[5] == 0 && FakePreviousDiceValues[4] == 0) { StartCoroutine(KyubuKombo(1)); }
                 if (FakePreviousDiceValues[5] == 1 && FakePreviousDiceValues[4] == 1) { StartCoroutine(KyubuKombo(2)); }
                 if (FakePreviousDiceValues[5] == 2 && FakePreviousDiceValues[4] == 2) { StartCoroutine(KyubuKombo(3)); }
                 if (FakePreviousDiceValues[5] == 3 && FakePreviousDiceValues[4] == 3) { StartCoroutine(KyubuKombo(4)); }
@@ -295,7 +299,6 @@ public class DiceThrow : MonoBehaviour
                 { 
                     StartCoroutine(KyubuKombo(100)); 
                 }
-            }
         }
     }
 
