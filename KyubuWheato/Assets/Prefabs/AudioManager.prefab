@@ -161,19 +161,19 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: DiceRay5
     clip: {fileID: 8300000, guid: 1302125ed4b3d76478a2e55f16a0d174, type: 3}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: DiceRay3
     clip: {fileID: 8300000, guid: 288d1bd85eb00d646be64fd5492204b1, type: 3}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: DiceRayNot5
     clip: {fileID: 8300000, guid: 96e5eb7d40188304897ce29e105e16c5, type: 3}
-    volume: 1
+    volume: 0.4
     pitch: 1
     loop: 0
     source: {fileID: 0}

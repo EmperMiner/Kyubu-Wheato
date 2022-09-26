@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
     private Image BroomBuffImage;
     [SerializeField] private Sprite[] BroomBuffIcons;
     
-
+    Collider2D other;
     
 
     private void Awake()
@@ -166,6 +166,13 @@ public class PlayerController : MonoBehaviour
             if (havePizza && haveCarrotCake && haveFlan && haveCremeBrulee && haveBanhmi && haveCupcake && haveChickenNuggets && havePastelDeChoclo && haveGarlicBread) { AllEntrees = true; }
             else { AllEntrees = false; }
 
+            if (diceThrowScript.isOnDiceTile1 && !other) { diceThrowScript.isOnDiceTile1 = false; }
+            if (diceThrowScript.isOnDiceTile2 && !other) { diceThrowScript.isOnDiceTile2 = false; }
+            if (diceThrowScript.isOnDiceTile3 && !other) { diceThrowScript.isOnDiceTile3 = false; }
+            if (diceThrowScript.isOnDiceTile4 && !other) { diceThrowScript.isOnDiceTile4 = false; }
+            if (diceThrowScript.isOnDiceTile5 && !other) { diceThrowScript.isOnDiceTile5 = false; }
+            if (diceThrowScript.isOnDiceTile6 && !other) { diceThrowScript.isOnDiceTile6 = false; }
+
             if (playerHealth == 0) { GameOver(); }
         }
     }
@@ -184,30 +191,21 @@ public class PlayerController : MonoBehaviour
         playerRB.MovePosition(playerRB.position + movement * MoveSpeed * Time.fixedDeltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collider.gameObject.tag == "6sidedDice1") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
-        if (collider.gameObject.tag == "6sidedDice2") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
-        if (collider.gameObject.tag == "6sidedDice3") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
-        if (collider.gameObject.tag == "6sidedDice4") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
-        if (collider.gameObject.tag == "6sidedDice5") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
-        if (collider.gameObject.tag == "6sidedDice6") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
+        if (other.gameObject.tag == "6sidedDice1") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
+        if (other.gameObject.tag == "6sidedDice2") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
+        if (other.gameObject.tag == "6sidedDice3") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
+        if (other.gameObject.tag == "6sidedDice4") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
+        if (other.gameObject.tag == "6sidedDice5") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
+        if (other.gameObject.tag == "6sidedDice6") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
 
-        if (collider.gameObject.tag == "DiceTile1") { AudioPlayer.PlaySound("PadOn"); }
-        if (collider.gameObject.tag == "DiceTile2") { AudioPlayer.PlaySound("PadOn"); }
-        if (collider.gameObject.tag == "DiceTile3") { AudioPlayer.PlaySound("PadOn"); }
-        if (collider.gameObject.tag == "DiceTile4") { AudioPlayer.PlaySound("PadOn"); }
-        if (collider.gameObject.tag == "DiceTile5") { AudioPlayer.PlaySound("PadOn"); }
-        if (collider.gameObject.tag == "DiceTile6") { AudioPlayer.PlaySound("PadOn"); }
-    }
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "DiceTile1") { diceThrowScript.isOnDiceTile1 = true; }
-        if (other.gameObject.tag == "DiceTile2") { diceThrowScript.isOnDiceTile2 = true; }
-        if (other.gameObject.tag == "DiceTile3") { diceThrowScript.isOnDiceTile3 = true; }
-        if (other.gameObject.tag == "DiceTile4") { diceThrowScript.isOnDiceTile4 = true; }
-        if (other.gameObject.tag == "DiceTile5") { diceThrowScript.isOnDiceTile5 = true; }
-        if (other.gameObject.tag == "DiceTile6") { diceThrowScript.isOnDiceTile6 = true; }
+        if (other.gameObject.tag == "DiceTile1") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile1 = true; this.other = other; }
+        if (other.gameObject.tag == "DiceTile2") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile2 = true; this.other = other; }
+        if (other.gameObject.tag == "DiceTile3") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile3 = true; this.other = other; }
+        if (other.gameObject.tag == "DiceTile4") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile4 = true; this.other = other; }
+        if (other.gameObject.tag == "DiceTile5") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile5 = true; this.other = other; }
+        if (other.gameObject.tag == "DiceTile6") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile6 = true; this.other = other; }
     }
 
     private void OnTriggerExit2D(Collider2D other)
