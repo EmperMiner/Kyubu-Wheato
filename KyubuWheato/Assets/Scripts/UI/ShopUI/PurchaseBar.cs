@@ -6,15 +6,11 @@ using UnityEngine.UI;
 
 public class PurchaseBar : MonoBehaviour
 {
-    public GameObject currentShopItem;
-    public GameObject currentBuyButton;
-    public GameObject currentRefundButton;
-    void Start()
-    {
+    [SerializeField] private GameObject currentShopItem;
+    [SerializeField] private GameObject currentBuyButton;
+    [SerializeField] private GameObject currentRefundButton;
 
-    }
-
-    void Update()
+    private void Update()
     {
         GameObject pressed = EventSystem.current.currentSelectedGameObject;
         if (pressed != currentShopItem && pressed != currentBuyButton && pressed != currentRefundButton)
