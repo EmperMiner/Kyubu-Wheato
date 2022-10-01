@@ -66,7 +66,7 @@ GameObject:
   - component: {fileID: 5422668082169324414}
   m_Layer: 0
   m_Name: BroomAttackLeft
-  m_TagString: FakeDice6
+  m_TagString: BroomAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: -92423974629623999}
   m_Layer: 0
   m_Name: DiceRay3Instantiate
-  m_TagString: FakeDice4
+  m_TagString: FakeDice3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

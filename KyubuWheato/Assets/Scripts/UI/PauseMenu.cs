@@ -6,10 +6,11 @@ public class PauseMenu : MonoBehaviour
 {
     private int MainMenu = 0;
     private int LoadingGameToMenu = 2;
-    private int Level_2 = 3;
+    private int Level_1 = 3;
 
     public static bool GameIsPaused = false;
 
+    private AudioManager AudioPlayer;
     private PlayerController player;
     [SerializeField] private GameObject pauseMenuUI;
     [SerializeField] private GameObject HUD;
@@ -58,9 +59,14 @@ public class PauseMenu : MonoBehaviour
         
     }
 
+    public void ButtonSelect()
+    {
+        FindObjectOfType<AudioManager>().PlaySound("UIButtonPress");
+    }
+
     public void Restart()
     {
-        onIngameLoaderCallback = () => { SceneManager.LoadScene(Level_2); };
+        onIngameLoaderCallback = () => { SceneManager.LoadScene(Level_1); };
 
         SceneManager.LoadScene(LoadingGameToMenu);
     }

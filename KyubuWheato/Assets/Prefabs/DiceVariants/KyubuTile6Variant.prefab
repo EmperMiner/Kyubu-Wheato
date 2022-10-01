@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2604802474105421970}
   - component: {fileID: 7911235701000418416}
+  - component: {fileID: -561305757763072279}
   m_Layer: 0
   m_Name: KyubuTile6Variant
   m_TagString: FakeDice6
@@ -51,6 +52,20 @@ MonoBehaviour:
   isKyubuTile6: 0
   Dice3: {fileID: 0}
   Dice6: []
+--- !u!114 &-561305757763072279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2604802474105421981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a05b94658a1124a84521e4a057d2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Delay: 2.98
+  isKyubuKombo6: 1
 --- !u!1 &2604802474888816304
 GameObject:
   m_ObjectHideFlags: 0

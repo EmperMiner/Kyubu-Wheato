@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private AudioManager AudioPlayer;
     private int LoadingMenuToGame = 1;
-    private int Level_2 = 9;
+    private int Level_1 = 3;
 
     private static Action onLoaderCallback;
     
@@ -51,7 +51,7 @@ public class MainMenu : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        onLoaderCallback = () => { SceneManager.LoadScene(Level_2); };
+        onLoaderCallback = () => { SceneManager.LoadScene(Level_1); };
 
         SceneManager.LoadScene(LoadingMenuToGame);
 

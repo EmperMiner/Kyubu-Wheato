@@ -26475,6 +26475,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -26548,6 +26549,22 @@ Transform:
   m_Father: {fileID: 1405087408}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab8353b5ebd32545867da143199a814, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultPosInfluence: {x: 0.15, y: 0.15, z: 0.15}
+  DefaultRotInfluence: {x: 1, y: 1, z: 1}
+  RestPositionOffset: {x: 0, y: 0, z: -10}
+  RestRotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &637846252
 GameObject:
   m_ObjectHideFlags: 0
@@ -27399,6 +27416,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cb6ea45cbefbe144a170e7a132a4d41, type: 3}
+--- !u!1 &1276159881 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6389990453117822187, guid: 8cb6ea45cbefbe144a170e7a132a4d41, type: 3}
+  m_PrefabInstance: {fileID: 1276159880}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1366617120
 GameObject:
   m_ObjectHideFlags: 0
@@ -97178,6 +97200,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6437636101127410530, guid: c05db5c31f7956748834054153fc5c04, type: 3}
+      propertyPath: HUD
+      value: 
+      objectReference: {fileID: 1276159881}
     - target: {fileID: 6437636101127410531, guid: c05db5c31f7956748834054153fc5c04, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -97279,6 +97305,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasPauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 7092342992478120178, guid: 33880d9e0175d104b97c8bb5528bb42a, type: 3}
+      propertyPath: HUD
+      value: 
+      objectReference: {fileID: 1276159881}
     - target: {fileID: 7092342992478120179, guid: 33880d9e0175d104b97c8bb5528bb42a, type: 3}
       propertyPath: m_Pivot.x
       value: 0

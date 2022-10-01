@@ -48,6 +48,7 @@ TagManager:
   - DicePreviewer4
   - DicePreviewer5
   - BroomBuffImage
+  - BroomAttack
   layers:
   - Default
   - TransparentFX

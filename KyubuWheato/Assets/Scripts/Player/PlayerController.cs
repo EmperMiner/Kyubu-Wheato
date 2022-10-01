@@ -199,6 +199,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "6sidedDice4") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
         if (other.gameObject.tag == "6sidedDice5") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
         if (other.gameObject.tag == "6sidedDice6") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
+        if (other.gameObject.tag == "Wheat") { AudioPlayer.PlaySound("DicePickup"); } 
 
         if (other.gameObject.tag == "DiceTile1") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile1 = true; this.other = other; }
         if (other.gameObject.tag == "DiceTile2") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile2 = true; this.other = other; }

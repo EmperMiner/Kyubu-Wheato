@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using EZCameraShake;
 
 public class DiceThrow : MonoBehaviour
 {
@@ -133,12 +134,12 @@ public class DiceThrow : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha2) && dicePreviewerLevel >= 3 && haveBanhmi == true) { DiceHotkey(2); }
             if (Input.GetKeyDown(KeyCode.Alpha3) && dicePreviewerLevel >= 4 && haveBanhmi == true) { DiceHotkey(3); }
             if (Input.GetKeyDown(KeyCode.Alpha4) && dicePreviewerLevel >= 5 && haveBanhmi == true) { DiceHotkey(4); }
-        /*    if (Input.GetKeyDown(KeyCode.Z)) { StartCoroutine(KyubuKombo(1)); } 
+            if (Input.GetKeyDown(KeyCode.Z)) { StartCoroutine(KyubuKombo(1)); } 
             if (Input.GetKeyDown(KeyCode.X)) { StartCoroutine(KyubuKombo(2)); }
             if (Input.GetKeyDown(KeyCode.C)) { StartCoroutine(KyubuKombo(3)); }
             if (Input.GetKeyDown(KeyCode.V)) { StartCoroutine(KyubuKombo(4)); }
             if (Input.GetKeyDown(KeyCode.B)) { StartCoroutine(KyubuKombo(5)); }
-            if (Input.GetKeyDown(KeyCode.N)) { StartCoroutine(KyubuKombo(6)); } */
+            if (Input.GetKeyDown(KeyCode.N)) { StartCoroutine(KyubuKombo(6)); } 
         }  
     }
 
@@ -456,6 +457,7 @@ public class DiceThrow : MonoBehaviour
     {
         ultimateBar.ultimateInProgress = true;
         yield return new WaitForSeconds(1f);
+        CameraShakeInstance bruh = CameraShaker.Instance.StartShake(1f, 4f, .1f);
         for (float i = 0; i < 5f; i += 0.2f)
         {
             AudioPlayer.PlaySound("ThrowDice");
@@ -478,6 +480,7 @@ public class DiceThrow : MonoBehaviour
             else { Instantiate(fakeDiceTypes[FakeDiceValue], diceTransform.position, UnityEngine.Random.rotation); CycleThroughFakeArray(); }
             yield return new WaitForSeconds(0.2f);
         }
+        bruh.StartFadeOut(1f);
         ultimateBar.ultimateInProgress = false;
         yield return null;
     }

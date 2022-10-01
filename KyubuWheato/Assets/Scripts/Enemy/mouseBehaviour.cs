@@ -97,7 +97,8 @@ public class mouseBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "6sidedDice3") { mouseTakeDamage(3); ChargeUlt(4); }
             if (collider.gameObject.tag == "6sidedDice4") { mouseTakeDamage(4); ChargeUlt(3); }
             if (collider.gameObject.tag == "6sidedDice5") { mouseTakeDamage(5); ChargeUlt(2); }
-            if (collider.gameObject.tag == "6sidedDice6") { mouseTakeDamage(6); ChargeUlt(1); }        
+            if (collider.gameObject.tag == "6sidedDice6") { mouseTakeDamage(6); ChargeUlt(1); }
+            if (collider.gameObject.tag == "BroomAttack") { mouseTakeDamage(10); ChargeUlt(8); }        
 
             if (collider.gameObject.tag == "FakeDice1") { mouseTakeDamage(1); }
             if (collider.gameObject.tag == "FakeDice2") { mouseTakeDamage(2); } 
