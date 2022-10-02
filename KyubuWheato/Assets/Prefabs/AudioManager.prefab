@@ -50,227 +50,265 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: ThrowDiceDisabled
     clip: {fileID: 8300000, guid: 730245cc2b8b2f647b95305a68f10553, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: DicePickup
     clip: {fileID: 8300000, guid: 722ae24b870e1464ea3d1a0a033d30a6, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: ChestOpening
     clip: {fileID: 8300000, guid: c58da7363f2c23d4888743aaf0fbf5db, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: PlayerHurt
     clip: {fileID: 8300000, guid: dee5b497cca92544587b8cd584374cd2, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: KK1
     clip: {fileID: 8300000, guid: 9de9772b1ca8f9c438fefa2aa5c0a8ae, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: KK2
     clip: {fileID: 8300000, guid: 868afa6d387f6c246b361df41349b482, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: KK3Throw
     clip: {fileID: 8300000, guid: 6e839cf915a7e0f468e9b6a487067ddd, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: KK3Explode
     clip: {fileID: 8300000, guid: 54da419e5f8c7c948be4a06a92df5fa3, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: KK4
     clip: {fileID: 8300000, guid: 47cfdef8ac282354482c56ceeb1b4cd1, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: KK5
     clip: {fileID: 8300000, guid: 9433f8bdaac58464c965fdac2a77cf94, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: KK5Var
     clip: {fileID: 8300000, guid: 9a8037c57c5992a40a4801be92fa3fea, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: KK6Hang
     clip: {fileID: 8300000, guid: 27bd057bc9dbc6c428c8da3d692aea9e, type: 3}
-    volume: 1
+    volume: 0.7
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: KK6Land
     clip: {fileID: 8300000, guid: a027e165e29c75046a58b08d7c208125, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: DiceHotkey
     clip: {fileID: 8300000, guid: 0975f5929ee9f4a439f4ddca91bf05fe, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: MagnetizedDice
     clip: {fileID: 8300000, guid: d163d959917745740a4bd00bb38b1ddf, type: 3}
     volume: 0.47
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: PadOn
     clip: {fileID: 8300000, guid: 3ab65864938b01c4eb837f738017d30c, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: PadOff
     clip: {fileID: 8300000, guid: 1a1fa289dd07bf64096c550c24819a2d, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: PadDestroy
     clip: {fileID: 8300000, guid: 983abc90be7a3ab4283c0d14d8da7d5f, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: DiceRay5
     clip: {fileID: 8300000, guid: 1302125ed4b3d76478a2e55f16a0d174, type: 3}
     volume: 0.7
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: DiceRay3
     clip: {fileID: 8300000, guid: 288d1bd85eb00d646be64fd5492204b1, type: 3}
     volume: 0.7
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: DiceRayNot5
     clip: {fileID: 8300000, guid: 96e5eb7d40188304897ce29e105e16c5, type: 3}
     volume: 0.4
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: BroomZoom1
     clip: {fileID: 8300000, guid: 4d3f36dde94785d4d8df85e5e712cabd, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: BroomZoom2
     clip: {fileID: 8300000, guid: 861cf33863db9394aa48c2b0db08ca75, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: BroomZoom3
     clip: {fileID: 8300000, guid: 9264b32d8f3c378499b337cb79ce3112, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: BroomZoom4
     clip: {fileID: 8300000, guid: 3845deb2d1b863146a0bdcf51ad4bf0b, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: BroomBuff
     clip: {fileID: 8300000, guid: e2c49d478f239f448b86ab69f6646bf7, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: UIButtonPress
     clip: {fileID: 8300000, guid: 5805ba218b6adaa4e953f4af1f2b038e, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: UIButtonHover
     clip: {fileID: 8300000, guid: 77c38c07799691e4a89d8bfda2361558, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: UIStart
     clip: {fileID: 8300000, guid: fa6303143edb0bc4187ac62535366d1b, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: PurchaseShop
     clip: {fileID: 8300000, guid: 1d7912dbe12a6ad45a39d5ef372a1481, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: RefundShop
     clip: {fileID: 8300000, guid: 0b7edea23a3b529468a2229cfaf99d88, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: UIButtonError
     clip: {fileID: 8300000, guid: 29997e2b46d95b14c8ca166e50620981, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: MainMenu
     clip: {fileID: 8300000, guid: b73aadfe9989d6742ba4103e53979f20, type: 3}
     volume: 1
     pitch: 1
     loop: 1
+    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
     source: {fileID: 0}
   - name: ErsteFirst
     clip: {fileID: 8300000, guid: 8411ecaa0e3fb58408c3f45e1109041b, type: 3}
     volume: 0.2
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
     source: {fileID: 0}
   - name: ErsteLoop
     clip: {fileID: 8300000, guid: a176512c94a37344a9b26fd72f8a86d7, type: 3}
     volume: 0.2
     pitch: 1
     loop: 1
+    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
     source: {fileID: 0}
   - name: GameOver
     clip: {fileID: 8300000, guid: c3e9043ff770fa443a734b8ee50ff32e, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
     source: {fileID: 0}
   - name: Victory
     clip: {fileID: 8300000, guid: 92ce87f4838dc074299c61a969f293a3, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
     source: {fileID: 0}
-  isMainMenu: 0
+  isMainMenu: 1

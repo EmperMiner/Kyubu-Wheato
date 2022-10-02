@@ -4,14 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class mouseBehaviour : MonoBehaviour
 {
     private UnityEngine.AI.NavMeshAgent agent;
 
-    [SerializeField] private int maxMouseHealth = 50;
+    [SerializeField] private int maxMouseHealth;
     private int mouseHealth;
-    [SerializeField] private int mouseStrength = 10;
+    [SerializeField] private int mouseStrength;
     [SerializeField] private float mouseAttackSpeed = 1f;
     private float mouseCanAttack;
 
@@ -29,14 +30,23 @@ public class mouseBehaviour : MonoBehaviour
     [SerializeField] private TextMeshPro pfDamagePopupText;
     [SerializeField] private GameObject[] dicetypes;
 
+    [SerializeField] private bool isMouse;
+    [SerializeField] private bool isCowman;
+    [SerializeField] private bool isHenor;
+    [SerializeField] private bool isScawy;
+
     private UltimateBarCharge ultimateBar;
 
-    private void Start()
+    private void Awake() 
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
+        UpdateStats();
+    }
 
+    private void Start()
+    {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -143,5 +153,15 @@ public class mouseBehaviour : MonoBehaviour
         if (collider.gameObject.tag == "FakeDice6") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
 
         if (collider.gameObject.tag == "Player") { player.spriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
+    }
+
+    private void UpdateStats()
+    {
+        int level = SceneManager.GetActiveScene().buildIndex - 3;
+        if (isMouse) 
+        { 
+           // mouseStrength = Mathf.FloorToInt(level*0.5 + 1);
+            mouseHealth = level*3 + 5;
+        }
     }
 }

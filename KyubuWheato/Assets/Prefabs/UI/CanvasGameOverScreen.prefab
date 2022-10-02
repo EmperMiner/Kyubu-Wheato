@@ -251,7 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 6437636102246486271}
   WheatGainedText: {fileID: 6437636101018491079}
-  HUD: {fileID: 6389990453117822187, guid: 8cb6ea45cbefbe144a170e7a132a4d41, type: 3}
+  HUD: {fileID: 0}
 --- !u!1 &6437636101729773889
 GameObject:
   m_ObjectHideFlags: 0

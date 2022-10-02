@@ -13,6 +13,8 @@ public class PauseMenu : MonoBehaviour
     private AudioManager AudioPlayer;
     private PlayerController player;
     [SerializeField] private GameObject pauseMenuUI;
+    [SerializeField] private GameObject ingameSettingsUI;
+    private SettingsMenu SettingsScript;
     [SerializeField] private GameObject HUD;
 
     private static Action onIngameLoaderCallback;
@@ -20,6 +22,9 @@ public class PauseMenu : MonoBehaviour
     private void Start() 
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        SettingsScript = ingameSettingsUI.GetComponent<SettingsMenu>();
+        SettingsScript.StartingSettings();
+
     }
 
     private void Update() 
@@ -49,6 +54,7 @@ public class PauseMenu : MonoBehaviour
     public void ResumeGame()
     {
         pauseMenuUI.SetActive(false);
+        ingameSettingsUI.SetActive(false);
         HUD.SetActive(true);
         Time.timeScale = 1f;
         GameIsPaused = false;

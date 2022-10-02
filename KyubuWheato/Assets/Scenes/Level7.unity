@@ -39984,8 +39984,8 @@ Tilemap:
   - first: {x: 3, y: 17, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 37
-      m_TileSpriteIndex: 43
+      m_TileIndex: 39
+      m_TileSpriteIndex: 51
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -72737,11 +72737,11 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 7f10b37e8e8e7544595edf73edef0838, type: 2}
   - m_RefCount: 12
     m_Data: {fileID: 11400000, guid: 655148014fa890349a6044481c2aa667, type: 2}
-  - m_RefCount: 2534
+  - m_RefCount: 2533
     m_Data: {fileID: 11400000, guid: 205ef763a976abd4eb3ffa7b0478bae5, type: 2}
   - m_RefCount: 154
     m_Data: {fileID: 11400000, guid: fe80d61f28171d945b1e270a7c9223d6, type: 2}
-  - m_RefCount: 11
+  - m_RefCount: 12
     m_Data: {fileID: 11400000, guid: ef254c04b02ee9045b2027c9881a7a40, type: 2}
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: 12b26c5d4a8677b4290069b6d0db75d1, type: 2}
@@ -72880,7 +72880,7 @@ Tilemap:
     m_Data: {fileID: 762099284, guid: 14fff21a5583b7f449751c48e70c04a9, type: 3}
   - m_RefCount: 292
     m_Data: {fileID: -1748561871, guid: 7ca07db30297f5f4286a41a007096268, type: 3}
-  - m_RefCount: 2534
+  - m_RefCount: 2533
     m_Data: {fileID: 1047913260, guid: 7ca07db30297f5f4286a41a007096268, type: 3}
   - m_RefCount: 120
     m_Data: {fileID: -456324328, guid: 14fff21a5583b7f449751c48e70c04a9, type: 3}
@@ -72896,7 +72896,7 @@ Tilemap:
     m_Data: {fileID: 894380231, guid: 7ca07db30297f5f4286a41a007096268, type: 3}
   - m_RefCount: 154
     m_Data: {fileID: 712308494, guid: 7ca07db30297f5f4286a41a007096268, type: 3}
-  - m_RefCount: 11
+  - m_RefCount: 12
     m_Data: {fileID: 1521419256, guid: 7ca07db30297f5f4286a41a007096268, type: 3}
   - m_RefCount: 6
     m_Data: {fileID: 1858886911, guid: 7ca07db30297f5f4286a41a007096268, type: 3}
@@ -73537,6 +73537,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3338609168007629930, guid: 314bb6e93c719144090c398c6daad3c3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3338609168007629931, guid: 314bb6e93c719144090c398c6daad3c3, type: 3}
+      propertyPath: isMainMenu
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

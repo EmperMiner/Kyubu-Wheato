@@ -224,6 +224,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3338609168007629931, guid: 314bb6e93c719144090c398c6daad3c3, type: 3}
+      propertyPath: isMainMenu
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 314bb6e93c719144090c398c6daad3c3, type: 3}
 --- !u!1 &342641313
@@ -5777,14 +5781,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6389990452870140463, guid: 8cb6ea45cbefbe144a170e7a132a4d41, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6389990452870140463, guid: 8cb6ea45cbefbe144a170e7a132a4d41, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6389990453117822187, guid: 8cb6ea45cbefbe144a170e7a132a4d41, type: 3}
       propertyPath: m_Name
       value: CanvasHUD
@@ -5872,22 +5868,6 @@ PrefabInstance:
     - target: {fileID: 6389990453117822191, guid: 8cb6ea45cbefbe144a170e7a132a4d41, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6389990453515624733, guid: 8cb6ea45cbefbe144a170e7a132a4d41, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6389990453515624733, guid: 8cb6ea45cbefbe144a170e7a132a4d41, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6389990453920541305, guid: 8cb6ea45cbefbe144a170e7a132a4d41, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6389990454043989965, guid: 8cb6ea45cbefbe144a170e7a132a4d41, type: 3}
-      propertyPath: maxUltimateCharge
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cb6ea45cbefbe144a170e7a132a4d41, type: 3}
