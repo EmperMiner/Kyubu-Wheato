@@ -134,12 +134,12 @@ public class DiceThrow : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha2) && dicePreviewerLevel >= 3 && haveBanhmi == true) { DiceHotkey(2); }
             if (Input.GetKeyDown(KeyCode.Alpha3) && dicePreviewerLevel >= 4 && haveBanhmi == true) { DiceHotkey(3); }
             if (Input.GetKeyDown(KeyCode.Alpha4) && dicePreviewerLevel >= 5 && haveBanhmi == true) { DiceHotkey(4); }
-            if (Input.GetKeyDown(KeyCode.Z)) { StartCoroutine(KyubuKombo(1)); } 
+    /*        if (Input.GetKeyDown(KeyCode.Z)) { StartCoroutine(KyubuKombo(1)); } 
             if (Input.GetKeyDown(KeyCode.X)) { StartCoroutine(KyubuKombo(2)); }
             if (Input.GetKeyDown(KeyCode.C)) { StartCoroutine(KyubuKombo(3)); }
             if (Input.GetKeyDown(KeyCode.V)) { StartCoroutine(KyubuKombo(4)); }
             if (Input.GetKeyDown(KeyCode.B)) { StartCoroutine(KyubuKombo(5)); }
-            if (Input.GetKeyDown(KeyCode.N)) { StartCoroutine(KyubuKombo(6)); } 
+            if (Input.GetKeyDown(KeyCode.N)) { StartCoroutine(KyubuKombo(6)); }  */
         }  
     }
 

@@ -20,10 +20,13 @@ public class mouseBehaviour : MonoBehaviour
     [SerializeField] private Renderer mouseSpriteRenderer;
 
     private PlayerController player;
+    private ExitHoeContainer ExitHoeWinCondition;
     private Transform playerTransform;
     private HealthBar healthBar;
+
     private Rigidbody2D mouseRB;
     private Vector2 movement;
+
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject wheatDrop;
     [SerializeField] private Transform pfDamagePopup;
@@ -37,20 +40,18 @@ public class mouseBehaviour : MonoBehaviour
 
     private UltimateBarCharge ultimateBar;
 
-    private void Awake() 
+    private void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
-        UpdateStats();
-    }
+        ExitHoeWinCondition = GameObject.FindGameObjectWithTag("ExitHoeContainer").GetComponent<ExitHoeContainer>();
 
-    private void Start()
-    {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
+        UpdateStats();
         mouseHealth = maxMouseHealth;
         alreadyDamaged = false;
 
@@ -69,6 +70,7 @@ public class mouseBehaviour : MonoBehaviour
             if (RNGWheat <= player.wheatDroprate/10) { Instantiate(wheatDrop, transform.position, Quaternion.identity); }
             int RNGDice = Random.Range(0, player.diceDroprate);
             if (RNGDice == 0) { Instantiate(dicetypes[Random.Range(0,dicetypes.Length)], transform.position, Quaternion.identity); }
+            ExitHoeWinCondition.EnemiesKilled++;
             Destroy(gameObject);
         }
     }
@@ -160,8 +162,8 @@ public class mouseBehaviour : MonoBehaviour
         int level = SceneManager.GetActiveScene().buildIndex - 3;
         if (isMouse) 
         { 
-           // mouseStrength = Mathf.FloorToInt(level*0.5 + 1);
-            mouseHealth = level*3 + 5;
+            mouseStrength = Mathf.FloorToInt(level*0.5f + 1f);
+            maxMouseHealth = level*3 + 5;
         }
     }
 }

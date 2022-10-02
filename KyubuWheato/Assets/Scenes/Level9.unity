@@ -230,7 +230,7 @@ Transform:
   - {fileID: 846025995}
   - {fileID: 1485811097}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &118512190
 PrefabInstance:
@@ -505,7 +505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7092342992478120179, guid: 33880d9e0175d104b97c8bb5528bb42a, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7092342992478120179, guid: 33880d9e0175d104b97c8bb5528bb42a, type: 3}
       propertyPath: m_AnchorMax.x
@@ -29784,7 +29784,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6437636101127410531, guid: c05db5c31f7956748834054153fc5c04, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6437636101127410531, guid: c05db5c31f7956748834054153fc5c04, type: 3}
       propertyPath: m_AnchorMax.x
@@ -29926,6 +29926,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4552566235481944529, guid: 25993c452000a084a8c1443954672387, type: 3}
   m_PrefabInstance: {fileID: 461996689}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &480391673
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5325896411272710558, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
+      propertyPath: m_Name
+      value: ExitHoeContainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325896411272710560, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325896411272710560, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 20.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325896411272710560, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 33.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325896411272710560, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.132618
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325896411272710560, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325896411272710560, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325896411272710560, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325896411272710560, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325896411272710560, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325896411272710560, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325896411272710560, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
 --- !u!1001 &491234421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30790,7 +30847,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &792087550
 PrefabInstance:
@@ -37912,7 +37969,7 @@ Transform:
   - {fileID: 1920200196}
   - {fileID: 1857522775}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1062003687
 PrefabInstance:
@@ -114357,7 +114414,7 @@ MonoBehaviour:
   playerAlive: 1
   CurrentMode: 0
   InHealMode: 0
-  FirstLevelSave: 1
+  FirstLevelSave: 0
   XSpawnpoints:
   - 21
   - -16
@@ -114413,7 +114470,7 @@ Transform:
   - {fileID: 1194601115}
   - {fileID: 519420032}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &1405087410
 CapsuleCollider2D:
@@ -114702,7 +114759,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1513021833
 PrefabInstance:
@@ -115069,7 +115126,7 @@ MonoBehaviour:
   - {fileID: 7592814316219585266, guid: d8abd4c52bceec54dbc898f74bdc399e, type: 3}
   - {fileID: 751358360935569434, guid: 5b63d21339c6e0849837b7787b6287e5, type: 3}
   - {fileID: 709161147729212536, guid: 2d74b0eee7093094198110476acd32e3, type: 3}
-  ChestLimit: 10
+  ChestLimit: 80
   ChestSpawned: 0
 --- !u!4 &1656680733
 Transform:
@@ -115084,7 +115141,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1681411182
 PrefabInstance:
@@ -116026,6 +116083,10 @@ MonoBehaviour:
   pfDamagePopup: {fileID: 6478138214433248903, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
   pfDamagePopupText: {fileID: 62537061617949394, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
   dicetypes: []
+  isMouse: 0
+  isCowman: 0
+  isHenor: 0
+  isScawy: 0
 --- !u!212 &4514144089389992950
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -116091,7 +116152,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6622152513260833695
 MonoBehaviour:

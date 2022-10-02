@@ -60,11 +60,6 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = false;
     }
 
-    public void SettingsInGameMenu()
-    {
-        
-    }
-
     public void ButtonSelect()
     {
         FindObjectOfType<AudioManager>().PlaySound("UIButtonPress");

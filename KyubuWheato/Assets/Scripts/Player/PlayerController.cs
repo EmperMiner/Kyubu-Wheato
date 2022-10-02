@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -97,7 +98,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Sprite[] BroomBuffIcons;
     
     Collider2D other;
-    
 
     private void Awake()
     {       
@@ -207,6 +207,8 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "DiceTile4") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile4 = true; this.other = other; }
         if (other.gameObject.tag == "DiceTile5") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile5 = true; this.other = other; }
         if (other.gameObject.tag == "DiceTile6") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile6 = true; this.other = other; }
+
+        if (other.gameObject.tag == "ExitHoe") { NextLevel(SceneManager.GetActiveScene().buildIndex); }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -234,7 +236,7 @@ public class PlayerController : MonoBehaviour
 
     private void CraftBread()
     {
-        if (Wheat >= 3 && playerHealth < maxHealth) { UpdateWheat(-3); UpdateHealth(10); LatterIngameSaveData();}
+        if (Wheat >= 3 && playerHealth < maxHealth) { UpdateWheat(-3); UpdateHealth(3); LatterIngameSaveData();}
         else if (playerHealth == maxHealth) { Debug.Log("You're At Full Health"); }
         else { Debug.Log("You Don't Have Enough Wheat To Craft Bread"); }
     }
@@ -369,6 +371,11 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(UnityEngine.Random.Range(2f,4f));
         if (RegenStop == false) { StartCoroutine(Regen()); }
         yield return null;
+    }
+
+    private void NextLevel(int currentScene)
+    {
+        SceneManager.LoadScene(currentScene + 1);
     }
 
     private void LoadData()

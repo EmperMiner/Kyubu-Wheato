@@ -49,6 +49,8 @@ TagManager:
   - DicePreviewer5
   - BroomBuffImage
   - BroomAttack
+  - ExitHoe
+  - ExitHoeContainer
   layers:
   - Default
   - TransparentFX
