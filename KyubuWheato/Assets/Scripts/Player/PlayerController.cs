@@ -148,7 +148,6 @@ public class PlayerController : MonoBehaviour
     {
         if (playerAlive)
         {
-            LimitCamera();
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
 
@@ -219,19 +218,6 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "DiceTile4") { diceThrowScript.isOnDiceTile4 = false; AudioPlayer.PlaySound("PadOff"); }
         if (other.gameObject.tag == "DiceTile5") { diceThrowScript.isOnDiceTile5 = false; AudioPlayer.PlaySound("PadOff"); }
         if (other.gameObject.tag == "DiceTile6") { diceThrowScript.isOnDiceTile6 = false; AudioPlayer.PlaySound("PadOff"); }
-    }
-
-    private void LimitCamera()
-    {
-        if (transform.position.x > RightCamLimit && transform.position.y > UpperCamLimit) { mainCam.position = new Vector3(RightCamLimit, UpperCamLimit, -10); }
-        else if (transform.position.x < LeftCamLimit && transform.position.y > UpperCamLimit) { mainCam.position = new Vector3(LeftCamLimit, UpperCamLimit, -10); }
-        else if (transform.position.x > RightCamLimit && transform.position.y < LowerCamLimit) { mainCam.position = new Vector3(RightCamLimit, LowerCamLimit, -10); }
-        else if (transform.position.x < LeftCamLimit && transform.position.y < LowerCamLimit) { mainCam.position = new Vector3(LeftCamLimit, LowerCamLimit, -10); }
-        else if (transform.position.x > RightCamLimit) { mainCam.position = new Vector3(RightCamLimit, transform.position.y, -10); }
-        else if (transform.position.x < LeftCamLimit) { mainCam.position = new Vector3(LeftCamLimit, transform.position.y, -10); }
-        else if (transform.position.y > UpperCamLimit) { mainCam.position = new Vector3(transform.position.x, UpperCamLimit, -10); }
-        else if (transform.position.y < LowerCamLimit) { mainCam.position = new Vector3(transform.position.x, LowerCamLimit, -10); }
-        else {}
     }
 
     private void CraftBread()

@@ -53,22 +53,22 @@ public class ShopManager : MonoBehaviour
         UpdateUpgradeUI(420);
         NotifText.text = "";
     }
-/*
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            shopWheat += 10;
+            shopWheat += 10000;
             ShopWheatCounterNumber.text = shopWheat.ToString();
             SaveData();
         } else if (Input.GetKeyDown(KeyCode.R))
         {
-            shopWheat -= 2614;
+            shopWheat -= 19000;
             ShopWheatCounterNumber.text = shopWheat.ToString();
             SaveData();
         }
     }
- */
+ 
     public void Buy(int UpgradeValue)
     {
         if (UpgradeValue == 0)
@@ -103,12 +103,12 @@ public class ShopManager : MonoBehaviour
         }
         if (UpgradeValue == 3)
         {
-            if (shopMoveSpeed < 2.01 && shopWheat >= upgradePrices[0]) { shopMoveSpeed = 2.25f; shopWheat -= upgradePrices[0]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopMoveSpeed >= 2.24 && shopMoveSpeed < 2.26 && shopWheat >= upgradePrices[1]) { shopMoveSpeed = 2.5f; shopWheat -= upgradePrices[1]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopMoveSpeed >= 2.49 && shopMoveSpeed < 2.51 && shopWheat >= upgradePrices[2]) { shopMoveSpeed = 2.75f; shopWheat -= upgradePrices[2]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopMoveSpeed >= 2.74 && shopMoveSpeed < 2.76 && shopWheat >= upgradePrices[3]) { shopMoveSpeed = 3f; shopWheat -= upgradePrices[3]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopMoveSpeed >= 2.99 && shopMoveSpeed < 3.01 && shopWheat >= upgradePrices[4]) { shopMoveSpeed = 3.5f; shopWheat -= upgradePrices[4]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopMoveSpeed >= 3.49) { StartCoroutine(NotifTextAlreadyBought()); }
+            if (shopMoveSpeed < 2.51 && shopWheat >= upgradePrices[0]) { shopMoveSpeed = 2.75f; shopWheat -= upgradePrices[0]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopMoveSpeed >= 2.74 && shopMoveSpeed < 2.76 && shopWheat >= upgradePrices[1]) { shopMoveSpeed = 3f; shopWheat -= upgradePrices[1]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopMoveSpeed >= 2.99 && shopMoveSpeed < 3.01 && shopWheat >= upgradePrices[2]) { shopMoveSpeed = 3.25f; shopWheat -= upgradePrices[2]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopMoveSpeed >= 3.24 && shopMoveSpeed < 3.26 && shopWheat >= upgradePrices[3]) { shopMoveSpeed = 3.5f; shopWheat -= upgradePrices[3]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopMoveSpeed >= 3.49 && shopMoveSpeed < 3.51 && shopWheat >= upgradePrices[4]) { shopMoveSpeed = 4f; shopWheat -= upgradePrices[4]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopMoveSpeed >= 3.99) { StartCoroutine(NotifTextAlreadyBought()); }
             else { StartCoroutine(NotifTextNotEnoughMoney()); } 
         }
         if (UpgradeValue == 4)
@@ -262,15 +262,15 @@ public class ShopManager : MonoBehaviour
         }
         if (RefundValue == 3 || RefundValue == 420)
         {
-            if (shopMoveSpeed < 2.01) { refundLoops = 0; if (RefundValue != 420) { StartCoroutine(NotifTextHaveNotBought()); } }
-            else if (shopMoveSpeed >= 2.24 && shopMoveSpeed < 2.26 ) { refundLoops = 1; }
-            else if (shopMoveSpeed >= 2.49 && shopMoveSpeed < 2.51 ) { refundLoops = 2; }
-            else if (shopMoveSpeed >= 2.74 && shopMoveSpeed < 2.76 ) { refundLoops = 3; }
-            else if (shopMoveSpeed >= 2.99 && shopMoveSpeed < 3.01 ) { refundLoops = 4; }
-            else if (shopMoveSpeed >= 3.49) { refundLoops = 5; }
+            if (shopMoveSpeed < 2.51) { refundLoops = 0; if (RefundValue != 420) { StartCoroutine(NotifTextHaveNotBought()); } }
+            else if (shopMoveSpeed >= 2.74 && shopMoveSpeed < 2.76 ) { refundLoops = 1; }
+            else if (shopMoveSpeed >= 2.99 && shopMoveSpeed < 3.01 ) { refundLoops = 2; }
+            else if (shopMoveSpeed >= 3.24 && shopMoveSpeed < 3.26 ) { refundLoops = 3; }
+            else if (shopMoveSpeed >= 3.49 && shopMoveSpeed < 3.51 ) { refundLoops = 4; }
+            else if (shopMoveSpeed >= 3.99) { refundLoops = 5; }
             else { Debug.Log("Error In Refunding"); }    
             for (int i = 0; i < refundLoops; i++) { shopWheat += upgradePrices[i]; }    
-            shopMoveSpeed = 2.0f;
+            shopMoveSpeed = 2.5f;
         }
         if (RefundValue == 4 || RefundValue == 420)
         {
@@ -442,12 +442,12 @@ public class ShopManager : MonoBehaviour
         }
         if (UpdateUpgradeUI == 3 || UpdateUpgradeUI == 420)
         {
-            if (shopMoveSpeed < 2.01) { UpgradesImage[3].sprite = UpgradesSpritesVariants[18]; upgradePriceText[3].text = upgradePrices[0].ToString(); }
-            else if (shopMoveSpeed >= 2.24 && shopMoveSpeed < 2.26 ) { UpgradesImage[3].sprite = UpgradesSpritesVariants[19]; upgradePriceText[3].text = upgradePrices[1].ToString();}
-            else if (shopMoveSpeed >= 2.49 && shopMoveSpeed < 2.51 ) { UpgradesImage[3].sprite = UpgradesSpritesVariants[20]; upgradePriceText[3].text = upgradePrices[2].ToString();}
-            else if (shopMoveSpeed >= 2.74 && shopMoveSpeed < 2.76 ) { UpgradesImage[3].sprite = UpgradesSpritesVariants[21]; upgradePriceText[3].text = upgradePrices[3].ToString();}
-            else if (shopMoveSpeed >= 2.99 && shopMoveSpeed < 3.01 ) { UpgradesImage[3].sprite = UpgradesSpritesVariants[22]; upgradePriceText[3].text = upgradePrices[4].ToString();}
-            else if (shopMoveSpeed >= 3.49) { UpgradesImage[3].sprite = UpgradesSpritesVariants[23]; upgradePriceText[3].text = MaxBought;}
+            if (shopMoveSpeed < 2.51) { UpgradesImage[3].sprite = UpgradesSpritesVariants[18]; upgradePriceText[3].text = upgradePrices[0].ToString(); }
+            else if (shopMoveSpeed >= 2.74 && shopMoveSpeed < 2.76 ) { UpgradesImage[3].sprite = UpgradesSpritesVariants[19]; upgradePriceText[3].text = upgradePrices[1].ToString();}
+            else if (shopMoveSpeed >= 2.99 && shopMoveSpeed < 3.01 ) { UpgradesImage[3].sprite = UpgradesSpritesVariants[20]; upgradePriceText[3].text = upgradePrices[2].ToString();}
+            else if (shopMoveSpeed >= 3.24 && shopMoveSpeed < 3.26 ) { UpgradesImage[3].sprite = UpgradesSpritesVariants[21]; upgradePriceText[3].text = upgradePrices[3].ToString();}
+            else if (shopMoveSpeed >= 3.49 && shopMoveSpeed < 3.51 ) { UpgradesImage[3].sprite = UpgradesSpritesVariants[22]; upgradePriceText[3].text = upgradePrices[4].ToString();}
+            else if (shopMoveSpeed >= 3.99) { UpgradesImage[3].sprite = UpgradesSpritesVariants[23]; upgradePriceText[3].text = MaxBought;}
             else { Debug.Log("Error in Updating UI");}
         }
         if (UpdateUpgradeUI == 4 || UpdateUpgradeUI == 420)

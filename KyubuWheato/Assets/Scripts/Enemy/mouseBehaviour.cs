@@ -159,7 +159,7 @@ public class mouseBehaviour : MonoBehaviour
 
     private void UpdateStats()
     {
-        int level = SceneManager.GetActiveScene().buildIndex - 3;
+        int level = SceneManager.GetActiveScene().buildIndex - 4;
         if (isMouse) 
         { 
             mouseStrength = Mathf.FloorToInt(level*0.5f + 1f);

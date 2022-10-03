@@ -27089,7 +27089,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2952340937594393223, guid: a9bf1af990dd47249b339c733a882119, type: 3}
       propertyPath: enemyInterval.Array.data[2]
-      value: 0.2
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9bf1af990dd47249b339c733a882119, type: 3}
@@ -27420,7 +27420,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2952340937594393223, guid: a9bf1af990dd47249b339c733a882119, type: 3}
       propertyPath: enemyInterval.Array.data[2]
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9bf1af990dd47249b339c733a882119, type: 3}
