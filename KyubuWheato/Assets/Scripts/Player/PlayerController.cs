@@ -114,12 +114,14 @@ public class PlayerController : MonoBehaviour
 
         if (FirstLevelSave) 
         { 
+            Wheat = 0;
             LoadData();
             FirstIngameSaveData(); 
         }
         else
         {
             SubtractTemporaryBuff();
+            WheatCounterNumber.text = Wheat.ToString();
         }
         IngameLoadData();
 
@@ -134,10 +136,9 @@ public class PlayerController : MonoBehaviour
         playerHealth = maxHealth;
         crosshair.SetActive(true);
         diceThrower.SetActive(true);
-        Wheat = 0;
+        
         healthBar.SetMaxHealth(maxHealth);
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").transform; 
-
         LeftMapLimit = LeftCamLimit - 7.5f;
         RightMapLimit = RightCamLimit + 7.5f;
         UpperMapLimit = UpperCamLimit + 3f;
@@ -199,6 +200,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "6sidedDice5") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
         if (other.gameObject.tag == "6sidedDice6") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
         if (other.gameObject.tag == "Wheat") { AudioPlayer.PlaySound("DicePickup"); } 
+        if (other.gameObject.tag == "DicePickup") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
 
         if (other.gameObject.tag == "DiceTile1") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile1 = true; this.other = other; }
         if (other.gameObject.tag == "DiceTile2") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile2 = true; this.other = other; }
@@ -222,7 +224,7 @@ public class PlayerController : MonoBehaviour
 
     private void CraftBread()
     {
-        if (Wheat >= 3 && playerHealth < maxHealth) { UpdateWheat(-3); UpdateHealth(3); LatterIngameSaveData();}
+        if (Wheat >= 3 && playerHealth < maxHealth) { UpdateWheat(-3); UpdateHealth(6); LatterIngameSaveData();}
         else if (playerHealth == maxHealth) { Debug.Log("You're At Full Health"); }
         else { Debug.Log("You Don't Have Enough Wheat To Craft Bread"); }
     }

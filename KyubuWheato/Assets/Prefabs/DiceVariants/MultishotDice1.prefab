@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 4223293490286792257}
   m_Layer: 0
   m_Name: CollisionBox
-  m_TagString: 6sidedDice1
+  m_TagString: DicePickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

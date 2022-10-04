@@ -53,7 +53,7 @@ public class ShopManager : MonoBehaviour
         UpdateUpgradeUI(420);
         NotifText.text = "";
     }
-
+/*
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -68,7 +68,7 @@ public class ShopManager : MonoBehaviour
             SaveData();
         }
     }
- 
+ */
     public void Buy(int UpgradeValue)
     {
         if (UpgradeValue == 0)
@@ -93,12 +93,12 @@ public class ShopManager : MonoBehaviour
         }
         if (UpgradeValue == 2)
         {
-            if (shopMaxHealth == 15 && shopWheat >= upgradePrices[0]) { shopMaxHealth = 25; shopWheat -= upgradePrices[0]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopMaxHealth == 25 && shopWheat >= upgradePrices[1]) { shopMaxHealth = 45; shopWheat -= upgradePrices[1]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopMaxHealth == 45 && shopWheat >= upgradePrices[2]) { shopMaxHealth = 70; shopWheat -= upgradePrices[2]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopMaxHealth == 70 && shopWheat >= upgradePrices[3]) { shopMaxHealth = 100; shopWheat -= upgradePrices[3]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopMaxHealth == 100 && shopWheat >= upgradePrices[4]) { shopMaxHealth = 150; shopWheat -= upgradePrices[4]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopMaxHealth == 150) { StartCoroutine(NotifTextAlreadyBought()); }
+            if (shopMaxHealth <= 30 && shopWheat >= upgradePrices[0]) { shopMaxHealth = 50; shopWheat -= upgradePrices[0]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopMaxHealth == 50 && shopWheat >= upgradePrices[1]) { shopMaxHealth = 90; shopWheat -= upgradePrices[1]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopMaxHealth == 90 && shopWheat >= upgradePrices[2]) { shopMaxHealth = 140; shopWheat -= upgradePrices[2]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopMaxHealth == 140 && shopWheat >= upgradePrices[3]) { shopMaxHealth = 200; shopWheat -= upgradePrices[3]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopMaxHealth == 200 && shopWheat >= upgradePrices[4]) { shopMaxHealth = 300; shopWheat -= upgradePrices[4]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopMaxHealth >= 300) { StartCoroutine(NotifTextAlreadyBought()); }
             else { StartCoroutine(NotifTextNotEnoughMoney()); }
         }
         if (UpgradeValue == 3)
@@ -250,15 +250,15 @@ public class ShopManager : MonoBehaviour
         }
         if (RefundValue == 2 || RefundValue == 420)
         {
-            if (shopMaxHealth == 15) { refundLoops = 0; if (RefundValue != 420) { StartCoroutine(NotifTextHaveNotBought()); } }
-            else if (shopMaxHealth == 25) { refundLoops = 1; }
-            else if (shopMaxHealth == 45) { refundLoops = 2; }
-            else if (shopMaxHealth == 70) { refundLoops = 3; }
-            else if (shopMaxHealth == 100) { refundLoops = 4; }
-            else if (shopMaxHealth == 150) { refundLoops = 5; }
+            if (shopMaxHealth <= 30) { refundLoops = 0; if (RefundValue != 420) { StartCoroutine(NotifTextHaveNotBought()); } }
+            else if (shopMaxHealth == 50) { refundLoops = 1; }
+            else if (shopMaxHealth == 90) { refundLoops = 2; }
+            else if (shopMaxHealth == 140) { refundLoops = 3; }
+            else if (shopMaxHealth == 200) { refundLoops = 4; }
+            else if (shopMaxHealth == 300) { refundLoops = 5; }
             else { Debug.Log("Error In Refunding"); }  
             for (int i = 0; i < refundLoops; i++) { shopWheat += upgradePrices[i]; }         
-            shopMaxHealth = 15;
+            shopMaxHealth = 30;
         }
         if (RefundValue == 3 || RefundValue == 420)
         {
@@ -432,12 +432,12 @@ public class ShopManager : MonoBehaviour
         }
         if (UpdateUpgradeUI == 2 || UpdateUpgradeUI == 420)
         {
-            if (shopMaxHealth == 15) { UpgradesImage[2].sprite = UpgradesSpritesVariants[12]; upgradePriceText[2].text = upgradePrices[0].ToString(); }
-            else if (shopMaxHealth == 25) { UpgradesImage[2].sprite = UpgradesSpritesVariants[13]; upgradePriceText[2].text = upgradePrices[1].ToString();}
-            else if (shopMaxHealth == 45) { UpgradesImage[2].sprite = UpgradesSpritesVariants[14]; upgradePriceText[2].text = upgradePrices[2].ToString();}
-            else if (shopMaxHealth == 70) { UpgradesImage[2].sprite = UpgradesSpritesVariants[15]; upgradePriceText[2].text = upgradePrices[3].ToString();}
-            else if (shopMaxHealth == 100) { UpgradesImage[2].sprite = UpgradesSpritesVariants[16]; upgradePriceText[2].text = upgradePrices[4].ToString();}
-            else if (shopMaxHealth == 150) { UpgradesImage[2].sprite = UpgradesSpritesVariants[17]; upgradePriceText[2].text = MaxBought;}
+            if (shopMaxHealth == 30) { UpgradesImage[2].sprite = UpgradesSpritesVariants[12]; upgradePriceText[2].text = upgradePrices[0].ToString(); }
+            else if (shopMaxHealth == 50) { UpgradesImage[2].sprite = UpgradesSpritesVariants[13]; upgradePriceText[2].text = upgradePrices[1].ToString();}
+            else if (shopMaxHealth == 90) { UpgradesImage[2].sprite = UpgradesSpritesVariants[14]; upgradePriceText[2].text = upgradePrices[2].ToString();}
+            else if (shopMaxHealth == 140) { UpgradesImage[2].sprite = UpgradesSpritesVariants[15]; upgradePriceText[2].text = upgradePrices[3].ToString();}
+            else if (shopMaxHealth == 200) { UpgradesImage[2].sprite = UpgradesSpritesVariants[16]; upgradePriceText[2].text = upgradePrices[4].ToString();}
+            else if (shopMaxHealth == 300) { UpgradesImage[2].sprite = UpgradesSpritesVariants[17]; upgradePriceText[2].text = MaxBought;}
             else { Debug.Log("Error in Updating UI");}
         }
         if (UpdateUpgradeUI == 3 || UpdateUpgradeUI == 420)
