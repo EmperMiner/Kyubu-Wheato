@@ -162,8 +162,22 @@ public class mouseBehaviour : MonoBehaviour
         int level = SceneManager.GetActiveScene().buildIndex - 4;
         if (isMouse) 
         { 
-            mouseStrength = Mathf.FloorToInt(level*0.5f + 1f);
-            maxMouseHealth = level*3 + 5;
+            mouseStrength = Mathf.FloorToInt(level*0.5f + 1.5f);
+            maxMouseHealth = level*4 + 5;
+            agent.speed = level*0.2f + 1.5f;
+        }
+        if (isCowman) 
+        { 
+            mouseStrength = Mathf.FloorToInt(level*0.5f + 4f);
+            maxMouseHealth = level*5 + 8;
+            agent.speed = level*0.1f + 1.3f;
+            agent.acceleration = level*0.1f + 6f;
+        }
+        if (isHenor) 
+        { 
+            mouseStrength = Mathf.FloorToInt(level*1f + 0.5f);
+            maxMouseHealth = level*3 + 3;
+            agent.speed = level*0.5f + 1.5f;
         }
     }
 }

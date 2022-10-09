@@ -51,6 +51,8 @@ TagManager:
   - BroomAttack
   - ExitHoe
   - ExitHoeContainer
+  - DicePickup
+  - Pointer
   layers:
   - Default
   - TransparentFX
