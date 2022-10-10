@@ -121,6 +121,12 @@ MonoBehaviour:
   isCowman: 0
   isHenor: 0
   isScawy: 0
+  enemiesPrefabs:
+  - {fileID: 4514144088407996268}
+  - {fileID: 5382777319672248433, guid: bde3eabfc1185154bbacd34a648fb10c, type: 3}
+  - {fileID: 3082860963927806209, guid: 4065d84a1526fb643bc599b1fbe954ba, type: 3}
+  - {fileID: 1815329666037625875, guid: 460b6b0a664fe41488bdf7a653f220d3, type: 3}
+  crowPrefab: {fileID: 0}
 --- !u!114 &6622152514414753538
 MonoBehaviour:
   m_ObjectHideFlags: 0

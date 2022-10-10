@@ -37,6 +37,17 @@ public class mouseBehaviour : MonoBehaviour
     [SerializeField] private bool isCowman;
     [SerializeField] private bool isHenor;
     [SerializeField] private bool isScawy;
+    private float stoppingDistance = 9f;
+
+    [SerializeField] private GameObject[] enemiesPrefabs;
+    [SerializeField] private GameObject crowPrefab;
+    private bool CrowCooldown = false;
+    private float crowCooldownTimer;
+
+    private int enemyIndex;
+    private bool CheckForValidSpawn;
+
+    private Transform betterEnemySpawner;
 
     private UltimateBarCharge ultimateBar;
 
@@ -46,6 +57,7 @@ public class mouseBehaviour : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
         ExitHoeWinCondition = GameObject.FindGameObjectWithTag("ExitHoeContainer").GetComponent<ExitHoeContainer>();
+        betterEnemySpawner = GameObject.FindGameObjectWithTag("betterEnemySpawner").transform;
 
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.updateRotation = false;
@@ -56,12 +68,40 @@ public class mouseBehaviour : MonoBehaviour
         alreadyDamaged = false;
 
         mouseRB = this.GetComponent<Rigidbody2D>();
+
+        if (isMouse) { enemyIndex = 0; }
+        else if (isCowman) { enemyIndex = 1; }
+        else if (isHenor) { enemyIndex = 2; }
+        else if (isScawy) { enemyIndex = 3; }
+        else {}
+
+        CheckForValidSpawn = true;
+        
+        StartCoroutine(ValidSpawn());
     }
 
     private void Update()
     {
-        if (playerTransform.position.x > transform.position.x) { animator.SetFloat("moveX", 1); }
-        else { animator.SetFloat("moveX", -1);  }
+        if (isScawy == false)
+        {
+            if (playerTransform.position.x > transform.position.x) { animator.SetFloat("moveX", 1); }
+            else { animator.SetFloat("moveX", -1);  }
+        }
+
+        if (isScawy)
+        {
+            if (Vector2.Distance(transform.position, playerTransform.position) <= stoppingDistance && CrowCooldown == false) { ShootCrow(); }
+        }
+
+        if (CrowCooldown)
+        {   
+            crowCooldownTimer += Time.deltaTime; 
+            if (crowCooldownTimer >= 2f)
+            {
+                CrowCooldown = false;
+                crowCooldownTimer = 0;
+            }
+        }
 
         if(mouseHealth <= 0)
         {   
@@ -102,6 +142,13 @@ public class mouseBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
+        bool UndesirableSpawn = collider.gameObject.tag == "MapCollider" || collider.gameObject.tag == "enemyMouse" || collider.gameObject.tag == "chest" || collider.gameObject.tag == "Player";
+        if (CheckForValidSpawn == true && UndesirableSpawn == true)
+        {
+            Instantiate(enemiesPrefabs[enemyIndex], new Vector3(betterEnemySpawner.position.x + Random.Range(-10f, 10f), betterEnemySpawner.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity);
+            Destroy(gameObject);
+        }  
+
         if (alreadyDamaged == false)
         {
             if (collider.gameObject.tag == "6sidedDice1") { mouseTakeDamage(1); ChargeUlt(6); }
@@ -157,6 +204,13 @@ public class mouseBehaviour : MonoBehaviour
         if (collider.gameObject.tag == "Player") { player.spriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
     }
 
+    private IEnumerator ValidSpawn()
+    {
+        yield return new WaitForSeconds(0.1f);
+        CheckForValidSpawn = false;
+        yield return null;
+    }
+
     private void UpdateStats()
     {
         int level = SceneManager.GetActiveScene().buildIndex - 4;
@@ -179,5 +233,18 @@ public class mouseBehaviour : MonoBehaviour
             maxMouseHealth = level*3 + 3;
             agent.speed = level*0.5f + 1.5f;
         }
+        if (isScawy) 
+        { 
+            mouseStrength = Mathf.FloorToInt(level*0.2f + 2f);
+            maxMouseHealth = level*3 + 5;
+            agent.speed = level*0.1f + 2f;
+            agent.acceleration = level*0.3f + 4f;
+        }
+    }
+
+    private void ShootCrow()
+    {
+        Instantiate(crowPrefab, transform.position, Quaternion.identity);
+        CrowCooldown = true;
     }
 }

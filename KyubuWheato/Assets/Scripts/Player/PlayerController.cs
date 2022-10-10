@@ -121,9 +121,9 @@ public class PlayerController : MonoBehaviour
         else
         {
             SubtractTemporaryBuff();
-            WheatCounterNumber.text = Wheat.ToString();
         }
         IngameLoadData();
+        WheatCounterNumber.text = Wheat.ToString();
 
         if (XSpawnpoints.Length > 0)
         {

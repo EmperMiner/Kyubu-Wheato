@@ -23,7 +23,7 @@ public class TreasureChestSpawner : MonoBehaviour
     private IEnumerator SpawnChestCycle()
     {
         triggeredChestSpawningCycle = true;
-        yield return new WaitForSeconds(Random.Range(30f, 90f));
+        yield return new WaitForSeconds(Random.Range(20f, 70f));
         SpawnChest();
         if (ChestSpawned < ChestLimit) { StartCoroutine(SpawnChestCycle()); }
         else { triggeredChestSpawningCycle = false; }

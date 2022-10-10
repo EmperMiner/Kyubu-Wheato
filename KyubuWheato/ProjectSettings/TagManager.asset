@@ -53,6 +53,7 @@ TagManager:
   - ExitHoeContainer
   - DicePickup
   - Pointer
+  - betterEnemySpawner
   layers:
   - Default
   - TransparentFX
