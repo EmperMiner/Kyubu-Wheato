@@ -37,6 +37,8 @@ public class mouseBehaviour : MonoBehaviour
     [SerializeField] private bool isCowman;
     [SerializeField] private bool isHenor;
     [SerializeField] private bool isScawy;
+    [SerializeField] private bool isSchwein;
+    [SerializeField] private GameObject cornRay;
     private float stoppingDistance = 9f;
 
     [SerializeField] private GameObject[] enemiesPrefabs;
@@ -73,6 +75,7 @@ public class mouseBehaviour : MonoBehaviour
         else if (isCowman) { enemyIndex = 1; }
         else if (isHenor) { enemyIndex = 2; }
         else if (isScawy) { enemyIndex = 3; }
+        else if (isSchwein) { StartCoroutine(ShootCornRays()); }
         else {}
 
         CheckForValidSpawn = true;
@@ -246,5 +249,15 @@ public class mouseBehaviour : MonoBehaviour
     {
         Instantiate(crowPrefab, transform.position, Quaternion.identity);
         CrowCooldown = true;
+    }
+
+    private IEnumerator ShootCornRays()
+    {
+        yield return new WaitForSeconds(UnityEngine.Random.Range(3f, 6f));
+        float AngleToShoot = Random.Range(0,2)*90;
+        Instantiate(cornRay, transform.position, Quaternion.Euler(0f, 0f, AngleToShoot), this.transform);
+        Instantiate(cornRay, transform.position, Quaternion.Euler(0f, 0f, AngleToShoot + 180f), this.transform);
+        StartCoroutine(ShootCornRays());
+        yield return null;
     }
 }

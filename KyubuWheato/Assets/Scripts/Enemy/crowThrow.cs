@@ -38,7 +38,7 @@ public class crowThrow : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "MapCollider" || other.gameObject.tag == "chest") { Destroy(gameObject); }
-        crowCanAttack = 3f;
+        if (other.gameObject.tag == "Player") { crowCanAttack = 3f; }
     }
 
     private void OnTriggerStay2D(Collider2D other)
