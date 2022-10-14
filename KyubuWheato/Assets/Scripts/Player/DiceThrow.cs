@@ -316,20 +316,20 @@ public class DiceThrow : MonoBehaviour
         if (KyubuTileValue == 1) 
         { 
             AudioPlayer.PlaySound("KK1");
-            try
-            { 
-                Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
-                Instantiate(KyubuTiles[0], new Vector3(enemyPosition.position.x + UnityEngine.Random.Range(-1f, 1f), enemyPosition.position.y + 15.5f + UnityEngine.Random.Range(-1f, 1f), enemyPosition.position.z), Quaternion.identity); 
-            }
-            catch (NullReferenceException) 
-            { 
-                Instantiate(KyubuTiles[0], new Vector3(transform.position.x, transform.position.y + 15.5f, transform.position.z), Quaternion.identity); 
-            }
+      //      try
+     //       { 
+      //          Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
+       //         Instantiate(KyubuTiles[0], new Vector3(enemyPosition.position.x + UnityEngine.Random.Range(-1f, 1f), enemyPosition.position.y + 15.5f + UnityEngine.Random.Range(-1f, 1f), enemyPosition.position.z), Quaternion.identity); 
+      //      }
+      //      catch (NullReferenceException) 
+      //      { 
+                Instantiate(KyubuTiles[0], new Vector3(transform.position.x + UnityEngine.Random.Range(-2f, 2f), transform.position.y + 15.5f + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity); 
+      //      }
         }
         if (KyubuTileValue == 2) 
         { 
             AudioPlayer.PlaySound("KK2");
-            try {
+      /*      try {
                 Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>();
                 int dafuq = UnityEngine.Random.Range(0,2);
                 if (dafuq < 1) 
@@ -346,19 +346,19 @@ public class DiceThrow : MonoBehaviour
                 }
             }
             catch (NullReferenceException) 
-            { 
+            { */
                 int dafuq = UnityEngine.Random.Range(0,2);
                 if (dafuq < 1) 
                 { 
-                    Instantiate(KyubuTiles[1], new Vector3(transform.position.x - 22.63f, transform.position.y, transform.position.z), Quaternion.identity); 
-                    Instantiate(KyubuTiles[2], new Vector3(transform.position.x + 22.63f, transform.position.y, transform.position.z), Quaternion.identity);  
+                    Instantiate(KyubuTiles[1], new Vector3(transform.position.x - 22.63f + UnityEngine.Random.Range(-2f, 2f), transform.position.y + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity); 
+                    Instantiate(KyubuTiles[2], new Vector3(transform.position.x + 22.63f + UnityEngine.Random.Range(-2f, 2f), transform.position.y + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity);  
                 }
                 else 
                 { 
-                    Instantiate(KyubuTiles[3], new Vector3(transform.position.x, transform.position.y + 13.63f, transform.position.z), Quaternion.identity); 
-                    Instantiate(KyubuTiles[4], new Vector3(transform.position.x, transform.position.y - 13.63f, transform.position.z), Quaternion.identity);  
+                    Instantiate(KyubuTiles[3], new Vector3(transform.position.x + UnityEngine.Random.Range(-2f, 2f), transform.position.y + 13.63f + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity); 
+                    Instantiate(KyubuTiles[4], new Vector3(transform.position.x + UnityEngine.Random.Range(-2f, 2f), transform.position.y - 13.63f + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity);  
                 }
-            }
+     //       }
         }
         if (KyubuTileValue == 3) 
         { 
@@ -378,18 +378,18 @@ public class DiceThrow : MonoBehaviour
             int rand = UnityEngine.Random.Range(7,9);
             if (rand == 7) { AudioPlayer.PlaySound("KK5Var"); }
             else { AudioPlayer.PlaySound("KK5"); }
-            try  
-            { 
-                Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
-                Instantiate(KyubuTiles[rand], new Vector3(enemyPosition.position.x + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.y + 12.5f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.z), Quaternion.identity); 
-            }
-            catch (NullReferenceException) 
-            { Instantiate(KyubuTiles[rand], new Vector3(transform.position.x, transform.position.y + 12.5f, transform.position.z), Quaternion.identity); }
+      //      try  
+      //      { 
+      //          Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
+       //         Instantiate(KyubuTiles[rand], new Vector3(enemyPosition.position.x + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.y + 12.5f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.z), Quaternion.identity); 
+       //     }
+      //      catch (NullReferenceException) 
+            { Instantiate(KyubuTiles[rand], new Vector3(transform.position.x + UnityEngine.Random.Range(-2f, 2f), transform.position.y + 12.5f + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity); }
         }
         if (KyubuTileValue == 6) 
         { 
             AudioPlayer.PlaySound("KK6Hang");
-            try 
+      /*      try 
             {
                 Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
                 int bruh = UnityEngine.Random.Range(0,2);
@@ -397,11 +397,11 @@ public class DiceThrow : MonoBehaviour
                 else { Instantiate(KyubuTiles[10], new Vector3(enemyPosition.position.x - 22f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.y + 12f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.z), Quaternion.identity); }
             }
             catch (NullReferenceException) 
-            { 
+            { */
                 int bruh = UnityEngine.Random.Range(0,2);
                 if (bruh < 1) { Instantiate(KyubuTiles[9], new Vector3(transform.position.x + 9f, transform.position.y + 6f, transform.position.z), Quaternion.identity); }
                 else { Instantiate(KyubuTiles[10], new Vector3(transform.position.x - 22f, transform.position.y + 12f, transform.position.z), Quaternion.identity); }
-            }
+   //         }
         }
         if (KyubuTileValue == 100)
         {

@@ -6,8 +6,10 @@ public class StaticObjectDamage : MonoBehaviour
 {
     private PlayerController player;
     private float objectCanAttack;
+    [SerializeField] private int damage;
 
     [SerializeField] private bool isCornRay;
+    [SerializeField] private bool isScytheAttack;
 
     private void Start()
     {
@@ -27,8 +29,10 @@ public class StaticObjectDamage : MonoBehaviour
         if (objectCanAttack >= 0.8f)
         {
             FindObjectOfType<AudioManager>().PlaySound("PlayerHurt");
-            player.UpdateHealth(-10 + Mathf.RoundToInt((10 * player.defense)/10));
+            if (isScytheAttack) { player.HitByScythe(); }
+            player.UpdateHealth(-damage + Mathf.RoundToInt((damage * player.defense)/10));
             objectCanAttack = 0f;
+            
         }    
         objectCanAttack += Time.deltaTime; 
 

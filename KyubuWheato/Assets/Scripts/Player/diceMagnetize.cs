@@ -27,6 +27,8 @@ public class diceMagnetize : MonoBehaviour
     private Vector2 enemyTargetVector;
     private float DiceRayAngleOffset;
 
+    public bool pickupable;
+
     void Start()
     {
         LoadData();
@@ -65,6 +67,8 @@ public class diceMagnetize : MonoBehaviour
         {
             StartCoroutine(Wait());
         }
+        pickupable = false;
+        StartCoroutine(PickupDelay());
     }
 
     private void FixedUpdate()
@@ -163,6 +167,13 @@ public class diceMagnetize : MonoBehaviour
             }
         }
         Destroy(gameObject);
+    }
+
+    IEnumerator PickupDelay()
+    {
+        yield return new WaitForSeconds(0.15f);
+        pickupable = true;
+        yield return null;
     }
 
     private void LoadData()

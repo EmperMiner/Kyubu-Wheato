@@ -5,6 +5,13 @@ using UnityEngine;
 public class DiceHitbox : MonoBehaviour
 {
     [SerializeField] private GameObject dice;
+    [SerializeField] private diceMagnetize diceScript;
+    [SerializeField] private bool isPickupableDice;
+
+    private void Start()
+    {
+        diceScript = dice.GetComponent<diceMagnetize>();
+    }
 
     private void Update()
     {
@@ -15,6 +22,7 @@ public class DiceHitbox : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
+            if (diceScript.pickupable == false) return;
             Destroy(dice);
             Destroy(gameObject);
         } 

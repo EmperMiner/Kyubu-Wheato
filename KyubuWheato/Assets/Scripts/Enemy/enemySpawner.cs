@@ -18,7 +18,6 @@ public class enemySpawner : MonoBehaviour
         StartCoroutine(callWave());
     }
 
-    // Update is called once per frame
     private IEnumerator spawnEnemy()
     {       
         Instantiate(enemy[wave], transform.position, Quaternion.identity);

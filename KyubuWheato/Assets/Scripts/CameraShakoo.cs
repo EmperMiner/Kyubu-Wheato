@@ -22,7 +22,7 @@ public class CameraShakoo : MonoBehaviour
     IEnumerator ShakeItHeavy(float ShakeDelay)
     {
         yield return new WaitForSeconds(ShakeDelay);
-        CameraShaker.Instance.ShakeOnce(2f, 5f, .1f, 2f);
+        CameraShaker.Instance.ShakeOnce(3f, 7f, .1f, 2f);
         yield return null;
     }
 }

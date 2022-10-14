@@ -193,12 +193,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "6sidedDice1") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
-        if (other.gameObject.tag == "6sidedDice2") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
-        if (other.gameObject.tag == "6sidedDice3") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
-        if (other.gameObject.tag == "6sidedDice4") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
-        if (other.gameObject.tag == "6sidedDice5") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
-        if (other.gameObject.tag == "6sidedDice6") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
+        bool dicePickupable = other.gameObject.tag == "6sidedDice1" || other.gameObject.tag == "6sidedDice2" || other.gameObject.tag == "6sidedDice3" || other.gameObject.tag == "6sidedDice4" || other.gameObject.tag == "6sidedDice5" || other.gameObject.tag == "6sidedDice6";
+        if (dicePickupable) 
+        { 
+            diceMagnetize diceScript = other.GetComponent<diceMagnetize>();
+            if (diceScript.pickupable == false) return;
+            IncreaseDiceNumber(); 
+            AudioPlayer.PlaySound("DicePickup"); 
+        } 
         if (other.gameObject.tag == "Wheat") { AudioPlayer.PlaySound("DicePickup"); } 
         if (other.gameObject.tag == "DicePickup") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
 
@@ -236,6 +238,15 @@ public class PlayerController : MonoBehaviour
         UpdateValues();
     }
 
+    public void HitByScythe()
+    {
+        diceNumber--;
+        if (diceNumber < 0) { diceNumber = 0; }
+        MoveSpeed -= 0.5f;
+        DiceCounterNumber.text = diceNumber.ToString();
+        UpdateValues();
+    }
+
     public void UpdateHealth(int healthMod)
     {
         playerHealth += healthMod;
@@ -254,6 +265,7 @@ public class PlayerController : MonoBehaviour
     public void UpdateWheat(int wheatMod) 
     {
         Wheat += wheatMod;
+        if (Wheat < 0) { Wheat = 0; }
         WheatCounterNumber.text = Wheat.ToString();
         LatterIngameSaveData();
     }

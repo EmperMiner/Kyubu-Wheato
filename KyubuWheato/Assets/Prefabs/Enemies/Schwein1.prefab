@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82677489f74b72244a69cbe380bda90c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMouseHealth: 100
+  maxMouseHealth: 150
   mouseStrength: 15
   mouseAttackSpeed: 5
   mouseSpriteRenderer: {fileID: 8935550308493363968}
