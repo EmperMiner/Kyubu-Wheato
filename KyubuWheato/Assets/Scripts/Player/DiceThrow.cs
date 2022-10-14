@@ -348,15 +348,17 @@ public class DiceThrow : MonoBehaviour
             catch (NullReferenceException) 
             { */
                 int dafuq = UnityEngine.Random.Range(0,2);
+                float randXOffset = UnityEngine.Random.Range(-2f, 2f);
+                float randYOffset = UnityEngine.Random.Range(-2f, 2f);
                 if (dafuq < 1) 
                 { 
-                    Instantiate(KyubuTiles[1], new Vector3(transform.position.x - 22.63f + UnityEngine.Random.Range(-2f, 2f), transform.position.y + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity); 
-                    Instantiate(KyubuTiles[2], new Vector3(transform.position.x + 22.63f + UnityEngine.Random.Range(-2f, 2f), transform.position.y + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity);  
+                    Instantiate(KyubuTiles[1], new Vector3(transform.position.x - 22.63f + randXOffset, transform.position.y + randYOffset, transform.position.z), Quaternion.identity); 
+                    Instantiate(KyubuTiles[2], new Vector3(transform.position.x + 22.63f + randXOffset, transform.position.y + randYOffset, transform.position.z), Quaternion.identity);  
                 }
                 else 
                 { 
-                    Instantiate(KyubuTiles[3], new Vector3(transform.position.x + UnityEngine.Random.Range(-2f, 2f), transform.position.y + 13.63f + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity); 
-                    Instantiate(KyubuTiles[4], new Vector3(transform.position.x + UnityEngine.Random.Range(-2f, 2f), transform.position.y - 13.63f + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity);  
+                    Instantiate(KyubuTiles[3], new Vector3(transform.position.x + randXOffset, transform.position.y + 13.63f + randYOffset, transform.position.z), Quaternion.identity); 
+                    Instantiate(KyubuTiles[4], new Vector3(transform.position.x + randXOffset, transform.position.y - 13.63f + randYOffset, transform.position.z), Quaternion.identity);  
                 }
      //       }
         }

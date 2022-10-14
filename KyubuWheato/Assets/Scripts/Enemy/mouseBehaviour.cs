@@ -77,7 +77,7 @@ public class mouseBehaviour : MonoBehaviour
         else if (isHenor) { enemyIndex = 2; }
         else if (isScawy) { enemyIndex = 3; }
         else if (isSchwein) { StartCoroutine(ShootCornRays()); }
-        else {}
+        else { enemyIndex = 0; }
 
         CheckForValidSpawn = true;
         
@@ -94,7 +94,8 @@ public class mouseBehaviour : MonoBehaviour
 
         if (isScawy)
         {
-            if (Vector2.Distance(transform.position, playerTransform.position) <= stoppingDistance && CrowCooldown == false) { ShootCrow(); }
+            if (Vector2.Distance(transform.position, playerTransform.position) <= stoppingDistance && CrowCooldown == false && isMiniBoss == false) { ShootCrow(); }
+            else if (Vector2.Distance(transform.position, playerTransform.position) <= stoppingDistance && CrowCooldown == false && isMiniBoss == true) { StartCoroutine(ShootMultipleCrow()); }
         }
 
         if (CrowCooldown)
@@ -223,29 +224,55 @@ public class mouseBehaviour : MonoBehaviour
     private void UpdateStats()
     {
         int level = SceneManager.GetActiveScene().buildIndex - 4;
-        if (isMouse) 
+        if (isMouse && isMiniBoss == false) 
         { 
             mouseStrength = Mathf.FloorToInt(level*0.5f + 1.5f);
             maxMouseHealth = level*4 + 5;
             agent.speed = level*0.2f + 1.5f;
         }
-        if (isCowman) 
+        if (isCowman && isMiniBoss == false) 
         { 
             mouseStrength = Mathf.FloorToInt(level*0.5f + 4f);
             maxMouseHealth = level*5 + 8;
             agent.speed = level*0.1f + 1.3f;
             agent.acceleration = level*0.1f + 6f;
         }
-        if (isHenor) 
+        if (isHenor && isMiniBoss == false) 
         { 
             mouseStrength = Mathf.FloorToInt(level*1f + 0.5f);
             maxMouseHealth = level*3 + 3;
             agent.speed = level*0.5f + 1.5f;
         }
-        if (isScawy) 
+        if (isScawy && isMiniBoss == false) 
         { 
             mouseStrength = Mathf.FloorToInt(level*0.2f + 2f);
             maxMouseHealth = level*3 + 5;
+            agent.speed = level*0.1f + 2f;
+            agent.acceleration = level*0.3f + 4f;
+        }
+        if (isMouse && isMiniBoss == true) 
+        { 
+            mouseStrength = Mathf.FloorToInt(level*1.5f + 1f);
+            maxMouseHealth = level*30 + 100;
+            agent.speed = level*0.2f + 1f;
+        }
+        if (isCowman && isMiniBoss == true) 
+        { 
+            mouseStrength = Mathf.FloorToInt(level*1.8f + 3f);
+            maxMouseHealth = level*45 + 180;
+            agent.speed = level*0.15f + 1f;
+            agent.acceleration = level*0.2f + 5f;
+        }
+        if (isHenor && isMiniBoss == true) 
+        { 
+            mouseStrength = Mathf.FloorToInt(level*0.9f + 1f);
+            maxMouseHealth = level*20 + 40;
+            agent.speed = level*1f + 3f;
+        }
+        if (isScawy && isMiniBoss == true) 
+        { 
+            mouseStrength = Mathf.FloorToInt(level*1.4f + 2f);
+            maxMouseHealth = level*24 + 60;
             agent.speed = level*0.1f + 2f;
             agent.acceleration = level*0.3f + 4f;
         }
@@ -255,6 +282,18 @@ public class mouseBehaviour : MonoBehaviour
     {
         Instantiate(crowPrefab, transform.position, Quaternion.identity);
         CrowCooldown = true;
+    }
+
+    private IEnumerator ShootMultipleCrow()
+    {
+        Instantiate(crowPrefab, transform.position, Quaternion.identity);
+        CrowCooldown = true;
+        for (int i = 0; i < 2; i++)
+        {
+            yield return new WaitForSeconds(0.3f);
+            Instantiate(crowPrefab, transform.position, Quaternion.identity);
+        }   
+        yield return null;
     }
 
     private IEnumerator ShootCornRays()

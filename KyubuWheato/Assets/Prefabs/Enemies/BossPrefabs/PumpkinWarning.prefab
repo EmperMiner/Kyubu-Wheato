@@ -99,8 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48ddf96928cb5a408e88a78447cb697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 12
+  damage: 25
   isCornRay: 0
+  isScytheAttack: 0
 --- !u!50 &8968723583056318424
 Rigidbody2D:
   serializedVersion: 4

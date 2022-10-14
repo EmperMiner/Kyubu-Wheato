@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 1815329666037625875}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 14.93, y: 12.38, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -117,10 +117,13 @@ MonoBehaviour:
   - {fileID: 7114270211502127729, guid: a9df15953e839184faf791adef183d66, type: 3}
   - {fileID: 1588563766128724097, guid: d88cb4d72b7b4ed46a133bae597b899d, type: 3}
   - {fileID: 3542439814215799712, guid: 769ce80170bc8a34ebeb3878c9745121, type: 3}
+  isMiniBoss: 0
   isMouse: 0
   isCowman: 0
   isHenor: 0
   isScawy: 1
+  isSchwein: 0
+  cornRay: {fileID: 0}
   enemiesPrefabs:
   - {fileID: 4514144088407996268, guid: 04c9d96d27fb36e419276ec3f71d15a5, type: 3}
   - {fileID: 5382777319672248433, guid: bde3eabfc1185154bbacd34a648fb10c, type: 3}

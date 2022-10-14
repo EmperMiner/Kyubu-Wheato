@@ -6,7 +6,6 @@ public class DiceHitbox : MonoBehaviour
 {
     [SerializeField] private GameObject dice;
     [SerializeField] private diceMagnetize diceScript;
-    [SerializeField] private bool isPickupableDice;
 
     private void Start()
     {
@@ -18,7 +17,7 @@ public class DiceHitbox : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, dice.transform.position, .03f);
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerStay2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Player")
         {

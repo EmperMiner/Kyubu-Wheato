@@ -137,8 +137,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48ddf96928cb5a408e88a78447cb697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 6
+  damage: 12
   isCornRay: 0
+  isScytheAttack: 0
 --- !u!95 &3309688419769658143
 Animator:
   serializedVersion: 4

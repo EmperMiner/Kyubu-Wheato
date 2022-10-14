@@ -193,16 +193,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        bool dicePickupable = other.gameObject.tag == "6sidedDice1" || other.gameObject.tag == "6sidedDice2" || other.gameObject.tag == "6sidedDice3" || other.gameObject.tag == "6sidedDice4" || other.gameObject.tag == "6sidedDice5" || other.gameObject.tag == "6sidedDice6";
-        if (dicePickupable) 
-        { 
-            diceMagnetize diceScript = other.GetComponent<diceMagnetize>();
-            if (diceScript.pickupable == false) return;
-            IncreaseDiceNumber(); 
-            AudioPlayer.PlaySound("DicePickup"); 
-        } 
         if (other.gameObject.tag == "Wheat") { AudioPlayer.PlaySound("DicePickup"); } 
-        if (other.gameObject.tag == "DicePickup") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
+   //     if (other.gameObject.tag == "DicePickup") { IncreaseDiceNumber(); AudioPlayer.PlaySound("DicePickup"); } 
 
         if (other.gameObject.tag == "DiceTile1") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile1 = true; this.other = other; }
         if (other.gameObject.tag == "DiceTile2") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile2 = true; this.other = other; }
@@ -213,6 +205,31 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.tag == "ExitHoe") { NextLevel(SceneManager.GetActiveScene().buildIndex); }
     }
+/*
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "DicePickup") 
+        { 
+            diceMagnetize diceScript = other.GetComponent<diceMagnetize>();
+            if (diceScript.pickupable == false) return;
+            IncreaseDiceNumber(); 
+            AudioPlayer.PlaySound("DicePickup"); 
+        } 
+    }
+
+    private void OnCollisionStay2D(Collision2D other) 
+    {
+        bool dicePickupable = other.gameObject.tag == "6sidedDice1" || other.gameObject.tag == "6sidedDice2" || other.gameObject.tag == "6sidedDice3" 
+                            || other.gameObject.tag == "6sidedDice4" || other.gameObject.tag == "6sidedDice5" || other.gameObject.tag == "6sidedDice6";
+        GameObject dice = other.gameObject;
+        if (dicePickupable) 
+        { 
+            diceMagnetize diceScript = dice.GetComponent<diceMagnetize>();
+            if (diceScript.pickupable == false) return;
+            IncreaseDiceNumber(); 
+            AudioPlayer.PlaySound("DicePickup"); 
+        } 
+    } */
 
     private void OnTriggerExit2D(Collider2D other)
     {
