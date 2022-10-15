@@ -4,30 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using UnityEngine.SceneManagement;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
-    private float shopMoveSpeed;
-    private int shopMaxHealth;
-    private int shopPlayerHealth;
-    private float shopStrength;
-    private int shopWheat;
-    private int shopDiceNumber;
-    private float shopPlayerCooldownTime;
-    private float shopDefense;
-    private float shopWheatDroprate;
-    private int shopDicePreviewerLevel;
-    private int shopDiceDroprate;
-    private bool shopHavePizza;
-    private bool shopHaveCarrotCake;
-    private bool shopHaveFlan;
-    private bool shopHaveCremeBrulee;
-    private bool shopHaveBanhmi;
-    private bool shopHaveCupcake;
-    private bool shopHaveChickenNuggets;
-    private bool shopHavePastelDeChoclo;
-    private bool shopHaveGarlicBread;
-
     public float MoveSpeed;
     public int maxHealth;
     private int playerHealth;
@@ -372,53 +352,53 @@ public class PlayerController : MonoBehaviour
     {
         string json = File.ReadAllText(Application.dataPath + "/gameSaveData.json");
         PlayerData loadedPlayerData = JsonUtility.FromJson<PlayerData>(json);
-
-        shopMoveSpeed = loadedPlayerData.MoveSpeed;
-        shopMaxHealth = loadedPlayerData.maxHealth;
-        shopPlayerHealth = loadedPlayerData.playerHealth;
-        shopStrength = loadedPlayerData.strength;
-        shopWheat = loadedPlayerData.Wheat;
-        shopDiceNumber = loadedPlayerData.diceNumber;
-        shopPlayerCooldownTime = loadedPlayerData.playerCooldownTime;
-        shopDefense = loadedPlayerData.defense;
-        shopWheatDroprate = loadedPlayerData.wheatDroprate;
-        shopDicePreviewerLevel = loadedPlayerData.dicePreviewerLevel;
-        shopDiceDroprate = loadedPlayerData.diceDroprate;
-        shopHavePizza = loadedPlayerData.havePizza;
-        shopHaveCarrotCake = loadedPlayerData.haveCarrotCake;
-        shopHaveFlan = loadedPlayerData.haveFlan;
-        shopHaveCremeBrulee = loadedPlayerData.haveCremeBrulee;
-        shopHaveBanhmi = loadedPlayerData.haveBanhmi;
-        shopHaveCupcake = loadedPlayerData.haveCupcake;
-        shopHaveChickenNuggets = loadedPlayerData.haveChickenNuggets;
-        shopHavePastelDeChoclo = loadedPlayerData.havePastelDeChoclo;
-        shopHaveGarlicBread = loadedPlayerData.haveGarlicBread;
+        
+        PlayerPrefs.SetFloat("MoveSpeed", loadedPlayerData.MoveSpeed);
+        PlayerPrefs.SetInt("maxHealth", loadedPlayerData.maxHealth);
+        PlayerPrefs.SetInt("playerHealth", loadedPlayerData.playerHealth);
+        PlayerPrefs.SetFloat("strength", loadedPlayerData.strength);
+        PlayerPrefs.SetInt("Wheat", loadedPlayerData.Wheat);
+        PlayerPrefs.SetInt("diceNumber", loadedPlayerData.diceNumber);
+        PlayerPrefs.SetFloat("playerCooldownTime", loadedPlayerData.playerCooldownTime);
+        PlayerPrefs.SetFloat("defense", loadedPlayerData.defense);
+        PlayerPrefs.SetFloat("wheatDroprate", loadedPlayerData.wheatDroprate);
+        PlayerPrefs.SetInt("dicePreviewerLevel", loadedPlayerData.dicePreviewerLevel);
+        PlayerPrefs.SetInt("diceDroprate", loadedPlayerData.diceDroprate);
+        PlayerPrefs.SetInt("havePizza", Convert.ToInt32(loadedPlayerData.havePizza));
+        PlayerPrefs.SetInt("haveCarrotCake", Convert.ToInt32(loadedPlayerData.haveCarrotCake));
+        PlayerPrefs.SetInt("haveFlan", Convert.ToInt32(loadedPlayerData.haveFlan));
+        PlayerPrefs.SetInt("haveCremeBrulee", Convert.ToInt32(loadedPlayerData.haveCremeBrulee));
+        PlayerPrefs.SetInt("haveBanhmi", Convert.ToInt32(loadedPlayerData.haveBanhmi));
+        PlayerPrefs.SetInt("haveCupcake", Convert.ToInt32(loadedPlayerData.haveCupcake));
+        PlayerPrefs.SetInt("haveChickenNuggets", Convert.ToInt32(loadedPlayerData.haveChickenNuggets));
+        PlayerPrefs.SetInt("havePastelDeChoclo", Convert.ToInt32(loadedPlayerData.havePastelDeChoclo));
+        PlayerPrefs.SetInt("haveGarlicBread", Convert.ToInt32(loadedPlayerData.haveGarlicBread));
     }
 
     private void SaveData()
     {
         PlayerData savingPlayerData = new PlayerData();
 
-        savingPlayerData.MoveSpeed = shopMoveSpeed;
-        savingPlayerData.maxHealth = shopMaxHealth;
-        savingPlayerData.playerHealth = shopPlayerHealth;
-        savingPlayerData.strength = shopStrength;
-        savingPlayerData.Wheat = shopWheat + Wheat;
-        savingPlayerData.diceNumber = shopDiceNumber;
-        savingPlayerData.playerCooldownTime = shopPlayerCooldownTime;
-        savingPlayerData.defense = shopDefense;
-        savingPlayerData.wheatDroprate = shopWheatDroprate;
-        savingPlayerData.dicePreviewerLevel = shopDicePreviewerLevel;
-        savingPlayerData.diceDroprate = shopDiceDroprate;
-        savingPlayerData.havePizza = shopHavePizza;
-        savingPlayerData.haveCarrotCake = shopHaveCarrotCake;
-        savingPlayerData.haveFlan = shopHaveFlan;
-        savingPlayerData.haveCremeBrulee = shopHaveCremeBrulee;
-        savingPlayerData.haveBanhmi = shopHaveBanhmi;
-        savingPlayerData.haveCupcake = shopHaveCupcake;
-        savingPlayerData.haveChickenNuggets = shopHaveChickenNuggets;
-        savingPlayerData.havePastelDeChoclo = shopHavePastelDeChoclo;
-        savingPlayerData.haveGarlicBread = shopHaveGarlicBread;
+        savingPlayerData.MoveSpeed = PlayerPrefs.GetFloat("MoveSpeed");
+        savingPlayerData.maxHealth = PlayerPrefs.GetInt("maxHealth");
+        savingPlayerData.playerHealth = PlayerPrefs.GetInt("playerHealth");
+        savingPlayerData.strength = PlayerPrefs.GetFloat("strength");
+        savingPlayerData.Wheat = PlayerPrefs.GetInt("Wheat") + Wheat;
+        savingPlayerData.diceNumber = PlayerPrefs.GetInt("diceNumber");
+        savingPlayerData.playerCooldownTime = PlayerPrefs.GetFloat("playerCooldownTime");
+        savingPlayerData.defense = PlayerPrefs.GetFloat("defense");
+        savingPlayerData.wheatDroprate = PlayerPrefs.GetFloat("wheatDroprate");
+        savingPlayerData.dicePreviewerLevel = PlayerPrefs.GetInt("dicePreviewerLevel");
+        savingPlayerData.diceDroprate = PlayerPrefs.GetInt("diceDroprate");
+        savingPlayerData.havePizza = Convert.ToBoolean(PlayerPrefs.GetInt("havePizza"));
+        savingPlayerData.haveCarrotCake = Convert.ToBoolean(PlayerPrefs.GetInt("haveCarrotCake"));
+        savingPlayerData.haveFlan = Convert.ToBoolean(PlayerPrefs.GetInt("haveFlan"));
+        savingPlayerData.haveCremeBrulee = Convert.ToBoolean(PlayerPrefs.GetInt("haveCremeBrulee"));
+        savingPlayerData.haveBanhmi = Convert.ToBoolean(PlayerPrefs.GetInt("haveBanhmi"));
+        savingPlayerData.haveCupcake = Convert.ToBoolean(PlayerPrefs.GetInt("haveCupcake"));
+        savingPlayerData.haveChickenNuggets = Convert.ToBoolean(PlayerPrefs.GetInt("haveChickenNuggets"));
+        savingPlayerData.havePastelDeChoclo = Convert.ToBoolean(PlayerPrefs.GetInt("havePastelDeChoclo"));
+        savingPlayerData.haveGarlicBread = Convert.ToBoolean(PlayerPrefs.GetInt("haveGarlicBread"));
 
 
         string json = JsonUtility.ToJson(savingPlayerData);
@@ -456,26 +436,26 @@ public class PlayerController : MonoBehaviour
     {
         PlayerData savingPlayerData = new PlayerData();
 
-        savingPlayerData.MoveSpeed = shopMoveSpeed;
-        savingPlayerData.maxHealth = shopMaxHealth;
-        savingPlayerData.playerHealth = shopPlayerHealth;
-        savingPlayerData.strength = shopStrength;
+        savingPlayerData.MoveSpeed = PlayerPrefs.GetFloat("MoveSpeed");
+        savingPlayerData.maxHealth = PlayerPrefs.GetInt("maxHealth");
+        savingPlayerData.playerHealth = PlayerPrefs.GetInt("playerHealth");
+        savingPlayerData.strength = PlayerPrefs.GetFloat("strength");
         savingPlayerData.Wheat = 0;
-        savingPlayerData.diceNumber = shopDiceNumber;
-        savingPlayerData.playerCooldownTime = shopPlayerCooldownTime;
-        savingPlayerData.defense = shopDefense;
-        savingPlayerData.wheatDroprate = shopWheatDroprate;
-        savingPlayerData.dicePreviewerLevel = shopDicePreviewerLevel;
-        savingPlayerData.diceDroprate = shopDiceDroprate;
-        savingPlayerData.havePizza = shopHavePizza;
-        savingPlayerData.haveCarrotCake = shopHaveCarrotCake;
-        savingPlayerData.haveFlan = shopHaveFlan;
-        savingPlayerData.haveCremeBrulee = shopHaveCremeBrulee;
-        savingPlayerData.haveBanhmi = shopHaveBanhmi;
-        savingPlayerData.haveCupcake = shopHaveCupcake;
-        savingPlayerData.haveChickenNuggets = shopHaveChickenNuggets;
-        savingPlayerData.havePastelDeChoclo = shopHavePastelDeChoclo;
-        savingPlayerData.haveGarlicBread = shopHaveGarlicBread;
+        savingPlayerData.diceNumber = PlayerPrefs.GetInt("diceNumber");
+        savingPlayerData.playerCooldownTime = PlayerPrefs.GetFloat("playerCooldownTime");
+        savingPlayerData.defense = PlayerPrefs.GetFloat("defense");
+        savingPlayerData.wheatDroprate = PlayerPrefs.GetFloat("wheatDroprate");
+        savingPlayerData.dicePreviewerLevel = PlayerPrefs.GetInt("dicePreviewerLevel");
+        savingPlayerData.diceDroprate = PlayerPrefs.GetInt("diceDroprate");
+        savingPlayerData.havePizza = Convert.ToBoolean(PlayerPrefs.GetInt("havePizza"));
+        savingPlayerData.haveCarrotCake = Convert.ToBoolean(PlayerPrefs.GetInt("haveCarrotCake"));
+        savingPlayerData.haveFlan = Convert.ToBoolean(PlayerPrefs.GetInt("haveFlan"));
+        savingPlayerData.haveCremeBrulee = Convert.ToBoolean(PlayerPrefs.GetInt("haveCremeBrulee"));
+        savingPlayerData.haveBanhmi = Convert.ToBoolean(PlayerPrefs.GetInt("haveBanhmi"));
+        savingPlayerData.haveCupcake = Convert.ToBoolean(PlayerPrefs.GetInt("haveCupcake"));
+        savingPlayerData.haveChickenNuggets = Convert.ToBoolean(PlayerPrefs.GetInt("haveChickenNuggets"));
+        savingPlayerData.havePastelDeChoclo = Convert.ToBoolean(PlayerPrefs.GetInt("havePastelDeChoclo"));
+        savingPlayerData.haveGarlicBread = Convert.ToBoolean(PlayerPrefs.GetInt("haveGarlicBread"));
 
         string json = JsonUtility.ToJson(savingPlayerData);
         Debug.Log(json);

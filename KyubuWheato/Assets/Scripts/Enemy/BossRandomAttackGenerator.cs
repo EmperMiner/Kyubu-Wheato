@@ -26,6 +26,7 @@ public class BossRandomAttackGenerator : MonoBehaviour
     public bool RollAttack;
     public int AttackRolled;
     public bool hit;
+    public bool inChargingState;
 
     private void Start()
     {
@@ -40,6 +41,7 @@ public class BossRandomAttackGenerator : MonoBehaviour
         agent.speed = 2;
         RollAttackDelay = 6f;
         alreadyDamaged = false;
+        inChargingState = false;
     }
 
     private void Update()
@@ -54,8 +56,6 @@ public class BossRandomAttackGenerator : MonoBehaviour
     {
         if (RollAttack)
         {   
-            yield return new WaitForSeconds(0.4f);
-            AttackRolled = 0;
             yield return new WaitForSeconds(RollAttackDelay);
             AttackRolled = Random.Range(1,11);
             StartCoroutine(RollAttackFunc());
@@ -81,7 +81,7 @@ public class BossRandomAttackGenerator : MonoBehaviour
              hit = other.gameObject.tag == "6sidedDice1" || other.gameObject.tag == "6sidedDice2" || other.gameObject.tag == "6sidedDice3" || 
                    other.gameObject.tag == "6sidedDice4" || other.gameObject.tag == "6sidedDice5" || other.gameObject.tag == "6sidedDice6" || 
                    other.gameObject.tag == "FakeDice1" || other.gameObject.tag == "FakeDice2" || other.gameObject.tag == "FakeDice3" || 
-                   other.gameObject.tag == "FakeDice4" || other.gameObject.tag == "FakeDice5" || other.gameObject.tag == "FakeDice6";
+                   other.gameObject.tag == "FakeDice4" || other.gameObject.tag == "FakeDice5" || other.gameObject.tag == "FakeDice6" || other.gameObject.tag == "BroomAttack" && inChargingState;
         if (alreadyDamaged == false)
         {
             if (other.gameObject.tag == "6sidedDice1") { mouseTakeDamage(1); ChargeUlt(6); }

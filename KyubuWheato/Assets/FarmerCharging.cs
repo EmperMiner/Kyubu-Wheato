@@ -16,6 +16,7 @@ public class FarmerCharging : StateMachineBehaviour
         randomNumberScript.bossDamage = 20;
         randomNumberScript.agent.speed = 4;
         randomNumberScript.RollAttackDelay = 3f;
+        randomNumberScript.inChargingState = true;
         hitWhileCharging = false;
         Instantiate(HeatRiserPrefab, bossRB.position, Quaternion.identity, bossRB.transform);
     }
@@ -37,12 +38,8 @@ public class FarmerCharging : StateMachineBehaviour
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        randomNumberScript.inChargingState = false;
         if (hitWhileCharging == false) { randomNumberScript.StartCoroutine(randomNumberScript.RemoveHeatRiserBuff()); }
         animator.ResetTrigger("Hurt");
-    }
-
-    private void OnTriggerEnter2D(Collider2D other) 
-    {
-        
     }
 }

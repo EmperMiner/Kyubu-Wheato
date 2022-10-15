@@ -119,7 +119,7 @@ public class mouseBehaviour : MonoBehaviour
             if (isMiniBoss) { for (int i = 0; i < 10; i++) { Instantiate(wheatDrop, new Vector3(transform.position.x + UnityEngine.Random.Range(-0.5f, 0.5f), transform.position.y + UnityEngine.Random.Range(-0.5f, 0.5f), transform.position.z), Quaternion.identity); } }
 
             int RNGDice = Random.Range(0, player.diceDroprate);
-            if (isMiniBoss == false) { RNGDice = 0; }
+            if (isMiniBoss == true) { RNGDice = 0; }
             if (RNGDice == 0) { Instantiate(dicetypes[Random.Range(0,dicetypes.Length)], transform.position, Quaternion.identity); }
 
             ExitHoeWinCondition.EnemiesKilled++;

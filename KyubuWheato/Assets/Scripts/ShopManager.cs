@@ -47,6 +47,7 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
         LoadData();
         AudioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         SettingsScript.StartingSettings();
