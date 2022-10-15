@@ -169,6 +169,17 @@ public class diceMagnetize : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (pickupable && other.gameObject.tag == "Player")
+        {
+        pickupable = false;
+        player.IncreaseDiceNumber(); 
+        FindObjectOfType<AudioManager>().PlaySound("DicePickup");
+        Destroy(this.gameObject);
+        }
+    } 
+
     IEnumerator PickupDelay()
     {
         yield return new WaitForSeconds(0.15f);

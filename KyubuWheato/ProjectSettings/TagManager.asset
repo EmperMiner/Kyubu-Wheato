@@ -54,6 +54,7 @@ TagManager:
   - DicePickup
   - Pointer
   - betterEnemySpawner
+  - HeatRiser
   layers:
   - Default
   - TransparentFX

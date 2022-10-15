@@ -138,7 +138,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: KK6Land
     clip: {fileID: 8300000, guid: a027e165e29c75046a58b08d7c208125, type: 3}
-    volume: 1
+    volume: 0.434
     pitch: 1
     loop: 0
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
@@ -311,4 +311,4 @@ MonoBehaviour:
     loop: 0
     group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
     source: {fileID: 0}
-  isMainMenu: 1
+  isMainMenu: 0

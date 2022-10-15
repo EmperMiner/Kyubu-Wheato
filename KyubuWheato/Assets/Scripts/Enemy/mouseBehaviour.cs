@@ -27,6 +27,8 @@ public class mouseBehaviour : MonoBehaviour
     private Rigidbody2D mouseRB;
     private Vector2 movement;
 
+    private bool badSpawn;
+
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject wheatDrop;
     [SerializeField] private Transform pfDamagePopup;
@@ -127,7 +129,7 @@ public class mouseBehaviour : MonoBehaviour
 
     private void FixedUpdate() 
     {
-        agent.SetDestination(playerTransform.position);
+       if (badSpawn == false) { agent.SetDestination(playerTransform.position); } 
     }
 
     private void mouseTakeDamage(int i)
@@ -152,9 +154,10 @@ public class mouseBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        bool UndesirableSpawn = collider.gameObject.tag == "MapCollider" || collider.gameObject.tag == "enemyMouse" || collider.gameObject.tag == "chest" || collider.gameObject.tag == "Player";
+        bool UndesirableSpawn = collider.gameObject.tag == "MapCollider" || collider.gameObject.tag == "chest" || collider.gameObject.tag == "Player";
         if (CheckForValidSpawn == true && UndesirableSpawn == true)
         {
+            badSpawn = true;
             Instantiate(enemiesPrefabs[enemyIndex], new Vector3(betterEnemySpawner.position.x + Random.Range(-10f, 10f), betterEnemySpawner.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity);
             Destroy(gameObject);
         }  
