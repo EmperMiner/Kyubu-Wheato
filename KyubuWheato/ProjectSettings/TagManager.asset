@@ -55,6 +55,17 @@ TagManager:
   - Pointer
   - betterEnemySpawner
   - HeatRiser
+  - BossHealthBar
+  - GoldenWheat
+  - VictoryScreen
+  - Arrow
+  - BossHealthBorder
+  - BossHealthFill
+  - Level12
+  - Level2
+  - Level5
+  - Level8
+  - Level10
   layers:
   - Default
   - TransparentFX

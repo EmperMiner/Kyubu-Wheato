@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class crowThrow : MonoBehaviour
 {
@@ -8,9 +9,14 @@ public class crowThrow : MonoBehaviour
     [SerializeField] private Sprite crowLeft;
     [SerializeField] private Sprite crowRight;
     [SerializeField] private float crowSpeed;
+
+    [SerializeField] private bool isInverted;
     private Transform playerTransform;
     private PlayerController player;
     private Vector2 target;
+    private byte x;
+    private byte y;
+    private byte z;
 
     private float crowCanAttack;
 
@@ -23,7 +29,8 @@ public class crowThrow : MonoBehaviour
         Destroy(gameObject, 5f);
 
         target = new Vector2(playerTransform.position.x, playerTransform.position.y);
-        randValue = Random.Range(0,2);
+        randValue = UnityEngine.Random.Range(0,2);
+        if (isInverted) { StartCoroutine(ChangeColor()); }
     }
 
     private void Update() 
@@ -60,5 +67,16 @@ public class crowThrow : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Player") { player.spriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
+    }
+
+    IEnumerator ChangeColor()
+    {
+        crowSpriteRenderer.material.color = new Color32(x, y , z, 255);
+        yield return new WaitForSeconds(UnityEngine.Random.Range(0.1f, 0.7f));
+        x = Convert.ToByte(UnityEngine.Random.Range(0,256));
+        y = Convert.ToByte(UnityEngine.Random.Range(0,256));
+        z = Convert.ToByte(UnityEngine.Random.Range(0,256));
+        StartCoroutine(ChangeColor());
+        yield return null;
     }
 }

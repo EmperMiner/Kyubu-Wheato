@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3014875349742876391}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3014875349800989124}
@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 30
   isCornRay: 0
+  isBossCornRay: 0
   isScytheAttack: 0
 --- !u!1 &3014875349800989114
 GameObject:
@@ -214,7 +215,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 648ee2592791e9a49b95fbd0c8079e1e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 

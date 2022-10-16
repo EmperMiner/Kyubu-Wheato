@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
     private Text DiceCounterNumber;
     private Text WheatCounterNumber;
     private GameOverScreen gameOverScript;
+    private GameOverScreen victoryScreenScript;
 
     [SerializeField] private GameObject crosshair;
     [SerializeField] private GameObject diceThrower;
@@ -88,6 +89,9 @@ public class PlayerController : MonoBehaviour
         DiceCounterNumber = GameObject.FindGameObjectWithTag("DiceCounter").GetComponent<Text>();
         WheatCounterNumber = GameObject.FindGameObjectWithTag("WheatCounter").GetComponent<Text>();
         gameOverScript = GameObject.FindGameObjectWithTag("GameOverScreen").GetComponent<GameOverScreen>();
+        try { victoryScreenScript = GameObject.FindGameObjectWithTag("GameOverScreen").GetComponent<GameOverScreen>(); }
+        catch (NullReferenceException) { Debug.Log("Not Level 11"); }
+        
         BroomBuffImage = GameObject.FindGameObjectWithTag("BroomBuffImage").GetComponent<Image>();
 
         BroomBuffImage.color = new Color32(255, 255, 255, 0);
@@ -136,6 +140,7 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("Speed", movement.sqrMagnitude);
 
             if (Input.GetKeyDown(KeyCode.R)) { CraftBread(); }
+            if (Input.GetKeyDown(KeyCode.T)) { CraftMoreBread(); }
 
             if (haveGarlicBread && triggeredBroom == false) { StartCoroutine(RollMode());}
             if (CurrentMode == 1 && BroomInMode == false) { StartCoroutine(AttackMode());}
@@ -183,6 +188,15 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "DiceTile6") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile6 = true; this.other = other; }
 
         if (other.gameObject.tag == "ExitHoe") { NextLevel(SceneManager.GetActiveScene().buildIndex); }
+        if (other.gameObject.tag == "GoldenWheat") { Win(); }
+
+        if (other.gameObject.tag == "Level12") { LoadToLevel(12); }
+        if (other.gameObject.tag == "Level2") { LoadToLevel(2); }
+        if (other.gameObject.tag == "Level5") { LoadToLevel(5); }
+        if (other.gameObject.tag == "Level8") { LoadToLevel(8); }
+        if (other.gameObject.tag == "Level10") { LoadToLevel(10); }
+
+        if (other.gameObject.tag == "Tumbleweed") { AudioPlayer.PlaySound("TumbleweedHit"); }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -197,8 +211,14 @@ public class PlayerController : MonoBehaviour
     private void CraftBread()
     {
         if (Wheat >= 3 && playerHealth < maxHealth) { UpdateWheat(-3); UpdateHealth(6); LatterIngameSaveData();}
-        else if (playerHealth == maxHealth) { Debug.Log("You're At Full Health"); }
-        else { Debug.Log("You Don't Have Enough Wheat To Craft Bread"); }
+        else if (playerHealth == maxHealth) { AudioPlayer.PlaySound("UIButtonError"); }
+        else { }
+    }
+    private void CraftMoreBread()
+    {
+        if (Wheat >= 15 && playerHealth < maxHealth) { UpdateWheat(-15); UpdateHealth(30); LatterIngameSaveData();}
+        else if (playerHealth == maxHealth) { AudioPlayer.PlaySound("UIButtonError"); }
+        else { }
     }
 
     public void IncreaseDiceNumber()
@@ -240,7 +260,7 @@ public class PlayerController : MonoBehaviour
         LatterIngameSaveData();
     }
 
-    public void GameOver()
+    private void GameOver()
     {
         AudioPlayer.PlayJingle("GameOver");
         playerAlive = false;
@@ -248,10 +268,22 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 0f;
         crosshair.SetActive(false);
         diceThrower.SetActive(false);
-        gameOverScript.GameOverTrigger(Wheat);
+        gameOverScript.GameOverTrigger(Wheat, false);
     }
 
-    IEnumerator FlashingHealthBar()
+    private void Win()
+    {
+        gameOverScript.GameOverTrigger(Wheat, true);
+        Wheat += 1000;
+        AudioPlayer.PlayJingle("YouWon");
+        playerAlive = false;
+        SaveData();
+        Time.timeScale = 0f;
+        crosshair.SetActive(false);
+        diceThrower.SetActive(false);
+    }
+
+    private IEnumerator FlashingHealthBar()
     {
         healthBar.HealthBarFlash(true);
         yield return new WaitForSeconds(0.25f);
@@ -346,6 +378,10 @@ public class PlayerController : MonoBehaviour
     private void NextLevel(int currentScene)
     {
         SceneManager.LoadScene(currentScene + 1);
+    }
+    private void LoadToLevel(int wantedScene)
+    {
+        SceneManager.LoadScene(wantedScene + 3);
     }
 
     private void LoadData()

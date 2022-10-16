@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
     [SerializeField] private bool isMainMenu;
+    [SerializeField] private bool isBossFight;
+    [SerializeField] private bool isSecretLevel;
 
     private void Awake()
     {
@@ -23,6 +25,8 @@ public class AudioManager : MonoBehaviour
         }
 
         if (isMainMenu) { PlayJingle("MainMenu"); }
+        else if (isBossFight) { }
+        else if (isSecretLevel) { PlayJingle("Discord"); }
         else { StartCoroutine(PlayGameOST()); }
     }
 

@@ -44,7 +44,7 @@ public class FarmerSummon : StateMachineBehaviour
         }
         if (attackIndex == 1)
         {
-            randomNumberScript.TumbleweedSpawn();
+            randomNumberScript.StartCoroutine(randomNumberScript.TumbleweedSpawn());
         }
         if (attackIndex == 2)
         {

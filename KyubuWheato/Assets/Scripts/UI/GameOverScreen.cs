@@ -24,10 +24,11 @@ public class GameOverScreen : MonoBehaviour
         HUD.SetActive(true);
     }
 
-    public void GameOverTrigger(int WheatGained)
+    public void GameOverTrigger(int WheatGained, bool victory)
     {
         HUD.SetActive(false);
-        WheatGainedText.text = "Wheats Harvested:" + WheatGained.ToString();
+        if (victory) { WheatGainedText.text = "Wheats Harvested:" + WheatGained.ToString() + " + 1000 Bonus"; }
+        else { WheatGainedText.text = "Wheats Harvested:" + WheatGained.ToString(); }
         gameOverScreen.SetActive(true);
     }
 

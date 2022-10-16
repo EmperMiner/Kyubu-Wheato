@@ -119,7 +119,7 @@ public class mouseBehaviour : MonoBehaviour
             if (isMiniBoss) { for (int i = 0; i < 10; i++) { Instantiate(wheatDrop, new Vector3(transform.position.x + UnityEngine.Random.Range(-0.5f, 0.5f), transform.position.y + UnityEngine.Random.Range(-0.5f, 0.5f), transform.position.z), Quaternion.identity); } }
 
             int RNGDice = Random.Range(0, player.diceDroprate);
-            if (isMiniBoss == true) { RNGDice = 0; }
+            if (isMiniBoss == true) { RNGDice = Random.Range(0, 3); }
             if (RNGDice == 0) { Instantiate(dicetypes[Random.Range(0,dicetypes.Length)], transform.position, Quaternion.identity); }
 
             ExitHoeWinCondition.EnemiesKilled++;
@@ -213,6 +213,7 @@ public class mouseBehaviour : MonoBehaviour
         if (collider.gameObject.tag == "FakeDice4") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
         if (collider.gameObject.tag == "FakeDice5") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
         if (collider.gameObject.tag == "FakeDice6") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
+        if (collider.gameObject.tag == "BroomAttack") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
 
         if (collider.gameObject.tag == "Player") { player.spriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
     }

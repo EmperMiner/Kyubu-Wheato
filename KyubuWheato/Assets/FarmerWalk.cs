@@ -12,7 +12,7 @@ public class FarmerWalk : StateMachineBehaviour
     
 
     private bool StartedRollingAttack = false;
-    private float attackRange = 12f;
+    private float attackRange = 8f;
     
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

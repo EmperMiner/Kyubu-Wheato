@@ -9,11 +9,15 @@ public class StaticObjectDamage : MonoBehaviour
     [SerializeField] private int damage;
 
     [SerializeField] private bool isCornRay;
+    [SerializeField] private bool isBossCornRay;
+    [SerializeField] private bool isInvertedCornray;
     [SerializeField] private bool isScytheAttack;
 
     private void Start()
     {
         if (isCornRay) { StartCoroutine(PlayRaySound()); }
+        if (isBossCornRay) { StartCoroutine(PlayRaySoundFast()); }
+        if (isInvertedCornray) { StartCoroutine(PlayRaySoundInverted()); }
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
@@ -49,6 +53,18 @@ public class StaticObjectDamage : MonoBehaviour
     {
         yield return new WaitForSeconds(2.1f);
         FindObjectOfType<AudioManager>().PlaySound("DiceRay3");
+        yield return null;
+    }
+    private IEnumerator PlayRaySoundFast()
+    {
+        yield return new WaitForSeconds(1.05f);
+        FindObjectOfType<AudioManager>().PlaySound("DiceRay3");
+        yield return null;
+    }
+    private IEnumerator PlayRaySoundInverted()
+    {
+        yield return new WaitForSeconds(0.35f);
+        FindObjectOfType<AudioManager>().PlaySound("InvertedCornray");
         yield return null;
     }
 }

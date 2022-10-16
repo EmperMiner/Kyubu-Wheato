@@ -311,4 +311,69 @@ MonoBehaviour:
     loop: 0
     group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
     source: {fileID: 0}
+  - name: YouWon
+    clip: {fileID: 8300000, guid: d98e3f86a12eabb4f80df2b9ece9c500, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
+    source: {fileID: 0}
+  - name: HEAVYFARMER
+    clip: {fileID: 8300000, guid: ec7b799a881f51f458740106331091a8, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
+    source: {fileID: 0}
+  - name: EyeGlare
+    clip: {fileID: 8300000, guid: 494cd137819d72041891ef35fa3a495c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: HeatRiser
+    clip: {fileID: 8300000, guid: 0c4a013269a6e8a40b54c177e9cc8ba2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: ScytheSwing
+    clip: {fileID: 8300000, guid: b98972040e2523c4d90b9c5b17f3c925, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: TumbleweedFly
+    clip: {fileID: 8300000, guid: 559f0d997b466a34f83e46f9342ecd1d, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: Discord
+    clip: {fileID: 8300000, guid: 667a98e72b590664b9590b2f5230da06, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
+    source: {fileID: 0}
+  - name: TumbleweedHit
+    clip: {fileID: 8300000, guid: c3dc76f110646ac419b209bac6196209, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: InvertedCornray
+    clip: {fileID: 8300000, guid: b82d19332292fb14d805d47c14148d98, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
   isMainMenu: 0
+  isBossFight: 0
+  isSecretLevel: 0

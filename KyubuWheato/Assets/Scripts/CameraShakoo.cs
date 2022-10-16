@@ -25,4 +25,6 @@ public class CameraShakoo : MonoBehaviour
         CameraShaker.Instance.ShakeOnce(3f, 7f, .1f, 2f);
         yield return null;
     }
+
+    public void PlayKK1() { FindObjectOfType<AudioManager>().PlaySound("KK1"); }
 }

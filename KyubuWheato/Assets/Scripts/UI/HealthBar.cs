@@ -5,10 +5,11 @@ public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider healthSlider;
     [SerializeField] private GameObject healthFill;
+    [SerializeField] private bool isBossBattle;
 
     private void Start()
     {
-        HealthBarFlash(false);
+        if (isBossBattle == false) { HealthBarFlash(false); }
     }
 
     public void SetMaxHealth(int playerHealth) 

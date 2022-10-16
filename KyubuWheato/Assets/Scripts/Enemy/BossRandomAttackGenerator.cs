@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using EZCameraShake;
 
 public class BossRandomAttackGenerator : MonoBehaviour
 {
+    private GameObject bossHealthBar;
+    private HealthBar bossHealthBarScript;
     public UnityEngine.AI.NavMeshAgent agent;
     [SerializeField] private Animator animator;
     private FarmerWalk farmerWalkScript;
@@ -16,8 +20,14 @@ public class BossRandomAttackGenerator : MonoBehaviour
     [SerializeField] private GameObject pfDamagePopup;
     [SerializeField] private TextMeshPro pfDamagePopupText;
 
+    [SerializeField] private GameObject GoldenWheat;
+    private GameObject GoldenWheatOnMap;
+    private GameObject Arrow;
+    private GameObject bossHealthBorder;
+    private GameObject bossHealthFill;
+
     private bool alreadyDamaged;
-    [SerializeField] private int mouseHealth = 10000;
+    [SerializeField] private int mouseHealth = 12000;
     public float RollAttackDelay;
 
     private float bossCanAttack;
@@ -30,6 +40,8 @@ public class BossRandomAttackGenerator : MonoBehaviour
 
     private void Start()
     {
+        Arrow = GameObject.FindGameObjectWithTag("Arrow");
+        Arrow.SetActive(false);
         agent = animator.GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -42,12 +54,24 @@ public class BossRandomAttackGenerator : MonoBehaviour
         RollAttackDelay = 6f;
         alreadyDamaged = false;
         inChargingState = false;
+
+        bossHealthBar = GameObject.FindGameObjectWithTag("BossHealthBar");
+        bossHealthBorder = GameObject.FindGameObjectWithTag("BossHealthBorder");
+        bossHealthFill = GameObject.FindGameObjectWithTag("BossHealthFill");
+        bossHealthBorder.GetComponent<Image>().color = new Color32(0, 0, 0, 200);
+        bossHealthFill.GetComponent<Image>().color = new Color32(135, 0, 0, 200);
+        
+        bossHealthBarScript = bossHealthBar.GetComponent<HealthBar>();
+        bossHealthBarScript.SetMaxHealth(mouseHealth);
+        bossHealthBar.SetActive(false);
     }
 
     private void Update()
     {
         if(mouseHealth <= 0)
         { 
+            Instantiate(GoldenWheat, transform.position, Quaternion.identity);
+            bossHealthBar.SetActive(false);
             Destroy(gameObject);  
         }
     }
@@ -65,12 +89,13 @@ public class BossRandomAttackGenerator : MonoBehaviour
 
     public IEnumerator TumbleweedSpawn()
     {
+        FindObjectOfType<AudioManager>().PlaySound("TumbleweedFly");
         float TumbleweedOffset = 0f;
-        for (int i = 0; i < 12; i++)
+        for (int i = 0; i < 8; i++)
         {
             Instantiate(tumbleWeed, transform.position, Quaternion.Euler(0f, 0f, TumbleweedOffset));
-            yield return new WaitForSeconds(0.8f);
-            TumbleweedOffset += 30f;
+            yield return new WaitForSeconds(0.5f);
+            TumbleweedOffset += 45f;
         }
         yield return null;
     }
@@ -105,7 +130,7 @@ public class BossRandomAttackGenerator : MonoBehaviour
     {   
         if (other.gameObject.tag != "Player") return;
 
-        if (bossCanAttack >= 0.5f)
+        if (bossCanAttack >= 0.7f)
         {
             FindObjectOfType<AudioManager>().PlaySound("PlayerHurt");
             player.UpdateHealth(-bossDamage);
@@ -132,6 +157,7 @@ public class BossRandomAttackGenerator : MonoBehaviour
         if (collider.gameObject.tag == "FakeDice4") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
         if (collider.gameObject.tag == "FakeDice5") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
         if (collider.gameObject.tag == "FakeDice6") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
+        if (collider.gameObject.tag == "BroomAttack") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
 
         if (collider.gameObject.tag == "Player") { player.spriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
     }
@@ -157,6 +183,8 @@ public class BossRandomAttackGenerator : MonoBehaviour
         mouseHealth -= i;
         mouseSpriteRenderer.material.color = new Color32(255, 150, 150, 255); 
         alreadyDamaged = true;
+        bossHealthBarScript.SetHealth(mouseHealth);
+        StartCoroutine(FlashingHealthBar());
     }
 
     private void CreateDamagePopup(int damageAmount)
@@ -169,4 +197,23 @@ public class BossRandomAttackGenerator : MonoBehaviour
     {
         if (ultimateBar.havePizza == true) { ultimateBar.IncreaseUltimateCharge(ChargeAmount); }
     }
+
+    public void ActivateHealthBar()
+    {
+        bossHealthBar.SetActive(true);
+    }
+
+    private IEnumerator FlashingHealthBar()
+    {
+        bossHealthBarScript.HealthBarFlash(true);
+        yield return new WaitForSeconds(0.3f);
+        bossHealthBarScript.HealthBarFlash(false);
+        yield return null;
+    }
+
+    public void ChargedShake() { CameraShaker.Instance.ShakeOnce(3f, 7f, .1f, 2f); }
+    public void PlayHEAVYFARMER() { FindObjectOfType<AudioManager>().PlayJingle("HEAVYFARMER"); }
+    public void PlayHeatRiser() { FindObjectOfType<AudioManager>().PlaySound("HeatRiser"); }
+    public void PlayScytheSwing() { FindObjectOfType<AudioManager>().PlaySound("ScytheSwing"); }
+    public void PlayEyeGlare() { FindObjectOfType<AudioManager>().PlaySound("EyeGlare"); }
 }
