@@ -5,8 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - enemyMouse
-  - enemySnake
-  - enemyBoss
   - 6sidedDice1
   - 6sidedDice2
   - 6sidedDice3
@@ -15,6 +13,61 @@ TagManager:
   - 6sidedDice6
   - Wheat
   - Wall
+  - HealthBar
+  - Blue PosFlower
+  - Orange PosFlower
+  - DiceManager
+  - Ultimate Bar
+  - FakeDice1
+  - FakeDice2
+  - FakeDice3
+  - FakeDice4
+  - FakeDice5
+  - FakeDice6
+  - MapCollider
+  - DicePadManager
+  - DiceTile1
+  - DiceTile2
+  - DiceTile3
+  - DiceTile4
+  - DiceTile5
+  - DiceTile6
+  - ChestManager
+  - chest
+  - IngameNotifText
+  - Blue PosFlower 2
+  - Orange PosFlower 2
+  - AudioManager
+  - CooldownBar
+  - WheatCounter
+  - DiceCounter
+  - GameOverScreen
+  - DicePreviewer1
+  - DicePreviewer2
+  - DicePreviewer3
+  - DicePreviewer4
+  - DicePreviewer5
+  - BroomBuffImage
+  - BroomAttack
+  - ExitHoe
+  - ExitHoeContainer
+  - DicePickup
+  - Pointer
+  - betterEnemySpawner
+  - HeatRiser
+  - BossHealthBar
+  - GoldenWheat
+  - VictoryScreen
+  - Arrow
+  - BossHealthBorder
+  - BossHealthFill
+  - Level12
+  - Level2
+  - Level5
+  - Level8
+  - Level10
+  - PGW
+  - 4thWall
   layers:
   - Default
   - TransparentFX
