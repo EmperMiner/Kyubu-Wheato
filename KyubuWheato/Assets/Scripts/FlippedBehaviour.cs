@@ -27,6 +27,7 @@ public class FlippedBehaviour : MonoBehaviour
     private bool badSpawn;
 
     [SerializeField] private GameObject wheatDrop;
+    [SerializeField] private GameObject worseWheatDrop;
     [SerializeField] private Transform pfDamagePopup;
     [SerializeField] private TextMeshPro pfDamagePopupText;
 
@@ -35,13 +36,19 @@ public class FlippedBehaviour : MonoBehaviour
     [SerializeField] private bool isC;
     [SerializeField] private bool isD;
     [SerializeField] private bool isE;
+    [SerializeField] private bool isF;
     [SerializeField] private GameObject cornRay;
-    private float stoppingDistance = 4f;
+    private float stoppingDistance = 5.1f;
+    private float BStoppingDistance = 3.1f;
+    private float AStoppingDistance = 10f;
+    private bool isMoving;
 
     [SerializeField] private GameObject[] enemiesPrefabs;
     [SerializeField] private GameObject crowPrefab;
+    [SerializeField] private GameObject WallPrefab;
     private bool CrowCooldown = false;
     private float crowCooldownTimer;
+    private bool ShotWall;
 
     private int enemyIndex;
     private bool CheckForValidSpawn;
@@ -52,6 +59,7 @@ public class FlippedBehaviour : MonoBehaviour
 
     private void Start()
     {
+        isMoving = true;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
@@ -67,28 +75,29 @@ public class FlippedBehaviour : MonoBehaviour
         mouseRB = this.GetComponent<Rigidbody2D>();
 
         if (isA) { enemyIndex = 0; }
-        else if (isB) { enemyIndex = 1; }
+        else if (isB) { enemyIndex = 1; FindObjectOfType<AudioManager>().PlaySound("BHello"); }
         else if (isC) { enemyIndex = 2; }
         else if (isD) { enemyIndex = 3; }
-        else if (isE) { StartCoroutine(ShootCornRays()); }
+        else if (isE) { enemyIndex = 4; StartCoroutine(ShootCornRays()); }
+        else if (isF) { enemyIndex = 5; StartCoroutine(ChangeSpeedATK()); }
         else { enemyIndex = 0; }
 
         CheckForValidSpawn = true;
+        ShotWall = false;
         
         StartCoroutine(ValidSpawn());
     }
 
     private void Update()
     {
-        if (isD)
-        {
-            if (Vector2.Distance(transform.position, playerTransform.position) <= stoppingDistance && CrowCooldown == false) { ShootCrow(); }
-        }
+        if (isA) { if (Vector2.Distance(transform.position, playerTransform.position) <= AStoppingDistance && ShotWall == false) { StartCoroutine(AHand()); } }
+        if (isB) { if (Vector2.Distance(transform.position, playerTransform.position) <= BStoppingDistance && ShotWall == false) { StartCoroutine(BWall()); } }
+        if (isD) { if (Vector2.Distance(transform.position, playerTransform.position) <= stoppingDistance && CrowCooldown == false) { ShootCrow(); }  }
 
         if (CrowCooldown)
         {   
             crowCooldownTimer += Time.deltaTime; 
-            if (crowCooldownTimer >= 0.3f)
+            if (crowCooldownTimer >= 0.15f)
             {
                 CrowCooldown = false;
                 crowCooldownTimer = 0;
@@ -97,9 +106,10 @@ public class FlippedBehaviour : MonoBehaviour
 
         if(mouseHealth <= 0)
         {   
-            if (player.InHealMode == true) { player.UpdateHealth(5); }
+            if (player.InHealMode == true) { player.UpdateHealth(15); }
 
-            for (int i = 0; i < 20; i++) { Instantiate(wheatDrop, new Vector3(transform.position.x + UnityEngine.Random.Range(-0.5f, 0.5f), transform.position.y + UnityEngine.Random.Range(-0.5f, 0.5f), transform.position.z), Quaternion.identity); }
+            if (isC) { Instantiate(worseWheatDrop, transform.position, Quaternion.identity); }
+            else { Instantiate(wheatDrop, transform.position, Quaternion.identity); }
 
             Destroy(gameObject);
         }
@@ -107,7 +117,7 @@ public class FlippedBehaviour : MonoBehaviour
 
     private void FixedUpdate() 
     {
-       if (badSpawn == false) { agent.SetDestination(playerTransform.position); } 
+       if (badSpawn == false && isMoving) { agent.SetDestination(playerTransform.position); } 
     }
 
     private void mouseTakeDamage(int i)
@@ -141,12 +151,12 @@ public class FlippedBehaviour : MonoBehaviour
 
         if (alreadyDamaged == false)
         {
-            if (collider.gameObject.tag == "6sidedDice1") { mouseTakeDamage(1); ChargeUlt(6); }
-            if (collider.gameObject.tag == "6sidedDice2") { mouseTakeDamage(2); ChargeUlt(5); } 
-            if (collider.gameObject.tag == "6sidedDice3") { mouseTakeDamage(3); ChargeUlt(4); }
-            if (collider.gameObject.tag == "6sidedDice4") { mouseTakeDamage(4); ChargeUlt(3); }
-            if (collider.gameObject.tag == "6sidedDice5") { mouseTakeDamage(5); ChargeUlt(2); }
-            if (collider.gameObject.tag == "6sidedDice6") { mouseTakeDamage(6); ChargeUlt(1); }
+            if (collider.gameObject.tag == "6sidedDice1" && isD == false && isF == false) { mouseTakeDamage(1); ChargeUlt(6); }
+            if (collider.gameObject.tag == "6sidedDice2" && isD == false && isF == false) { mouseTakeDamage(2); ChargeUlt(5); } 
+            if (collider.gameObject.tag == "6sidedDice3" && isD == false && isF == false) { mouseTakeDamage(3); ChargeUlt(4); }
+            if (collider.gameObject.tag == "6sidedDice4" && isD == false && isF == false) { mouseTakeDamage(4); ChargeUlt(3); }
+            if (collider.gameObject.tag == "6sidedDice5" && isD == false && isF == false) { mouseTakeDamage(5); ChargeUlt(2); }
+            if (collider.gameObject.tag == "6sidedDice6" && isD == false && isF == false) { mouseTakeDamage(6); ChargeUlt(1); }
             if (collider.gameObject.tag == "BroomAttack") { mouseTakeDamage(10); ChargeUlt(8); }        
 
             if (collider.gameObject.tag == "FakeDice1") { mouseTakeDamage(1); }
@@ -155,6 +165,20 @@ public class FlippedBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "FakeDice4") { mouseTakeDamage(4); }
             if (collider.gameObject.tag == "FakeDice5") { mouseTakeDamage(5); }
             if (collider.gameObject.tag == "FakeDice6") { mouseTakeDamage(6); }      
+
+            if (collider.gameObject.tag == "6sidedDice1" && isD  == true) { PlayGlitchedSound(); }
+            if (collider.gameObject.tag == "6sidedDice2" && isD  == true) { PlayGlitchedSound(); }
+            if (collider.gameObject.tag == "6sidedDice3" && isD  == true) { PlayGlitchedSound(); }
+            if (collider.gameObject.tag == "6sidedDice4" && isD  == true) { PlayGlitchedSound(); }
+            if (collider.gameObject.tag == "6sidedDice5" && isD  == true) { PlayGlitchedSound(); }
+            if (collider.gameObject.tag == "6sidedDice6" && isD  == true) { PlayGlitchedSound(); }
+
+            if (collider.gameObject.tag == "6sidedDice1" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp"); }
+            if (collider.gameObject.tag == "6sidedDice2" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
+            if (collider.gameObject.tag == "6sidedDice3" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
+            if (collider.gameObject.tag == "6sidedDice4" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
+            if (collider.gameObject.tag == "6sidedDice5" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
+            if (collider.gameObject.tag == "6sidedDice6" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
         }
         if (collider.gameObject.tag == "Player") { mouseCanAttack = mouseAttackSpeed; }
     }
@@ -168,6 +192,8 @@ public class FlippedBehaviour : MonoBehaviour
             FindObjectOfType<AudioManager>().PlaySound("PlayerHurt");
             player.UpdateHealth(-mouseStrength + Mathf.RoundToInt((mouseStrength * player.defense)/10));
             mouseCanAttack = 0f;
+            if (isC) { StartCoroutine(CSplit()); player.HitByC(); FindObjectOfType<AudioManager>().PlaySound("DefenseDown"); }
+            if (isF) { FindObjectOfType<AudioManager>().PlaySound("FSay");  }
         }    
 
         mouseCanAttack += Time.deltaTime; 
@@ -220,6 +246,83 @@ public class FlippedBehaviour : MonoBehaviour
         }
         
         StartCoroutine(ShootCornRays());
+        yield return null;
+    }
+
+    private IEnumerator BWall()
+    {
+        ShotWall = true;
+        isMoving = false;
+        agent.isStopped = true;
+        agent.ResetPath();
+        yield return new WaitForSeconds(4f);
+        FindObjectOfType<AudioManager>().PlaySound("4thWall");
+        Instantiate(WallPrefab, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(2.5f);
+        isMoving = true;
+        agent.isStopped = false;
+        ShotWall = false;
+        yield return null;
+    }
+
+    private IEnumerator AHand()
+    {
+        ShotWall = true;
+        isMoving = false;
+        agent.isStopped = true;
+        agent.ResetPath();
+        StartCoroutine(PlayHandSounds());
+        Vector2 enemyTargetVector = new Vector2(playerTransform.position.x - transform.position.x, playerTransform.position.y - transform.position.y);
+        float HandAngleOffset = Vector2.Angle(Vector2.right, enemyTargetVector);
+        if (playerTransform.position.y < transform.position.y) { Instantiate(WallPrefab, transform.position, Quaternion.Euler(0f, 0f, 360f - HandAngleOffset)); }
+        else { Instantiate(WallPrefab, transform.position, Quaternion.Euler(0f, 0f, HandAngleOffset)); }
+        yield return new WaitForSeconds(10f);
+        isMoving = true;
+        agent.isStopped = false;
+        ShotWall = false;
+        yield return null;
+    }
+    
+    private IEnumerator PlayHandSounds()
+    {
+        for (int i = 0; i < 7; i++)
+        {
+            FindObjectOfType<AudioManager>().PlaySound("Bone");
+            yield return new WaitForSeconds(1f);
+        }
+        yield return null;
+    }
+
+    private IEnumerator CSplit()
+    {
+        isMoving = false;
+        agent.isStopped = true;
+        agent.ResetPath();
+        yield return new WaitForSeconds(2f);
+        Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x - 2f, transform.position.y, transform.position.z), Quaternion.identity);
+        Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x + 2f, transform.position.y, transform.position.z), Quaternion.identity);
+        Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z), Quaternion.identity);
+        Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x, transform.position.y - 2f, transform.position.z), Quaternion.identity);
+        FindObjectOfType<AudioManager>().PlaySound("CSplit");
+        isMoving = true;
+        agent.isStopped = false;
+        yield return null;
+    }
+
+    private void PlayGlitchedSound()
+    {
+        int haha = UnityEngine.Random.Range(0,2);
+        if (haha == 0) { FindObjectOfType<AudioManager>().PlaySound("HahaIgnore"); }
+        else if (haha == 1) { FindObjectOfType<AudioManager>().PlaySound("HahaIgnore2"); }
+    }
+
+    private IEnumerator ChangeSpeedATK()
+    {
+        agent.speed = UnityEngine.Random.Range(3f, 8f);
+        agent.acceleration = UnityEngine.Random.Range(2f, 6f);
+        mouseStrength = UnityEngine.Random.Range(10, 50);
+        yield return new WaitForSeconds(UnityEngine.Random.Range(0.4f, 3f));
+        StartCoroutine(ChangeSpeedATK());
         yield return null;
     }
 }

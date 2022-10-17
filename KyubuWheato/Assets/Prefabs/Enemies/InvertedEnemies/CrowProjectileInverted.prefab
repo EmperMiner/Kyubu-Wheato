@@ -48,10 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crowSpriteRenderer: {fileID: 7584795839634895818}
-  crowLeft: {fileID: 21300000, guid: a34e1b2df6e0e0448a5373d01a0256b2, type: 3}
-  crowRight: {fileID: 21300000, guid: bd17c07d4a1cf4a4dbe0e52147839dec, type: 3}
-  crowSpeed: 4
-  isInverted: 0
+  crowLeft: {fileID: 21300000, guid: 8802fa4a5febec54cb76acb5cb574e53, type: 3}
+  crowRight: {fileID: 21300000, guid: 7d0dbeb9eaa8db24f96873d8db74c246, type: 3}
+  crowSpeed: 6
+  isInverted: 1
 --- !u!212 &7584795839634895818
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -93,7 +93,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: a34e1b2df6e0e0448a5373d01a0256b2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8802fa4a5febec54cb76acb5cb574e53, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -142,7 +142,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.6, y: 1.6}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 0.4, y: 0.4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

@@ -55,20 +55,20 @@ public class ShopManager : MonoBehaviour
         NotifText.text = "";
     }
 
-    private void Update()
+ /*   private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            shopWheat += 1000;
+            shopWheat += 250;
             ShopWheatCounterNumber.text = shopWheat.ToString();
             SaveData();
         } else if (Input.GetKeyDown(KeyCode.R))
         {
-            shopWheat -= 1000;
+            shopWheat -= 946;
             ShopWheatCounterNumber.text = shopWheat.ToString();
             SaveData();
         }
-    }
+    } */
  
     public void Buy(int UpgradeValue)
     {

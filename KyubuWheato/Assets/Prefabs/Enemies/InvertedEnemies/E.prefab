@@ -49,11 +49,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a12c4c090aed54a4693a2a3341c8cc16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMouseHealth: 150
-  mouseStrength: 10
+  maxMouseHealth: 500
+  mouseStrength: 30
   mouseAttackSpeed: 2
   mouseSpriteRenderer: {fileID: 2760173454840875558}
-  wheatDrop: {fileID: 6133570875003662420, guid: 47d5b60bfb15aea49839d118dac8f86c, type: 3}
+  wheatDrop: {fileID: 8311296782179859832, guid: 3cfa3a151773d094e9fc3c0661264258, type: 3}
+  worseWheatDrop: {fileID: 0}
   pfDamagePopup: {fileID: 6478138214433248903, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
   pfDamagePopupText: {fileID: 62537061617949394, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
   isA: 0
@@ -61,9 +62,17 @@ MonoBehaviour:
   isC: 0
   isD: 0
   isE: 1
+  isF: 0
   cornRay: {fileID: 167627879417173580, guid: fbc915b697a0bce49bbccadea23ec28c, type: 3}
-  enemiesPrefabs: []
+  enemiesPrefabs:
+  - {fileID: 1348866234531774441, guid: 25c3bb9ec6168c846ae626ae76740057, type: 3}
+  - {fileID: 3276073638894901266, guid: 034d3f6be589f8d44b89e7474d496f97, type: 3}
+  - {fileID: 7069245806492307287, guid: 893bb5d87adced049beb2a7b75c014fc, type: 3}
+  - {fileID: 6882148814188905353, guid: 4062a5eb4f1554546b63e2d8882c8635, type: 3}
+  - {fileID: 2760173454840875553}
+  - {fileID: 6308753891499002788, guid: 5899ab7e71ba3b149a4d710dd40dc329, type: 3}
   crowPrefab: {fileID: 7584795839634895823, guid: 387e74060e6d78746bfae2ad2225afd6, type: 3}
+  WallPrefab: {fileID: 0}
 --- !u!212 &2760173454840875558
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -176,7 +185,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.2, y: 3.2}
+    oldSize: {x: 3.5555556, y: 3.5555556}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

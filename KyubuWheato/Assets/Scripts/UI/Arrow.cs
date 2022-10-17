@@ -14,7 +14,6 @@ public class Arrow : MonoBehaviour
 
     private void Awake() 
     {
-        uiCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>(); 
         ExitHoePos = GameObject.FindGameObjectWithTag("ExitHoeContainer");
         targetPosition = new Vector3(ExitHoePos.transform.position.x, ExitHoePos.transform.position.y);
         pointerRectTransform = transform.Find("ArrowImage").GetComponent<RectTransform>();

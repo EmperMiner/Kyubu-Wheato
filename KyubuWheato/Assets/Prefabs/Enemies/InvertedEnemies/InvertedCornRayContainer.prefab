@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delay: 1.01
-  isKyubuKombo6: 1
+  isKyubuKombo6: 0
 --- !u!1 &167627879838183587
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 {
     public float MoveSpeed;
     public int maxHealth;
-    private int playerHealth;
+    public int playerHealth;
     public float strength;
     public float defense;
     public float wheatDroprate;
@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Wheat") { AudioPlayer.PlaySound("DicePickup"); } 
+        if (other.gameObject.tag == "Wheat" || other.gameObject.tag == "PGW") { AudioPlayer.PlaySound("DicePickup"); } 
 
         if (other.gameObject.tag == "DiceTile1") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile1 = true; this.other = other; }
         if (other.gameObject.tag == "DiceTile2") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile2 = true; this.other = other; }
@@ -197,6 +197,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Level10") { LoadToLevel(10); }
 
         if (other.gameObject.tag == "Tumbleweed") { AudioPlayer.PlaySound("TumbleweedHit"); }
+        if (other.gameObject.tag == "4thWall") { AudioPlayer.PlaySound("4thWallHit"); }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -210,13 +211,13 @@ public class PlayerController : MonoBehaviour
 
     private void CraftBread()
     {
-        if (Wheat >= 3 && playerHealth < maxHealth) { UpdateWheat(-3); UpdateHealth(6); LatterIngameSaveData();}
+        if (Wheat >= 6 && playerHealth < maxHealth) { UpdateWheat(-6); UpdateHealth(6); AudioPlayer.PlaySound("Burp"); LatterIngameSaveData();}
         else if (playerHealth == maxHealth) { AudioPlayer.PlaySound("UIButtonError"); }
         else { }
     }
     private void CraftMoreBread()
     {
-        if (Wheat >= 15 && playerHealth < maxHealth) { UpdateWheat(-15); UpdateHealth(30); LatterIngameSaveData();}
+        if (Wheat >= 30 && playerHealth < maxHealth) { UpdateWheat(-30); UpdateHealth(30); AudioPlayer.PlaySound("Burp"); LatterIngameSaveData();}
         else if (playerHealth == maxHealth) { AudioPlayer.PlaySound("UIButtonError"); }
         else { }
     }
@@ -233,7 +234,22 @@ public class PlayerController : MonoBehaviour
         diceNumber--;
         if (diceNumber < 0) { diceNumber = 0; }
         MoveSpeed -= 0.5f;
+        if (MoveSpeed < 2.5f) { MoveSpeed = 2.5f; }
         DiceCounterNumber.text = diceNumber.ToString();
+        UpdateValues();
+    }
+
+    public void HitByHand()
+    {
+        MoveSpeed -= 0.25f;
+        if (MoveSpeed < 2.5f) { MoveSpeed = 2.5f; }
+        UpdateValues();
+    }
+
+    public void HitByC()
+    {
+        defense -= 1f;
+        if (defense < 1f) { defense = 1f; }
         UpdateValues();
     }
 

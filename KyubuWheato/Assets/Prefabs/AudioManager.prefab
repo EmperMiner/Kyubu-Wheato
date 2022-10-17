@@ -355,7 +355,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Discord
     clip: {fileID: 8300000, guid: 667a98e72b590664b9590b2f5230da06, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 1
     group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
@@ -370,6 +370,76 @@ MonoBehaviour:
   - name: InvertedCornray
     clip: {fileID: 8300000, guid: b82d19332292fb14d805d47c14148d98, type: 3}
     volume: 0.7
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: HahaIgnore
+    clip: {fileID: 8300000, guid: 239fc0db327308449a0ccef3df25d209, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: HahaIgnore2
+    clip: {fileID: 8300000, guid: 4b17f90ea3f6b084cac674929c2287cd, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: CSplit
+    clip: {fileID: 8300000, guid: 69e300328078c8647adc0a40e6aa5965, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: 4thWall
+    clip: {fileID: 8300000, guid: c0b472e7c9590524b8b8c5e1de495179, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: 4thWallHit
+    clip: {fileID: 8300000, guid: 85ee6cf453f8c8740a6fbf6bb52bf443, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: BHello
+    clip: {fileID: 8300000, guid: 8ec20a679dd097e4e97876092386be3f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: FSay
+    clip: {fileID: 8300000, guid: 999097a5f4ab2df43b290c245b97a949, type: 3}
+    volume: 0.9
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: Bone
+    clip: {fileID: 8300000, guid: 5d49532e076b58344930889248187a6c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: Burp
+    clip: {fileID: 8300000, guid: 330ebd6c92052b546a1162997d5d69bb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: DefenseDown
+    clip: {fileID: 8300000, guid: c0279fc12d1263b46bb2971bd4ad4a85, type: 3}
+    volume: 1
     pitch: 1
     loop: 0
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}

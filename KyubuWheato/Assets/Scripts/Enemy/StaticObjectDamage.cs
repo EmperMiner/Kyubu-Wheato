@@ -12,6 +12,8 @@ public class StaticObjectDamage : MonoBehaviour
     [SerializeField] private bool isBossCornRay;
     [SerializeField] private bool isInvertedCornray;
     [SerializeField] private bool isScytheAttack;
+    [SerializeField] private bool is4thWall;
+    [SerializeField] private bool isHand;
 
     private void Start()
     {
@@ -23,7 +25,15 @@ public class StaticObjectDamage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Player") { objectCanAttack = 0.8f; }
+        if (other.gameObject.tag == "Player") 
+        { 
+            objectCanAttack = 0.8f;
+            if (is4thWall)
+            {
+                FindObjectOfType<AudioManager>().PlaySound("PlayerHurt");
+                player.UpdateHealth(-(player.playerHealth/2));
+            }
+        }
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -34,6 +44,7 @@ public class StaticObjectDamage : MonoBehaviour
         {
             FindObjectOfType<AudioManager>().PlaySound("PlayerHurt");
             if (isScytheAttack) { player.HitByScythe(); }
+            if (isHand) { player.HitByHand(); }
             player.UpdateHealth(-damage + Mathf.RoundToInt((damage * player.defense)/10));
             objectCanAttack = 0f;
             

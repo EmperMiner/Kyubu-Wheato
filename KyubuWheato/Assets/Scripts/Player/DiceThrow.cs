@@ -62,6 +62,8 @@ public class DiceThrow : MonoBehaviour
     private int FakeDiceValue;
     private int[] FakePreviousDiceValues = new int[6];
 
+    [SerializeField] private bool isLevel12;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -134,12 +136,6 @@ public class DiceThrow : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha2) && dicePreviewerLevel >= 3 && haveBanhmi == true) { DiceHotkey(2); }
             if (Input.GetKeyDown(KeyCode.Alpha3) && dicePreviewerLevel >= 4 && haveBanhmi == true) { DiceHotkey(3); }
             if (Input.GetKeyDown(KeyCode.Alpha4) && dicePreviewerLevel >= 5 && haveBanhmi == true) { DiceHotkey(4); }
-    /*        if (Input.GetKeyDown(KeyCode.Z)) { StartCoroutine(KyubuKombo(1)); } 
-            if (Input.GetKeyDown(KeyCode.X)) { StartCoroutine(KyubuKombo(2)); }
-            if (Input.GetKeyDown(KeyCode.C)) { StartCoroutine(KyubuKombo(3)); }
-            if (Input.GetKeyDown(KeyCode.V)) { StartCoroutine(KyubuKombo(4)); }
-            if (Input.GetKeyDown(KeyCode.B)) { StartCoroutine(KyubuKombo(5)); }
-            if (Input.GetKeyDown(KeyCode.N)) { StartCoroutine(KyubuKombo(6)); }  */
         }  
     }
 
@@ -316,51 +312,42 @@ public class DiceThrow : MonoBehaviour
         if (KyubuTileValue == 1) 
         { 
             AudioPlayer.PlaySound("KK1");
-      //      try
-     //       { 
-      //          Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
-       //         Instantiate(KyubuTiles[0], new Vector3(enemyPosition.position.x + UnityEngine.Random.Range(-1f, 1f), enemyPosition.position.y + 15.5f + UnityEngine.Random.Range(-1f, 1f), enemyPosition.position.z), Quaternion.identity); 
-      //      }
-      //      catch (NullReferenceException) 
-      //      { 
-                Instantiate(KyubuTiles[0], new Vector3(transform.position.x + UnityEngine.Random.Range(-2f, 2f), transform.position.y + 15.5f + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity); 
-      //      }
+            if (isLevel12 == false) { Instantiate(KyubuTiles[0], new Vector3(transform.position.x + UnityEngine.Random.Range(-2f, 2f), transform.position.y + 15.5f + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity); }
+            else {
+                try
+                { 
+                    Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
+                    Instantiate(KyubuTiles[0], new Vector3(enemyPosition.position.x + UnityEngine.Random.Range(-1f, 1f), enemyPosition.position.y + 15.5f + UnityEngine.Random.Range(-1f, 1f), enemyPosition.position.z), Quaternion.identity); 
+                }
+                catch (NullReferenceException) 
+                { 
+                    Instantiate(KyubuTiles[0], new Vector3(transform.position.x + UnityEngine.Random.Range(-2f, 2f), transform.position.y + 15.5f + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity); 
+                }
+            }
         }
         if (KyubuTileValue == 2) 
         { 
             AudioPlayer.PlaySound("KK2");
-      /*      try {
-                Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>();
-                int dafuq = UnityEngine.Random.Range(0,2);
-                if (dafuq < 1) 
-                { 
-                    float randomOffset = UnityEngine.Random.Range(-1.5f, 1.5f);
-                    Instantiate(KyubuTiles[1], new Vector3(enemyPosition.position.x - 22.63f, enemyPosition.position.y + randomOffset, enemyPosition.position.z), Quaternion.identity); 
-                    Instantiate(KyubuTiles[2], new Vector3(enemyPosition.position.x + 22.63f, enemyPosition.position.y + randomOffset, enemyPosition.position.z), Quaternion.identity);  
+            if (isLevel12 == false) { KK2NoTarget(); }
+            else {
+                try {
+                    Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>();
+                    int dafuq = UnityEngine.Random.Range(0,2);
+                    if (dafuq < 1) 
+                    { 
+                        float randomOffset = UnityEngine.Random.Range(-1.5f, 1.5f);
+                        Instantiate(KyubuTiles[1], new Vector3(enemyPosition.position.x - 22.63f, enemyPosition.position.y + randomOffset, enemyPosition.position.z), Quaternion.identity); 
+                        Instantiate(KyubuTiles[2], new Vector3(enemyPosition.position.x + 22.63f, enemyPosition.position.y + randomOffset, enemyPosition.position.z), Quaternion.identity);  
+                    }
+                    else 
+                    { 
+                        float randomOffset2 = UnityEngine.Random.Range(-1.5f, 1.5f);
+                        Instantiate(KyubuTiles[3], new Vector3(enemyPosition.position.x + randomOffset2, enemyPosition.position.y + 13.63f, enemyPosition.position.z), Quaternion.identity); 
+                        Instantiate(KyubuTiles[4], new Vector3(enemyPosition.position.x + randomOffset2, enemyPosition.position.y - 13.63f, enemyPosition.position.z), Quaternion.identity);  
+                    }
                 }
-                else 
-                { 
-                    float randomOffset2 = UnityEngine.Random.Range(-1.5f, 1.5f);
-                    Instantiate(KyubuTiles[3], new Vector3(enemyPosition.position.x + randomOffset2, enemyPosition.position.y + 13.63f, enemyPosition.position.z), Quaternion.identity); 
-                    Instantiate(KyubuTiles[4], new Vector3(enemyPosition.position.x + randomOffset2, enemyPosition.position.y - 13.63f, enemyPosition.position.z), Quaternion.identity);  
-                }
+                catch (NullReferenceException) { KK2NoTarget(); }
             }
-            catch (NullReferenceException) 
-            { */
-                int dafuq = UnityEngine.Random.Range(0,2);
-                float randXOffset = UnityEngine.Random.Range(-2f, 2f);
-                float randYOffset = UnityEngine.Random.Range(-2f, 2f);
-                if (dafuq < 1) 
-                { 
-                    Instantiate(KyubuTiles[1], new Vector3(transform.position.x - 22.63f + randXOffset, transform.position.y + randYOffset, transform.position.z), Quaternion.identity); 
-                    Instantiate(KyubuTiles[2], new Vector3(transform.position.x + 22.63f + randXOffset, transform.position.y + randYOffset, transform.position.z), Quaternion.identity);  
-                }
-                else 
-                { 
-                    Instantiate(KyubuTiles[3], new Vector3(transform.position.x + randXOffset, transform.position.y + 13.63f + randYOffset, transform.position.z), Quaternion.identity); 
-                    Instantiate(KyubuTiles[4], new Vector3(transform.position.x + randXOffset, transform.position.y - 13.63f + randYOffset, transform.position.z), Quaternion.identity);  
-                }
-     //       }
         }
         if (KyubuTileValue == 3) 
         { 
@@ -380,30 +367,41 @@ public class DiceThrow : MonoBehaviour
             int rand = UnityEngine.Random.Range(7,9);
             if (rand == 7) { AudioPlayer.PlaySound("KK5Var"); }
             else { AudioPlayer.PlaySound("KK5"); }
-      //      try  
-      //      { 
-      //          Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
-       //         Instantiate(KyubuTiles[rand], new Vector3(enemyPosition.position.x + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.y + 12.5f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.z), Quaternion.identity); 
-       //     }
-      //      catch (NullReferenceException) 
-            { Instantiate(KyubuTiles[rand], new Vector3(transform.position.x + UnityEngine.Random.Range(-2f, 2f), transform.position.y + 12.5f + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity); }
+            if (isLevel12 == false) { Instantiate(KyubuTiles[rand], new Vector3(transform.position.x + UnityEngine.Random.Range(-2f, 2f), transform.position.y + 12.5f + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity); }
+            else {
+                try  
+                { 
+                    Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
+                    Instantiate(KyubuTiles[rand], new Vector3(enemyPosition.position.x + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.y + 12.5f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.z), Quaternion.identity); 
+                }
+                catch (NullReferenceException) 
+                { Instantiate(KyubuTiles[rand], new Vector3(transform.position.x + UnityEngine.Random.Range(-2f, 2f), transform.position.y + 12.5f + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity); }
+            }
         }
         if (KyubuTileValue == 6) 
         { 
             AudioPlayer.PlaySound("KK6Hang");
-      /*      try 
+            if (isLevel12 == false)
             {
-                Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
-                int bruh = UnityEngine.Random.Range(0,2);
-                if (bruh < 1) { Instantiate(KyubuTiles[9], new Vector3(enemyPosition.position.x + 9f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.y + 6f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.z), Quaternion.identity); }
-                else { Instantiate(KyubuTiles[10], new Vector3(enemyPosition.position.x - 22f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.y + 12f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.z), Quaternion.identity); }
-            }
-            catch (NullReferenceException) 
-            { */
                 int bruh = UnityEngine.Random.Range(0,2);
                 if (bruh < 1) { Instantiate(KyubuTiles[9], new Vector3(transform.position.x + 9f, transform.position.y + 6f, transform.position.z), Quaternion.identity); }
                 else { Instantiate(KyubuTiles[10], new Vector3(transform.position.x - 22f, transform.position.y + 12f, transform.position.z), Quaternion.identity); }
-   //         }
+            }
+            else {
+                try 
+                {
+                    Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
+                    int bruh = UnityEngine.Random.Range(0,2);
+                    if (bruh < 1) { Instantiate(KyubuTiles[9], new Vector3(enemyPosition.position.x + 9f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.y + 6f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.z), Quaternion.identity); }
+                    else { Instantiate(KyubuTiles[10], new Vector3(enemyPosition.position.x - 22f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.y + 12f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.z), Quaternion.identity); }
+                }
+                catch (NullReferenceException) 
+                { 
+                    int bruh = UnityEngine.Random.Range(0,2);
+                    if (bruh < 1) { Instantiate(KyubuTiles[9], new Vector3(transform.position.x + 9f, transform.position.y + 6f, transform.position.z), Quaternion.identity); }
+                    else { Instantiate(KyubuTiles[10], new Vector3(transform.position.x - 22f, transform.position.y + 12f, transform.position.z), Quaternion.identity); }
+                }
+            }
         }
         if (KyubuTileValue == 100)
         {
@@ -416,6 +414,23 @@ public class DiceThrow : MonoBehaviour
             inKyubuKombo100 = false;
         }
         yield return null;
+    }
+
+    private void KK2NoTarget()
+    {
+        int dafuq = UnityEngine.Random.Range(0,2);
+                float randXOffset = UnityEngine.Random.Range(-2f, 2f);
+                float randYOffset = UnityEngine.Random.Range(-2f, 2f);
+                if (dafuq < 1) 
+                { 
+                    Instantiate(KyubuTiles[1], new Vector3(transform.position.x - 22.63f + randXOffset, transform.position.y + randYOffset, transform.position.z), Quaternion.identity); 
+                    Instantiate(KyubuTiles[2], new Vector3(transform.position.x + 22.63f + randXOffset, transform.position.y + randYOffset, transform.position.z), Quaternion.identity);  
+                }
+                else 
+                { 
+                    Instantiate(KyubuTiles[3], new Vector3(transform.position.x + randXOffset, transform.position.y + 13.63f + randYOffset, transform.position.z), Quaternion.identity); 
+                    Instantiate(KyubuTiles[4], new Vector3(transform.position.x + randXOffset, transform.position.y - 13.63f + randYOffset, transform.position.z), Quaternion.identity);  
+                }
     }
 
     private void ShootOneDice()

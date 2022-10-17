@@ -5,6 +5,7 @@ using UnityEngine;
 public class Wheat : MonoBehaviour
 {
     private PlayerController player;
+    [SerializeField] private int WheatAmount;
 
     void Start()
     {
@@ -15,7 +16,7 @@ public class Wheat : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            player.UpdateWheat(1);
+            player.UpdateWheat(WheatAmount);
             Destroy(gameObject);
         }
     }

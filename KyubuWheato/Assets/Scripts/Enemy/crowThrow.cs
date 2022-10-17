@@ -27,10 +27,14 @@ public class crowThrow : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         Destroy(gameObject, 5f);
+        if (isInverted) 
+        { 
+            Destroy(gameObject, UnityEngine.Random.Range(1.5f, 5f)); 
+            StartCoroutine(ChangeColor());
+        }
 
         target = new Vector2(playerTransform.position.x, playerTransform.position.y);
         randValue = UnityEngine.Random.Range(0,2);
-        if (isInverted) { StartCoroutine(ChangeColor()); }
     }
 
     private void Update() 
@@ -52,10 +56,13 @@ public class crowThrow : MonoBehaviour
     {   
         if (other.gameObject.tag != "Player") return;
 
+        int attackDamage = 3;
+        if (isInverted) { attackDamage = 10; }
+
         if (crowCanAttack >= 3f)
         {
             FindObjectOfType<AudioManager>().PlaySound("PlayerHurt");
-            player.UpdateHealth(-3 + Mathf.RoundToInt((3 * player.defense)/10));
+            player.UpdateHealth(-attackDamage + Mathf.RoundToInt((attackDamage * player.defense)/10));
             crowCanAttack = 0f;
         }    
         crowCanAttack += Time.deltaTime; 

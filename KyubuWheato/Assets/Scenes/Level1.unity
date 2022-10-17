@@ -178,15 +178,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyLimits.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyPrefabs.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyIntervals.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyLimits.Array.data[0]
@@ -197,6 +197,10 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
+      propertyPath: enemyLimits.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyPrefabs.Array.data[0]
       value: 
       objectReference: {fileID: 4514144088407996268, guid: 04c9d96d27fb36e419276ec3f71d15a5, type: 3}
@@ -205,12 +209,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4514144088407996268, guid: 04c9d96d27fb36e419276ec3f71d15a5, type: 3}
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
+      propertyPath: enemyPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 1348866234531774441, guid: 25c3bb9ec6168c846ae626ae76740057, type: 3}
+    - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyIntervals.Array.data[0]
       value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyIntervals.Array.data[1]
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
+      propertyPath: enemyIntervals.Array.data[2]
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486102, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: m_Name
@@ -353,12 +365,12 @@ MonoBehaviour:
     E to open chests
 
     R
-    to turn 3 wheat into bread to heal
+    to turn 6 wheat into bread to heal
 
-    T to turn 15 wheat into breads to heal
+    T to turn 30 wheat into breads to heal
     more
 
-    Destroy all enemies to continue!'
+    Destroy all enemies and take back the Golden Wheat for Steve!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d49ee2d8e448b6341ac5218e82e2f75e, type: 2}
   m_sharedMaterial: {fileID: 5492453401987223161, guid: d49ee2d8e448b6341ac5218e82e2f75e, type: 2}
@@ -421,7 +433,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -1385.9535, w: -178.61603}
+  m_margin: {x: 0, y: 0, z: -1663.8512, w: -216.97379}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -33960,6 +33972,7 @@ MonoBehaviour:
   isOnDiceTile4: 0
   isOnDiceTile5: 0
   isOnDiceTile6: 0
+  isLevel12: 0
 --- !u!1 &1366617120
 GameObject:
   m_ObjectHideFlags: 0
@@ -47013,6 +47026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 0
   maxHealth: 0
+  playerHealth: 0
   strength: 1
   defense: 1
   wheatDroprate: 0

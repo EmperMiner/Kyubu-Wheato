@@ -60964,15 +60964,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyLimits.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyPrefabs.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyIntervals.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyLimits.Array.data[0]
@@ -60987,6 +60987,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
+      propertyPath: enemyLimits.Array.data[3]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyPrefabs.Array.data[0]
       value: 
       objectReference: {fileID: 4514144088407996268, guid: 04c9d96d27fb36e419276ec3f71d15a5, type: 3}
@@ -60999,6 +61003,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5382777319672248433, guid: bde3eabfc1185154bbacd34a648fb10c, type: 3}
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
+      propertyPath: enemyPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 3276073638894901266, guid: 034d3f6be589f8d44b89e7474d496f97, type: 3}
+    - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyIntervals.Array.data[0]
       value: 1.3
       objectReference: {fileID: 0}
@@ -61009,6 +61017,10 @@ PrefabInstance:
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyIntervals.Array.data[2]
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
+      propertyPath: enemyIntervals.Array.data[3]
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486102, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: m_Name
@@ -61572,6 +61584,7 @@ MonoBehaviour:
   isOnDiceTile4: 0
   isOnDiceTile5: 0
   isOnDiceTile6: 0
+  isLevel12: 0
 --- !u!1 &1366617120
 GameObject:
   m_ObjectHideFlags: 0
@@ -90885,6 +90898,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 0
   maxHealth: 0
+  playerHealth: 0
   strength: 1
   defense: 1
   wheatDroprate: 0

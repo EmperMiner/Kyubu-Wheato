@@ -66,6 +66,8 @@ TagManager:
   - Level5
   - Level8
   - Level10
+  - PGW
+  - 4thWall
   layers:
   - Default
   - TransparentFX
