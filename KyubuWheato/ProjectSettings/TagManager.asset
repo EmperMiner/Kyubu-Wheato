@@ -68,6 +68,9 @@ TagManager:
   - Level10
   - PGW
   - 4thWall
+  - RedWheat
+  - BlueWheat
+  - GreenWheat
   layers:
   - Default
   - TransparentFX

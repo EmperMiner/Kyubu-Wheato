@@ -8,11 +8,13 @@ public class betterEnemySpawner : MonoBehaviour
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private int[] enemyLimits;
     private int[] enemySpawned;
+    [SerializeField] private bool isSecretLevel;
 
     private void Start()
     {
         enemySpawned = new int[enemyPrefabs.Length];
         StartCoroutine(SpawnEnemyStartingDelay());
+        if (isSecretLevel) { StartCoroutine(SpawnEnemyInCircle()); }
     }
 
     private IEnumerator SpawnEnemy(float enemyInterval, GameObject enemy, int enemyLimit, int enemyIndex)
@@ -30,6 +32,17 @@ public class betterEnemySpawner : MonoBehaviour
         {
             StartCoroutine(SpawnEnemy(enemyIntervals[i], enemyPrefabs[i], enemyLimits[i], i));
         }
+        yield return null;
+    }
+
+    private IEnumerator SpawnEnemyInCircle()
+    {
+        yield return new WaitForSeconds(Random.Range(200f, 300f));
+        for (int i =  0; i < 6; i++)
+        {
+            Instantiate(enemyPrefabs[i], new Vector3(transform.position.x + Random.Range(-15f, 15f), transform.position.y + Random.Range(-15f, 15f), 0), Quaternion.identity);
+        }
+        StartCoroutine(SpawnEnemyInCircle());
         yield return null;
     }
 }

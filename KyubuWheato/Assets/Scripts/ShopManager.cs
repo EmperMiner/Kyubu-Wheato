@@ -26,6 +26,7 @@ public class ShopManager : MonoBehaviour
     private bool shopHaveChickenNuggets;
     private bool shopHavePastelDeChoclo;
     private bool shopHaveGarlicBread;
+    private bool shopHaveHornScallop;
 
     private AudioManager AudioPlayer;
     [SerializeField] private Text ShopWheatCounterNumber;
@@ -55,11 +56,11 @@ public class ShopManager : MonoBehaviour
         NotifText.text = "";
     }
 
- /*   private void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            shopWheat += 250;
+            shopWheat += 10000;
             ShopWheatCounterNumber.text = shopWheat.ToString();
             SaveData();
         } else if (Input.GetKeyDown(KeyCode.R))
@@ -68,7 +69,7 @@ public class ShopManager : MonoBehaviour
             ShopWheatCounterNumber.text = shopWheat.ToString();
             SaveData();
         }
-    } */
+    } 
  
     public void Buy(int UpgradeValue)
     {
@@ -216,6 +217,12 @@ public class ShopManager : MonoBehaviour
         {
             if (shopHaveGarlicBread == false && shopWheat >= upgradePrices[6]) { shopHaveGarlicBread = true; shopWheat -= upgradePrices[6]; StartCoroutine(NotifTextBuySuccess()); }
             else if (shopHaveGarlicBread == true) { StartCoroutine(NotifTextAlreadyBought()); }
+            else { StartCoroutine(NotifTextNotEnoughMoney()); }  
+        }
+        if (UpgradeValue == 110)
+        {
+            if (shopHaveHornScallop == false && shopWheat >= upgradePrices[5]) { shopHaveHornScallop = true; shopWheat -= upgradePrices[5]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopHaveHornScallop == true) { StartCoroutine(NotifTextAlreadyBought()); }
             else { StartCoroutine(NotifTextNotEnoughMoney()); }  
         }
         UpdateUpgradeUI(UpgradeValue);   
@@ -403,6 +410,12 @@ public class ShopManager : MonoBehaviour
             else { shopWheat += upgradePrices[6]; AudioPlayer.PlaySound("RefundShop"); }
             shopHaveGarlicBread = false;
         }
+        if (RefundValue == 110 || RefundValue == 420)
+        {
+            if (shopHaveHornScallop == false) { if (RefundValue != 420) { StartCoroutine(NotifTextHaveNotBought()); } }
+            else { shopWheat += upgradePrices[5]; AudioPlayer.PlaySound("RefundShop"); }
+            shopHaveHornScallop = false;
+        }
         if (refundLoops > 0 || RefundValue == 420) { AudioPlayer.PlaySound("RefundShop"); }
         UpdateUpgradeUI(RefundValue);
         ShopWheatCounterNumber.text = shopWheat.ToString();
@@ -546,6 +559,11 @@ public class ShopManager : MonoBehaviour
             if (shopHaveGarlicBread) { UpgradesImage[17].sprite = UpgradesSpritesVariants[71]; upgradePriceText[17].text = MaxBought; }
             else { UpgradesImage[17].sprite = UpgradesSpritesVariants[70]; upgradePriceText[17].text = upgradePrices[6].ToString(); }
         }
+        if (UpdateUpgradeUI == 110 || UpdateUpgradeUI == 420)
+        {
+            if (shopHaveHornScallop) { UpgradesImage[18].sprite = UpgradesSpritesVariants[73]; upgradePriceText[18].text = MaxBought; }
+            else { UpgradesImage[18].sprite = UpgradesSpritesVariants[72]; upgradePriceText[18].text = upgradePrices[5].ToString(); }
+        }
     }
 
     IEnumerator NotifTextBuySuccess()
@@ -663,6 +681,7 @@ public class ShopManager : MonoBehaviour
         shopHaveChickenNuggets = loadedPlayerData.haveChickenNuggets;
         shopHavePastelDeChoclo = loadedPlayerData.havePastelDeChoclo;
         shopHaveGarlicBread = loadedPlayerData.haveGarlicBread;
+        shopHaveHornScallop = loadedPlayerData.haveHornScallop;
 
         ShopWheatCounterNumber.text = shopWheat.ToString();
     }
@@ -690,6 +709,7 @@ public class ShopManager : MonoBehaviour
         savingPlayerData.haveChickenNuggets = shopHaveChickenNuggets;
         savingPlayerData.havePastelDeChoclo = shopHavePastelDeChoclo;
         savingPlayerData.haveGarlicBread = shopHaveGarlicBread;
+        savingPlayerData.haveHornScallop = shopHaveHornScallop;
 
         string json = JsonUtility.ToJson(savingPlayerData);
         Debug.Log(json);
@@ -719,5 +739,6 @@ public class ShopManager : MonoBehaviour
         public bool haveChickenNuggets;
         public bool havePastelDeChoclo;
         public bool haveGarlicBread;
+        public bool haveHornScallop;
     }
 }

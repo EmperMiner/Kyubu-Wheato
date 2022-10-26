@@ -72,6 +72,7 @@ public class BossRandomAttackGenerator : MonoBehaviour
         { 
             Instantiate(GoldenWheat, transform.position, Quaternion.identity);
             bossHealthBar.SetActive(false);
+            FindObjectOfType<AudioManager>().StopSound("HEAVYFARMER");
             Destroy(gameObject);  
         }
     }

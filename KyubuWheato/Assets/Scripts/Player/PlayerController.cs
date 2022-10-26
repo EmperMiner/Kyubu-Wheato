@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.IO;
 using UnityEngine.SceneManagement;
 using System;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public bool haveCupcake;
     public bool haveChickenNuggets;
     public bool havePastelDeChoclo;
+    public bool haveHornScallop;
 
     public bool playerAlive;
 
@@ -66,7 +68,9 @@ public class PlayerController : MonoBehaviour
     private Text WheatCounterNumber;
     private GameOverScreen gameOverScript;
     private GameOverScreen victoryScreenScript;
+    private ExitHoeContainer KeyWheatScript;
 
+    private TextMeshProUGUI SmallText;
     [SerializeField] private GameObject crosshair;
     [SerializeField] private GameObject diceThrower;
     
@@ -79,9 +83,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Sprite[] BroomBuffIcons;
     
     Collider2D other;
+    string requiredWheat;
+
+    private GameObject MapDisplay;
+    private GameObject RedWheatIndicator;
+    private GameObject BlueWheatIndicator;
+    private GameObject GreenWheatIndicator;
+    private TextMeshProUGUI LevelText;
 
     private void Awake()
     {       
+        SmallText = GameObject.FindGameObjectWithTag("IngameNotifText").GetComponent<TextMeshProUGUI>();
+        SmallText.text = "";
+        KeyWheatScript = GameObject.FindGameObjectWithTag("ExitHoeContainer").GetComponent<ExitHoeContainer>();
+        MapDisplay = GameObject.Find("Map");
+        RedWheatIndicator = GameObject.Find("RedWheatIndicator");
+        BlueWheatIndicator = GameObject.Find("BlueWheatIndicator");
+        GreenWheatIndicator = GameObject.Find("GreenWheatIndicator");
+        LevelText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
+        LevelText.text = "Level " + (SceneManager.GetActiveScene().buildIndex - 3);
         AudioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>();
         ultimateScript = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
@@ -129,6 +149,14 @@ public class PlayerController : MonoBehaviour
         LowerMapLimit = LowerCamLimit - 3f;
     }
 
+    private void Start()
+    {
+        RedWheatIndicator.SetActive(false);
+        BlueWheatIndicator.SetActive(false);
+        GreenWheatIndicator.SetActive(false);
+        MapDisplay.SetActive(false);
+    }
+
     private void Update()
     {
         if (playerAlive)
@@ -141,6 +169,12 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.R)) { CraftBread(); }
             if (Input.GetKeyDown(KeyCode.T)) { CraftMoreBread(); }
+
+            if (Input.GetKeyDown(KeyCode.Tab)) 
+            { 
+                if (MapDisplay.activeSelf == false) { MapDisplay.SetActive(true); }
+                else { MapDisplay.SetActive(false); }
+            }
 
             if (haveGarlicBread && triggeredBroom == false) { StartCoroutine(RollMode());}
             if (CurrentMode == 1 && BroomInMode == false) { StartCoroutine(AttackMode());}
@@ -187,7 +221,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "DiceTile5") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile5 = true; this.other = other; }
         if (other.gameObject.tag == "DiceTile6") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile6 = true; this.other = other; }
 
-        if (other.gameObject.tag == "ExitHoe") { NextLevel(SceneManager.GetActiveScene().buildIndex); }
+        
         if (other.gameObject.tag == "GoldenWheat") { Win(); }
 
         if (other.gameObject.tag == "Level12") { LoadToLevel(12); }
@@ -198,6 +232,42 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.tag == "Tumbleweed") { AudioPlayer.PlaySound("TumbleweedHit"); }
         if (other.gameObject.tag == "4thWall") { AudioPlayer.PlaySound("4thWallHit"); }
+
+        if (other.gameObject.tag == "RedWheat") { UnlockKey("Red"); Destroy(other.gameObject); }
+        if (other.gameObject.tag == "BlueWheat") { UnlockKey("Blue"); Destroy(other.gameObject); }
+        if (other.gameObject.tag == "GreenWheat") { UnlockKey("Green"); Destroy(other.gameObject); }
+        if (other.gameObject.tag == "ExitHoe") 
+        { 
+            if (KeyWheatScript.Level == 1) { NextLevel(SceneManager.GetActiveScene().buildIndex); }
+            else if (KeyWheatScript.Level == 2) 
+            { 
+                if (!KeyWheatScript.haveRedWheat)
+                {
+                    requiredWheat = "";
+                    requiredWheat += "Red "; 
+                    StartCoroutine(NotifTextWarning());
+                }
+            }
+            else if (KeyWheatScript.Level == 3) 
+            { 
+                if (!KeyWheatScript.haveBlueWheat || !KeyWheatScript.haveGreenWheat)
+                {
+                    requiredWheat = "";
+                    if (!KeyWheatScript.haveBlueWheat) { requiredWheat += "Blue "; }
+                    if (!KeyWheatScript.haveGreenWheat) { requiredWheat += "Green "; }
+                    StartCoroutine(NotifTextWarning());
+               }
+            }        
+            else if (!KeyWheatScript.haveRedWheat || !KeyWheatScript.haveBlueWheat || !KeyWheatScript.haveGreenWheat)
+            {
+                requiredWheat = "";
+                if (!KeyWheatScript.haveRedWheat) { requiredWheat += "Red "; }
+                if (!KeyWheatScript.haveBlueWheat) { requiredWheat += "Blue "; }
+                if (!KeyWheatScript.haveGreenWheat) { requiredWheat += "Green "; }
+                StartCoroutine(NotifTextWarning());
+            }
+            else { NextLevel(SceneManager.GetActiveScene().buildIndex); }
+        }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -207,6 +277,23 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "DiceTile4") { diceThrowScript.isOnDiceTile4 = false; AudioPlayer.PlaySound("PadOff"); }
         if (other.gameObject.tag == "DiceTile5") { diceThrowScript.isOnDiceTile5 = false; AudioPlayer.PlaySound("PadOff"); }
         if (other.gameObject.tag == "DiceTile6") { diceThrowScript.isOnDiceTile6 = false; AudioPlayer.PlaySound("PadOff"); }
+    }
+
+    private IEnumerator NotifTextWarning()
+    {
+        AudioPlayer.PlaySound("UIButtonError");
+        SmallText.text = "Needs " + requiredWheat + "Wheat";
+        yield return new WaitForSeconds(1f);
+        SmallText.text = "";
+        yield return null;
+    }
+
+    private void UnlockKey(string i)
+    {
+        if (i == "Red") { KeyWheatScript.haveRedWheat = true; RedWheatIndicator.SetActive(true); }
+        if (i == "Blue") { KeyWheatScript.haveBlueWheat = true; BlueWheatIndicator.SetActive(true); }
+        if (i == "Green") { KeyWheatScript.haveGreenWheat = true; GreenWheatIndicator.SetActive(true); }
+        AudioPlayer.PlaySound("DicePickup");
     }
 
     private void CraftBread()
@@ -284,12 +371,12 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 0f;
         crosshair.SetActive(false);
         diceThrower.SetActive(false);
-        gameOverScript.GameOverTrigger(Wheat, false);
+        gameOverScript.GameOverTrigger(Wheat);
     }
 
     private void Win()
     {
-        gameOverScript.GameOverTrigger(Wheat, true);
+        gameOverScript.WinningTrigger(Wheat);
         Wheat += 1000;
         AudioPlayer.PlayJingle("YouWon");
         playerAlive = false;
@@ -400,6 +487,8 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene(wantedScene + 3);
     }
 
+    
+
     private void LoadData()
     {
         string json = File.ReadAllText(Application.dataPath + "/gameSaveData.json");
@@ -425,6 +514,7 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetInt("haveChickenNuggets", Convert.ToInt32(loadedPlayerData.haveChickenNuggets));
         PlayerPrefs.SetInt("havePastelDeChoclo", Convert.ToInt32(loadedPlayerData.havePastelDeChoclo));
         PlayerPrefs.SetInt("haveGarlicBread", Convert.ToInt32(loadedPlayerData.haveGarlicBread));
+        PlayerPrefs.SetInt("haveHornScallop", Convert.ToInt32(loadedPlayerData.haveHornScallop));
     }
 
     private void SaveData()
@@ -451,7 +541,7 @@ public class PlayerController : MonoBehaviour
         savingPlayerData.haveChickenNuggets = Convert.ToBoolean(PlayerPrefs.GetInt("haveChickenNuggets"));
         savingPlayerData.havePastelDeChoclo = Convert.ToBoolean(PlayerPrefs.GetInt("havePastelDeChoclo"));
         savingPlayerData.haveGarlicBread = Convert.ToBoolean(PlayerPrefs.GetInt("haveGarlicBread"));
-
+        savingPlayerData.haveHornScallop = Convert.ToBoolean(PlayerPrefs.GetInt("haveHornScallop"));
 
         string json = JsonUtility.ToJson(savingPlayerData);
         Debug.Log(json);
@@ -483,6 +573,7 @@ public class PlayerController : MonoBehaviour
         haveChickenNuggets = loadedPlayerData.haveChickenNuggets;
         havePastelDeChoclo = loadedPlayerData.havePastelDeChoclo;
         haveGarlicBread = loadedPlayerData.haveGarlicBread;
+        haveHornScallop = loadedPlayerData.haveHornScallop;
     }
     private void FirstIngameSaveData()
     {
@@ -508,6 +599,7 @@ public class PlayerController : MonoBehaviour
         savingPlayerData.haveChickenNuggets = Convert.ToBoolean(PlayerPrefs.GetInt("haveChickenNuggets"));
         savingPlayerData.havePastelDeChoclo = Convert.ToBoolean(PlayerPrefs.GetInt("havePastelDeChoclo"));
         savingPlayerData.haveGarlicBread = Convert.ToBoolean(PlayerPrefs.GetInt("haveGarlicBread"));
+        savingPlayerData.haveHornScallop = Convert.ToBoolean(PlayerPrefs.GetInt("haveHornScallop"));
 
         string json = JsonUtility.ToJson(savingPlayerData);
         Debug.Log(json);
@@ -538,6 +630,7 @@ public class PlayerController : MonoBehaviour
         savingPlayerData.haveChickenNuggets = haveChickenNuggets;
         savingPlayerData.havePastelDeChoclo = havePastelDeChoclo;
         savingPlayerData.haveGarlicBread = haveGarlicBread;
+        savingPlayerData.haveHornScallop = haveHornScallop;
 
         string json = JsonUtility.ToJson(savingPlayerData);
         Debug.Log(json);
@@ -568,5 +661,6 @@ public class PlayerController : MonoBehaviour
         public bool haveChickenNuggets;
         public bool havePastelDeChoclo;
         public bool haveGarlicBread;
+        public bool haveHornScallop;
     }
 }

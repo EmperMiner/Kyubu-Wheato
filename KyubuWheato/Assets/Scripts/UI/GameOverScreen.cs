@@ -11,6 +11,8 @@ public class GameOverScreen : MonoBehaviour
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private TextMeshProUGUI WheatGainedText;
     [SerializeField] private GameObject HUD;
+    [SerializeField] private GameObject winningScreen;
+    [SerializeField] private TextMeshProUGUI winningWheatGainedText;
 
     private int MainMenu = 0;
     private int GameOverGameToMenu = 3;
@@ -24,12 +26,18 @@ public class GameOverScreen : MonoBehaviour
         HUD.SetActive(true);
     }
 
-    public void GameOverTrigger(int WheatGained, bool victory)
+    public void GameOverTrigger(int WheatGained)
     {
         HUD.SetActive(false);
-        if (victory) { WheatGainedText.text = "Wheats Harvested:" + WheatGained.ToString() + " + 1000 Bonus"; }
-        else { WheatGainedText.text = "Wheats Harvested:" + WheatGained.ToString(); }
-        gameOverScreen.SetActive(true);
+        WheatGainedText.text = "Wheats Harvested:" + WheatGained.ToString(); 
+        gameOverScreen.SetActive(true); 
+    }
+
+    public void WinningTrigger(int WheatGained)
+    {
+        HUD.SetActive(false);
+        winningWheatGainedText.text = "Wheats Harvested:" + WheatGained.ToString() + " + 1000 Bonus"; 
+        winningScreen.SetActive(true); 
     }
 
     public void ButtonSelect()
