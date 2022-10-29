@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using TMPro;
 
 public class ShopManager : MonoBehaviour
 {
@@ -42,12 +43,21 @@ public class ShopManager : MonoBehaviour
     private bool NotifTextAlreadyBoughtDisplayed = false;
     private bool NotifTextHaveNotBoughtDisplayed = false;
 
+    [SerializeField] private GameObject trophy;
+    [SerializeField] private TextMeshProUGUI winsText;
+
     private string MaxBought = "Maxed";
 
     private int refundLoops;
 
     private void Start()
     {
+        trophy.SetActive(false);
+
+        if (!PlayerPrefs.HasKey("WinCounter")) { PlayerPrefs.SetInt("WinCounter", 0); }
+        int i = PlayerPrefs.GetInt("WinCounter");
+        if (i > 0) { DisplayTrophy(i); }
+
         Time.timeScale = 1f;
         LoadData();
         AudioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
@@ -564,6 +574,12 @@ public class ShopManager : MonoBehaviour
             if (shopHaveHornScallop) { UpgradesImage[18].sprite = UpgradesSpritesVariants[73]; upgradePriceText[18].text = MaxBought; }
             else { UpgradesImage[18].sprite = UpgradesSpritesVariants[72]; upgradePriceText[18].text = upgradePrices[5].ToString(); }
         }
+    }
+
+    private void DisplayTrophy(int wins)
+    {
+        trophy.SetActive(true);
+        winsText.text = wins.ToString();
     }
 
     IEnumerator NotifTextBuySuccess()

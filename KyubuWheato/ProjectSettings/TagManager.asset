@@ -71,6 +71,8 @@ TagManager:
   - RedWheat
   - BlueWheat
   - GreenWheat
+  - BL
+  - TR
   layers:
   - Default
   - TransparentFX

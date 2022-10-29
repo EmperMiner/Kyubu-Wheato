@@ -181,3 +181,32 @@ MonoBehaviour:
   EnemiesKilled: 0
   EnemyLimit: 1
   ExitHoe: {fileID: 5325896410580884792}
+  notBossFight: 0
+  ArrowVisible: 0
+  haveRedWheat: 0
+  haveBlueWheat: 0
+  haveGreenWheat: 0
+  Level: 0
+  MapSprites:
+  - {fileID: 21300000, guid: c5b6b69784b76d74bb06baab1e019967, type: 3}
+  - {fileID: 21300000, guid: c5b6b69784b76d74bb06baab1e019967, type: 3}
+  - {fileID: 21300000, guid: 558408bbd24d48e47a899d561140a98e, type: 3}
+  - {fileID: 21300000, guid: e8b85e5c97814fa43b1c18f059b187c7, type: 3}
+  - {fileID: 21300000, guid: 06dc6183e7c8a504b87eac42272f448b, type: 3}
+  - {fileID: 21300000, guid: ab24e32e4aeda0545b18dad5df203445, type: 3}
+  - {fileID: 21300000, guid: a1e25c1d49a8d9542b9d13c32a237f81, type: 3}
+  - {fileID: 21300000, guid: 618b96080332dd8479043df833ac89f7, type: 3}
+  - {fileID: 21300000, guid: cfdaeb86aebfc4a468a79b16a2c023ba, type: 3}
+  - {fileID: 21300000, guid: ea99d4d05aa9a224c83e167668f04d7d, type: 3}
+  - {fileID: 21300000, guid: 4e4b9bd2ab04a1b48a319b947ba1e294, type: 3}
+  - {fileID: 21300000, guid: 4e4b9bd2ab04a1b48a319b947ba1e294, type: 3}
+  - {fileID: 21300000, guid: 3293e328c425ef3419d5c484fa033079, type: 3}
+  - {fileID: 21300000, guid: 9e6901735f72b194d9774c36e8e6dd87, type: 3}
+  - {fileID: 21300000, guid: fcd3a60b028aec945bc7f57bda38384d, type: 3}
+  - {fileID: 21300000, guid: 59a106b4809a43242a651ec8e39ff942, type: 3}
+  - {fileID: 21300000, guid: db6e9e8a87f1c5b48b8f24d291214646, type: 3}
+  - {fileID: 21300000, guid: 11c98add1309c1049b8198d6de6bfc35, type: 3}
+  - {fileID: 21300000, guid: 9b2c76600aa4a7c4bb925f9e08cfee31, type: 3}
+  - {fileID: 21300000, guid: d18cc81b75446f94ab563446a31810ec, type: 3}
+  - {fileID: 21300000, guid: c4106e37af29127498801bb048c95430, type: 3}
+  - {fileID: 21300000, guid: c4106e37af29127498801bb048c95430, type: 3}

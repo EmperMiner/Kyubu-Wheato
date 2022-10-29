@@ -90,19 +90,28 @@ public class PlayerController : MonoBehaviour
     private GameObject BlueWheatIndicator;
     private GameObject GreenWheatIndicator;
     private TextMeshProUGUI LevelText;
-
+    private TextMeshProUGUI LevelTextMap;
+    
     private void Awake()
     {       
         SmallText = GameObject.FindGameObjectWithTag("IngameNotifText").GetComponent<TextMeshProUGUI>();
         SmallText.text = "";
         KeyWheatScript = GameObject.FindGameObjectWithTag("ExitHoeContainer").GetComponent<ExitHoeContainer>();
+
         MapDisplay = GameObject.Find("Map");
         RedWheatIndicator = GameObject.Find("RedWheatIndicator");
         BlueWheatIndicator = GameObject.Find("BlueWheatIndicator");
         GreenWheatIndicator = GameObject.Find("GreenWheatIndicator");
         LevelText = GameObject.Find("LevelText").GetComponent<TextMeshProUGUI>();
-        LevelText.text = "Level " + (SceneManager.GetActiveScene().buildIndex - 3);
+        if (SceneManager.GetActiveScene().buildIndex != 15) { LevelText.text = "Level " + (SceneManager.GetActiveScene().buildIndex - 3); }
+        else { LevelText.text = "Level AK_-B(N*#23K+CS!@d"; }
+
+        LevelTextMap = GameObject.Find("LevelTextMap").GetComponent<TextMeshProUGUI>();
+        if (SceneManager.GetActiveScene().buildIndex != 15) { LevelTextMap.text = "Level " + (SceneManager.GetActiveScene().buildIndex - 3); }
+        else { LevelTextMap.text = "Level (#93MS8*-D%LD_-LQ"; }
+
         AudioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+
         healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>();
         ultimateScript = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
         cooldownBarScript = GameObject.FindGameObjectWithTag("CooldownBar").GetComponent<CooldownBar>();
@@ -247,6 +256,7 @@ public class PlayerController : MonoBehaviour
                     requiredWheat += "Red "; 
                     StartCoroutine(NotifTextWarning());
                 }
+                else { NextLevel(SceneManager.GetActiveScene().buildIndex); }
             }
             else if (KeyWheatScript.Level == 3) 
             { 
@@ -256,7 +266,8 @@ public class PlayerController : MonoBehaviour
                     if (!KeyWheatScript.haveBlueWheat) { requiredWheat += "Blue "; }
                     if (!KeyWheatScript.haveGreenWheat) { requiredWheat += "Green "; }
                     StartCoroutine(NotifTextWarning());
-               }
+                }
+                else { NextLevel(SceneManager.GetActiveScene().buildIndex); }
             }        
             else if (!KeyWheatScript.haveRedWheat || !KeyWheatScript.haveBlueWheat || !KeyWheatScript.haveGreenWheat)
             {
@@ -283,6 +294,24 @@ public class PlayerController : MonoBehaviour
     {
         AudioPlayer.PlaySound("UIButtonError");
         SmallText.text = "Needs " + requiredWheat + "Wheat";
+        yield return new WaitForSeconds(1f);
+        SmallText.text = "";
+        yield return null;
+    }
+
+    public IEnumerator NotifTextMapUnlock()
+    {
+        AudioPlayer.PlaySound("MapUnlock");
+        SmallText.text = "Map Revealed";
+        yield return new WaitForSeconds(1f);
+        SmallText.text = "";
+        yield return null;
+    }
+
+    public IEnumerator NotifTextKeyUnlock()
+    {
+        AudioPlayer.PlaySound("MapUnlock");
+        SmallText.text = "Wheat Cards Position Shown";
         yield return new WaitForSeconds(1f);
         SmallText.text = "";
         yield return null;
