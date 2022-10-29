@@ -10,18 +10,28 @@ public class betterEnemySpawner : MonoBehaviour
     private int[] enemySpawned;
     [SerializeField] private bool isSecretLevel;
 
+    private GameObject[] spawnings;
+
     private void Start()
     {
         enemySpawned = new int[enemyPrefabs.Length];
         StartCoroutine(SpawnEnemyStartingDelay());
         if (isSecretLevel) { StartCoroutine(SpawnEnemyInCircle()); }
+        spawnings = GameObject.FindGameObjectsWithTag("MobSpawner");
     }
 
     private IEnumerator SpawnEnemy(float enemyInterval, GameObject enemy, int enemyLimit, int enemyIndex)
     {
         yield return new WaitForSeconds(enemyInterval);
         enemySpawned[enemyIndex]++;
-        Instantiate(enemy, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity);
+        int rand = Random.Range(0,3);
+        if (rand == 0) { Instantiate(enemy, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity); }
+        else 
+        { 
+            Vector3 hi = spawnings[Random.Range(0, spawnings.Length)].transform.position;
+            Instantiate(enemy, new Vector3(hi.x, hi.y, 0), Quaternion.identity); 
+        }
+
         if (enemySpawned[enemyIndex] < enemyLimit) { StartCoroutine(SpawnEnemy(enemyInterval, enemy, enemyLimit, enemyIndex)); }
     }
 

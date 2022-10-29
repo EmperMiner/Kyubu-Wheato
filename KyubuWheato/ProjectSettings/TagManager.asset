@@ -73,6 +73,7 @@ TagManager:
   - GreenWheat
   - BL
   - TR
+  - MobSpawner
   layers:
   - Default
   - TransparentFX

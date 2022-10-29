@@ -15,8 +15,7 @@ public class diceMagnetize : MonoBehaviour
     private PlayerController player;
     private DiceThrow diceThrowScript;
     private Transform playerTransform;
-    private UnityEngine.AI.NavMeshAgent agent;
-    private bool Magnetized = false;
+    
     [SerializeField] private bool DiceIsMultishot;
     [SerializeField] private bool Magnetizable;
     [SerializeField] private float directionX;
@@ -59,9 +58,6 @@ public class diceMagnetize : MonoBehaviour
         if (gameObject.tag == "FakeDice5") { DestroyFakeDice(); }
         if (gameObject.tag == "FakeDice6") { DestroyFakeDice(); }
 
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
 
         if (Magnetizable && haveCupcake) 
         {
@@ -71,11 +67,6 @@ public class diceMagnetize : MonoBehaviour
         StartCoroutine(PickupDelay());
     }
 
-    private void FixedUpdate()
-    {
-        if (Magnetized) { agent.SetDestination(playerTransform.position); }
-    }
-    
     private void AddTorqueImpulse(float angularChangeInDegrees)
     {
         var impulse = (angularChangeInDegrees * Mathf.Deg2Rad) * rb.inertia;
@@ -89,9 +80,12 @@ public class diceMagnetize : MonoBehaviour
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(4f);
         FindObjectOfType<AudioManager>().PlaySound("MagnetizedDice");
-        Magnetized = true;
+        yield return new WaitForSeconds(1f);
+        FindObjectOfType<AudioManager>().PlaySound("DicePickup");
+        player.IncreaseDiceNumber();
+        Destroy(gameObject);
         yield return null;
     }
     
