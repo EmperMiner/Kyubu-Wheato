@@ -84,8 +84,8 @@ public class ExitHoeContainer : MonoBehaviour
         float xLerped = Mathf.InverseLerp(BotLeft.position.x, TopRight.position.x, playerTransform.position.x);
         float yLerped = Mathf.InverseLerp(BotLeft.position.y, TopRight.position.y, playerTransform.position.y);
 
-        float xValue = Mathf.Lerp(-445f, 434f, xLerped);
-        float yValue = Mathf.Lerp(-173f, 187f, yLerped);
+        float xValue = Mathf.Lerp(-337f, 334f, xLerped);
+        float yValue = Mathf.Lerp(-141f, 128f, yLerped);
 
         playerOnMap.anchoredPosition = new Vector3(xValue, yValue, 0.5f);
     }

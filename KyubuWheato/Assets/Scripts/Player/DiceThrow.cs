@@ -8,6 +8,8 @@ using EZCameraShake;
 
 public class DiceThrow : MonoBehaviour
 {
+    private Rigidbody2D playerRB;
+    private Transform playerTransform;
     private Camera mainCam;
     private Vector3 mousePos;
     private PlayerController player;
@@ -18,18 +20,19 @@ public class DiceThrow : MonoBehaviour
     [SerializeField] private GameObject[] MultishotDiceTypes;
     [SerializeField] private GameObject[] FakeMultishotLeftDiceTypes;
     [SerializeField] private GameObject[] FakeMultishotRightDiceTypes;
+    [SerializeField] private GameObject[] chargedDicetypes;
+    [SerializeField] private GameObject[] chargedMultishotDiceTypes;
     [SerializeField] private Transform diceTransform;
     private CooldownBar cooldownBar;
     private UltimateBarCharge ultimateBar;
     private Image[] DicePreviewerImage = new Image[5];
     [SerializeField] private Sprite[] DiceSprites;
     [SerializeField] private GameObject[] KyubuTiles;
-
-    [SerializeField] private int whichever;
     
     private bool inCooldown = false;
     private float cooldownTimer;
-    
+    private bool chargedAttack;
+
     public int diceNumber;
     private float playerCooldownTime;
     private int dicePreviewerLevel;
@@ -66,6 +69,8 @@ public class DiceThrow : MonoBehaviour
 
     void Start()
     {
+        playerRB = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         AudioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
@@ -97,9 +102,11 @@ public class DiceThrow : MonoBehaviour
             if (inCooldown)
             {   
                 cooldownBar.SetCooldown(cooldownTimer*10);
-                cooldownTimer += Time.deltaTime; 
+                if (chargedAttack) { cooldownTimer += Time.deltaTime/5; }
+                else { cooldownTimer += Time.deltaTime; }
                 if (cooldownTimer > playerCooldownTime/10)
                 {
+                    chargedAttack = false;
                     inCooldown = false;
                     cooldownTimer = 0;
                     cooldownBar.CooldownBarInvisible();
@@ -126,6 +133,18 @@ public class DiceThrow : MonoBehaviour
                 DiceCounterNumber.text = diceNumber.ToString();
             }
             else if (Input.GetMouseButtonDown(0)) { AudioPlayer.PlaySound("ThrowDiceDisabled"); }
+
+            if (Input.GetMouseButton(1) && diceNumber > 0 && inCooldown == false && ultimateBar.ultimateInProgress == false)
+            {
+                AudioPlayer.PlaySound("ThrowDice");
+                inCooldown = true;
+                chargedAttack = true;
+                if (haveFlan == true && haveCremeBrulee == false) { ShootTwoChargedDice(); }
+                else if (haveCremeBrulee) { ShootThreeChargedDice(); }
+                else { ShootOneChargedDice(); }
+                DiceCounterNumber.text = diceNumber.ToString();
+            }
+            else if (Input.GetMouseButtonDown(1)) { AudioPlayer.PlaySound("ThrowDiceDisabled"); }
 
             if (Input.GetKeyDown(KeyCode.Q) && ultimateBar.currentUltimateCharge == ultimateBar.maxUltimateCharge && ultimateBar.havePizza == true)
             {
@@ -468,6 +487,43 @@ public class DiceThrow : MonoBehaviour
         }
         else if (diceNumber == 2) { ShootTwoDice(); }
         else { ShootOneDice(); }
+    }
+
+    private void ShootOneChargedDice()
+    {
+        diceNumber--;
+        SaveDiceNumber();
+        Instantiate(chargedDicetypes[DiceValues[0]], diceTransform.position, UnityEngine.Random.rotation);
+        CycleThroughDiceValueArray();
+    }
+    private void ShootTwoChargedDice()
+    {
+        if (diceNumber >= 2)
+        {
+            diceNumber -= 2;
+            SaveDiceNumber();
+            for (int i = 0; i < 2; i++) 
+            { 
+                Instantiate(chargedMultishotDiceTypes[DiceValues[0]], diceTransform.position, UnityEngine.Random.rotation); 
+                CycleThroughDiceValueArray();
+            }
+        }
+        else { ShootOneChargedDice(); }
+    }
+    private void ShootThreeChargedDice()
+    {
+        if (diceNumber >= 3)
+        {
+            diceNumber -= 3;
+            SaveDiceNumber();
+            for (int i = 0; i < 3; i++) 
+            { 
+                Instantiate(chargedMultishotDiceTypes[DiceValues[0]], diceTransform.position, UnityEngine.Random.rotation); 
+                CycleThroughDiceValueArray();
+            }
+        }
+        else if (diceNumber == 2) { ShootTwoChargedDice(); }
+        else { ShootOneChargedDice(); }
     }
 
     IEnumerator ActivateUltimate()

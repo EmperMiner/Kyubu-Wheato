@@ -79,6 +79,7 @@ public class ShopManager : MonoBehaviour
             ShopWheatCounterNumber.text = shopWheat.ToString();
             SaveData();
         }
+        if (Input.GetKeyDown(KeyCode.T)) { PlayerPrefs.SetInt("SavedLevel", 1); }
     } 
  
     public void Buy(int UpgradeValue)

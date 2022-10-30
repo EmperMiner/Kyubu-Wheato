@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class betterEnemySpawner : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class betterEnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(enemyInterval);
         enemySpawned[enemyIndex]++;
         int rand = Random.Range(0,3);
-        if (rand == 0) { Instantiate(enemy, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity); }
+        if (rand > 0 || SceneManager.GetActiveScene().buildIndex == 15) { Instantiate(enemy, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity); }
         else 
         { 
             Vector3 hi = spawnings[Random.Range(0, spawnings.Length)].transform.position;

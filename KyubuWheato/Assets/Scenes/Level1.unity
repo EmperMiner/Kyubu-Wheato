@@ -33587,90 +33587,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6389990453117822191, guid: 8cb6ea45cbefbe144a170e7a132a4d41, type: 3}
   m_PrefabInstance: {fileID: 626162364}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &714086819
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 714086820}
-  - component: {fileID: 714086821}
-  m_Layer: 7
-  m_Name: DiceTransform
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &714086820
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 714086819}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.59, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1194601115}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &714086821
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 714086819}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: c7f47cd6964858145ae97ab92d003bdb, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!1 &728331190
 GameObject:
   m_ObjectHideFlags: 0
@@ -33954,121 +33870,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5479b8d50ad19a4408ecc9b53ef892ee, type: 3}
---- !u!1 &1194601114
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1194601115}
-  - component: {fileID: 1194601116}
-  m_Layer: 7
-  m_Name: Rotator
-  m_TagString: DiceManager
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1194601115
+--- !u!4 &1194601115 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 530435906868019268, guid: a9555b7d28b304e499d5a614f92c0982, type: 3}
+  m_PrefabInstance: {fileID: 530435907922111199}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194601114}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.14, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 714086820}
-  m_Father: {fileID: 1405087408}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1194601116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194601114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c439c6e4247f084297c864234350c70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fakeDiceTypes:
-  - {fileID: 6101733112107348607, guid: 03e88ba43c6ccb044a7e5dc85dfed2af, type: 3}
-  - {fileID: 2297460331419674129, guid: 9a0946131fe0e5841a966df8c7e9881c, type: 3}
-  - {fileID: 7195128439615257229, guid: ea39e503abe50264dadfcfecbd475b0d, type: 3}
-  - {fileID: 6011528366683039447, guid: bdbfe34597a932a408e36827234acf2a, type: 3}
-  - {fileID: 7999765507421223115, guid: 8551939502dadbc48b61c997fbadf112, type: 3}
-  - {fileID: 574205237845065796, guid: c992fe8ef8b690543ac24d6e0178d9a8, type: 3}
-  dicetypes:
-  - {fileID: 5705092907752739581, guid: 6c2e6dd266c647a4ca2e1eb8f9f91cc5, type: 3}
-  - {fileID: 8172298123866409655, guid: 973684b318644fe4ebe66418d1493f38, type: 3}
-  - {fileID: 1459828089717397112, guid: 20a5c520404d5c54f9238f54ae3abe9f, type: 3}
-  - {fileID: 7114270211502127729, guid: a9df15953e839184faf791adef183d66, type: 3}
-  - {fileID: 1588563766128724097, guid: d88cb4d72b7b4ed46a133bae597b899d, type: 3}
-  - {fileID: 3542439814215799712, guid: 769ce80170bc8a34ebeb3878c9745121, type: 3}
-  MultishotDiceTypes:
-  - {fileID: 290477472558822825, guid: 549b2b152fa453b459c77a9357bc824a, type: 3}
-  - {fileID: 2243014547503836990, guid: a148605a605a0184a83bb80d69b32522, type: 3}
-  - {fileID: 4414744190124114413, guid: d88680fb27320a840857388202534f1e, type: 3}
-  - {fileID: 6744136202367864812, guid: 041fc0b186a1377439fa0d5483847ba3, type: 3}
-  - {fileID: 1457076664917287032, guid: cfd1d87cb0b806349b3ed228cc2ec14e, type: 3}
-  - {fileID: 427982493457996520, guid: 9a9f2930ae733da4e9a0d155fa075564, type: 3}
-  FakeMultishotLeftDiceTypes:
-  - {fileID: 4208210667518361820, guid: 55d8e4df784ed5c4d9c426b97fd315fc, type: 3}
-  - {fileID: 5031363006263341889, guid: 4787f4ae75bea4549b53095cf2688a6b, type: 3}
-  - {fileID: 1963286924592635531, guid: afcd036d4fc530641a5c9145a6d37d72, type: 3}
-  - {fileID: 6640734412418283719, guid: fdc49dc19c73d5045b8e4c59b00727ac, type: 3}
-  - {fileID: 2374400190956787126, guid: d910aeb72bc90a84b8d384117ad56d81, type: 3}
-  - {fileID: 5560372495068876589, guid: e2f8a6c91cac45f40aeb011da27e5aa4, type: 3}
-  FakeMultishotRightDiceTypes:
-  - {fileID: 1937124892246141753, guid: 7a16f2ab575e8864faf4d70eb6a903ed, type: 3}
-  - {fileID: 7397685383570034165, guid: 036b1abaac303104e9978a3b99c352d1, type: 3}
-  - {fileID: 6042224947836239621, guid: 3c049ec074acc22449513d24a114256b, type: 3}
-  - {fileID: 3072151134667920572, guid: 5a7eaeaf0358da2438954f1f8d8872a4, type: 3}
-  - {fileID: 2727238522805084412, guid: 6484fbadfd4c9a748a9aa5f0e0cb40b6, type: 3}
-  - {fileID: 8666069454089908796, guid: 1d6b52199ad3fb5448341771132dc9af, type: 3}
-  diceTransform: {fileID: 714086820}
-  DiceSprites:
-  - {fileID: 21300000, guid: f0064a4e2daeefa4f8e78d54bdad2046, type: 3}
-  - {fileID: 21300000, guid: aa8cabe838632544e81df498e2eddaa7, type: 3}
-  - {fileID: 21300000, guid: b53e804681c321b4db082573ca8967ff, type: 3}
-  - {fileID: 21300000, guid: 315bbbfc156c7d7438f8da7ca5e6654a, type: 3}
-  - {fileID: 21300000, guid: 8eddb044e6926fa49ba2de2d63013766, type: 3}
-  - {fileID: 21300000, guid: 62c403f06b473ac4f94fddb7c37dc227, type: 3}
-  KyubuTiles:
-  - {fileID: 4248112938865199798, guid: a4f01445ece9c41499969e605592d927, type: 3}
-  - {fileID: 3080327106070918884, guid: f5cce149241d0ce4e906fc52735b1076, type: 3}
-  - {fileID: 8237918309134486643, guid: 51947124b9657fa4ab1c3d57636ea426, type: 3}
-  - {fileID: 591907398328386461, guid: 280966bd5f5b83646a136e34045535cd, type: 3}
-  - {fileID: 1912423655383428298, guid: 61a035a8859baff4c9eb12ce8be06589, type: 3}
-  - {fileID: 6020544595198355263, guid: 720de443264a7ec40bfd60174104b232, type: 3}
-  - {fileID: 6518503413716656165, guid: 75af3940cec101b4ca49e6b0f13c3538, type: 3}
-  - {fileID: 2135314248640993187, guid: e566d1dfc9c71424a8d694bae7ca14d0, type: 3}
-  - {fileID: 3199337658831333694, guid: 055d1cb503bf2b049aa6cabb59b801b6, type: 3}
-  - {fileID: 6514816559376776414, guid: 3e1060c9ea6fd1b4d97fa570d8295d98, type: 3}
-  - {fileID: 2604802474105421981, guid: 038493b8ebb61674ea8b1dc3640d9170, type: 3}
-  - {fileID: 5077234268740239152, guid: 82b99217a49e74643838a6c00213addb, type: 3}
-  - {fileID: 4583217318136974271, guid: 12976076f01faa4438d3f918aa6a7bfe, type: 3}
-  - {fileID: 4318353916021109916, guid: 97b47f5e05ef7f14cabd180a3238c4e2, type: 3}
-  - {fileID: 7128060687376789456, guid: 28532801f4758c344976709d5edfe059, type: 3}
-  whichever: 0
-  diceNumber: 3
-  KyubuStack: 0
-  inKyubuKombo100: 0
-  isOnDiceTile1: 0
-  isOnDiceTile2: 0
-  isOnDiceTile3: 0
-  isOnDiceTile4: 0
-  isOnDiceTile5: 0
-  isOnDiceTile6: 0
-  isLevel12: 0
 --- !u!1 &1366617120
 GameObject:
   m_ObjectHideFlags: 0
@@ -47159,10 +46965,7 @@ MonoBehaviour:
   animator: {fileID: 1405087412}
   spriteRenderer: {fileID: 1405087413}
   healthBar: {fileID: 0}
-  diceThrowScript: {fileID: 1194601116}
   dicePadSpawnerScript: {fileID: 1508249893}
-  crosshair: {fileID: 714086819}
-  diceThrower: {fileID: 1194601114}
   BroomPrefabs:
   - {fileID: 2933156990235791690, guid: 8d8d9483c1af6c64d99c89c575e86bbe, type: 3}
   - {fileID: 5239859770946935951, guid: f46ea0f2afa0b2940b3786118d244bee, type: 3}
@@ -47709,6 +47512,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33880d9e0175d104b97c8bb5528bb42a, type: 3}
+--- !u!1001 &530435907922111199
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1405087408}
+    m_Modifications:
+    - target: {fileID: 530435906868019268, guid: a9555b7d28b304e499d5a614f92c0982, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 530435906868019268, guid: a9555b7d28b304e499d5a614f92c0982, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 530435906868019268, guid: a9555b7d28b304e499d5a614f92c0982, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 530435906868019268, guid: a9555b7d28b304e499d5a614f92c0982, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 530435906868019268, guid: a9555b7d28b304e499d5a614f92c0982, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 530435906868019268, guid: a9555b7d28b304e499d5a614f92c0982, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 530435906868019268, guid: a9555b7d28b304e499d5a614f92c0982, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 530435906868019268, guid: a9555b7d28b304e499d5a614f92c0982, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 530435906868019268, guid: a9555b7d28b304e499d5a614f92c0982, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 530435906868019268, guid: a9555b7d28b304e499d5a614f92c0982, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 530435906868019268, guid: a9555b7d28b304e499d5a614f92c0982, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 530435906868019269, guid: a9555b7d28b304e499d5a614f92c0982, type: 3}
+      propertyPath: m_Name
+      value: Rotator
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a9555b7d28b304e499d5a614f92c0982, type: 3}
 --- !u!1001 &2762988402620852414
 PrefabInstance:
   m_ObjectHideFlags: 0

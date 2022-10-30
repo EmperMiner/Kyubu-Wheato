@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
     public Renderer spriteRenderer;
     public HealthBar healthBar;
-    [SerializeField] private DiceThrow diceThrowScript;
+    private DiceThrow diceThrowScript;
     [SerializeField] private DicePadSpawner dicePadSpawnerScript;
     private UltimateBarCharge ultimateScript;
     private CooldownBar cooldownBarScript;
@@ -71,8 +71,8 @@ public class PlayerController : MonoBehaviour
     private ExitHoeContainer KeyWheatScript;
 
     private TextMeshProUGUI SmallText;
-    [SerializeField] private GameObject crosshair;
-    [SerializeField] private GameObject diceThrower;
+    private GameObject crosshair;
+    private GameObject diceThrower;
     
     [SerializeField] private GameObject[] BroomPrefabs;
     private bool HasStrengthTemporaryBuff;
@@ -111,7 +111,9 @@ public class PlayerController : MonoBehaviour
         else { LevelTextMap.text = "Level (#93MS8*-D%LD_-LQ"; }
 
         AudioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
-
+        diceThrower = GameObject.FindGameObjectWithTag("DiceManager");
+        crosshair = GameObject.FindGameObjectWithTag("Crosshair");
+        diceThrowScript = GameObject.FindGameObjectWithTag("DiceManager").GetComponent<DiceThrow>();
         healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<HealthBar>();
         ultimateScript = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
         cooldownBarScript = GameObject.FindGameObjectWithTag("CooldownBar").GetComponent<CooldownBar>();
@@ -130,12 +132,15 @@ public class PlayerController : MonoBehaviour
             Wheat = 0;
             LoadData();
             FirstIngameSaveData(); 
+            IngameLoadData();
         }
         else
         {
             SubtractTemporaryBuff();
+            LoadLastSaved();
+            UpdateValues();
         }
-        IngameLoadData();
+        
         WheatCounterNumber.text = Wheat.ToString();
 
         if (XSpawnpoints.Length > 0)
@@ -212,6 +217,7 @@ public class PlayerController : MonoBehaviour
         dicePadSpawnerScript.DicePadLoadData();
         ultimateScript.UltimateLoadData();
         cooldownBarScript.CooldownBarLoadData();
+        DiceCounterNumber.text = diceNumber.ToString();
     }
 
     private void FixedUpdate()
@@ -247,7 +253,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "GreenWheat") { UnlockKey("Green"); Destroy(other.gameObject); }
         if (other.gameObject.tag == "ExitHoe") 
         { 
-            if (KeyWheatScript.Level == 1) { NextLevel(SceneManager.GetActiveScene().buildIndex); }
+            if (KeyWheatScript.Level == 1) { ToTheNextLevel(); }
             else if (KeyWheatScript.Level == 2) 
             { 
                 if (!KeyWheatScript.haveRedWheat)
@@ -256,7 +262,7 @@ public class PlayerController : MonoBehaviour
                     requiredWheat += "Red "; 
                     StartCoroutine(NotifTextWarning());
                 }
-                else { NextLevel(SceneManager.GetActiveScene().buildIndex); }
+                else { ToTheNextLevel(); }
             }
             else if (KeyWheatScript.Level == 3) 
             { 
@@ -267,7 +273,7 @@ public class PlayerController : MonoBehaviour
                     if (!KeyWheatScript.haveGreenWheat) { requiredWheat += "Green "; }
                     StartCoroutine(NotifTextWarning());
                 }
-                else { NextLevel(SceneManager.GetActiveScene().buildIndex); }
+                else { ToTheNextLevel(); }
             }        
             else if (!KeyWheatScript.haveRedWheat || !KeyWheatScript.haveBlueWheat || !KeyWheatScript.haveGreenWheat)
             {
@@ -277,9 +283,17 @@ public class PlayerController : MonoBehaviour
                 if (!KeyWheatScript.haveGreenWheat) { requiredWheat += "Green "; }
                 StartCoroutine(NotifTextWarning());
             }
-            else { NextLevel(SceneManager.GetActiveScene().buildIndex); }
+            else { ToTheNextLevel(); }
         }
     }
+
+    private void ToTheNextLevel()
+    {
+        int current = PlayerPrefs.GetInt("SavedLevel");
+        PlayerPrefs.SetInt("SavedLevel", current + 1);
+        NextLevel(SceneManager.GetActiveScene().buildIndex);
+    }
+
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "DiceTile1") { diceThrowScript.isOnDiceTile1 = false; AudioPlayer.PlaySound("PadOff"); }
@@ -303,7 +317,7 @@ public class PlayerController : MonoBehaviour
     {
         AudioPlayer.PlaySound("MapUnlock");
         SmallText.text = "Map Revealed";
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         SmallText.text = "";
         yield return null;
     }
@@ -312,7 +326,7 @@ public class PlayerController : MonoBehaviour
     {
         AudioPlayer.PlaySound("MapUnlock");
         SmallText.text = "Wheat Cards Position Shown";
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
         SmallText.text = "";
         yield return null;
     }
@@ -394,6 +408,7 @@ public class PlayerController : MonoBehaviour
 
     private void GameOver()
     {
+        PlayerPrefs.SetInt("SavedLevel", 1);
         AudioPlayer.PlayJingle("GameOver");
         playerAlive = false;
         SaveData();
@@ -405,6 +420,7 @@ public class PlayerController : MonoBehaviour
 
     private void Win()
     {
+        PlayerPrefs.SetInt("SavedLevel", 1);
         gameOverScript.WinningTrigger(Wheat);
         Wheat += 1000;
         AudioPlayer.PlayJingle("YouWon");
@@ -509,10 +525,13 @@ public class PlayerController : MonoBehaviour
 
     private void NextLevel(int currentScene)
     {
+        EnterLevelIngameSaveData();
         SceneManager.LoadScene(currentScene + 1);
     }
     private void LoadToLevel(int wantedScene)
     {
+        EnterLevelIngameSaveData();
+        PlayerPrefs.SetInt("SavedLevel", wantedScene);
         SceneManager.LoadScene(wantedScene + 3);
     }
 
@@ -665,6 +684,65 @@ public class PlayerController : MonoBehaviour
         Debug.Log(json);
 
         File.WriteAllText(Application.dataPath + "/ingameSaveData.json", json);    
+    }
+
+    public void EnterLevelIngameSaveData()
+    {
+        PlayerData savingPlayerData = new PlayerData();
+
+        savingPlayerData.MoveSpeed = MoveSpeed;
+        savingPlayerData.maxHealth = maxHealth;
+        savingPlayerData.playerHealth = playerHealth;
+        savingPlayerData.strength = strength;
+        savingPlayerData.Wheat = Wheat;
+        savingPlayerData.diceNumber = diceNumber;
+        savingPlayerData.playerCooldownTime = playerCooldownTime;
+        savingPlayerData.defense = defense;
+        savingPlayerData.wheatDroprate = wheatDroprate;
+        savingPlayerData.dicePreviewerLevel = dicePreviewerLevel;
+        savingPlayerData.diceDroprate = diceDroprate;
+        savingPlayerData.havePizza = havePizza;
+        savingPlayerData.haveCarrotCake = haveCarrotCake;
+        savingPlayerData.haveFlan = haveFlan;
+        savingPlayerData.haveCremeBrulee = haveCremeBrulee;
+        savingPlayerData.haveBanhmi = haveBanhmi;
+        savingPlayerData.haveCupcake = haveCupcake;
+        savingPlayerData.haveChickenNuggets = haveChickenNuggets;
+        savingPlayerData.havePastelDeChoclo = havePastelDeChoclo;
+        savingPlayerData.haveGarlicBread = haveGarlicBread;
+        savingPlayerData.haveHornScallop = haveHornScallop;
+
+        string json = JsonUtility.ToJson(savingPlayerData);
+        Debug.Log(json);
+
+        File.WriteAllText(Application.dataPath + "/enterLevelSaveData.json", json);    
+    }
+
+    public void LoadLastSaved()
+    {
+        string json = File.ReadAllText(Application.dataPath + "/enterLevelSaveData.json");
+        PlayerData loadedPlayerData = JsonUtility.FromJson<PlayerData>(json);
+
+        MoveSpeed = loadedPlayerData.MoveSpeed;
+        maxHealth = loadedPlayerData.maxHealth;
+        strength = loadedPlayerData.strength;
+        Wheat = loadedPlayerData.Wheat;
+        diceNumber = loadedPlayerData.diceNumber;
+        playerCooldownTime = loadedPlayerData.playerCooldownTime;
+        defense = loadedPlayerData.defense;
+        wheatDroprate = loadedPlayerData.wheatDroprate;
+        dicePreviewerLevel = loadedPlayerData.dicePreviewerLevel;
+        diceDroprate = loadedPlayerData.diceDroprate;
+        havePizza = loadedPlayerData.havePizza;
+        haveCarrotCake = loadedPlayerData.haveCarrotCake;
+        haveFlan = loadedPlayerData.haveFlan;
+        haveCremeBrulee = loadedPlayerData.haveCremeBrulee;
+        haveBanhmi = loadedPlayerData.haveBanhmi;
+        haveCupcake = loadedPlayerData.haveCupcake;
+        haveChickenNuggets = loadedPlayerData.haveChickenNuggets;
+        havePastelDeChoclo = loadedPlayerData.havePastelDeChoclo;
+        haveGarlicBread = loadedPlayerData.haveGarlicBread;
+        haveHornScallop = loadedPlayerData.haveHornScallop;
     }
     
 
