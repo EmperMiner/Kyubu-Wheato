@@ -75,6 +75,10 @@ TagManager:
   - TR
   - MobSpawner
   - Crosshair
+  - FakeDice20
+  - FakeDice8
+  - FakeDice10
+  - FakeDice12
   layers:
   - Default
   - TransparentFX

@@ -228,6 +228,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: betterEnemySpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 2303169879045486102, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486103, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -366,15 +370,9 @@ MonoBehaviour:
     E to open chests
 
     R
-    to turn 6 wheat into bread to heal
+    to turn some wheat into bread to heal
 
-    T to turn 30 wheat into breads to heal
-    more
-
-    Tab to see Map/Wheat Cards
-
-    Destroy all enemies and take back the
-    Golden Wheat for Steve!'
+    Tab to see Map/Wheat Cards'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d49ee2d8e448b6341ac5218e82e2f75e, type: 2}
   m_sharedMaterial: {fileID: 5492453401987223161, guid: d49ee2d8e448b6341ac5218e82e2f75e, type: 2}

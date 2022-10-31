@@ -91384,10 +91384,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Often, to exit the level, you must collect
+  m_text: 'Right click to consume 2 dice for a charged attack
 
-    Wheat Cards scattered
-    around the map!'
+    Charged attacks
+    can be upgraded by opening chests
+
+    Often, to exit the level, you must collect
+
+    Wheat
+    Cards scattered around the map!
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d49ee2d8e448b6341ac5218e82e2f75e, type: 2}
   m_sharedMaterial: {fileID: 5492453401987223161, guid: d49ee2d8e448b6341ac5218e82e2f75e, type: 2}
@@ -91450,7 +91457,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -1663.8512, w: -216.97379}
+  m_margin: {x: 0, y: 0, z: -1930.0437, w: -216.97379}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

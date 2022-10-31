@@ -146,10 +146,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48ddf96928cb5a408e88a78447cb697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 30
+  damage: 45
   isCornRay: 0
   isBossCornRay: 0
+  isInvertedCornray: 0
   isScytheAttack: 0
+  is4thWall: 0
+  isHand: 0
 --- !u!1 &3014875349800989114
 GameObject:
   m_ObjectHideFlags: 0

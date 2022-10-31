@@ -27,7 +27,7 @@ public class BossRandomAttackGenerator : MonoBehaviour
     private GameObject bossHealthFill;
 
     private bool alreadyDamaged;
-    [SerializeField] private int mouseHealth = 12000;
+    [SerializeField] private int mouseHealth = 16000;
     public float RollAttackDelay;
 
     private float bossCanAttack;
@@ -49,9 +49,9 @@ public class BossRandomAttackGenerator : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
 
-        bossDamage = 20;
-        agent.speed = 2;
-        RollAttackDelay = 6f;
+        bossDamage = 30;
+        agent.speed = 3;
+        RollAttackDelay = 5f;
         alreadyDamaged = false;
         inChargingState = false;
 
@@ -125,7 +125,11 @@ public class BossRandomAttackGenerator : MonoBehaviour
             if (other.gameObject.tag == "FakeDice3") { mouseTakeDamage(3); }
             if (other.gameObject.tag == "FakeDice4") { mouseTakeDamage(4); }
             if (other.gameObject.tag == "FakeDice5") { mouseTakeDamage(5); }
-            if (other.gameObject.tag == "FakeDice6") { mouseTakeDamage(6); }      
+            if (other.gameObject.tag == "FakeDice6") { mouseTakeDamage(6); }   
+            if (other.gameObject.tag == "FakeDice8") { mouseTakeDamage(8); ChargeUlt(8); }     
+            if (other.gameObject.tag == "FakeDice10") { mouseTakeDamage(10); ChargeUlt(10); }     
+            if (other.gameObject.tag == "FakeDice12") { mouseTakeDamage(12); ChargeUlt(12); }     
+            if (other.gameObject.tag == "FakeDice20") { mouseTakeDamage(20); }     
         }
     }
 
@@ -161,6 +165,10 @@ public class BossRandomAttackGenerator : MonoBehaviour
         if (collider.gameObject.tag == "FakeDice5") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
         if (collider.gameObject.tag == "FakeDice6") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
         if (collider.gameObject.tag == "BroomAttack") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
+        if (collider.gameObject.tag == "FakeDice8") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
+        if (collider.gameObject.tag == "FakeDice10") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
+        if (collider.gameObject.tag == "FakeDice12") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
+        if (collider.gameObject.tag == "FakeDice20") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
 
         if (collider.gameObject.tag == "Player") { player.spriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
     }

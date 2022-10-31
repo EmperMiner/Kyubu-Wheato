@@ -23,9 +23,9 @@ public class betterEnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnEnemy(float enemyInterval, GameObject enemy, int enemyLimit, int enemyIndex)
     {
-        yield return new WaitForSeconds(enemyInterval);
+        yield return new WaitForSeconds(Random.Range(enemyInterval*0.25f, enemyInterval*1.25f));
         enemySpawned[enemyIndex]++;
-        int rand = Random.Range(0,3);
+        int rand = Random.Range(0,4);
         if (rand > 0 || SceneManager.GetActiveScene().buildIndex == 15) { Instantiate(enemy, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity); }
         else 
         { 
@@ -38,7 +38,7 @@ public class betterEnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnEnemyStartingDelay()
     {
-        yield return new WaitForSeconds(15f);
+        yield return new WaitForSeconds(5f);
         for (int i = 0; i < enemyPrefabs.Length; i++)
         {
             StartCoroutine(SpawnEnemy(enemyIntervals[i], enemyPrefabs[i], enemyLimits[i], i));

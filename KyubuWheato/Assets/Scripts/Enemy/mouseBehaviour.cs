@@ -178,6 +178,10 @@ public class mouseBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "FakeDice4") { mouseTakeDamage(4); }
             if (collider.gameObject.tag == "FakeDice5") { mouseTakeDamage(5); }
             if (collider.gameObject.tag == "FakeDice6") { mouseTakeDamage(6); }      
+            if (collider.gameObject.tag == "FakeDice8") { mouseTakeDamage(8); ChargeUlt(8); }     
+            if (collider.gameObject.tag == "FakeDice10") { mouseTakeDamage(10); ChargeUlt(10); }     
+            if (collider.gameObject.tag == "FakeDice12") { mouseTakeDamage(12); ChargeUlt(12); }     
+            if (collider.gameObject.tag == "FakeDice20") { mouseTakeDamage(20); }   
         }
         if (collider.gameObject.tag == "Player") { mouseCanAttack = mouseAttackSpeed; }
     }
@@ -214,6 +218,10 @@ public class mouseBehaviour : MonoBehaviour
         if (collider.gameObject.tag == "FakeDice5") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
         if (collider.gameObject.tag == "FakeDice6") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
         if (collider.gameObject.tag == "BroomAttack") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
+        if (collider.gameObject.tag == "FakeDice8") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
+        if (collider.gameObject.tag == "FakeDice10") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
+        if (collider.gameObject.tag == "FakeDice12") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
+        if (collider.gameObject.tag == "FakeDice20") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
 
         if (collider.gameObject.tag == "Player") { player.spriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
     }
@@ -230,53 +238,53 @@ public class mouseBehaviour : MonoBehaviour
         int level = SceneManager.GetActiveScene().buildIndex - 4;
         if (isMouse && isMiniBoss == false) 
         { 
-            mouseStrength = Mathf.FloorToInt(level*0.5f + 1.5f);
-            maxMouseHealth = level*4 + 5;
+            mouseStrength = Mathf.FloorToInt(level*1f + 1.5f);
+            maxMouseHealth = level*8 + 5;
             agent.speed = level*0.2f + 1.5f;
         }
         if (isCowman && isMiniBoss == false) 
         { 
-            mouseStrength = Mathf.FloorToInt(level*0.5f + 4f);
-            maxMouseHealth = level*5 + 8;
+            mouseStrength = Mathf.FloorToInt(level*1f + 4f);
+            maxMouseHealth = level*10 + 8;
             agent.speed = level*0.1f + 1.3f;
             agent.acceleration = level*0.1f + 6f;
         }
         if (isHenor && isMiniBoss == false) 
         { 
-            mouseStrength = Mathf.FloorToInt(level*1f + 0.5f);
-            maxMouseHealth = level*3 + 3;
+            mouseStrength = Mathf.FloorToInt(level*2f + 0.5f);
+            maxMouseHealth = level*6 + 3;
             agent.speed = level*0.5f + 1.5f;
         }
         if (isScawy && isMiniBoss == false) 
         { 
-            mouseStrength = Mathf.FloorToInt(level*0.2f + 2f);
-            maxMouseHealth = level*3 + 5;
+            mouseStrength = Mathf.FloorToInt(level*0.4f + 2f);
+            maxMouseHealth = level*6 + 5;
             agent.speed = level*0.1f + 2f;
             agent.acceleration = level*0.3f + 4f;
         }
         if (isMouse && isMiniBoss == true) 
         { 
-            mouseStrength = Mathf.FloorToInt(level*1.5f + 1f);
-            maxMouseHealth = level*30 + 100;
+            mouseStrength = Mathf.FloorToInt(level*3f + 1f);
+            maxMouseHealth = level*60 + 100;
             agent.speed = level*0.2f + 1f;
         }
         if (isCowman && isMiniBoss == true) 
         { 
-            mouseStrength = Mathf.FloorToInt(level*1.8f + 3f);
-            maxMouseHealth = level*45 + 180;
+            mouseStrength = Mathf.FloorToInt(level*3.6f + 3f);
+            maxMouseHealth = level*90 + 180;
             agent.speed = level*0.15f + 1f;
             agent.acceleration = level*0.2f + 5f;
         }
         if (isHenor && isMiniBoss == true) 
         { 
-            mouseStrength = Mathf.FloorToInt(level*0.9f + 1f);
-            maxMouseHealth = level*20 + 40;
+            mouseStrength = Mathf.FloorToInt(level*1.8f + 1f);
+            maxMouseHealth = level*40 + 40;
             agent.speed = level*1f + 3f;
         }
         if (isScawy && isMiniBoss == true) 
         { 
-            mouseStrength = Mathf.FloorToInt(level*1.4f + 2f);
-            maxMouseHealth = level*24 + 60;
+            mouseStrength = Mathf.FloorToInt(level*2.8f + 2f);
+            maxMouseHealth = level*48 + 60;
             agent.speed = level*0.1f + 2f;
             agent.acceleration = level*0.3f + 4f;
         }

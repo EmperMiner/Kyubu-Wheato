@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 179522339808425042}
   m_Layer: 0
   m_Name: LargeMultishotDice4
-  m_TagString: 6sidedDice4
+  m_TagString: FakeDice8
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

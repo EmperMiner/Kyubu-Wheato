@@ -91,9 +91,16 @@ public class PlayerController : MonoBehaviour
     private GameObject GreenWheatIndicator;
     private TextMeshProUGUI LevelText;
     private TextMeshProUGUI LevelTextMap;
+
+    private bool inCooldown = false;
+    private float cooldownTimer;
+    [SerializeField] private float healingCooldownTime = 30f;
+    private int healWheatCost;
     
     private void Awake()
     {       
+        int level = SceneManager.GetActiveScene().buildIndex - 4;
+        healWheatCost = level^2 + 10;
         SmallText = GameObject.FindGameObjectWithTag("IngameNotifText").GetComponent<TextMeshProUGUI>();
         SmallText.text = "";
         KeyWheatScript = GameObject.FindGameObjectWithTag("ExitHoeContainer").GetComponent<ExitHoeContainer>();
@@ -129,6 +136,8 @@ public class PlayerController : MonoBehaviour
 
         if (FirstLevelSave) 
         { 
+            PlayerPrefs.SetFloat("DiceSpinLevel", 0);
+            PlayerPrefs.SetFloat("DiceSpinLevelUp", 1f);
             Wheat = 0;
             LoadData();
             FirstIngameSaveData(); 
@@ -181,8 +190,8 @@ public class PlayerController : MonoBehaviour
             if ( movement.x!=0 ) { animator.SetFloat("Horizontal", movement.x); }
             animator.SetFloat("Speed", movement.sqrMagnitude);
 
-            if (Input.GetKeyDown(KeyCode.R)) { CraftBread(); }
-            if (Input.GetKeyDown(KeyCode.T)) { CraftMoreBread(); }
+            if (Input.GetKeyDown(KeyCode.R) && inCooldown == false) { CraftBread(); }
+            else if (Input.GetKeyDown(KeyCode.R)) { StartCoroutine(CantCraftBread(Mathf.RoundToInt(healingCooldownTime - cooldownTimer))); }
 
             if (Input.GetKeyDown(KeyCode.Tab)) 
             { 
@@ -205,6 +214,16 @@ public class PlayerController : MonoBehaviour
             if (diceThrowScript.isOnDiceTile4 && !other) { diceThrowScript.isOnDiceTile4 = false; }
             if (diceThrowScript.isOnDiceTile5 && !other) { diceThrowScript.isOnDiceTile5 = false; }
             if (diceThrowScript.isOnDiceTile6 && !other) { diceThrowScript.isOnDiceTile6 = false; }
+
+            if (inCooldown)
+            {    
+                cooldownTimer += Time.deltaTime;
+                if (cooldownTimer > healingCooldownTime)
+                {
+                    inCooldown = false;
+                    cooldownTimer = 0;
+                }
+            }
 
             if (playerHealth == 0) { GameOver(); }
         }
@@ -304,6 +323,15 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "DiceTile6") { diceThrowScript.isOnDiceTile6 = false; AudioPlayer.PlaySound("PadOff"); }
     }
 
+    private IEnumerator CantCraftBread(int cooldown)
+    {
+        AudioPlayer.PlaySound("UIButtonError");
+        SmallText.text = "Wait " + cooldown + " before healing again";
+        yield return new WaitForSeconds(1.5f);
+        SmallText.text = "";
+        yield return null;
+    }
+
     private IEnumerator NotifTextWarning()
     {
         AudioPlayer.PlaySound("UIButtonError");
@@ -331,6 +359,15 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
+    public IEnumerator NotifTextChargedATKUpgrade(int ok)
+    {
+        AudioPlayer.PlaySound("MapUnlock");
+        SmallText.text = "Charged Attack Level " + ok;
+        yield return new WaitForSeconds(2f);
+        SmallText.text = "";
+        yield return null;
+    }
+
     private void UnlockKey(string i)
     {
         if (i == "Red") { KeyWheatScript.haveRedWheat = true; RedWheatIndicator.SetActive(true); }
@@ -341,13 +378,7 @@ public class PlayerController : MonoBehaviour
 
     private void CraftBread()
     {
-        if (Wheat >= 6 && playerHealth < maxHealth) { UpdateWheat(-6); UpdateHealth(6); AudioPlayer.PlaySound("Burp"); LatterIngameSaveData();}
-        else if (playerHealth == maxHealth) { AudioPlayer.PlaySound("UIButtonError"); }
-        else { }
-    }
-    private void CraftMoreBread()
-    {
-        if (Wheat >= 30 && playerHealth < maxHealth) { UpdateWheat(-30); UpdateHealth(30); AudioPlayer.PlaySound("Burp"); LatterIngameSaveData();}
+        if (Wheat >= healWheatCost && playerHealth < maxHealth) { UpdateWheat(-healWheatCost); UpdateHealth(Mathf.RoundToInt(maxHealth*0.15f)); AudioPlayer.PlaySound("Burp"); LatterIngameSaveData();}
         else if (playerHealth == maxHealth) { AudioPlayer.PlaySound("UIButtonError"); }
         else { }
     }
@@ -366,6 +397,12 @@ public class PlayerController : MonoBehaviour
         MoveSpeed -= 0.5f;
         if (MoveSpeed < 2.5f) { MoveSpeed = 2.5f; }
         DiceCounterNumber.text = diceNumber.ToString();
+        UpdateValues();
+    }
+
+    public void UseChargeAttack()
+    {
+        diceNumber -= 2;
         UpdateValues();
     }
 

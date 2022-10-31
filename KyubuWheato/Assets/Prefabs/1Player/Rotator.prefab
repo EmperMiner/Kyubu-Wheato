@@ -118,6 +118,19 @@ MonoBehaviour:
   - {fileID: 4583217318136974271, guid: 12976076f01faa4438d3f918aa6a7bfe, type: 3}
   - {fileID: 4318353916021109916, guid: 97b47f5e05ef7f14cabd180a3238c4e2, type: 3}
   - {fileID: 7128060687376789456, guid: 28532801f4758c344976709d5edfe059, type: 3}
+  diceSpinPrefabs:
+  - {fileID: 8132489664897371903, guid: b255c024d2fc26f49944c37edd76a549, type: 3}
+  - {fileID: 8047824590054202328, guid: fb4b069bf7904174b921f633e0adad8e, type: 3}
+  - {fileID: 3945457198069737157, guid: 6e482b032ebad8643bfdbe54e0bace5b, type: 3}
+  - {fileID: 3443330036819916709, guid: a19438a67d1906548af437b53497a5ed, type: 3}
+  - {fileID: 2676252585719432644, guid: 7499a585b37f11a49b782f7f92e7cdf3, type: 3}
+  - {fileID: 3566122768744469098, guid: f31b902a08424f14c8d51a944b297b65, type: 3}
+  - {fileID: 2976806137732519722, guid: 4a548fbb1627ed34995c3652d1d9c2fd, type: 3}
+  - {fileID: 6303115555851974747, guid: 10cdd3b98208c5d419744e0e3838daeb, type: 3}
+  - {fileID: 4706916348783211502, guid: 9d72c18dea05f5248aec96fbb4d2c335, type: 3}
+  - {fileID: 8428880122500096516, guid: 89cc96aeb9fecca40b17ebf27a4fb24f, type: 3}
+  - {fileID: 7486692981826823261, guid: ce400c67f7ac7824d8c669ff74c6fea2, type: 3}
+  - {fileID: 9076578555221302558, guid: 8c7a8818f6a1a9349955ec14e96f0197, type: 3}
   diceNumber: 3
   KyubuStack: 0
   inKyubuKombo100: 0
