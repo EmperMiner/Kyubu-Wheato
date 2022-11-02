@@ -190,11 +190,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyLimits.Array.data[0]
-      value: 70
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyLimits.Array.data[1]
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyLimits.Array.data[2]
@@ -46976,6 +46976,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2e4a18c45679ab7479c51e4b996f625c, type: 3}
   - {fileID: 21300000, guid: e526b7fa05b799d49a29f99f6bf2c235, type: 3}
   - {fileID: 21300000, guid: c4e599516ea3e444b8af44c45e4aba14, type: 3}
+  healingCooldownTime: 30
 --- !u!4 &1405087408
 Transform:
   m_ObjectHideFlags: 0
@@ -47689,11 +47690,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5325896411272710561, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
       propertyPath: EnemyLimit
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5325896411272710561, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
       propertyPath: MapSprites.Array.size
-      value: 24
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 5325896411272710561, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
       propertyPath: MapSprites.Array.data[0]

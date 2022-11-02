@@ -146,12 +146,12 @@ public class ShopManager : MonoBehaviour
         }
         if (UpgradeValue == 6)
         {
-            if (shopWheatDroprate == 50.0 && shopWheat >= upgradePrices[0]) { shopWheatDroprate = 60.0f; shopWheat -= upgradePrices[0]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopWheatDroprate == 60.0 && shopWheat >= upgradePrices[1]) { shopWheatDroprate = 70.0f; shopWheat -= upgradePrices[1]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopWheatDroprate == 70.0 && shopWheat >= upgradePrices[2]) { shopWheatDroprate = 80.0f; shopWheat -= upgradePrices[2]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopWheatDroprate == 80.0 && shopWheat >= upgradePrices[3]) { shopWheatDroprate = 90.0f; shopWheat -= upgradePrices[3]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopWheatDroprate == 90.0 && shopWheat >= upgradePrices[4]) { shopWheatDroprate = 100.0f; shopWheat -= upgradePrices[4]; StartCoroutine(NotifTextBuySuccess()); }
-            else if (shopWheatDroprate == 100.0) { StartCoroutine(NotifTextAlreadyBought()); }
+            if (shopWheatDroprate == 30.0 && shopWheat >= upgradePrices[0]) { shopWheatDroprate = 40.0f; shopWheat -= upgradePrices[0]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopWheatDroprate == 40.0 && shopWheat >= upgradePrices[1]) { shopWheatDroprate = 50.0f; shopWheat -= upgradePrices[1]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopWheatDroprate == 50.0 && shopWheat >= upgradePrices[2]) { shopWheatDroprate = 60.0f; shopWheat -= upgradePrices[2]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopWheatDroprate == 60.0 && shopWheat >= upgradePrices[3]) { shopWheatDroprate = 70.0f; shopWheat -= upgradePrices[3]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopWheatDroprate == 70.0 && shopWheat >= upgradePrices[4]) { shopWheatDroprate = 80.0f; shopWheat -= upgradePrices[4]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopWheatDroprate == 80.0) { StartCoroutine(NotifTextAlreadyBought()); }              
             else { StartCoroutine(NotifTextNotEnoughMoney()); } 
         }
         if (UpgradeValue == 7)
@@ -317,15 +317,15 @@ public class ShopManager : MonoBehaviour
         }
         if (RefundValue == 6 || RefundValue == 420)
         {
-            if (shopWheatDroprate == 50.0) { refundLoops = 0; if (RefundValue != 420) { StartCoroutine(NotifTextHaveNotBought()); } }
-            else if (shopWheatDroprate == 60.0) { refundLoops = 1; }
-            else if (shopWheatDroprate == 70.0) { refundLoops = 2; }
-            else if (shopWheatDroprate == 80.0) { refundLoops = 3; }
-            else if (shopWheatDroprate == 90.0) { refundLoops = 4; }
-            else if (shopWheatDroprate == 100.0) { refundLoops = 5; }
+            if (shopWheatDroprate == 30.0) { refundLoops = 0; if (RefundValue != 420) { StartCoroutine(NotifTextHaveNotBought()); } }
+            else if (shopWheatDroprate == 40.0) { refundLoops = 1; }
+            else if (shopWheatDroprate == 50.0) { refundLoops = 2; }
+            else if (shopWheatDroprate == 60.0) { refundLoops = 3; }
+            else if (shopWheatDroprate == 70.0) { refundLoops = 4; }
+            else if (shopWheatDroprate == 80.0) { refundLoops = 5; }
             else { Debug.Log("Error In Refunding"); }    
             for (int i = 0; i < refundLoops; i++) { shopWheat += upgradePrices[i]; }      
-            shopWheatDroprate = 50.0f;
+            shopWheatDroprate = 30.0f;
         }
         if (RefundValue == 7 || RefundValue == 420)
         {
@@ -497,12 +497,12 @@ public class ShopManager : MonoBehaviour
         }
         if (UpdateUpgradeUI == 6 || UpdateUpgradeUI == 420)
         {
-            if (shopWheatDroprate == 50.0) { UpgradesImage[6].sprite = UpgradesSpritesVariants[36]; upgradePriceText[6].text = upgradePrices[0].ToString(); }
-            else if (shopWheatDroprate == 60.0) { UpgradesImage[6].sprite = UpgradesSpritesVariants[37]; upgradePriceText[6].text = upgradePrices[1].ToString();}
-            else if (shopWheatDroprate == 70.0) { UpgradesImage[6].sprite = UpgradesSpritesVariants[38]; upgradePriceText[6].text = upgradePrices[2].ToString();}
-            else if (shopWheatDroprate == 80.0) { UpgradesImage[6].sprite = UpgradesSpritesVariants[39]; upgradePriceText[6].text = upgradePrices[3].ToString();}
-            else if (shopWheatDroprate == 90.0) { UpgradesImage[6].sprite = UpgradesSpritesVariants[40]; upgradePriceText[6].text = upgradePrices[4].ToString();}
-            else if (shopWheatDroprate == 100.0) { UpgradesImage[6].sprite = UpgradesSpritesVariants[41]; upgradePriceText[6].text = MaxBought;}
+            if (shopWheatDroprate == 30.0) { UpgradesImage[6].sprite = UpgradesSpritesVariants[36]; upgradePriceText[6].text = upgradePrices[0].ToString(); }
+            else if (shopWheatDroprate == 40.0) { UpgradesImage[6].sprite = UpgradesSpritesVariants[37]; upgradePriceText[6].text = upgradePrices[1].ToString();}
+            else if (shopWheatDroprate == 50.0) { UpgradesImage[6].sprite = UpgradesSpritesVariants[38]; upgradePriceText[6].text = upgradePrices[2].ToString();}
+            else if (shopWheatDroprate == 60.0) { UpgradesImage[6].sprite = UpgradesSpritesVariants[39]; upgradePriceText[6].text = upgradePrices[3].ToString();}
+            else if (shopWheatDroprate == 70.0) { UpgradesImage[6].sprite = UpgradesSpritesVariants[40]; upgradePriceText[6].text = upgradePrices[4].ToString();}
+            else if (shopWheatDroprate == 80.0) { UpgradesImage[6].sprite = UpgradesSpritesVariants[41]; upgradePriceText[6].text = MaxBought;}
             else { Debug.Log("Error in Updating UI");}
         }
         if (UpdateUpgradeUI == 7 || UpdateUpgradeUI == 420)

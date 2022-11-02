@@ -45774,6 +45774,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2e4a18c45679ab7479c51e4b996f625c, type: 3}
   - {fileID: 21300000, guid: e526b7fa05b799d49a29f99f6bf2c235, type: 3}
   - {fileID: 21300000, guid: c4e599516ea3e444b8af44c45e4aba14, type: 3}
+  healingCooldownTime: 30
 --- !u!4 &1405087408
 Transform:
   m_ObjectHideFlags: 0
@@ -46116,15 +46117,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyLimits.Array.data[0]
-      value: 133
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyLimits.Array.data[1]
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyLimits.Array.data[2]
-      value: 200
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyLimits.Array.data[3]
@@ -46584,7 +46585,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5325896411272710561, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
       propertyPath: EnemyLimit
-      value: 433
+      value: 219
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
@@ -47506,10 +47507,10 @@ MonoBehaviour:
   - 1
   waveNumbers: 3
   waveInterval:
-  - 40
-  - 40
-  - 40
-  - 40
+  - 30
+  - 30
+  - 30
+  - 30
 --- !u!1 &2952340936557682676
 GameObject:
   m_ObjectHideFlags: 0

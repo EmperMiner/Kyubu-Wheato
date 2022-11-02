@@ -353,13 +353,6 @@ MonoBehaviour:
     loop: 0
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
-  - name: Discord
-    clip: {fileID: 8300000, guid: 667a98e72b590664b9590b2f5230da06, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 1
-    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
-    source: {fileID: 0}
   - name: TumbleweedHit
     clip: {fileID: 8300000, guid: c3dc76f110646ac419b209bac6196209, type: 3}
     volume: 1
@@ -464,6 +457,34 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: Discord
+    clip: {fileID: 8300000, guid: 667a98e72b590664b9590b2f5230da06, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
+    source: {fileID: 0}
+  - name: BGM1
+    clip: {fileID: 8300000, guid: 21765e9024a037844a429b1f12160356, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
+    source: {fileID: 0}
+  - name: BGM2
+    clip: {fileID: 8300000, guid: d6082f5a7c9167a4fbf399db42c852f5, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
+    source: {fileID: 0}
+  - name: BGM3
+    clip: {fileID: 8300000, guid: 1cc099dfb168877459e05ef5f8d6b932, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
     source: {fileID: 0}
   isMainMenu: 0
   isBossFight: 0
