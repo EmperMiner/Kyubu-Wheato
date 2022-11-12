@@ -109,6 +109,8 @@ public class DiceThrow : MonoBehaviour
                 {
                     if (chargedAttack)
                     {
+                        PlayerPrefs.SetInt("ChargedAttacks", PlayerPrefs.GetInt("ChargedAttacks") + 1);
+                        Debug.Log(PlayerPrefs.GetInt("ChargedAttacks"));
                         AudioPlayer.PlaySound("ThrowDice");
                         if (haveFlan == true && haveCremeBrulee == false) { ShootTwoChargedDice(); }
                         else if (haveCremeBrulee) { ShootThreeChargedDice(); }
@@ -180,7 +182,7 @@ public class DiceThrow : MonoBehaviour
             } */
         }  
     }
-
+   
     private void GetDiceValue()
     {
         if (isOnDiceTile6) { RandomDiceValue = 5; }

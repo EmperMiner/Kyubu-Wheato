@@ -72,6 +72,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7db69aed66e0823419452e8b24e1f02f, type: 3}
   - {fileID: 21300000, guid: 1099f7679e9014a44b6df2b9e9fd3234, type: 3}
   - {fileID: 21300000, guid: 6fcb542c4f8438a44bd4c2fe9747a406, type: 3}
+  - {fileID: 21300000, guid: a92bc5e6ccafbaa48a388d5b4bea1934, type: 3}
+  - {fileID: 21300000, guid: 6ccf6eb4f462aa845a658064676a642e, type: 3}
+  - {fileID: 21300000, guid: e4258bb49516727439c4995005d36fbd, type: 3}
   ImagePopup: {fileID: 5822004289717855711, guid: d2dc4dfb1ee8b0c4192e981fb9e19882, type: 3}
   ImagePopupObject: {fileID: 3641310022112643465, guid: d2dc4dfb1ee8b0c4192e981fb9e19882, type: 3}
   prePlaced: 0

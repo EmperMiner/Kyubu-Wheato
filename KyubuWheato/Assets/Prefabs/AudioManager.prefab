@@ -430,13 +430,6 @@ MonoBehaviour:
     loop: 0
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
-  - name: DefenseDown
-    clip: {fileID: 8300000, guid: c0279fc12d1263b46bb2971bd4ad4a85, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
-    source: {fileID: 0}
   - name: LevelName
     clip: {fileID: 8300000, guid: 3276b1a396baf2d4598e0d94a1463271, type: 3}
     volume: 1
@@ -485,6 +478,111 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
+    source: {fileID: 0}
+  - name: DefenseDown
+    clip: {fileID: 8300000, guid: c0279fc12d1263b46bb2971bd4ad4a85, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: CrescentBreak1
+    clip: {fileID: 8300000, guid: 1f876d802ff89e446b5a5019c8d87782, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: CrescentBreak2
+    clip: {fileID: 8300000, guid: 0669d11fc1c7dc640bcf4f561c34b07e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: CrescentBreak3
+    clip: {fileID: 8300000, guid: 00f0c4688cacb684b91d2668eea5a6d4, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: CrescentBreak4
+    clip: {fileID: 8300000, guid: fb38e4a33861fee46a93a9e304078d1f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: CrescentBreak5
+    clip: {fileID: 8300000, guid: b41ce29037a4f3d4e820f6e4e0d52e1e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: CrescentBreak6
+    clip: {fileID: 8300000, guid: 8d9ab440753a3c749bafa99b223c1590, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: UnlockEntree
+    clip: {fileID: 8300000, guid: beae25f590eadb949b2d7da71f0a67df, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: TimeCrescent
+    clip: {fileID: 8300000, guid: 9f050bac17ee6e74fb52e508d8dd08c2, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: Iframe
+    clip: {fileID: 8300000, guid: 5a3da2794676d764c86adf6fc4c06217, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: WhaleJumpscare
+    clip: {fileID: 8300000, guid: 5166904006e1fe04bb47719d697fd245, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: WhaleLaugh
+    clip: {fileID: 8300000, guid: 9d1eacf0335d32c44adbbb9ef833ff19, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: WindingMusicBox
+    clip: {fileID: 8300000, guid: 7cd8341e4d4732f44b527de04c77c18a, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: WitchPotion
+    clip: {fileID: 8300000, guid: d0157fc1b2f1a444dbeba05ebca158fc, type: 3}
+    volume: 0.65
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: WaterSplash
+    clip: {fileID: 8300000, guid: db26d0064e280b642ba3c2cb288ff29e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   isMainMenu: 0
   isBossFight: 0

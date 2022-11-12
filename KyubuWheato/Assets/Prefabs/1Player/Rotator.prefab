@@ -141,6 +141,7 @@ MonoBehaviour:
   isOnDiceTile5: 0
   isOnDiceTile6: 0
   isLevel12: 0
+  HeatRiserSprite: {fileID: 0}
 --- !u!1 &530435908283872124
 GameObject:
   m_ObjectHideFlags: 0

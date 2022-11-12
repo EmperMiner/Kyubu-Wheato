@@ -84,6 +84,7 @@ public class mouseBehaviour : MonoBehaviour
         CheckForValidSpawn = true;
         
         StartCoroutine(ValidSpawn());
+        StartCoroutine(RandomSpeedOffset());
     }
 
     private void Update()
@@ -230,6 +231,14 @@ public class mouseBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         CheckForValidSpawn = false;
+        yield return null;
+    }
+
+    private IEnumerator RandomSpeedOffset()
+    {
+        yield return new WaitForSeconds(Random.Range(3f, 30f));
+        agent.speed += Random.Range(-1f, 1f);
+        if (agent.speed < 1f) { agent.speed = 1; }
         yield return null;
     }
 

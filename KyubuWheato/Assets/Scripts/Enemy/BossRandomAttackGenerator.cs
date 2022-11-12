@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using EZCameraShake;
+using System;
 
 public class BossRandomAttackGenerator : MonoBehaviour
 {
@@ -75,7 +76,23 @@ public class BossRandomAttackGenerator : MonoBehaviour
             FindObjectOfType<AudioManager>().StopSound("HEAVYFARMER");
             int i = PlayerPrefs.GetInt("WinCounter");
             PlayerPrefs.SetInt("WinCounter", (i + 1));
+
+            int nice = UnityEngine.Random.Range(0,2);
+            if (nice == 0 || PlayerPrefs.GetInt("WinCounter") == 0 || PlayerPrefs.GetInt("WinCounter") >= 7) { UnlockEntree(); }
             Destroy(gameObject);  
+        }
+    }
+
+    private void UnlockEntree()
+    {
+        bool AllEntree = Convert.ToBoolean(PlayerPrefs.GetInt("Ramen")) && Convert.ToBoolean(PlayerPrefs.GetInt("Ramen")) && Convert.ToBoolean(PlayerPrefs.GetInt("Ramen"));
+        if (!AllEntree)
+        {
+            int Entree = UnityEngine.Random.Range(0,3);
+            if (Entree == 0 && PlayerPrefs.GetInt("Ramen") == 0) { PlayerPrefs.SetInt("Ramen", 1); PlayerPrefs.SetInt("NewEntreeScreen", 1); }
+            else if (Entree == 1 && PlayerPrefs.GetInt("Salmon") == 0) { PlayerPrefs.SetInt("Salmon", 1); PlayerPrefs.SetInt("NewEntreeScreen", 1); }
+            else if (Entree == 2 && PlayerPrefs.GetInt("Steak") == 0) { PlayerPrefs.SetInt("Steak", 1); PlayerPrefs.SetInt("NewEntreeScreen", 1); }
+            else { UnlockEntree(); }
         }
     }
 
@@ -84,7 +101,7 @@ public class BossRandomAttackGenerator : MonoBehaviour
         if (RollAttack)
         {   
             yield return new WaitForSeconds(RollAttackDelay);
-            AttackRolled = Random.Range(1,11);
+            AttackRolled = UnityEngine.Random.Range(1,11);
             StartCoroutine(RollAttackFunc());
         }
         else { yield return null; }

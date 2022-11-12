@@ -96,9 +96,16 @@ public class PlayerController : MonoBehaviour
     private float cooldownTimer;
     [SerializeField] private float healingCooldownTime = 30f;
     private int healWheatCost;
+    private bool SalmonStarted;
+    private bool Invincible;
+    [SerializeField] private GameObject SalmonRiser;
     
     private void Awake()
     {       
+        SalmonStarted = false;
+        Invincible = false;
+        SalmonRiser.SetActive(false);
+        
         int level = SceneManager.GetActiveScene().buildIndex - 4;
         healWheatCost = level^2 + 10;
         SmallText = GameObject.FindGameObjectWithTag("IngameNotifText").GetComponent<TextMeshProUGUI>();
@@ -129,13 +136,20 @@ public class PlayerController : MonoBehaviour
         gameOverScript = GameObject.FindGameObjectWithTag("GameOverScreen").GetComponent<GameOverScreen>();
         try { victoryScreenScript = GameObject.FindGameObjectWithTag("GameOverScreen").GetComponent<GameOverScreen>(); }
         catch (NullReferenceException) { Debug.Log("Not Level 11"); }
-        
+
         BroomBuffImage = GameObject.FindGameObjectWithTag("BroomBuffImage").GetComponent<Image>();
 
         BroomBuffImage.color = new Color32(255, 255, 255, 0);
 
         if (FirstLevelSave) 
         { 
+            PlayerPrefs.SetInt("ChargedAttacks", 0);
+            PlayerPrefs.SetInt("IngameRamen", 0);
+            PlayerPrefs.SetInt("IngameSalmon", 0);
+            PlayerPrefs.SetInt("IngameSteak", 0);
+            if (PlayerPrefs.GetInt("Ramen") == 1) { PlayerPrefs.SetInt("IngameRamen", 1); }
+            if (PlayerPrefs.GetInt("Salmon") == 1) { PlayerPrefs.SetInt("IngameSalmon", 1); }
+            if (PlayerPrefs.GetInt("Steak") == 1) { PlayerPrefs.SetInt("Steak", 1); }
             PlayerPrefs.SetFloat("DiceSpinLevel", 0);
             PlayerPrefs.SetFloat("DiceSpinLevelUp", 1f);
             Wheat = 0;
@@ -199,6 +213,14 @@ public class PlayerController : MonoBehaviour
                 else { MapDisplay.SetActive(false); }
             }
 
+            if (Input.GetKeyDown(KeyCode.M)) 
+            {
+                for (int i = 0; i < 70; i++)
+                {
+                    IncreaseDiceNumber();
+                }
+            }
+
             if (haveGarlicBread && triggeredBroom == false) { StartCoroutine(RollMode());}
             if (CurrentMode == 1 && BroomInMode == false) { StartCoroutine(AttackMode());}
             if (CurrentMode == 2 && BroomInMode == false) { StartCoroutine(HealMode());}
@@ -214,6 +236,9 @@ public class PlayerController : MonoBehaviour
             if (diceThrowScript.isOnDiceTile4 && !other) { diceThrowScript.isOnDiceTile4 = false; }
             if (diceThrowScript.isOnDiceTile5 && !other) { diceThrowScript.isOnDiceTile5 = false; }
             if (diceThrowScript.isOnDiceTile6 && !other) { diceThrowScript.isOnDiceTile6 = false; }
+
+            if (PlayerPrefs.GetInt("IngameSalmon") == 1 && SalmonStarted == false) { StartCoroutine(InvincibleWaves()); }
+            if (Invincible) { healthBar.HealthBarFlash(true); }
 
             if (inCooldown)
             {    
@@ -422,6 +447,7 @@ public class PlayerController : MonoBehaviour
 
     public void UpdateHealth(int healthMod)
     {
+        if (Invincible == true && healthMod < 0) { healthMod = 0; AudioPlayer.PlaySound("Iframe"); }
         playerHealth += healthMod;
         healthBar.SetHealth(playerHealth);
         StartCoroutine(FlashingHealthBar());
@@ -557,6 +583,21 @@ public class PlayerController : MonoBehaviour
         UpdateHealth(2);
         yield return new WaitForSeconds(UnityEngine.Random.Range(2f,4f));
         if (RegenStop == false) { StartCoroutine(Regen()); }
+        yield return null;
+    }
+
+    private IEnumerator InvincibleWaves()
+    {
+        SalmonStarted = true;
+        yield return new WaitForSeconds(20f);
+        Invincible = true;
+        AudioPlayer.PlaySound("HeatRiser");
+        SalmonRiser.SetActive(true);
+        yield return new WaitForSeconds(2f + 0.04f*diceNumber);
+        Invincible = false;
+        SalmonRiser.SetActive(false);
+        healthBar.HealthBarFlash(false);
+        StartCoroutine(InvincibleWaves());
         yield return null;
     }
 

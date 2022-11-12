@@ -84,17 +84,21 @@ public class FlippedChestScript : MonoBehaviour
 
     private void ChooseEntree()
     {
-        int EntreeGachaRoll = Random.Range(0, 9);
-        if (EntreeGachaRoll == 0 && player.havePizza == false) { player.havePizza = true; CreateImagePopup(0); }
-        else if (EntreeGachaRoll == 1 && player.haveCarrotCake == false) { player.haveCarrotCake = true; CreateImagePopup(1); }
-        else if (EntreeGachaRoll == 2 && player.haveFlan == false) { player.haveFlan = true; CreateImagePopup(2); }
-        else if (EntreeGachaRoll == 3 && player.haveCremeBrulee == false && player.haveFlan == true) { player.haveCremeBrulee = true; CreateImagePopup(3); }
-        else if (EntreeGachaRoll == 4 && player.haveBanhmi == false && player.dicePreviewerLevel > 0) { player.haveBanhmi = true; CreateImagePopup(4); }
-        else if (EntreeGachaRoll == 5 && player.haveCupcake == false) { player.haveCupcake = true; CreateImagePopup(5); }
-        else if (EntreeGachaRoll == 6 && player.haveChickenNuggets == false) { player.haveChickenNuggets = true; CreateImagePopup(6); }
-        else if (EntreeGachaRoll == 7 && player.havePastelDeChoclo == false) { player.havePastelDeChoclo = true; CreateImagePopup(7); }
-        else if (EntreeGachaRoll == 8 && player.haveGarlicBread == false) { player.haveGarlicBread = true; CreateImagePopup(8); }
-        else { ChooseEntree(); }
+        int EntreeGachaRoll = Random.Range(0, 12);
+        if (EntreeGachaRoll == 0 && player.havePizza == false) { player.havePizza = true; CreateImagePopup(EntreeGachaRoll); }
+        else if (EntreeGachaRoll == 1 && player.haveCarrotCake == false) { player.haveCarrotCake = true; CreateImagePopup(EntreeGachaRoll); }
+        else if (EntreeGachaRoll == 2 && player.haveFlan == false) { player.haveFlan = true; CreateImagePopup(EntreeGachaRoll); }
+        else if (EntreeGachaRoll == 3 && player.haveCremeBrulee == false && player.haveFlan == true) { player.haveCremeBrulee = true; CreateImagePopup(EntreeGachaRoll); }
+        else if (EntreeGachaRoll == 4 && player.haveBanhmi == false && player.dicePreviewerLevel > 0) { player.haveBanhmi = true; CreateImagePopup(EntreeGachaRoll); }
+        else if (EntreeGachaRoll == 5 && player.haveCupcake == false) { player.haveCupcake = true; CreateImagePopup(EntreeGachaRoll); }
+        else if (EntreeGachaRoll == 6 && player.haveChickenNuggets == false) { player.haveChickenNuggets = true; CreateImagePopup(EntreeGachaRoll); }
+        else if (EntreeGachaRoll == 7 && player.havePastelDeChoclo == false) { player.havePastelDeChoclo = true; CreateImagePopup(EntreeGachaRoll); }
+        else if (EntreeGachaRoll == 8 && player.haveGarlicBread == false) { player.haveGarlicBread = true; CreateImagePopup(EntreeGachaRoll); }
+        else if (EntreeGachaRoll == 9 && PlayerPrefs.GetInt("IngameRamen") == 0) { PlayerPrefs.SetInt("IngameRamen", 1); CreateImagePopup(EntreeGachaRoll + 1); }
+        else if (EntreeGachaRoll == 10 && PlayerPrefs.GetInt("IngameSalmon") == 0) { PlayerPrefs.SetInt("IngameSalmon", 1); CreateImagePopup(EntreeGachaRoll + 1); } 
+        else if (EntreeGachaRoll == 11 && PlayerPrefs.GetInt("IngameSteak") == 0) { PlayerPrefs.SetInt("IngameSteak", 1); CreateImagePopup(EntreeGachaRoll + 1); }
+        else if (EntreeGachaRoll <= 8) { ChooseEntree(); }
+        else { ChooseStat(); }
     }
 
     private void ChooseStat()
