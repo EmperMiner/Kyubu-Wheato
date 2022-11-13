@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float healingCooldownTime = 30f;
     private int healWheatCost;
     private bool SalmonStarted;
-    private bool Invincible;
+    public bool Invincible;
     [SerializeField] private GameObject SalmonRiser;
     
     private void Awake()
@@ -143,13 +143,17 @@ public class PlayerController : MonoBehaviour
 
         if (FirstLevelSave) 
         { 
+            PlayerPrefs.SetInt("Crack", 0);
+            ultimateScript.currentUltimateCharge = 0;
+            PlayerPrefs.SetInt("PreviousCrack", 0);
+            PlayerPrefs.SetInt("UltCharge", 0);
             PlayerPrefs.SetInt("ChargedAttacks", 0);
             PlayerPrefs.SetInt("IngameRamen", 0);
             PlayerPrefs.SetInt("IngameSalmon", 0);
             PlayerPrefs.SetInt("IngameSteak", 0);
             if (PlayerPrefs.GetInt("Ramen") == 1) { PlayerPrefs.SetInt("IngameRamen", 1); }
             if (PlayerPrefs.GetInt("Salmon") == 1) { PlayerPrefs.SetInt("IngameSalmon", 1); }
-            if (PlayerPrefs.GetInt("Steak") == 1) { PlayerPrefs.SetInt("Steak", 1); }
+            if (PlayerPrefs.GetInt("Steak") == 1) { PlayerPrefs.SetInt("IngameSteak", 1); }
             PlayerPrefs.SetFloat("DiceSpinLevel", 0);
             PlayerPrefs.SetFloat("DiceSpinLevelUp", 1f);
             Wheat = 0;
@@ -238,7 +242,7 @@ public class PlayerController : MonoBehaviour
             if (diceThrowScript.isOnDiceTile6 && !other) { diceThrowScript.isOnDiceTile6 = false; }
 
             if (PlayerPrefs.GetInt("IngameSalmon") == 1 && SalmonStarted == false) { StartCoroutine(InvincibleWaves()); }
-            if (Invincible) { healthBar.HealthBarFlash(true); }
+            if (Invincible) { healthBar.HealthBarFlash(2); }
 
             if (inCooldown)
             {    
@@ -357,6 +361,14 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
+    public IEnumerator UltNotifText()
+    {
+        SmallText.text = "Ultimate Ready!";
+        yield return new WaitForSeconds(2f);
+        SmallText.text = "";
+        yield return null;
+    }
+
     private IEnumerator NotifTextWarning()
     {
         AudioPlayer.PlaySound("UIButtonError");
@@ -447,7 +459,7 @@ public class PlayerController : MonoBehaviour
 
     public void UpdateHealth(int healthMod)
     {
-        if (Invincible == true && healthMod < 0) { healthMod = 0; AudioPlayer.PlaySound("Iframe"); }
+        if (Invincible == true && healthMod < 0) { healthMod = 0; }
         playerHealth += healthMod;
         healthBar.SetHealth(playerHealth);
         StartCoroutine(FlashingHealthBar());
@@ -496,9 +508,9 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator FlashingHealthBar()
     {
-        healthBar.HealthBarFlash(true);
+        healthBar.HealthBarFlash(1);
         yield return new WaitForSeconds(0.25f);
-        healthBar.HealthBarFlash(false);
+        healthBar.HealthBarFlash(0);
         yield return null;
     }
 
@@ -589,14 +601,14 @@ public class PlayerController : MonoBehaviour
     private IEnumerator InvincibleWaves()
     {
         SalmonStarted = true;
-        yield return new WaitForSeconds(20f);
+        yield return new WaitForSeconds(100f);
         Invincible = true;
         AudioPlayer.PlaySound("HeatRiser");
         SalmonRiser.SetActive(true);
-        yield return new WaitForSeconds(2f + 0.04f*diceNumber);
+        yield return new WaitForSeconds(2f + 0.08f*diceNumber);
         Invincible = false;
         SalmonRiser.SetActive(false);
-        healthBar.HealthBarFlash(false);
+        healthBar.HealthBarFlash(0);
         StartCoroutine(InvincibleWaves());
         yield return null;
     }
@@ -789,6 +801,7 @@ public class PlayerController : MonoBehaviour
         savingPlayerData.havePastelDeChoclo = havePastelDeChoclo;
         savingPlayerData.haveGarlicBread = haveGarlicBread;
         savingPlayerData.haveHornScallop = haveHornScallop;
+        PlayerPrefs.SetInt("UltCharge", ultimateScript.currentUltimateCharge);
 
         string json = JsonUtility.ToJson(savingPlayerData);
         Debug.Log(json);
@@ -821,6 +834,7 @@ public class PlayerController : MonoBehaviour
         havePastelDeChoclo = loadedPlayerData.havePastelDeChoclo;
         haveGarlicBread = loadedPlayerData.haveGarlicBread;
         haveHornScallop = loadedPlayerData.haveHornScallop;
+        ultimateScript.currentUltimateCharge = PlayerPrefs.GetInt("UltCharge");
     }
     
 

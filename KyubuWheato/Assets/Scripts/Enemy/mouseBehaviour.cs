@@ -46,6 +46,7 @@ public class mouseBehaviour : MonoBehaviour
 
     [SerializeField] private GameObject[] enemiesPrefabs;
     [SerializeField] private GameObject crowPrefab;
+    private DiceThrow diceThrowScript;
     private bool CrowCooldown = false;
     private float crowCooldownTimer;
 
@@ -53,12 +54,14 @@ public class mouseBehaviour : MonoBehaviour
     private bool CheckForValidSpawn;
 
     private Transform betterEnemySpawner;
-
     private UltimateBarCharge ultimateBar;
+    private bool stopped;
 
     private void Start()
     {
+        stopped = false;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        diceThrowScript = GameObject.FindGameObjectWithTag("DiceManager").GetComponent<DiceThrow>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
         ExitHoeWinCondition = GameObject.FindGameObjectWithTag("ExitHoeContainer").GetComponent<ExitHoeContainer>();
@@ -130,7 +133,13 @@ public class mouseBehaviour : MonoBehaviour
 
     private void FixedUpdate() 
     {
-       if (badSpawn == false) { agent.SetDestination(playerTransform.position); } 
+        if (badSpawn == false && stopped == false) { agent.SetDestination(playerTransform.position); } 
+        else
+        {
+            agent.isStopped = true;
+            agent.ResetPath();
+            agent.velocity = Vector3.zero;
+        }
     }
 
     private void mouseTakeDamage(int i)
@@ -163,6 +172,12 @@ public class mouseBehaviour : MonoBehaviour
             Destroy(gameObject);
         }  
 
+        if (collider.gameObject.tag == "TimeCrescent")
+        {
+            stopped = true;
+            diceThrowScript.CrescentCrack(1);
+        }
+
         if (alreadyDamaged == false)
         {
             if (collider.gameObject.tag == "6sidedDice1") { mouseTakeDamage(1); ChargeUlt(6); }
@@ -189,11 +204,13 @@ public class mouseBehaviour : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {   
+        if (other.gameObject.tag == "TimeCrescent") { mouseSpriteRenderer.material.color = new Color32(255, 187, 0, 255); }
         if (other.gameObject.tag != "Player") return;
 
         if (mouseCanAttack >= mouseAttackSpeed)
         {
-            FindObjectOfType<AudioManager>().PlaySound("PlayerHurt");
+            if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("PlayerHurt"); }
+            else { FindObjectOfType<AudioManager>().PlaySound("Iframe"); }
             player.UpdateHealth(-mouseStrength + Mathf.RoundToInt((mouseStrength * player.defense)/10));
             mouseCanAttack = 0f;
         }    
@@ -205,6 +222,11 @@ public class mouseBehaviour : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collider)
     {
+        if (collider.gameObject.tag == "TimeCrescent") 
+        { 
+            stopped = false;
+            mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); 
+        }
         if (collider.gameObject.tag == "6sidedDice1") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
         if (collider.gameObject.tag == "6sidedDice2") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); } 
         if (collider.gameObject.tag == "6sidedDice3") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
@@ -236,8 +258,8 @@ public class mouseBehaviour : MonoBehaviour
 
     private IEnumerator RandomSpeedOffset()
     {
-        yield return new WaitForSeconds(Random.Range(3f, 30f));
-        agent.speed += Random.Range(-1f, 1f);
+        yield return new WaitForSeconds(Random.Range(3f, 20f));
+        agent.speed += Random.Range(-0.5f, 1.2f);
         if (agent.speed < 1f) { agent.speed = 1; }
         yield return null;
     }

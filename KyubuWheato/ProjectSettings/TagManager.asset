@@ -79,6 +79,7 @@ TagManager:
   - FakeDice8
   - FakeDice10
   - FakeDice12
+  - TimeCrescent
   layers:
   - Default
   - TransparentFX

@@ -54,13 +54,16 @@ public class FlippedBehaviour : MonoBehaviour
     private bool CheckForValidSpawn;
 
     private Transform betterEnemySpawner;
-
     private UltimateBarCharge ultimateBar;
+    private bool stopped;
+    private DiceThrow diceThrowScript;
 
     private void Start()
     {
+        stopped = false;
         isMoving = true;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        diceThrowScript = GameObject.FindGameObjectWithTag("DiceManager").GetComponent<DiceThrow>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
         betterEnemySpawner = GameObject.FindGameObjectWithTag("betterEnemySpawner").transform;
@@ -86,6 +89,7 @@ public class FlippedBehaviour : MonoBehaviour
         ShotWall = false;
         
         StartCoroutine(ValidSpawn());
+        StartCoroutine(RandomSpeedOffset());
     }
 
     private void Update()
@@ -117,7 +121,13 @@ public class FlippedBehaviour : MonoBehaviour
 
     private void FixedUpdate() 
     {
-       if (badSpawn == false && isMoving) { agent.SetDestination(playerTransform.position); } 
+        if (badSpawn == false && isMoving && stopped == false) { agent.SetDestination(playerTransform.position); } 
+        else
+        {
+            agent.isStopped = true;
+            agent.ResetPath();
+            agent.velocity = Vector3.zero;
+        }
     }
 
     private void mouseTakeDamage(int i)
@@ -148,6 +158,13 @@ public class FlippedBehaviour : MonoBehaviour
             Instantiate(enemiesPrefabs[enemyIndex], new Vector3(betterEnemySpawner.position.x + Random.Range(-10f, 10f), betterEnemySpawner.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity);
             Destroy(gameObject);
         }  
+
+        if (collider.gameObject.tag == "TimeCrescent")
+        {
+            stopped = true;
+            diceThrowScript.CrescentCrack(400);
+            FindObjectOfType<AudioManager>().PlaySound("CrescentBreak" + UnityEngine.Random.Range(1,7));
+        }
 
         if (alreadyDamaged == false)
         {
@@ -189,7 +206,8 @@ public class FlippedBehaviour : MonoBehaviour
 
         if (mouseCanAttack >= mouseAttackSpeed)
         {
-            FindObjectOfType<AudioManager>().PlaySound("PlayerHurt");
+            if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("PlayerHurt"); }
+            else { FindObjectOfType<AudioManager>().PlaySound("Iframe"); }
             player.UpdateHealth(-mouseStrength + Mathf.RoundToInt((mouseStrength * player.defense)/10));
             mouseCanAttack = 0f;
             if (isC) { StartCoroutine(CSplit()); player.HitByC(); FindObjectOfType<AudioManager>().PlaySound("DefenseDown"); }
@@ -203,6 +221,10 @@ public class FlippedBehaviour : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collider)
     {
+        if (collider.gameObject.tag == "TimeCrescent") 
+        { 
+            stopped = false;
+        }
         if (collider.gameObject.tag == "6sidedDice1") { alreadyDamaged = false; }
         if (collider.gameObject.tag == "6sidedDice2") { alreadyDamaged = false; } 
         if (collider.gameObject.tag == "6sidedDice3") { alreadyDamaged = false; }
@@ -219,6 +241,14 @@ public class FlippedBehaviour : MonoBehaviour
         if (collider.gameObject.tag == "BroomAttack") { alreadyDamaged = false; }  
 
         if (collider.gameObject.tag == "Player") { player.spriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
+    }
+
+    private IEnumerator RandomSpeedOffset()
+    {
+        yield return new WaitForSeconds(Random.Range(1f, 18f));
+        agent.speed += Random.Range(-0.3f, 2f);
+        if (agent.speed < 1f) { agent.speed = 1; }
+        yield return null;
     }
 
     private IEnumerator ValidSpawn()

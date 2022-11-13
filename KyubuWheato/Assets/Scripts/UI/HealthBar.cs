@@ -9,7 +9,7 @@ public class HealthBar : MonoBehaviour
 
     private void Start()
     {
-        if (isBossBattle == false) { HealthBarFlash(false); }
+        if (isBossBattle == false) { HealthBarFlash(0); }
     }
 
     public void SetMaxHealth(int playerHealth) 
@@ -23,9 +23,10 @@ public class HealthBar : MonoBehaviour
         healthSlider.value = playerHealth;
     } 
 
-    public void HealthBarFlash(bool flashIndex)
+    public void HealthBarFlash(int flashIndex)
     {
-        if (flashIndex) { healthFill.GetComponent<Image>().color = new Color32(170, 70, 70, 200); }
+        if (flashIndex == 1) { healthFill.GetComponent<Image>().color = new Color32(170, 70, 70, 200); }
+        else if (flashIndex == 2) { healthFill.GetComponent<Image>().color = new Color32(255, 255, 255, 200); }
         else { healthFill.GetComponent<Image>().color = new Color32(135, 0, 0, 200); }
     }
 }

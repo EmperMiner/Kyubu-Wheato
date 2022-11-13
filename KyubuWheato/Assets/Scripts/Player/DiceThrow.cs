@@ -67,9 +67,13 @@ public class DiceThrow : MonoBehaviour
     private int[] FakePreviousDiceValues = new int[6];
 
     [SerializeField] private bool isLevel12;
+    [SerializeField] private GameObject TimeCrescent;
+    private SpriteRenderer TimeCrescentSprite;
+    [SerializeField] private Sprite[] CrescentCracks;
 
     void Start()
     {
+        TimeCrescentSprite = TimeCrescent.GetComponent<SpriteRenderer>();
         playerRB = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -162,6 +166,7 @@ public class DiceThrow : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Q) && ultimateBar.currentUltimateCharge == ultimateBar.maxUltimateCharge && ultimateBar.havePizza == true)
             {
+                AudioPlayer.PlaySound("UltimateActive");
                 ultimateBar.IncreaseUltimateCharge(-ultimateBar.maxUltimateCharge);
                 StartCoroutine(ActivateUltimate());
             }
@@ -169,20 +174,34 @@ public class DiceThrow : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha2) && dicePreviewerLevel >= 3 && haveBanhmi == true) { DiceHotkey(2); }
             if (Input.GetKeyDown(KeyCode.Alpha3) && dicePreviewerLevel >= 4 && haveBanhmi == true) { DiceHotkey(3); }
             if (Input.GetKeyDown(KeyCode.Alpha4) && dicePreviewerLevel >= 5 && haveBanhmi == true) { DiceHotkey(4); }
-        /*    if (Input.GetKeyDown(KeyCode.R)) 
-            {
-                float bro = PlayerPrefs.GetFloat("DiceSpinLevel");
-                PlayerPrefs.SetFloat("DiceSpinLevel", bro + 5f); 
-                Debug.Log("Increased Charge Level");
-            }
-            if (Input.GetKeyDown(KeyCode.T)) 
-            {
-                PlayerPrefs.SetFloat("DiceSpinLevel", 1); 
-                Debug.Log("Decreased Charge Level to 1");
-            } */
+
+            if (PlayerPrefs.GetInt("IngameSteak") == 1 && TimeCrescent.activeSelf == false) { StartCrescent(); }
         }  
     }
-   
+    
+    private void StartCrescent()
+    {
+        TimeCrescent.SetActive(true);
+        AudioPlayer.PlaySound("TimeCrescent");
+        TimeCrescentSprite.sprite = CrescentCracks[Mathf.FloorToInt(PlayerPrefs.GetInt("Crack")/800)];
+    }
+
+    public void CrescentCrack(int crack)
+    {
+        PlayerPrefs.SetInt("PreviousCrack", PlayerPrefs.GetInt("Crack"));
+        PlayerPrefs.SetInt("Crack", PlayerPrefs.GetInt("Crack") + crack);
+        TimeCrescentSprite.sprite = CrescentCracks[Mathf.FloorToInt(PlayerPrefs.GetInt("Crack")/800)];
+        if (PlayerPrefs.GetInt("Crack")/800 >= Mathf.FloorToInt(PlayerPrefs.GetInt("PreviousCrack")/800) + 1) { AudioPlayer.PlaySound("CrescentBreak" + UnityEngine.Random.Range(1,7)); }
+        if (PlayerPrefs.GetInt("Crack") >= 8000)
+        {
+            PlayerPrefs.SetInt("Crack", 0);
+            PlayerPrefs.SetInt("PreviousCrack", 0);
+            PlayerPrefs.SetInt("IngameSteak", 0);
+            TimeCrescentSprite.sprite = CrescentCracks[0];
+            TimeCrescent.SetActive(false);
+        }
+    }
+
     private void GetDiceValue()
     {
         if (isOnDiceTile6) { RandomDiceValue = 5; }

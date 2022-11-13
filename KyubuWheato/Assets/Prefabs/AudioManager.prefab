@@ -537,21 +537,21 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: TimeCrescent
     clip: {fileID: 8300000, guid: 9f050bac17ee6e74fb52e508d8dd08c2, type: 3}
-    volume: 0.7
+    volume: 0.6
     pitch: 1
     loop: 0
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: Iframe
     clip: {fileID: 8300000, guid: 5a3da2794676d764c86adf6fc4c06217, type: 3}
-    volume: 0.7
+    volume: 1
     pitch: 1
     loop: 0
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: WhaleJumpscare
     clip: {fileID: 8300000, guid: 5166904006e1fe04bb47719d697fd245, type: 3}
-    volume: 0.7
+    volume: 0.5
     pitch: 1
     loop: 0
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
@@ -565,7 +565,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: WindingMusicBox
     clip: {fileID: 8300000, guid: 7cd8341e4d4732f44b527de04c77c18a, type: 3}
-    volume: 0.8
+    volume: 1
     pitch: 1
     loop: 0
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
@@ -579,6 +579,20 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: WaterSplash
     clip: {fileID: 8300000, guid: db26d0064e280b642ba3c2cb288ff29e, type: 3}
+    volume: 0.9
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: UltimateCharged
+    clip: {fileID: 8300000, guid: a8a8cb7d2c44eb24cb7fff709f889c1c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: UltimateActive
+    clip: {fileID: 8300000, guid: 66a3b903b298a3b4791b58bab5e79990, type: 3}
     volume: 1
     pitch: 1
     loop: 0

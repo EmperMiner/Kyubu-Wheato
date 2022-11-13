@@ -233,9 +233,9 @@ public class BossRandomAttackGenerator : MonoBehaviour
 
     private IEnumerator FlashingHealthBar()
     {
-        bossHealthBarScript.HealthBarFlash(true);
+        bossHealthBarScript.HealthBarFlash(1);
         yield return new WaitForSeconds(0.3f);
-        bossHealthBarScript.HealthBarFlash(false);
+        bossHealthBarScript.HealthBarFlash(0);
         yield return null;
     }
 
