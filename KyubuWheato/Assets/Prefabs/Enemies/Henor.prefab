@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3082860963927806215}
   - component: {fileID: 3082860963927806214}
   - component: {fileID: 3082860963927806213}
-  - component: {fileID: 5731797234627875183}
   - component: {fileID: 3082860963927806212}
   - component: {fileID: 3082860963927806211}
   - component: {fileID: 3082860963927806210}
@@ -130,18 +129,7 @@ MonoBehaviour:
   - {fileID: 3082860963927806209}
   - {fileID: 1815329666037625875, guid: 460b6b0a664fe41488bdf7a653f220d3, type: 3}
   crowPrefab: {fileID: 0}
---- !u!114 &5731797234627875183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3082860963927806209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f95f391df8103f409607b9da03660c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  Supernova: {fileID: 5566907859428112482, guid: 98c1bed42d99fbd41ab765ffb6bf5706, type: 3}
 --- !u!195 &3082860963927806212
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82677489f74b72244a69cbe380bda90c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Supernova: {fileID: 5566907859428112482, guid: 98c1bed42d99fbd41ab765ffb6bf5706, type: 3}
   maxMouseHealth: 150
   mouseStrength: 15
   mouseAttackSpeed: 5
@@ -142,6 +143,7 @@ MonoBehaviour:
   - {fileID: 7114270211502127729, guid: a9df15953e839184faf791adef183d66, type: 3}
   - {fileID: 1588563766128724097, guid: d88cb4d72b7b4ed46a133bae597b899d, type: 3}
   - {fileID: 3542439814215799712, guid: 769ce80170bc8a34ebeb3878c9745121, type: 3}
+  isMiniBoss: 0
   isMouse: 0
   isCowman: 0
   isHenor: 0

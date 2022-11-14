@@ -101,7 +101,7 @@ public class ShopManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Y)) { PlayerPrefs.SetInt("Salmon", 0); }
         if (Input.GetKeyDown(KeyCode.U)) { PlayerPrefs.SetInt("Steak", 0); }
         if (Input.GetKeyDown(KeyCode.I)) { PlayerPrefs.SetInt("WinCounter", 0); }
-        if (Input.GetKeyDown(KeyCode.O)) { PlayerPrefs.SetInt("Steak", 1); }
+        if (Input.GetKeyDown(KeyCode.O)) { PlayerPrefs.SetInt("Ramen", 1); }
     } 
  
     public void Buy(int UpgradeValue)

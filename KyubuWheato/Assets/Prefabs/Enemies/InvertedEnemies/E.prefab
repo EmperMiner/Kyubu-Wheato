@@ -73,6 +73,7 @@ MonoBehaviour:
   - {fileID: 6308753891499002788, guid: 5899ab7e71ba3b149a4d710dd40dc329, type: 3}
   crowPrefab: {fileID: 7584795839634895823, guid: 387e74060e6d78746bfae2ad2225afd6, type: 3}
   WallPrefab: {fileID: 0}
+  Supernova: {fileID: 5566907859428112482, guid: 98c1bed42d99fbd41ab765ffb6bf5706, type: 3}
 --- !u!212 &2760173454840875558
 SpriteRenderer:
   m_ObjectHideFlags: 0

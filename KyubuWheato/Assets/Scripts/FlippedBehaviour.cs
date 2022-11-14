@@ -57,6 +57,7 @@ public class FlippedBehaviour : MonoBehaviour
     private UltimateBarCharge ultimateBar;
     private bool stopped;
     private DiceThrow diceThrowScript;
+    [SerializeField] private GameObject Supernova;
 
     private void Start()
     {
@@ -110,6 +111,11 @@ public class FlippedBehaviour : MonoBehaviour
 
         if(mouseHealth <= 0)
         {   
+            if (PlayerPrefs.GetInt("IngameRamen") == 1 && Random.Range(0f, 100f) < 7f + PlayerPrefs.GetInt("ChargedAttacks")*0.1f) 
+            { 
+                Instantiate(Supernova, transform.position, Quaternion.identity); 
+                FindObjectOfType<AudioManager>().PlaySound("Supernova");
+            }
             if (player.InHealMode == true) { player.UpdateHealth(15); }
 
             if (isC) { Instantiate(worseWheatDrop, transform.position, Quaternion.identity); }

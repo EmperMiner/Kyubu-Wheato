@@ -56,6 +56,7 @@ public class mouseBehaviour : MonoBehaviour
     private Transform betterEnemySpawner;
     private UltimateBarCharge ultimateBar;
     private bool stopped;
+    [SerializeField] private GameObject Supernova;
 
     private void Start()
     {
@@ -116,6 +117,11 @@ public class mouseBehaviour : MonoBehaviour
 
         if(mouseHealth <= 0)
         {   
+            if (PlayerPrefs.GetInt("IngameRamen") == 1 && Random.Range(0f, 100f) < 3f + PlayerPrefs.GetInt("ChargedAttacks")*0.1f) 
+            { 
+                Instantiate(Supernova, transform.position, Quaternion.identity); 
+                FindObjectOfType<AudioManager>().PlaySound("Supernova");
+            }
             if (player.InHealMode == true) { player.UpdateHealth(5); }
 
             float RNGWheat = Random.Range(0f, 10f);
