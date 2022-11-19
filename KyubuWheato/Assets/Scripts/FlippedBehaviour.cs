@@ -202,6 +202,7 @@ public class FlippedBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "6sidedDice4" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
             if (collider.gameObject.tag == "6sidedDice5" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
             if (collider.gameObject.tag == "6sidedDice6" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
+            if (collider.gameObject.tag == "Star") { mouseTakeDamage(UnityEngine.Random.Range(1,4) + Mathf.RoundToInt(((player.maxHealth - player.playerHealth)/player.maxHealth)*5)); }  
         }
         if (collider.gameObject.tag == "Player") { mouseCanAttack = mouseAttackSpeed; }
     }
@@ -245,6 +246,11 @@ public class FlippedBehaviour : MonoBehaviour
         if (collider.gameObject.tag == "FakeDice5") { alreadyDamaged = false; }
         if (collider.gameObject.tag == "FakeDice6") { alreadyDamaged = false; }  
         if (collider.gameObject.tag == "BroomAttack") { alreadyDamaged = false; }  
+        if (collider.gameObject.tag == "FakeDice8") { alreadyDamaged = false; }  
+        if (collider.gameObject.tag == "FakeDice10") { alreadyDamaged = false; }  
+        if (collider.gameObject.tag == "FakeDice12") { alreadyDamaged = false; }  
+        if (collider.gameObject.tag == "FakeDice20") { alreadyDamaged = false; }  
+        if (collider.gameObject.tag == "Star") { alreadyDamaged = false; }  
 
         if (collider.gameObject.tag == "Player") { player.spriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
     }

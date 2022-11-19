@@ -99,6 +99,9 @@ public class PlayerController : MonoBehaviour
     private bool SalmonStarted;
     public bool Invincible;
     [SerializeField] private GameObject SalmonRiser;
+
+    private bool FSCInvincible;
+    [SerializeField] private GameObject MyriadCookies;
     
     private void Awake()
     {       
@@ -151,9 +154,13 @@ public class PlayerController : MonoBehaviour
             PlayerPrefs.SetInt("IngameRamen", 0);
             PlayerPrefs.SetInt("IngameSalmon", 0);
             PlayerPrefs.SetInt("IngameSteak", 0);
+            PlayerPrefs.SetInt("IngameCheese", 0);
+            PlayerPrefs.SetInt("IngameFSC", 0);
             if (PlayerPrefs.GetInt("Ramen") == 1) { PlayerPrefs.SetInt("IngameRamen", 1); }
             if (PlayerPrefs.GetInt("Salmon") == 1) { PlayerPrefs.SetInt("IngameSalmon", 1); }
             if (PlayerPrefs.GetInt("Steak") == 1) { PlayerPrefs.SetInt("IngameSteak", 1); }
+            if (PlayerPrefs.GetInt("Cheese") == 1) { PlayerPrefs.SetInt("IngameCheese", 1); }
+            if (PlayerPrefs.GetInt("FSC") == 1) { PlayerPrefs.SetInt("IngameFSC", 1); }
             PlayerPrefs.SetFloat("DiceSpinLevel", 0);
             PlayerPrefs.SetFloat("DiceSpinLevelUp", 1f);
             Wheat = 0;
@@ -217,14 +224,6 @@ public class PlayerController : MonoBehaviour
                 else { MapDisplay.SetActive(false); }
             }
 
-            if (Input.GetKeyDown(KeyCode.M)) 
-            {
-                for (int i = 0; i < 70; i++)
-                {
-                    IncreaseDiceNumber();
-                }
-            }
-
             if (haveGarlicBread && triggeredBroom == false) { StartCoroutine(RollMode());}
             if (CurrentMode == 1 && BroomInMode == false) { StartCoroutine(AttackMode());}
             if (CurrentMode == 2 && BroomInMode == false) { StartCoroutine(HealMode());}
@@ -254,8 +253,26 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if (playerHealth == 0) { GameOver(); }
+            if(GameObject.FindGameObjectsWithTag("Star").Length > 25) 
+            {
+                Destroy(GameObject.FindGameObjectWithTag("Star"));
+            }
+            if ( FSCInvincible == true) { Invincible = true; }
+
+            if (playerHealth == 0 && PlayerPrefs.GetInt("IngameFSC") == 1) { StartCoroutine(FSC()); }
+            else if (playerHealth == 0) { GameOver(); }
         }
+    }
+
+    IEnumerator FSC()
+    {
+        PlayerPrefs.SetInt("IngameFSC", 0);
+        UpdateHealth(maxHealth);
+        FSCInvincible = true;
+        Instantiate(MyriadCookies, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(20f);
+        FSCInvincible = false;
+        yield return null;
     }
 
     public void UpdateValues()

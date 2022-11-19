@@ -80,6 +80,7 @@ TagManager:
   - FakeDice10
   - FakeDice12
   - TimeCrescent
+  - Star
   layers:
   - Default
   - TransparentFX

@@ -92,7 +92,7 @@ public class diceMagnetize : MonoBehaviour
     IEnumerator RollExplosionChance()
     {
         yield return new WaitForSeconds(1f);
-        int i = UnityEngine.Random.Range(0,100);
+        int i = UnityEngine.Random.Range(0,130);
         if (i < 10  + diceThrowScript.KyubuStack) { Explode(); }
         yield return null;
     }

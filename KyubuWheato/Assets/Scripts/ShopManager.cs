@@ -58,6 +58,8 @@ public class ShopManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("Ramen")) { PlayerPrefs.SetInt("Ramen", 0); }
         if (!PlayerPrefs.HasKey("Salmon")) { PlayerPrefs.SetInt("Salmon", 0); }
         if (!PlayerPrefs.HasKey("Steak")) { PlayerPrefs.SetInt("Steak", 0); }
+        if (!PlayerPrefs.HasKey("Cheese")) { PlayerPrefs.SetInt("Cheese", 0); }
+        if (!PlayerPrefs.HasKey("FSC")) { PlayerPrefs.SetInt("FSC", 0); }
     }
 
     private void Start()
@@ -101,7 +103,7 @@ public class ShopManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Y)) { PlayerPrefs.SetInt("Salmon", 0); }
         if (Input.GetKeyDown(KeyCode.U)) { PlayerPrefs.SetInt("Steak", 0); }
         if (Input.GetKeyDown(KeyCode.I)) { PlayerPrefs.SetInt("WinCounter", 0); }
-        if (Input.GetKeyDown(KeyCode.O)) { PlayerPrefs.SetInt("Ramen", 1); }
+        if (Input.GetKeyDown(KeyCode.O)) { PlayerPrefs.SetInt("Cheese", 1); }
     } 
  
     public void Buy(int UpgradeValue)
@@ -275,6 +277,18 @@ public class ShopManager : MonoBehaviour
             int EntreeValue = PlayerPrefs.GetInt("Steak");
             if (EntreeValue == 0) { StartCoroutine(NotifTextHaveNotUnlocked()); }
             else { PlayerPrefs.SetInt("Steak", 1); AudioPlayer.PlaySound("PurchaseShop"); }
+        }
+        if (UpgradeValue == 114)
+        {
+            int EntreeValue = PlayerPrefs.GetInt("Cheese");
+            if (EntreeValue == 0) { StartCoroutine(NotifTextHaveNotUnlocked()); }
+            else { PlayerPrefs.SetInt("Cheese", 1); AudioPlayer.PlaySound("PurchaseShop"); }
+        }
+        if (UpgradeValue == 115)
+        {
+            int EntreeValue = PlayerPrefs.GetInt("FSC");
+            if (EntreeValue == 0) { StartCoroutine(NotifTextHaveNotUnlocked()); }
+            else { PlayerPrefs.SetInt("FSC", 1); AudioPlayer.PlaySound("PurchaseShop"); }
         }
         UpdateUpgradeUI(UpgradeValue);   
         ShopWheatCounterNumber.text = shopWheat.ToString();
@@ -485,6 +499,18 @@ public class ShopManager : MonoBehaviour
             if (EntreeValue == 0) { StartCoroutine(NotifTextHaveNotUnlocked()); }
             else { PlayerPrefs.SetInt("Steak", 2); AudioPlayer.PlaySound("RefundShop"); }
         }
+        if (RefundValue == 114)
+        {
+            int EntreeValue = PlayerPrefs.GetInt("Cheese");
+            if (EntreeValue == 0) { StartCoroutine(NotifTextHaveNotUnlocked()); }
+            else { PlayerPrefs.SetInt("Cheese", 2); AudioPlayer.PlaySound("RefundShop"); }
+        }
+        if (RefundValue == 115)
+        {
+            int EntreeValue = PlayerPrefs.GetInt("FSC");
+            if (EntreeValue == 0) { StartCoroutine(NotifTextHaveNotUnlocked()); }
+            else { PlayerPrefs.SetInt("FSC", 2); AudioPlayer.PlaySound("RefundShop"); }
+        }
         if (refundLoops > 0 || RefundValue == 420) { AudioPlayer.PlaySound("RefundShop"); }
         UpdateUpgradeUI(RefundValue);
         ShopWheatCounterNumber.text = shopWheat.ToString();
@@ -653,6 +679,20 @@ public class ShopManager : MonoBehaviour
             if (EntreeValue == 0) { UpgradesImage[21].sprite = UpgradesSpritesVariants[80]; upgradePriceText[21].text = "???"; }
             else if (EntreeValue == 1) { UpgradesImage[21].sprite = UpgradesSpritesVariants[81]; upgradePriceText[21].text = "Steak"; }
             else { UpgradesImage[21].sprite = UpgradesSpritesVariants[82]; upgradePriceText[21].text = "Steak"; }
+        }
+        if (UpdateUpgradeUI == 114 || UpdateUpgradeUI == 420)
+        {
+            int EntreeValue = PlayerPrefs.GetInt("Cheese");
+            if (EntreeValue == 0) { UpgradesImage[22].sprite = UpgradesSpritesVariants[83]; upgradePriceText[22].text = "???"; }
+            else if (EntreeValue == 1) { UpgradesImage[22].sprite = UpgradesSpritesVariants[84]; upgradePriceText[22].text = "Sharp Cheddar"; }
+            else { UpgradesImage[22].sprite = UpgradesSpritesVariants[85]; upgradePriceText[22].text = "Sharp Cheddar"; }
+        }
+        if (UpdateUpgradeUI == 115 || UpdateUpgradeUI == 420)
+        {
+            int EntreeValue = PlayerPrefs.GetInt("FSC");
+            if (EntreeValue == 0) { UpgradesImage[23].sprite = UpgradesSpritesVariants[86]; upgradePriceText[23].text = "???"; }
+            else if (EntreeValue == 1) { UpgradesImage[23].sprite = UpgradesSpritesVariants[87]; upgradePriceText[23].text = "FSC"; }
+            else { UpgradesImage[23].sprite = UpgradesSpritesVariants[88]; upgradePriceText[23].text = "FSC"; }
         }
     }
 

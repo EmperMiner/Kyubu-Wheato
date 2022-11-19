@@ -155,6 +155,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e40cb0e99cfc1d64fa3fe03d278e87cb, type: 3}
   - {fileID: 21300000, guid: de5065ede35db1840ba76e2efad00526, type: 3}
   - {fileID: 21300000, guid: 6a46ecabcc863e34c8ed8726658549b1, type: 3}
+  starPrefab: {fileID: 6148403404016607509, guid: 5a6f40fe27d0bcd47b2f7cbfc6e91bf6, type: 3}
 --- !u!1 &530435908283872124
 GameObject:
   m_ObjectHideFlags: 0

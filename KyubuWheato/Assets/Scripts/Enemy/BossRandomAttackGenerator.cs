@@ -85,13 +85,14 @@ public class BossRandomAttackGenerator : MonoBehaviour
 
     private void UnlockEntree()
     {
-        bool AllEntree = Convert.ToBoolean(PlayerPrefs.GetInt("Ramen")) && Convert.ToBoolean(PlayerPrefs.GetInt("Ramen")) && Convert.ToBoolean(PlayerPrefs.GetInt("Ramen"));
+        bool AllEntree = Convert.ToBoolean(PlayerPrefs.GetInt("Ramen")) && Convert.ToBoolean(PlayerPrefs.GetInt("Salmon")) && Convert.ToBoolean(PlayerPrefs.GetInt("Steak")) && Convert.ToBoolean(PlayerPrefs.GetInt("Cheese"));
         if (!AllEntree)
         {
-            int Entree = UnityEngine.Random.Range(0,3);
+            int Entree = UnityEngine.Random.Range(0,4);
             if (Entree == 0 && PlayerPrefs.GetInt("Ramen") == 0) { PlayerPrefs.SetInt("Ramen", 1); PlayerPrefs.SetInt("NewEntreeScreen", 1); }
             else if (Entree == 1 && PlayerPrefs.GetInt("Salmon") == 0) { PlayerPrefs.SetInt("Salmon", 1); PlayerPrefs.SetInt("NewEntreeScreen", 1); }
             else if (Entree == 2 && PlayerPrefs.GetInt("Steak") == 0) { PlayerPrefs.SetInt("Steak", 1); PlayerPrefs.SetInt("NewEntreeScreen", 1); }
+            else if (Entree == 3 && PlayerPrefs.GetInt("Cheese") == 0) { PlayerPrefs.SetInt("Cheese", 1); PlayerPrefs.SetInt("NewEntreeScreen", 1); }
             else { UnlockEntree(); }
         }
     }

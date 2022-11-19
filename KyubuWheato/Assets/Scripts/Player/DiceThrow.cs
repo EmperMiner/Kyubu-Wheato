@@ -70,6 +70,7 @@ public class DiceThrow : MonoBehaviour
     [SerializeField] private GameObject TimeCrescent;
     private SpriteRenderer TimeCrescentSprite;
     [SerializeField] private Sprite[] CrescentCracks;
+    [SerializeField] private GameObject starPrefab;
 
     void Start()
     {
@@ -120,6 +121,7 @@ public class DiceThrow : MonoBehaviour
                         else if (haveCremeBrulee) { ShootThreeChargedDice(); }
                         else { ShootOneChargedDice(); }
                         DiceCounterNumber.text = diceNumber.ToString();
+                        if (PlayerPrefs.GetInt("IngameCheese") == 1) { ShootStar(UnityEngine.Random.Range(5, 15)); }
                     }
                     chargedAttack = false;
                     inCooldown = false;
@@ -152,6 +154,7 @@ public class DiceThrow : MonoBehaviour
                 if (haveFlan == true && haveCremeBrulee == false) { ShootTwoDice(); }
                 else if (haveCremeBrulee) { ShootThreeDice(); }
                 else { ShootOneDice(); }
+                if (PlayerPrefs.GetInt("IngameCheese") == 1) { ShootStar(UnityEngine.Random.Range(0, 9)); }
                 DiceCounterNumber.text = diceNumber.ToString();
             }
             else if (Input.GetMouseButtonDown(0)) { AudioPlayer.PlaySound("ThrowDiceDisabled"); }
@@ -359,6 +362,14 @@ public class DiceThrow : MonoBehaviour
                 { 
                     StartCoroutine(KyubuKombo(100)); 
                 }
+        }
+    }
+
+    private void ShootStar(int starAmount)
+    {
+        for (int i = 0; i < starAmount; i++)
+        {
+            Instantiate(starPrefab, diceTransform.position, UnityEngine.Random.rotation); 
         }
     }
 
