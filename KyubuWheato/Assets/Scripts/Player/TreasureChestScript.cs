@@ -15,12 +15,13 @@ public class TreasureChestScript : MonoBehaviour
     [SerializeField] private GameObject[] ChestTypes;
 
     private TextMeshProUGUI SmallText;
-    [SerializeField] private int WheatCost;
+    [SerializeField] private int ChestRarity;
     [SerializeField] private int StatChance;
     [SerializeField] private Sprite[] UpgradeSpritePopup;
     [SerializeField] private SpriteRenderer ImagePopup;
     [SerializeField] private GameObject ImagePopupObject;
     [SerializeField] private bool prePlaced;
+    private int WheatCost;
 
     private void Start()
     {  
@@ -30,6 +31,23 @@ public class TreasureChestScript : MonoBehaviour
         diceThrowScript = GameObject.FindGameObjectWithTag("DiceManager").GetComponent<DiceThrow>();
         chestSpawnerScript = GameObject.FindGameObjectWithTag("ChestManager").GetComponent<TreasureChestSpawner>();
         CloseEnoughToChest = false;
+
+        if (ChestRarity == 0) 
+        { 
+            if (player.Wheat*0.1f < 20) { WheatCost = 20; }
+            else { WheatCost = Mathf.RoundToInt(player.Wheat*0.1f); }
+        }
+        else if (ChestRarity == 1)
+        {
+            if (player.Wheat*0.15f < 40) { WheatCost = 40; }
+            else { WheatCost = Mathf.RoundToInt(player.Wheat*0.15f); }
+        }
+        else 
+        {
+            if (player.Wheat*0.25f < 70) { WheatCost = 70; }
+            else { WheatCost = Mathf.RoundToInt(player.Wheat*0.25f); }
+        }
+
         StartCoroutine(ValidSpawn());
     }
 
@@ -95,7 +113,7 @@ public class TreasureChestScript : MonoBehaviour
 
     private void ChooseEntree()
     {
-        int EntreeGachaRoll = Random.Range(0, 12);
+        int EntreeGachaRoll = Random.Range(0, 13);
         int NewEntreeChance = Random.Range(0, 3);
         if (EntreeGachaRoll == 0 && player.havePizza == false) { player.havePizza = true; CreateImagePopup(EntreeGachaRoll); }
         else if (EntreeGachaRoll == 1 && player.haveCarrotCake == false) { player.haveCarrotCake = true; CreateImagePopup(EntreeGachaRoll); }
@@ -109,6 +127,7 @@ public class TreasureChestScript : MonoBehaviour
         else if (EntreeGachaRoll == 9 && PlayerPrefs.GetInt("IngameRamen") == 0 && NewEntreeChance == 0) { PlayerPrefs.SetInt("IngameRamen", 1); CreateImagePopup(EntreeGachaRoll); }
         else if (EntreeGachaRoll == 10 && PlayerPrefs.GetInt("IngameSalmon") == 0 && NewEntreeChance == 0) { PlayerPrefs.SetInt("IngameSalmon", 1); CreateImagePopup(EntreeGachaRoll); } 
         else if (EntreeGachaRoll == 11 && PlayerPrefs.GetInt("IngameSteak") == 0 && NewEntreeChance == 0) { PlayerPrefs.SetInt("IngameSteak", 1); CreateImagePopup(EntreeGachaRoll); }
+        else if (EntreeGachaRoll == 12 && PlayerPrefs.GetInt("IngameCheese") == 0 && NewEntreeChance == 0) { PlayerPrefs.SetInt("IngameCheese", 1); CreateImagePopup(EntreeGachaRoll); }
         else if (EntreeGachaRoll <= 8) { ChooseEntree(); }
         else { ChooseStat(); }
     }

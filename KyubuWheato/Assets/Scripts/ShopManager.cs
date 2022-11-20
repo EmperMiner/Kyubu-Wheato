@@ -103,7 +103,7 @@ public class ShopManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Y)) { PlayerPrefs.SetInt("Salmon", 0); }
         if (Input.GetKeyDown(KeyCode.U)) { PlayerPrefs.SetInt("Steak", 0); }
         if (Input.GetKeyDown(KeyCode.I)) { PlayerPrefs.SetInt("WinCounter", 0); }
-        if (Input.GetKeyDown(KeyCode.O)) { PlayerPrefs.SetInt("Cheese", 1); }
+        if (Input.GetKeyDown(KeyCode.O)) { PlayerPrefs.SetInt("WinCounter", 0); }
     } 
  
     public void Buy(int UpgradeValue)
@@ -691,7 +691,7 @@ public class ShopManager : MonoBehaviour
         {
             int EntreeValue = PlayerPrefs.GetInt("FSC");
             if (EntreeValue == 0) { UpgradesImage[23].sprite = UpgradesSpritesVariants[86]; upgradePriceText[23].text = "???"; }
-            else if (EntreeValue == 1) { UpgradesImage[23].sprite = UpgradesSpritesVariants[87]; upgradePriceText[23].text = "FSC"; }
+            else if (EntreeValue == 1) { UpgradesImage[23].sprite = UpgradesSpritesVariants[87]; upgradePriceText[23].text = "Frosted Sugar Cookies"; }
             else { UpgradesImage[23].sprite = UpgradesSpritesVariants[88]; upgradePriceText[23].text = "FSC"; }
         }
     }

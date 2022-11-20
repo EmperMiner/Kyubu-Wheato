@@ -30,7 +30,8 @@ public class StaticObjectDamage : MonoBehaviour
             objectCanAttack = 0.8f;
             if (is4thWall)
             {
-                FindObjectOfType<AudioManager>().PlaySound("PlayerHurt");
+                if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("PlayerHurt"); }
+            else { FindObjectOfType<AudioManager>().PlaySound("Iframe"); }
                 player.UpdateHealth(-(player.playerHealth/2));
             }
         }
@@ -42,7 +43,8 @@ public class StaticObjectDamage : MonoBehaviour
 
         if (objectCanAttack >= 0.8f)
         {
-            FindObjectOfType<AudioManager>().PlaySound("PlayerHurt");
+            if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("PlayerHurt"); }
+            else { FindObjectOfType<AudioManager>().PlaySound("Iframe"); }
             if (isScytheAttack) { player.HitByScythe(); }
             if (isHand) { player.HitByHand(); }
             player.UpdateHealth(-damage + Mathf.RoundToInt((damage * player.defense)/10));

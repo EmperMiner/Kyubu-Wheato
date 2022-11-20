@@ -203,6 +203,7 @@ public class FlippedBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "6sidedDice5" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
             if (collider.gameObject.tag == "6sidedDice6" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
             if (collider.gameObject.tag == "Star") { mouseTakeDamage(UnityEngine.Random.Range(1,4) + Mathf.RoundToInt(((player.maxHealth - player.playerHealth)/player.maxHealth)*5)); }  
+            if (collider.gameObject.tag == "100sidedDice") { mouseTakeDamage(UnityEngine.Random.Range(50,100)); }   
         }
         if (collider.gameObject.tag == "Player") { mouseCanAttack = mouseAttackSpeed; }
     }
@@ -251,6 +252,7 @@ public class FlippedBehaviour : MonoBehaviour
         if (collider.gameObject.tag == "FakeDice12") { alreadyDamaged = false; }  
         if (collider.gameObject.tag == "FakeDice20") { alreadyDamaged = false; }  
         if (collider.gameObject.tag == "Star") { alreadyDamaged = false; }  
+        if (collider.gameObject.tag == "100sidedDice") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
 
         if (collider.gameObject.tag == "Player") { player.spriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
     }

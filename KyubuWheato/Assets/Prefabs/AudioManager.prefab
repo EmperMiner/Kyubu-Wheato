@@ -138,7 +138,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: KK6Land
     clip: {fileID: 8300000, guid: a027e165e29c75046a58b08d7c208125, type: 3}
-    volume: 0.434
+    volume: 0.25
     pitch: 1
     loop: 0
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
@@ -479,6 +479,13 @@ MonoBehaviour:
     loop: 1
     group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
     source: {fileID: 0}
+  - name: Sanesss
+    clip: {fileID: 8300000, guid: 4b90a7f0842bbfe43bfd3484fa3c1916, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
+    source: {fileID: 0}
   - name: DefenseDown
     clip: {fileID: 8300000, guid: c0279fc12d1263b46bb2971bd4ad4a85, type: 3}
     volume: 1
@@ -600,6 +607,27 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Supernova
     clip: {fileID: 8300000, guid: 47741b504a979124eb8988496ac3a63c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: FSC
+    clip: {fileID: 8300000, guid: cb937004e403c3e4aa08f20ae1f0ceeb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: LilD
+    clip: {fileID: 8300000, guid: e101282db4c5e8a42865b929f7dd3255, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: Gasp
+    clip: {fileID: 8300000, guid: 7a631995057e21c41b291eb386fe1e5c, type: 3}
     volume: 1
     pitch: 1
     loop: 0

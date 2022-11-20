@@ -133,6 +133,7 @@ MonoBehaviour:
   - {fileID: 8428880122500096516, guid: 89cc96aeb9fecca40b17ebf27a4fb24f, type: 3}
   - {fileID: 7486692981826823261, guid: ce400c67f7ac7824d8c669ff74c6fea2, type: 3}
   - {fileID: 9076578555221302558, guid: 8c7a8818f6a1a9349955ec14e96f0197, type: 3}
+  MyriadCookies: {fileID: 1700445570050176395, guid: f918fe5c8854ff446988bed6bf6f611a, type: 3}
   diceNumber: 3
   KyubuStack: 0
   inKyubuKombo100: 0

@@ -84,7 +84,7 @@ public class FlippedChestScript : MonoBehaviour
 
     private void ChooseEntree()
     {
-        int EntreeGachaRoll = Random.Range(0, 12);
+        int EntreeGachaRoll = Random.Range(0, 13);
         if (EntreeGachaRoll == 0 && player.havePizza == false) { player.havePizza = true; CreateImagePopup(EntreeGachaRoll); }
         else if (EntreeGachaRoll == 1 && player.haveCarrotCake == false) { player.haveCarrotCake = true; CreateImagePopup(EntreeGachaRoll); }
         else if (EntreeGachaRoll == 2 && player.haveFlan == false) { player.haveFlan = true; CreateImagePopup(EntreeGachaRoll); }
@@ -97,6 +97,7 @@ public class FlippedChestScript : MonoBehaviour
         else if (EntreeGachaRoll == 9 && PlayerPrefs.GetInt("IngameRamen") == 0) { PlayerPrefs.SetInt("IngameRamen", 1); CreateImagePopup(EntreeGachaRoll + 1); }
         else if (EntreeGachaRoll == 10 && PlayerPrefs.GetInt("IngameSalmon") == 0) { PlayerPrefs.SetInt("IngameSalmon", 1); CreateImagePopup(EntreeGachaRoll + 1); } 
         else if (EntreeGachaRoll == 11 && PlayerPrefs.GetInt("IngameSteak") == 0) { PlayerPrefs.SetInt("IngameSteak", 1); CreateImagePopup(EntreeGachaRoll + 1); }
+        else if (EntreeGachaRoll == 12 && PlayerPrefs.GetInt("IngameCheese") == 0) { PlayerPrefs.SetInt("IngameCheese", 1); CreateImagePopup(EntreeGachaRoll + 1); }
         else if (EntreeGachaRoll <= 8) { ChooseEntree(); }
         else { ChooseStat(); }
     }

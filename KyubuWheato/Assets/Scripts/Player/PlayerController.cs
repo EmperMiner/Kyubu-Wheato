@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
 
     private bool inCooldown = false;
     private float cooldownTimer;
-    [SerializeField] private float healingCooldownTime = 30f;
+    private float healingCooldownTime;
     private int healWheatCost;
     private bool SalmonStarted;
     public bool Invincible;
@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviour
 
     private bool FSCInvincible;
     [SerializeField] private GameObject MyriadCookies;
+    private bool lowHealth;
     
     private void Awake()
     {       
@@ -110,7 +111,6 @@ public class PlayerController : MonoBehaviour
         SalmonRiser.SetActive(false);
         
         int level = SceneManager.GetActiveScene().buildIndex - 4;
-        healWheatCost = level^2 + 10;
         SmallText = GameObject.FindGameObjectWithTag("IngameNotifText").GetComponent<TextMeshProUGUI>();
         SmallText.text = "";
         KeyWheatScript = GameObject.FindGameObjectWithTag("ExitHoeContainer").GetComponent<ExitHoeContainer>();
@@ -188,13 +188,15 @@ public class PlayerController : MonoBehaviour
         playerHealth = maxHealth;
         crosshair.SetActive(true);
         diceThrower.SetActive(true);
-        
         healthBar.SetMaxHealth(maxHealth);
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").transform; 
         LeftMapLimit = LeftCamLimit - 7.5f;
         RightMapLimit = RightCamLimit + 7.5f;
         UpperMapLimit = UpperCamLimit + 3f;
         LowerMapLimit = LowerCamLimit - 3f;
+
+        healingCooldownTime = 20f;
+        lowHealth = false;
     }
 
     private void Start()
@@ -253,6 +255,8 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
+            if ((float)playerHealth <= maxHealth*0.2f && lowHealth == false) { Gasp(); }
+
             if(GameObject.FindGameObjectsWithTag("Star").Length > 25) 
             {
                 Destroy(GameObject.FindGameObjectWithTag("Star"));
@@ -264,14 +268,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator FSC()
+    private IEnumerator FSC()
     {
         PlayerPrefs.SetInt("IngameFSC", 0);
         UpdateHealth(maxHealth);
         FSCInvincible = true;
+        AudioPlayer.PlaySound("LilD");
+        yield return new WaitForSeconds(3.5f);
         Instantiate(MyriadCookies, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(20f);
+        AudioPlayer.PlaySound("FSC");
+        yield return new WaitForSeconds(16.5f);
         FSCInvincible = false;
+        Invincible = false;
         yield return null;
     }
 
@@ -432,8 +440,19 @@ public class PlayerController : MonoBehaviour
 
     private void CraftBread()
     {
-        if (Wheat >= healWheatCost && playerHealth < maxHealth) { UpdateWheat(-healWheatCost); UpdateHealth(Mathf.RoundToInt(maxHealth*0.15f)); AudioPlayer.PlaySound("Burp"); LatterIngameSaveData();}
-        else if (playerHealth == maxHealth) { AudioPlayer.PlaySound("UIButtonError"); }
+        int level = SceneManager.GetActiveScene().buildIndex - 4;
+        int lowPrice = Mathf.RoundToInt(Mathf.Pow((float)level, 2f) + 15f); 
+        if (Mathf.RoundToInt(Wheat*0.2f) < lowPrice) { healWheatCost = lowPrice; }
+        else { healWheatCost = Mathf.RoundToInt(Wheat*0.2f); }
+        if (Wheat >= healWheatCost && playerHealth < maxHealth) 
+        { 
+            UpdateWheat(-healWheatCost); 
+            UpdateHealth(Mathf.RoundToInt(maxHealth*0.35f));
+            AudioPlayer.PlaySound("Burp"); 
+            inCooldown = true;
+            LatterIngameSaveData();
+        }
+        else if (playerHealth == maxHealth || Wheat < healWheatCost) { AudioPlayer.PlaySound("UIButtonError"); }
         else { }
     }
 
@@ -478,6 +497,9 @@ public class PlayerController : MonoBehaviour
     {
         if (Invincible == true && healthMod < 0) { healthMod = 0; }
         playerHealth += healthMod;
+
+        if ((float)playerHealth > maxHealth*0.2f) { lowHealth = false; }
+
         healthBar.SetHealth(playerHealth);
         StartCoroutine(FlashingHealthBar());
 
@@ -488,6 +510,12 @@ public class PlayerController : MonoBehaviour
         {
             playerHealth = 0;
         }
+    }
+
+    private void Gasp()
+    {
+        lowHealth = true;
+        AudioPlayer.PlaySound("Gasp");
     }
 
     public void UpdateWheat(int wheatMod) 
@@ -819,6 +847,11 @@ public class PlayerController : MonoBehaviour
         savingPlayerData.haveGarlicBread = haveGarlicBread;
         savingPlayerData.haveHornScallop = haveHornScallop;
         PlayerPrefs.SetInt("UltCharge", ultimateScript.currentUltimateCharge);
+        PlayerPrefs.SetInt("IngameRamenSave", PlayerPrefs.GetInt("IngameRamen"));
+        PlayerPrefs.SetInt("IngameSalmonSave", PlayerPrefs.GetInt("IngameSalmon"));
+        PlayerPrefs.SetInt("IngameSteakSave", PlayerPrefs.GetInt("IngameSteak"));
+        PlayerPrefs.SetInt("IngameCheeseSave", PlayerPrefs.GetInt("IngameCheese"));
+        PlayerPrefs.SetInt("IngameFSCSave", PlayerPrefs.GetInt("IngameFSC"));
 
         string json = JsonUtility.ToJson(savingPlayerData);
         Debug.Log(json);
@@ -852,6 +885,11 @@ public class PlayerController : MonoBehaviour
         haveGarlicBread = loadedPlayerData.haveGarlicBread;
         haveHornScallop = loadedPlayerData.haveHornScallop;
         ultimateScript.currentUltimateCharge = PlayerPrefs.GetInt("UltCharge");
+        PlayerPrefs.SetInt("IngameRamen", PlayerPrefs.GetInt("IngameRamenSave"));
+        PlayerPrefs.SetInt("IngameSalmon", PlayerPrefs.GetInt("IngameSalmonSave"));
+        PlayerPrefs.SetInt("IngameSteak", PlayerPrefs.GetInt("IngameSteakSave"));
+        PlayerPrefs.SetInt("IngameCheese", PlayerPrefs.GetInt("IngameCheeseSave"));
+        PlayerPrefs.SetInt("IngameFSC", PlayerPrefs.GetInt("IngameFSCSave"));
     }
     
 

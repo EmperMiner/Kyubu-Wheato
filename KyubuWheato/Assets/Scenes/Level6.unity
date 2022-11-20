@@ -45848,6 +45848,7 @@ MonoBehaviour:
   healingCooldownTime: 30
   Invincible: 0
   SalmonRiser: {fileID: 189789847}
+  MyriadCookies: {fileID: 1700445570050176395, guid: f918fe5c8854ff446988bed6bf6f611a, type: 3}
 --- !u!4 &1405087408
 Transform:
   m_ObjectHideFlags: 0

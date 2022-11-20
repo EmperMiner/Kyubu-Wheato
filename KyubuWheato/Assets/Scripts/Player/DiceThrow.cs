@@ -193,8 +193,10 @@ public class DiceThrow : MonoBehaviour
     {
         PlayerPrefs.SetInt("PreviousCrack", PlayerPrefs.GetInt("Crack"));
         PlayerPrefs.SetInt("Crack", PlayerPrefs.GetInt("Crack") + crack);
-        TimeCrescentSprite.sprite = CrescentCracks[Mathf.FloorToInt(PlayerPrefs.GetInt("Crack")/800)];
+        if (PlayerPrefs.GetInt("Crack") < 8000) { TimeCrescentSprite.sprite = CrescentCracks[Mathf.FloorToInt(PlayerPrefs.GetInt("Crack")/800)]; }
+
         if (PlayerPrefs.GetInt("Crack")/800 >= Mathf.FloorToInt(PlayerPrefs.GetInt("PreviousCrack")/800) + 1) { AudioPlayer.PlaySound("CrescentBreak" + UnityEngine.Random.Range(1,7)); }
+        
         if (PlayerPrefs.GetInt("Crack") >= 8000)
         {
             PlayerPrefs.SetInt("Crack", 0);

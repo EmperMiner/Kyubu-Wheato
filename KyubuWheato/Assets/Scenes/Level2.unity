@@ -90855,6 +90855,7 @@ MonoBehaviour:
   healingCooldownTime: 30
   Invincible: 0
   SalmonRiser: {fileID: 1902850485}
+  MyriadCookies: {fileID: 1700445570050176395, guid: f918fe5c8854ff446988bed6bf6f611a, type: 3}
 --- !u!4 &1405087408
 Transform:
   m_ObjectHideFlags: 0
@@ -91582,6 +91583,7 @@ MonoBehaviour:
   isKyubuTile3Left: 0
   isKyubuTile3Right: 0
   isKyubuTile6: 0
+  isStar: 0
   Dice3: {fileID: 0}
   Dice6: []
 --- !u!1001 &2448566925506791174

@@ -48,7 +48,7 @@ public class crowThrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "MapCollider" || other.gameObject.tag == "chest") { Destroy(gameObject); }
+        if (other.gameObject.tag == "MapCollider" || other.gameObject.tag == "chest" || other.gameObject.tag == "100sidedDice" || other.gameObject.tag == "TimeCrescent") { Destroy(gameObject); }
         if (other.gameObject.tag == "Player") { crowCanAttack = 3f; }
     }
 
@@ -61,7 +61,8 @@ public class crowThrow : MonoBehaviour
 
         if (crowCanAttack >= 3f)
         {
-            FindObjectOfType<AudioManager>().PlaySound("PlayerHurt");
+            if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("PlayerHurt"); }
+            else { FindObjectOfType<AudioManager>().PlaySound("Iframe"); }
             player.UpdateHealth(-attackDamage + Mathf.RoundToInt((attackDamage * player.defense)/10));
             crowCanAttack = 0f;
         }    
