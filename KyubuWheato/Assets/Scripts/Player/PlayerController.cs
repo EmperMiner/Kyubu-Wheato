@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
             if (PlayerPrefs.GetInt("Salmon") == 1) { PlayerPrefs.SetInt("IngameSalmon", 1); }
             if (PlayerPrefs.GetInt("Steak") == 1) { PlayerPrefs.SetInt("IngameSteak", 1); }
             if (PlayerPrefs.GetInt("Cheese") == 1) { PlayerPrefs.SetInt("IngameCheese", 1); }
-            if (PlayerPrefs.GetInt("FSC") == 1) { PlayerPrefs.SetInt("IngameFSC", 1); }
+            if (PlayerPrefs.GetInt("FSC") == 1) { PlayerPrefs.SetInt("IngameFSC", 3); }
             PlayerPrefs.SetFloat("DiceSpinLevel", 0);
             PlayerPrefs.SetFloat("DiceSpinLevelUp", 1f);
             Wheat = 0;
@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
         UpperMapLimit = UpperCamLimit + 3f;
         LowerMapLimit = LowerCamLimit - 3f;
 
-        healingCooldownTime = 20f;
+        healingCooldownTime = 30f;
         lowHealth = false;
     }
 
@@ -255,7 +255,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if ((float)playerHealth <= maxHealth*0.2f && lowHealth == false) { Gasp(); }
+            if ((float)playerHealth <= maxHealth*0.3f && lowHealth == false) { Gasp(); }
 
             if(GameObject.FindGameObjectsWithTag("Star").Length > 25) 
             {
@@ -263,14 +263,20 @@ public class PlayerController : MonoBehaviour
             }
             if ( FSCInvincible == true) { Invincible = true; }
 
-            if (playerHealth == 0 && PlayerPrefs.GetInt("IngameFSC") == 1) { StartCoroutine(FSC()); }
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                Instantiate(MyriadCookies, transform.position, Quaternion.identity);
+                AudioPlayer.PlaySound("FSC");
+            }
+
+            if (playerHealth == 0 && PlayerPrefs.GetInt("IngameFSC") > 0) { StartCoroutine(FSC()); }
             else if (playerHealth == 0) { GameOver(); }
         }
     }
 
     private IEnumerator FSC()
     {
-        PlayerPrefs.SetInt("IngameFSC", 0);
+        PlayerPrefs.SetInt("IngameFSC", PlayerPrefs.GetInt("IngameFSC") - 1);
         UpdateHealth(maxHealth);
         FSCInvincible = true;
         AudioPlayer.PlaySound("LilD");
@@ -386,6 +392,24 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
+    private IEnumerator FullHealth()
+    {
+        AudioPlayer.PlaySound("UIButtonError");
+        SmallText.text = "You're at full health";
+        yield return new WaitForSeconds(1f);
+        SmallText.text = "";
+        yield return null;
+    }
+
+    private IEnumerator NotEnoughWheat()
+    {
+        AudioPlayer.PlaySound("UIButtonError");
+        SmallText.text = "Needs " + requiredWheat + "Wheat";
+        yield return new WaitForSeconds(1f);
+        SmallText.text = "";
+        yield return null;
+    }
+
     public IEnumerator UltNotifText()
     {
         SmallText.text = "Ultimate Ready!";
@@ -444,7 +468,13 @@ public class PlayerController : MonoBehaviour
         int lowPrice = Mathf.RoundToInt(Mathf.Pow((float)level, 2f) + 15f); 
         if (Mathf.RoundToInt(Wheat*0.2f) < lowPrice) { healWheatCost = lowPrice; }
         else { healWheatCost = Mathf.RoundToInt(Wheat*0.2f); }
-        if (Wheat >= healWheatCost && playerHealth < maxHealth) 
+
+        if (Wheat < healWheatCost) 
+        { 
+            requiredWheat = healWheatCost.ToString();
+            StartCoroutine(NotEnoughWheat());
+        }
+        else if (Wheat >= healWheatCost && playerHealth < maxHealth) 
         { 
             UpdateWheat(-healWheatCost); 
             UpdateHealth(Mathf.RoundToInt(maxHealth*0.35f));
@@ -452,8 +482,7 @@ public class PlayerController : MonoBehaviour
             inCooldown = true;
             LatterIngameSaveData();
         }
-        else if (playerHealth == maxHealth || Wheat < healWheatCost) { AudioPlayer.PlaySound("UIButtonError"); }
-        else { }
+        else { StartCoroutine(FullHealth()); }
     }
 
     public void IncreaseDiceNumber()
@@ -475,7 +504,7 @@ public class PlayerController : MonoBehaviour
 
     public void UseChargeAttack()
     {
-        diceNumber -= 2;
+        diceNumber -= 3;
         UpdateValues();
     }
 
@@ -498,7 +527,7 @@ public class PlayerController : MonoBehaviour
         if (Invincible == true && healthMod < 0) { healthMod = 0; }
         playerHealth += healthMod;
 
-        if ((float)playerHealth > maxHealth*0.2f) { lowHealth = false; }
+        if ((float)playerHealth > maxHealth*0.3f) { lowHealth = false; }
 
         healthBar.SetHealth(playerHealth);
         StartCoroutine(FlashingHealthBar());
@@ -637,7 +666,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Regen()
     {
-        UpdateHealth(2);
+        UpdateHealth(Mathf.RoundToInt(maxHealth*0.05f));
         yield return new WaitForSeconds(UnityEngine.Random.Range(2f,4f));
         if (RegenStop == false) { StartCoroutine(Regen()); }
         yield return null;

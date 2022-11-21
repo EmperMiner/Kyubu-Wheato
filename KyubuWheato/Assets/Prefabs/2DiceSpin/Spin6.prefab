@@ -225,7 +225,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &1013949690272293959
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +483,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &1831989671206334680
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,7 +712,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &2976806137732519722
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,8 +725,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8665365058399915142}
-  - component: {fileID: 3693121230618824362}
   - component: {fileID: 8854999652310294945}
+  - component: {fileID: -52379247072221858}
   m_Layer: 0
   m_Name: Spin6
   m_TagString: Untagged
@@ -741,24 +750,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3693121230618824362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2976806137732519722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9d15e48e60b62c4a9faa029fa63c2c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeBeforeDestroy: 5
-  isKyubuTile3Left: 0
-  isKyubuTile3Right: 0
-  isKyubuTile6: 0
-  Dice3: {fileID: 0}
-  Dice6: []
 --- !u!114 &8854999652310294945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,6 +762,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dece68e3b853024a8a62b6870510efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-52379247072221858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2976806137732519722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d15e48e60b62c4a9faa029fa63c2c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBeforeDestroy: 5.5
+  isKyubuTile3Left: 0
+  isKyubuTile3Right: 0
+  isKyubuTile6: 0
+  isStar: 0
+  Dice3: {fileID: 0}
+  Dice6: []
 --- !u!1 &3819602977294973245
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,7 +974,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &5120414075358839261
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,7 +1139,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &6319406373623612215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1320,7 +1336,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &7101595023072467359
 GameObject:
   m_ObjectHideFlags: 0
@@ -1514,7 +1533,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &8254367969928892190
 GameObject:
   m_ObjectHideFlags: 0
@@ -1676,7 +1698,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &8480144625097492701
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,4 +1895,7 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}

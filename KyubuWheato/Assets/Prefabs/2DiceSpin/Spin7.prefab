@@ -161,7 +161,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &1082181905850516983
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,7 +326,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &2652753044822575214
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,7 +491,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &2842763049893413540
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +656,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &3140182173143611369
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,7 +821,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &3204253946139007669
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +986,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &3395339230239772510
 GameObject:
   m_ObjectHideFlags: 0
@@ -1267,8 +1285,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2041406128284936128}
-  - component: {fileID: -3423379480232392609}
   - component: {fileID: -6740888058280246300}
+  - component: {fileID: -3598667305547467897}
   m_Layer: 0
   m_Name: Spin7
   m_TagString: Untagged
@@ -1292,24 +1310,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-3423379480232392609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6303115555851974747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9d15e48e60b62c4a9faa029fa63c2c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeBeforeDestroy: 5.5
-  isKyubuTile3Left: 0
-  isKyubuTile3Right: 0
-  isKyubuTile6: 0
-  Dice3: {fileID: 0}
-  Dice6: []
 --- !u!114 &-6740888058280246300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1322,6 +1322,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dece68e3b853024a8a62b6870510efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3598667305547467897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6303115555851974747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d15e48e60b62c4a9faa029fa63c2c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBeforeDestroy: 5
+  isKyubuTile3Left: 0
+  isKyubuTile3Right: 0
+  isKyubuTile6: 0
+  isStar: 0
+  Dice3: {fileID: 0}
+  Dice6: []
 --- !u!1 &6321635189221803551
 GameObject:
   m_ObjectHideFlags: 0
@@ -1483,7 +1502,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &6682576692482397841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,7 +1667,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &6846519488102817156
 GameObject:
   m_ObjectHideFlags: 0
@@ -1871,7 +1896,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &7405201466331175630
 GameObject:
   m_ObjectHideFlags: 0
@@ -2065,4 +2093,7 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}

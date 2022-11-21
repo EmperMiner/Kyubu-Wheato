@@ -152,7 +152,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: MagnetizedDice
     clip: {fileID: 8300000, guid: d163d959917745740a4bd00bb38b1ddf, type: 3}
-    volume: 0.47
+    volume: 0.23
     pitch: 1
     loop: 0
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}

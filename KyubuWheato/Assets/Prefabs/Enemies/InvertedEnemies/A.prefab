@@ -57,6 +57,8 @@ MonoBehaviour:
   worseWheatDrop: {fileID: 0}
   pfDamagePopup: {fileID: 6478138214433248903, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
   pfDamagePopupText: {fileID: 62537061617949394, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
+  pfDamagePopupCrit: {fileID: 212571527099406956, guid: 7439f9bcb36fa6e4f88ac2a4e65a5199, type: 3}
+  pfDamagePopupTextCrit: {fileID: 6614628894609430073, guid: 7439f9bcb36fa6e4f88ac2a4e65a5199, type: 3}
   isA: 1
   isB: 0
   isC: 0

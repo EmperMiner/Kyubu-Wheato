@@ -127,7 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82677489f74b72244a69cbe380bda90c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Supernova: {fileID: 5566907859428112482, guid: 98c1bed42d99fbd41ab765ffb6bf5706, type: 3}
   maxMouseHealth: 150
   mouseStrength: 15
   mouseAttackSpeed: 5
@@ -136,6 +135,8 @@ MonoBehaviour:
   wheatDrop: {fileID: 6133570875003662420, guid: 47d5b60bfb15aea49839d118dac8f86c, type: 3}
   pfDamagePopup: {fileID: 6478138214433248903, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
   pfDamagePopupText: {fileID: 62537061617949394, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
+  pfDamagePopupCrit: {fileID: 212571527099406956, guid: 7439f9bcb36fa6e4f88ac2a4e65a5199, type: 3}
+  pfDamagePopupTextCrit: {fileID: 6614628894609430073, guid: 7439f9bcb36fa6e4f88ac2a4e65a5199, type: 3}
   dicetypes:
   - {fileID: 5705092907752739581, guid: 6c2e6dd266c647a4ca2e1eb8f9f91cc5, type: 3}
   - {fileID: 8172298123866409655, guid: 973684b318644fe4ebe66418d1493f38, type: 3}
@@ -156,6 +157,7 @@ MonoBehaviour:
   - {fileID: 3082860963927806209, guid: 4065d84a1526fb643bc599b1fbe954ba, type: 3}
   - {fileID: 1815329666037625875, guid: 460b6b0a664fe41488bdf7a653f220d3, type: 3}
   crowPrefab: {fileID: 0}
+  Supernova: {fileID: 5566907859428112482, guid: 98c1bed42d99fbd41ab765ffb6bf5706, type: 3}
 --- !u!50 &8935550308493363974
 Rigidbody2D:
   serializedVersion: 4

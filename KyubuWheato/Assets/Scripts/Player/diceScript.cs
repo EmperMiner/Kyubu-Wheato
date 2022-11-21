@@ -22,6 +22,7 @@ public class diceScript : MonoBehaviour
     [SerializeField] private float directionY;
     [SerializeField] private GameObject[] DiceRayPrefabs;
     [SerializeField] private bool isStar;
+    [SerializeField] private bool isDiceSpin;
     private byte[,] starColors = new byte[18,3] {
         { 255, 51, 51 },
         { 255, 153, 51 },
@@ -99,7 +100,7 @@ public class diceScript : MonoBehaviour
     }
     private void DestroyFakeDice()
     {
-        Destroy(gameObject, 1.5f);
+        if (!isDiceSpin) { Destroy(gameObject, 1.5f); }
     }
     IEnumerator RollExplosionChance()
     {

@@ -20,6 +20,8 @@ public class BossRandomAttackGenerator : MonoBehaviour
     [SerializeField] private SpriteRenderer mouseSpriteRenderer;
     [SerializeField] private GameObject pfDamagePopup;
     [SerializeField] private TextMeshPro pfDamagePopupText;
+    [SerializeField] private Transform pfDamagePopupCrit;
+    [SerializeField] private TextMeshPro pfDamagePopupTextCrit;
 
     [SerializeField] private GameObject GoldenWheat;
     private GameObject GoldenWheatOnMap;
@@ -28,7 +30,7 @@ public class BossRandomAttackGenerator : MonoBehaviour
     private GameObject bossHealthFill;
 
     private bool alreadyDamaged;
-    [SerializeField] private int mouseHealth = 16000;
+    [SerializeField] private int mouseHealth;
     public float RollAttackDelay;
 
     private float bossCanAttack;
@@ -41,6 +43,7 @@ public class BossRandomAttackGenerator : MonoBehaviour
 
     private void Start()
     {
+        mouseHealth = 18000;
         Arrow = GameObject.FindGameObjectWithTag("Arrow");
         Arrow.SetActive(false);
         agent = animator.GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -222,7 +225,9 @@ public class BossRandomAttackGenerator : MonoBehaviour
     private void CreateDamagePopup(int damageAmount)
     {
         pfDamagePopupText.text = damageAmount.ToString();
-        Instantiate(pfDamagePopup, transform.position, Quaternion.identity);
+        pfDamagePopupTextCrit.text = damageAmount.ToString();
+        if (damageAmount/player.strength <= 6) { Instantiate(pfDamagePopup, transform.position, Quaternion.identity); }
+        else { Instantiate(pfDamagePopupCrit, transform.position, Quaternion.identity); }
     }
 
     private void ChargeUlt(int ChargeAmount)

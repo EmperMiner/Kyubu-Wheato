@@ -33,6 +33,8 @@ public class mouseBehaviour : MonoBehaviour
     [SerializeField] private GameObject wheatDrop;
     [SerializeField] private Transform pfDamagePopup;
     [SerializeField] private TextMeshPro pfDamagePopupText;
+    [SerializeField] private Transform pfDamagePopupCrit;
+    [SerializeField] private TextMeshPro pfDamagePopupTextCrit;
     [SerializeField] private GameObject[] dicetypes;
 
     [SerializeField] private bool isMiniBoss;
@@ -126,7 +128,7 @@ public class mouseBehaviour : MonoBehaviour
 
             float RNGWheat = Random.Range(0f, 10f);
             if (RNGWheat <= player.wheatDroprate/10) { Instantiate(wheatDrop, transform.position, Quaternion.identity); }
-            if (isMiniBoss) { for (int i = 0; i < 10; i++) { Instantiate(wheatDrop, new Vector3(transform.position.x + UnityEngine.Random.Range(-0.5f, 0.5f), transform.position.y + UnityEngine.Random.Range(-0.5f, 0.5f), transform.position.z), Quaternion.identity); } }
+            if (isMiniBoss) { for (int i = 0; i < Random.Range(2,7); i++) { Instantiate(wheatDrop, new Vector3(transform.position.x + UnityEngine.Random.Range(-0.5f, 0.5f), transform.position.y + UnityEngine.Random.Range(-0.5f, 0.5f), transform.position.z), Quaternion.identity); } }
 
             int RNGDice = Random.Range(0, player.diceDroprate);
             if (isMiniBoss == true) { RNGDice = Random.Range(0, 3); }
@@ -160,7 +162,9 @@ public class mouseBehaviour : MonoBehaviour
     private void CreateDamagePopup(int damageAmount)
     {
         pfDamagePopupText.text = damageAmount.ToString();
-        Instantiate(pfDamagePopup, transform.position, Quaternion.identity);
+        pfDamagePopupTextCrit.text = damageAmount.ToString();
+        if (damageAmount/player.strength <= 6) { Instantiate(pfDamagePopup, transform.position, Quaternion.identity); }
+        else { Instantiate(pfDamagePopupCrit, transform.position, Quaternion.identity); }
     }
 
     private void ChargeUlt(int ChargeAmount)
@@ -328,6 +332,13 @@ public class mouseBehaviour : MonoBehaviour
             maxMouseHealth = level*48 + 60;
             agent.speed = level*0.1f + 2f;
             agent.acceleration = level*0.3f + 4f;
+        }
+        if (isSchwein) 
+        { 
+            mouseStrength = Mathf.FloorToInt(level*1.5f + 10f);
+            maxMouseHealth = level*22 + 150;
+            agent.speed = level*0.1f + 0.8f;
+            agent.acceleration = level*0.1f + 3.5f;
         }
     }
 

@@ -115,7 +115,6 @@ public class DiceThrow : MonoBehaviour
                     if (chargedAttack)
                     {
                         PlayerPrefs.SetInt("ChargedAttacks", PlayerPrefs.GetInt("ChargedAttacks") + 1);
-                        Debug.Log(PlayerPrefs.GetInt("ChargedAttacks"));
                         AudioPlayer.PlaySound("ThrowDice");
                         if (haveFlan == true && haveCremeBrulee == false) { ShootTwoChargedDice(); }
                         else if (haveCremeBrulee) { ShootThreeChargedDice(); }
@@ -592,11 +591,12 @@ public class DiceThrow : MonoBehaviour
         else { ShootOneChargedDice(); }
     }
 
-    IEnumerator ActivateUltimate()
+    private IEnumerator ActivateUltimate()
     {
         ultimateBar.ultimateInProgress = true;
         yield return new WaitForSeconds(1f);
         CameraShakeInstance bruh = CameraShaker.Instance.StartShake(1f, 4f, .1f);
+        StartCoroutine(AlongUltimate());
         for (float i = 0; i < 5f; i += 0.2f)
         {
             AudioPlayer.PlaySound("ThrowDice");
@@ -621,6 +621,17 @@ public class DiceThrow : MonoBehaviour
         }
         bruh.StartFadeOut(1f);
         ultimateBar.ultimateInProgress = false;
+        yield return null;
+    }
+
+    private IEnumerator AlongUltimate()
+    {
+        for (int i = 0; i < 5; i ++)
+        {
+            if (PlayerPrefs.GetFloat("DiceSpinLevelUp") < 11f) { Instantiate(diceSpinPrefabs[Mathf.RoundToInt(Mathf.Floor(PlayerPrefs.GetFloat("DiceSpinLevel")/10))], transform.position, Quaternion.identity); }
+            else { Instantiate(diceSpinPrefabs[11], transform.position, Quaternion.identity); }
+            yield return new WaitForSeconds(1f);
+        }
         yield return null;
     }
 

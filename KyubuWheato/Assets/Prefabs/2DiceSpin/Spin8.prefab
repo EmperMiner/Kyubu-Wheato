@@ -161,7 +161,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &718899937572595472
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,7 +358,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &1141183598488392986
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,7 +650,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &2236084573070460366
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,7 +815,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &2316759745053029324
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,7 +980,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &2883267283930965776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,8 +1121,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 954117548863326218}
-  - component: {fileID: -6671497732866631617}
   - component: {fileID: 6814120750871008544}
+  - component: {fileID: 8608739045726329064}
   m_Layer: 0
   m_Name: Spin8
   m_TagString: Untagged
@@ -1131,24 +1146,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6671497732866631617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4706916348783211502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9d15e48e60b62c4a9faa029fa63c2c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeBeforeDestroy: 6
-  isKyubuTile3Left: 0
-  isKyubuTile3Right: 0
-  isKyubuTile6: 0
-  Dice3: {fileID: 0}
-  Dice6: []
 --- !u!114 &6814120750871008544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1161,6 +1158,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dece68e3b853024a8a62b6870510efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8608739045726329064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4706916348783211502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d15e48e60b62c4a9faa029fa63c2c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBeforeDestroy: 5
+  isKyubuTile3Left: 0
+  isKyubuTile3Right: 0
+  isKyubuTile6: 0
+  isStar: 0
+  Dice3: {fileID: 0}
+  Dice6: []
 --- !u!1 &5074114462390530455
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,7 +1338,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &5220076407176702526
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,7 +1567,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &7743247439056043214
 GameObject:
   m_ObjectHideFlags: 0
@@ -1710,7 +1732,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &7958044791515544899
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,7 +1929,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &8329472659431818629
 GameObject:
   m_ObjectHideFlags: 0
@@ -2066,7 +2094,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &8596156358792527924
 GameObject:
   m_ObjectHideFlags: 0
@@ -2228,7 +2259,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!1 &9165927864578693365
 GameObject:
   m_ObjectHideFlags: 0

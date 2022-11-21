@@ -30,6 +30,8 @@ public class FlippedBehaviour : MonoBehaviour
     [SerializeField] private GameObject worseWheatDrop;
     [SerializeField] private Transform pfDamagePopup;
     [SerializeField] private TextMeshPro pfDamagePopupText;
+    [SerializeField] private Transform pfDamagePopupCrit;
+    [SerializeField] private TextMeshPro pfDamagePopupTextCrit;
 
     [SerializeField] private bool isA;
     [SerializeField] private bool isB;
@@ -111,15 +113,15 @@ public class FlippedBehaviour : MonoBehaviour
 
         if(mouseHealth <= 0)
         {   
-            if (PlayerPrefs.GetInt("IngameRamen") == 1 && Random.Range(0f, 100f) < 7f + PlayerPrefs.GetInt("ChargedAttacks")*0.1f) 
+            if (PlayerPrefs.GetInt("IngameRamen") == 1 && Random.Range(0f, 100f) < 3f + PlayerPrefs.GetInt("ChargedAttacks")*0.1f) 
             { 
                 Instantiate(Supernova, transform.position, Quaternion.identity); 
                 FindObjectOfType<AudioManager>().PlaySound("Supernova");
             }
             if (player.InHealMode == true) { player.UpdateHealth(15); }
 
-            if (isC) { Instantiate(worseWheatDrop, transform.position, Quaternion.identity); }
-            else { Instantiate(wheatDrop, transform.position, Quaternion.identity); }
+            if (isC) { for (int i = 0; i < Random.Range(0,5); i++) { Instantiate(worseWheatDrop, transform.position, Quaternion.identity); } }
+            else { for (int i = 0; i < Random.Range(1,4); i++) { Instantiate(wheatDrop, transform.position, Quaternion.identity); } }
 
             Destroy(gameObject);
         }
@@ -147,7 +149,9 @@ public class FlippedBehaviour : MonoBehaviour
     private void CreateDamagePopup(int damageAmount)
     {
         pfDamagePopupText.text = damageAmount.ToString();
-        Instantiate(pfDamagePopup, transform.position, Quaternion.identity);
+        pfDamagePopupTextCrit.text = damageAmount.ToString();
+        if (damageAmount/player.strength <= 6) { Instantiate(pfDamagePopup, transform.position, Quaternion.identity); }
+        else { Instantiate(pfDamagePopupCrit, transform.position, Quaternion.identity); }
     }
 
     private void ChargeUlt(int ChargeAmount)

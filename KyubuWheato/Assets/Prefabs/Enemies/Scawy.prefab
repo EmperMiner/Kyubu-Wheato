@@ -109,6 +109,8 @@ MonoBehaviour:
   wheatDrop: {fileID: 6133570875003662420, guid: 47d5b60bfb15aea49839d118dac8f86c, type: 3}
   pfDamagePopup: {fileID: 6478138214433248903, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
   pfDamagePopupText: {fileID: 62537061617949394, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
+  pfDamagePopupCrit: {fileID: 212571527099406956, guid: 7439f9bcb36fa6e4f88ac2a4e65a5199, type: 3}
+  pfDamagePopupTextCrit: {fileID: 6614628894609430073, guid: 7439f9bcb36fa6e4f88ac2a4e65a5199, type: 3}
   dicetypes:
   - {fileID: 5705092907752739581, guid: 6c2e6dd266c647a4ca2e1eb8f9f91cc5, type: 3}
   - {fileID: 8172298123866409655, guid: 973684b318644fe4ebe66418d1493f38, type: 3}

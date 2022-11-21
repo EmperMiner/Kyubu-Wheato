@@ -21,11 +21,6 @@ public class DamagePopupDestroy : MonoBehaviour
         Destroy(gameObject, timeBeforeDestroy);
     }
 
-    void Update()
-    {
-        
-    }
-
     IEnumerator Summon3Dice(float offset)
     {
         yield return new WaitForSeconds(0.7f);

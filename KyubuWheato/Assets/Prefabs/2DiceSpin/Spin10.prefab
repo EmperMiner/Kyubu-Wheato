@@ -322,7 +322,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!95 &2029920096326414473
 Animator:
   serializedVersion: 4
@@ -537,7 +540,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!95 &2029920096418733264
 Animator:
   serializedVersion: 4
@@ -720,7 +726,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!95 &2029920096486454872
 Animator:
   serializedVersion: 4
@@ -903,7 +912,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!95 &2029920096490279060
 Animator:
   serializedVersion: 4
@@ -1182,7 +1194,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!95 &2029920096802484963
 Animator:
   serializedVersion: 4
@@ -1365,7 +1380,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!95 &2029920097026358858
 Animator:
   serializedVersion: 4
@@ -1580,7 +1598,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!95 &2029920097075428971
 Animator:
   serializedVersion: 4
@@ -1763,7 +1784,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!95 &2029920097230282445
 Animator:
   serializedVersion: 4
@@ -1978,7 +2002,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!95 &2029920097514983784
 Animator:
   serializedVersion: 4
@@ -2257,7 +2284,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!95 &2029920097929755014
 Animator:
   serializedVersion: 4
@@ -2440,7 +2470,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!95 &2029920097990367561
 Animator:
   serializedVersion: 4
@@ -2623,7 +2656,10 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  isStar: 0
+  isDiceSpin: 1
   dontExplode: 1
+  starItself: {fileID: 0}
 --- !u!95 &5344246655610033994
 Animator:
   serializedVersion: 4
@@ -2653,8 +2689,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1442357689317354464}
-  - component: {fileID: -6430171358941202442}
   - component: {fileID: -8130547566281343921}
+  - component: {fileID: -3176088190378110386}
   m_Layer: 0
   m_Name: Spin10
   m_TagString: Untagged
@@ -2678,24 +2714,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6430171358941202442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7486692981826823261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9d15e48e60b62c4a9faa029fa63c2c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeBeforeDestroy: 7
-  isKyubuTile3Left: 0
-  isKyubuTile3Right: 0
-  isKyubuTile6: 0
-  Dice3: {fileID: 0}
-  Dice6: []
 --- !u!114 &-8130547566281343921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2708,3 +2726,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dece68e3b853024a8a62b6870510efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3176088190378110386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7486692981826823261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d15e48e60b62c4a9faa029fa63c2c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBeforeDestroy: 4
+  isKyubuTile3Left: 0
+  isKyubuTile3Right: 0
+  isKyubuTile6: 0
+  isStar: 0
+  Dice3: {fileID: 0}
+  Dice6: []
