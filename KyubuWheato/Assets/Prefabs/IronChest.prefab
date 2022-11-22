@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7592814316219585265}
   - component: {fileID: 7592814316219585264}
   - component: {fileID: 7592814316219585267}
+  - component: {fileID: 1903527604118872157}
   m_Layer: 0
   m_Name: IronChest
   m_TagString: chest
@@ -51,7 +52,7 @@ MonoBehaviour:
   - {fileID: 7592814316219585266}
   - {fileID: 751358360935569434, guid: 5b63d21339c6e0849837b7787b6287e5, type: 3}
   - {fileID: 709161147729212536, guid: 2d74b0eee7093094198110476acd32e3, type: 3}
-  WheatCost: 20
+  ChestRarity: 0
   StatChance: 95
   UpgradeSpritePopup:
   - {fileID: 21300000, guid: 5958b9b1a1628a9419804828b074a25c, type: 3}
@@ -121,7 +122,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 03fc7605610dbc649b5342ccd928776d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -178,3 +179,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6589022, y: 0.7550555}
   m_EdgeRadius: 0
+--- !u!95 &1903527604118872157
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7592814316219585266}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d0c086cece9354e4fb07525501fc6185, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

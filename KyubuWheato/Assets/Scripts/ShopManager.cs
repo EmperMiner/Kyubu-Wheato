@@ -99,11 +99,7 @@ public class ShopManager : MonoBehaviour
             SaveData();
         }
 
-        if (Input.GetKeyDown(KeyCode.T)) { PlayerPrefs.SetInt("Ramen", 0); }
-        if (Input.GetKeyDown(KeyCode.Y)) { PlayerPrefs.SetInt("Salmon", 0); }
-        if (Input.GetKeyDown(KeyCode.U)) { PlayerPrefs.SetInt("Steak", 0); }
-        if (Input.GetKeyDown(KeyCode.I)) { PlayerPrefs.SetInt("WinCounter", 0); }
-        if (Input.GetKeyDown(KeyCode.O)) { PlayerPrefs.SetInt("WinCounter", 0); }
+        if (Input.GetKeyDown(KeyCode.U)) { PlayerPrefs.SetInt("Steak", 1); }
     } 
  
     public void Buy(int UpgradeValue)

@@ -161,7 +161,7 @@ public class PlayerController : MonoBehaviour
             if (PlayerPrefs.GetInt("Steak") == 1) { PlayerPrefs.SetInt("IngameSteak", 1); }
             if (PlayerPrefs.GetInt("Cheese") == 1) { PlayerPrefs.SetInt("IngameCheese", 1); }
             if (PlayerPrefs.GetInt("FSC") == 1) { PlayerPrefs.SetInt("IngameFSC", 3); }
-            PlayerPrefs.SetFloat("DiceSpinLevel", 0);
+            PlayerPrefs.SetFloat("DiceSpinLevel", 0f);
             PlayerPrefs.SetFloat("DiceSpinLevelUp", 1f);
             Wheat = 0;
             LoadData();
@@ -881,6 +881,8 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetInt("IngameSteakSave", PlayerPrefs.GetInt("IngameSteak"));
         PlayerPrefs.SetInt("IngameCheeseSave", PlayerPrefs.GetInt("IngameCheese"));
         PlayerPrefs.SetInt("IngameFSCSave", PlayerPrefs.GetInt("IngameFSC"));
+        PlayerPrefs.SetFloat("DiceSpinLevelUpSave", PlayerPrefs.GetFloat("DiceSpinLevelUp"));
+        PlayerPrefs.SetFloat("DiceSpinLevelSave", PlayerPrefs.GetFloat("DiceSpinLevel"));
 
         string json = JsonUtility.ToJson(savingPlayerData);
         Debug.Log(json);
@@ -919,6 +921,8 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetInt("IngameSteak", PlayerPrefs.GetInt("IngameSteakSave"));
         PlayerPrefs.SetInt("IngameCheese", PlayerPrefs.GetInt("IngameCheeseSave"));
         PlayerPrefs.SetInt("IngameFSC", PlayerPrefs.GetInt("IngameFSCSave"));
+        PlayerPrefs.SetFloat("DiceSpinLevelUp", PlayerPrefs.GetFloat("DiceSpinLevelUpSave"));
+        PlayerPrefs.SetFloat("DiceSpinLevel", PlayerPrefs.GetFloat("DiceSpinLevelSave"));
     }
     
 

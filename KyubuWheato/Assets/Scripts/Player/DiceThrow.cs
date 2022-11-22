@@ -139,7 +139,7 @@ public class DiceThrow : MonoBehaviour
                 }
             }
 
-            if (PlayerPrefs.GetFloat("DiceSpinLevel")/10f == PlayerPrefs.GetFloat("DiceSpinLevelUp") && PlayerPrefs.GetFloat("DiceSpinLevelUp") < 11)
+            if (Mathf.FloorToInt(PlayerPrefs.GetFloat("DiceSpinLevel")/10f) == Mathf.FloorToInt(PlayerPrefs.GetFloat("DiceSpinLevelUp")) && PlayerPrefs.GetFloat("DiceSpinLevelUp") < 11)
             {
                 float i = PlayerPrefs.GetFloat("DiceSpinLevelUp");
                 player.StartCoroutine(player.NotifTextChargedATKUpgrade(Mathf.RoundToInt(i)));
