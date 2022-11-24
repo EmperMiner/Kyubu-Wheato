@@ -27,9 +27,11 @@ public class diceMagnetize : MonoBehaviour
     private float DiceRayAngleOffset;
 
     public bool pickupable;
+    private bool LifeStolen;
 
     void Start()
     {
+        LifeStolen = false;
         LoadData();
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>(); 
         rb = GetComponent<Rigidbody2D>();
@@ -173,6 +175,26 @@ public class diceMagnetize : MonoBehaviour
         Destroy(this.gameObject);
         }
     } 
+
+    private void OnTriggerEnter2D(Collider2D other) 
+    {
+        bool Lifesteal = this.gameObject.tag == "ChargedDice2" || this.gameObject.tag == "ChargedDice2" || this.gameObject.tag == "ChargedDice2" || this.gameObject.tag == "FakeDice8"|| this.gameObject.tag == "FakeDice8"|| this.gameObject.tag == "FakeDice8";
+        if (!Lifesteal) { return; }
+        if (other.gameObject.tag == "enemyMouse" && LifeStolen == false) { FindObjectOfType<AudioManager>().PlaySound("Lifesteal"); }
+        if (other.gameObject.tag == "enemyMouse" && this.gameObject.tag == "ChargedDice2" && LifeStolen == false )
+        { player.UpdateHealth(Mathf.RoundToInt(player.maxHealth*0.007f*(PlayerPrefs.GetFloat("DiceSpinLevelUp")) + 2.5f));}
+        if (other.gameObject.tag == "enemyMouse" && this.gameObject.tag == "ChargedDice4" && LifeStolen == false )
+        { player.UpdateHealth(Mathf.RoundToInt(player.maxHealth*0.007f*(PlayerPrefs.GetFloat("DiceSpinLevelUp")) + 2f));}
+        if (other.gameObject.tag == "enemyMouse" && this.gameObject.tag == "ChargedDice6" && LifeStolen == false )
+        { player.UpdateHealth(Mathf.RoundToInt(player.maxHealth*0.007f*(PlayerPrefs.GetFloat("DiceSpinLevelUp")) + 1.5f));}
+        if (other.gameObject.tag == "enemyMouse" && this.gameObject.tag == "FakeDice8" && LifeStolen == false )
+        { player.UpdateHealth(Mathf.RoundToInt(player.maxHealth*0.007f*(PlayerPrefs.GetFloat("DiceSpinLevelUp")) + 1f));}
+        if (other.gameObject.tag == "enemyMouse" && this.gameObject.tag == "FakeDice10" && LifeStolen == false )
+        { player.UpdateHealth(Mathf.RoundToInt(player.maxHealth*0.007f*(PlayerPrefs.GetFloat("DiceSpinLevelUp")) + 0.5f));}
+        if (other.gameObject.tag == "enemyMouse" && this.gameObject.tag == "FakeDice12" && LifeStolen == false )
+        { player.UpdateHealth(Mathf.RoundToInt(player.maxHealth*0.007f*(PlayerPrefs.GetFloat("DiceSpinLevelUp"))));}
+        if (other.gameObject.tag == "enemyMouse") { LifeStolen = true; }
+    }
 
     IEnumerator PickupDelay()
     {

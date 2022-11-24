@@ -82,6 +82,9 @@ TagManager:
   - TimeCrescent
   - Star
   - 100sidedDice
+  - ChargedDice2
+  - ChargedDice4
+  - ChargedDice6
   layers:
   - Default
   - TransparentFX

@@ -118,7 +118,7 @@ public class FlippedBehaviour : MonoBehaviour
                 Instantiate(Supernova, transform.position, Quaternion.identity); 
                 FindObjectOfType<AudioManager>().PlaySound("Supernova");
             }
-            if (player.InHealMode == true) { player.UpdateHealth(15); }
+            if (player.InHealMode == true) { player.UpdateHealth(Mathf.RoundToInt(player.maxHealth*0.03f + 0.7f)); FindObjectOfType<AudioManager>().PlaySound("Lifesteal");}
 
             if (isC) { for (int i = 0; i < Random.Range(0,5); i++) { Instantiate(worseWheatDrop, transform.position, Quaternion.identity); } }
             else { for (int i = 0; i < Random.Range(1,4); i++) { Instantiate(wheatDrop, transform.position, Quaternion.identity); } }
@@ -184,6 +184,12 @@ public class FlippedBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "6sidedDice4" && isD == false && isF == false) { mouseTakeDamage(4); ChargeUlt(3); }
             if (collider.gameObject.tag == "6sidedDice5" && isD == false && isF == false) { mouseTakeDamage(5); ChargeUlt(2); }
             if (collider.gameObject.tag == "6sidedDice6" && isD == false && isF == false) { mouseTakeDamage(6); ChargeUlt(1); }
+            if (collider.gameObject.tag == "ChargedDice2" && isD == false && isF == false) { mouseTakeDamage(2); ChargeUlt(2); }   
+            if (collider.gameObject.tag == "ChargedDice4" && isD == false && isF == false) { mouseTakeDamage(4); ChargeUlt(4); }   
+            if (collider.gameObject.tag == "ChargedDice6" && isD == false && isF == false) { mouseTakeDamage(6); ChargeUlt(6);}   
+            if (collider.gameObject.tag == "FakeDice8" && isD == false && isF == false) { mouseTakeDamage(8); ChargeUlt(8); }     
+            if (collider.gameObject.tag == "FakeDice10" && isD == false && isF == false) { mouseTakeDamage(10); ChargeUlt(10); }     
+            if (collider.gameObject.tag == "FakeDice12" && isD == false && isF == false) { mouseTakeDamage(12); ChargeUlt(12); }   
             if (collider.gameObject.tag == "BroomAttack") { mouseTakeDamage(10); ChargeUlt(8); }        
 
             if (collider.gameObject.tag == "FakeDice1") { mouseTakeDamage(1); }
@@ -192,6 +198,7 @@ public class FlippedBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "FakeDice4") { mouseTakeDamage(4); }
             if (collider.gameObject.tag == "FakeDice5") { mouseTakeDamage(5); }
             if (collider.gameObject.tag == "FakeDice6") { mouseTakeDamage(6); }      
+             
 
             if (collider.gameObject.tag == "6sidedDice1" && isD  == true) { PlayGlitchedSound(); }
             if (collider.gameObject.tag == "6sidedDice2" && isD  == true) { PlayGlitchedSound(); }
@@ -199,6 +206,12 @@ public class FlippedBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "6sidedDice4" && isD  == true) { PlayGlitchedSound(); }
             if (collider.gameObject.tag == "6sidedDice5" && isD  == true) { PlayGlitchedSound(); }
             if (collider.gameObject.tag == "6sidedDice6" && isD  == true) { PlayGlitchedSound(); }
+            if (collider.gameObject.tag == "ChargedDice2" && isD  == true) { PlayGlitchedSound(); }
+            if (collider.gameObject.tag == "ChargedDice4" && isD  == true) { PlayGlitchedSound(); }
+            if (collider.gameObject.tag == "ChargedDice6" && isD  == true) { PlayGlitchedSound(); }
+            if (collider.gameObject.tag == "FakeDice8" && isD  == true) { PlayGlitchedSound(); }
+            if (collider.gameObject.tag == "FakeDice10" && isD  == true) { PlayGlitchedSound(); }
+            if (collider.gameObject.tag == "FakeDice12" && isD  == true) { PlayGlitchedSound(); }
 
             if (collider.gameObject.tag == "6sidedDice1" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp"); }
             if (collider.gameObject.tag == "6sidedDice2" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
@@ -206,6 +219,12 @@ public class FlippedBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "6sidedDice4" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
             if (collider.gameObject.tag == "6sidedDice5" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
             if (collider.gameObject.tag == "6sidedDice6" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
+            if (collider.gameObject.tag == "ChargedDice2" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp"); }
+            if (collider.gameObject.tag == "ChargedDice4" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
+            if (collider.gameObject.tag == "ChargedDice6" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
+            if (collider.gameObject.tag == "FakeDice8" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
+            if (collider.gameObject.tag == "FakeDice10" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
+            if (collider.gameObject.tag == "FakeDice12" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
             if (collider.gameObject.tag == "Star") { mouseTakeDamage(UnityEngine.Random.Range(1,4) + Mathf.RoundToInt(((player.maxHealth - player.playerHealth)/player.maxHealth)*5)); }  
             if (collider.gameObject.tag == "100sidedDice") { mouseTakeDamage(UnityEngine.Random.Range(50,100)); }   
         }
@@ -251,12 +270,15 @@ public class FlippedBehaviour : MonoBehaviour
         if (collider.gameObject.tag == "FakeDice5") { alreadyDamaged = false; }
         if (collider.gameObject.tag == "FakeDice6") { alreadyDamaged = false; }  
         if (collider.gameObject.tag == "BroomAttack") { alreadyDamaged = false; }  
+        if (collider.gameObject.tag == "ChargedDice2") { alreadyDamaged = false;}
+        if (collider.gameObject.tag == "ChargedDice4") { alreadyDamaged = false;}
+        if (collider.gameObject.tag == "ChargedDice6") { alreadyDamaged = false;}
         if (collider.gameObject.tag == "FakeDice8") { alreadyDamaged = false; }  
         if (collider.gameObject.tag == "FakeDice10") { alreadyDamaged = false; }  
         if (collider.gameObject.tag == "FakeDice12") { alreadyDamaged = false; }  
         if (collider.gameObject.tag == "FakeDice20") { alreadyDamaged = false; }  
         if (collider.gameObject.tag == "Star") { alreadyDamaged = false; }  
-        if (collider.gameObject.tag == "100sidedDice") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
+        if (collider.gameObject.tag == "100sidedDice") { alreadyDamaged = false;}  
 
         if (collider.gameObject.tag == "Player") { player.spriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
     }

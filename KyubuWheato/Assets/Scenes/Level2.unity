@@ -90852,6 +90852,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2e4a18c45679ab7479c51e4b996f625c, type: 3}
   - {fileID: 21300000, guid: e526b7fa05b799d49a29f99f6bf2c235, type: 3}
   - {fileID: 21300000, guid: c4e599516ea3e444b8af44c45e4aba14, type: 3}
+  - {fileID: 21300000, guid: 5d85880bfc3b2d44d94c2bee7a5495d9, type: 3}
   Invincible: 0
   SalmonRiser: {fileID: 1902850485}
   MyriadCookies: {fileID: 1700445570050176395, guid: f918fe5c8854ff446988bed6bf6f611a, type: 3}
@@ -91464,10 +91465,12 @@ MonoBehaviour:
     Charged attacks
     can be upgraded by opening chests
 
-    Often, to exit the level, you must collect
+    Upgraded charged attacks can also lifesteal
 
-    Wheat
-    Cards scattered around the map!
+    Often,
+    to exit the level, you must collect
+
+    Wheat Cards scattered around the map!
 
 '
   m_isRightToLeft: 0

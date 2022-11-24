@@ -156,11 +156,13 @@ public class PlayerController : MonoBehaviour
             PlayerPrefs.SetInt("IngameSteak", 0);
             PlayerPrefs.SetInt("IngameCheese", 0);
             PlayerPrefs.SetInt("IngameFSC", 0);
+            PlayerPrefs.SetInt("IngameInfinitruths", 0);
             if (PlayerPrefs.GetInt("Ramen") == 1) { PlayerPrefs.SetInt("IngameRamen", 1); }
             if (PlayerPrefs.GetInt("Salmon") == 1) { PlayerPrefs.SetInt("IngameSalmon", 1); }
             if (PlayerPrefs.GetInt("Steak") == 1) { PlayerPrefs.SetInt("IngameSteak", 1); }
             if (PlayerPrefs.GetInt("Cheese") == 1) { PlayerPrefs.SetInt("IngameCheese", 1); }
             if (PlayerPrefs.GetInt("FSC") == 1) { PlayerPrefs.SetInt("IngameFSC", 3); }
+            if (PlayerPrefs.GetInt("Infinitruths") == 2) { PlayerPrefs.SetInt("IngameInfinitruths", 1); }
             PlayerPrefs.SetFloat("DiceSpinLevel", 0f);
             PlayerPrefs.SetFloat("DiceSpinLevelUp", 1f);
             Wheat = 0;
@@ -263,7 +265,7 @@ public class PlayerController : MonoBehaviour
             }
             if ( FSCInvincible == true) { Invincible = true; }
 
-            if (Input.GetKeyDown(KeyCode.Z))
+            if (Input.GetKeyDown(KeyCode.Z) && PlayerPrefs.GetInt("IngameInfinitruths") == 1)
             {
                 Instantiate(MyriadCookies, transform.position, Quaternion.identity);
                 AudioPlayer.PlaySound("FSC");
@@ -404,7 +406,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator NotEnoughWheat()
     {
         AudioPlayer.PlaySound("UIButtonError");
-        SmallText.text = "Needs " + requiredWheat + "Wheat";
+        SmallText.text = "Needs " + requiredWheat + " Wheat";
         yield return new WaitForSeconds(1f);
         SmallText.text = "";
         yield return null;
@@ -624,9 +626,12 @@ public class PlayerController : MonoBehaviour
     IEnumerator HealMode()
     {
         if (playerAlive) {
+            BroomBuffImage.color = new Color32(255, 255, 255, 255);
             BroomInMode = true;
+            BroomBuffImage.sprite = BroomBuffIcons[5]; 
             InHealMode = true;
-            yield return new WaitForSeconds(UnityEngine.Random.Range(20f,60f));
+            yield return new WaitForSeconds(UnityEngine.Random.Range(3f,12f));
+            BroomBuffImage.color = new Color32(255, 255, 255, 0);
             InHealMode = false;
             StartCoroutine(RollMode());
         }
@@ -883,6 +888,7 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetInt("IngameFSCSave", PlayerPrefs.GetInt("IngameFSC"));
         PlayerPrefs.SetFloat("DiceSpinLevelUpSave", PlayerPrefs.GetFloat("DiceSpinLevelUp"));
         PlayerPrefs.SetFloat("DiceSpinLevelSave", PlayerPrefs.GetFloat("DiceSpinLevel"));
+        PlayerPrefs.SetInt("ChargedAttacksSave", PlayerPrefs.GetInt("ChargedAttacks"));
 
         string json = JsonUtility.ToJson(savingPlayerData);
         Debug.Log(json);
@@ -923,6 +929,7 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetInt("IngameFSC", PlayerPrefs.GetInt("IngameFSCSave"));
         PlayerPrefs.SetFloat("DiceSpinLevelUp", PlayerPrefs.GetFloat("DiceSpinLevelUpSave"));
         PlayerPrefs.SetFloat("DiceSpinLevel", PlayerPrefs.GetFloat("DiceSpinLevelSave"));
+        PlayerPrefs.SetInt("ChargedAttacks", PlayerPrefs.GetInt("ChargedAttacksSave"));
     }
     
 

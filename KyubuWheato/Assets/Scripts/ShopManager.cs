@@ -60,6 +60,7 @@ public class ShopManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("Steak")) { PlayerPrefs.SetInt("Steak", 0); }
         if (!PlayerPrefs.HasKey("Cheese")) { PlayerPrefs.SetInt("Cheese", 0); }
         if (!PlayerPrefs.HasKey("FSC")) { PlayerPrefs.SetInt("FSC", 0); }
+        if (!PlayerPrefs.HasKey("Infinitruths")) { PlayerPrefs.SetInt("Infinitruths", 0); }
     }
 
     private void Start()
@@ -67,8 +68,6 @@ public class ShopManager : MonoBehaviour
         trophy.SetActive(false);
         int i = PlayerPrefs.GetInt("WinCounter");
         if (i > 0) { DisplayTrophy(i); }
-
-        
 
         Time.timeScale = 1f;
         LoadData();
@@ -83,13 +82,14 @@ public class ShopManager : MonoBehaviour
             NewEntreeScreen.SetActive(true);
             AudioPlayer.PlaySound("UnlockEntree");
         }
+        MaxShopCheck();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            shopWheat += 10000;
+            shopWheat += 999999;
             ShopWheatCounterNumber.text = shopWheat.ToString();
             SaveData();
         } else if (Input.GetKeyDown(KeyCode.R))
@@ -99,8 +99,17 @@ public class ShopManager : MonoBehaviour
             SaveData();
         }
 
-        if (Input.GetKeyDown(KeyCode.U)) { PlayerPrefs.SetInt("Steak", 1); }
+        if (Input.GetKeyDown(KeyCode.T)) { PlayerPrefs.SetInt("Infinitruths", 0); }
     } 
+
+    private void MaxShopCheck()
+    {
+        if (shopStrength == 5 && shopDefense == 5 && shopMaxHealth >= 300 && shopMoveSpeed >= 3.99 && shopPlayerCooldownTime <= 5.0 && shopDiceNumber == 30 && shopWheatDroprate == 80.0 && shopDicePreviewerLevel == 5
+        && shopDiceDroprate == 100 && shopHavePizza == true && shopHaveCarrotCake == true && shopHaveFlan == true && shopHaveCremeBrulee == true && shopHaveBanhmi == true && shopHaveCupcake == true 
+        && shopHaveChickenNuggets == true && shopHavePastelDeChoclo == true && shopHaveGarlicBread == true && shopHaveHornScallop == true && PlayerPrefs.GetInt("Ramen") > 0 && PlayerPrefs.GetInt("Salmon") > 0
+        && PlayerPrefs.GetInt("Steak") > 0 && PlayerPrefs.GetInt("Cheese") > 0 && PlayerPrefs.GetInt("FSC") > 0 && PlayerPrefs.GetInt("Infinitruths") == 0) { PlayerPrefs.SetInt("Infinitruths", 1); }
+        UpdateUpgradeUI(116);
+    }
  
     public void Buy(int UpgradeValue)
     {
@@ -286,9 +295,17 @@ public class ShopManager : MonoBehaviour
             if (EntreeValue == 0) { StartCoroutine(NotifTextHaveNotUnlocked()); }
             else { PlayerPrefs.SetInt("FSC", 1); AudioPlayer.PlaySound("PurchaseShop"); }
         }
+        if (UpgradeValue == 116)
+        {
+            if (PlayerPrefs.GetInt("Infinitruths") == 0) { StartCoroutine(NotifTextHaveNotUnlocked());  }
+            else if (PlayerPrefs.GetInt("Infinitruths") == 2)  { StartCoroutine(NotifTextAlreadyBought()); }
+            else if (PlayerPrefs.GetInt("Infinitruths") == 1 && shopWheat >= upgradePrices[9]) { PlayerPrefs.SetInt("Infinitruths", 2); shopWheat -= upgradePrices[9]; StartCoroutine(NotifTextBuySuccess()); }
+            else { StartCoroutine(NotifTextNotEnoughMoney()); }
+        }
         UpdateUpgradeUI(UpgradeValue);   
         ShopWheatCounterNumber.text = shopWheat.ToString();
         SaveData();
+        MaxShopCheck();
     }
 
     public void Refund(int RefundValue)
@@ -477,40 +494,47 @@ public class ShopManager : MonoBehaviour
             else { shopWheat += upgradePrices[7]; AudioPlayer.PlaySound("RefundShop"); }
             shopHaveHornScallop = false;
         }
-        if (RefundValue == 111)
+        if (RefundValue == 111 || RefundValue == 420)
         {
             int EntreeValue = PlayerPrefs.GetInt("Ramen");
-            if (EntreeValue == 0) { StartCoroutine(NotifTextHaveNotUnlocked()); }
+            if (EntreeValue == 0) { if (RefundValue != 420) { StartCoroutine(NotifTextHaveNotUnlocked()); } }
             else { PlayerPrefs.SetInt("Ramen", 2); AudioPlayer.PlaySound("RefundShop"); }
         }
-        if (RefundValue == 112)
+        if (RefundValue == 112 || RefundValue == 420)
         {
             int EntreeValue = PlayerPrefs.GetInt("Salmon");
-            if (EntreeValue == 0) { StartCoroutine(NotifTextHaveNotUnlocked()); }
+            if (EntreeValue == 0) { if (RefundValue != 420) { StartCoroutine(NotifTextHaveNotUnlocked()); } }
             else { PlayerPrefs.SetInt("Salmon", 2); AudioPlayer.PlaySound("RefundShop"); }
         }
-        if (RefundValue == 113)
+        if (RefundValue == 113 || RefundValue == 420)
         {
             int EntreeValue = PlayerPrefs.GetInt("Steak");
-            if (EntreeValue == 0) { StartCoroutine(NotifTextHaveNotUnlocked()); }
+            if (EntreeValue == 0) { if (RefundValue != 420) { StartCoroutine(NotifTextHaveNotUnlocked()); } }
             else { PlayerPrefs.SetInt("Steak", 2); AudioPlayer.PlaySound("RefundShop"); }
         }
-        if (RefundValue == 114)
+        if (RefundValue == 114 || RefundValue == 420)
         {
             int EntreeValue = PlayerPrefs.GetInt("Cheese");
-            if (EntreeValue == 0) { StartCoroutine(NotifTextHaveNotUnlocked()); }
+            if (EntreeValue == 0) { if (RefundValue != 420) { StartCoroutine(NotifTextHaveNotUnlocked()); } }
             else { PlayerPrefs.SetInt("Cheese", 2); AudioPlayer.PlaySound("RefundShop"); }
         }
-        if (RefundValue == 115)
+        if (RefundValue == 115 || RefundValue == 420)
         {
             int EntreeValue = PlayerPrefs.GetInt("FSC");
-            if (EntreeValue == 0) { StartCoroutine(NotifTextHaveNotUnlocked()); }
+            if (EntreeValue == 0) { if (RefundValue != 420) { StartCoroutine(NotifTextHaveNotUnlocked()); } }
             else { PlayerPrefs.SetInt("FSC", 2); AudioPlayer.PlaySound("RefundShop"); }
+        }
+        if (RefundValue == 116 || RefundValue == 420)
+        {
+            if (PlayerPrefs.GetInt("Infinitruths") == 0) { if (RefundValue != 420) { StartCoroutine(NotifTextHaveNotUnlocked()); } }
+            else if (PlayerPrefs.GetInt("Infinitruths") == 1) { if (RefundValue != 420) { StartCoroutine(NotifTextHaveNotBought()); } }
+            else { shopWheat += upgradePrices[9]; AudioPlayer.PlaySound("RefundShop"); PlayerPrefs.SetInt("Infinitruths", 1); }
         }
         if (refundLoops > 0 || RefundValue == 420) { AudioPlayer.PlaySound("RefundShop"); }
         UpdateUpgradeUI(RefundValue);
         ShopWheatCounterNumber.text = shopWheat.ToString();
         SaveData();
+        MaxShopCheck();
     }
 
     private void UpdateUpgradeUI(int UpdateUpgradeUI)
@@ -689,6 +713,13 @@ public class ShopManager : MonoBehaviour
             if (EntreeValue == 0) { UpgradesImage[23].sprite = UpgradesSpritesVariants[86]; upgradePriceText[23].text = "???"; }
             else if (EntreeValue == 1) { UpgradesImage[23].sprite = UpgradesSpritesVariants[87]; upgradePriceText[23].text = "Frosted Sugar Cookies"; }
             else { UpgradesImage[23].sprite = UpgradesSpritesVariants[88]; upgradePriceText[23].text = "FSC"; }
+        }
+        if (UpdateUpgradeUI == 116 || UpdateUpgradeUI == 420)
+        {
+            int EntreeValue = PlayerPrefs.GetInt("Infinitruths");
+            if (EntreeValue == 0) { UpgradesImage[24].sprite = UpgradesSpritesVariants[89]; upgradePriceText[24].text = "???"; }
+            else if (EntreeValue == 1) { UpgradesImage[24].sprite = UpgradesSpritesVariants[90]; upgradePriceText[24].text = "999999"; }
+            else { UpgradesImage[24].sprite = UpgradesSpritesVariants[91]; upgradePriceText[24].text = "999999"; }
         }
     }
 

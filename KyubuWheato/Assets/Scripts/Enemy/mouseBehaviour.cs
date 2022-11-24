@@ -45,6 +45,8 @@ public class mouseBehaviour : MonoBehaviour
     [SerializeField] private bool isSchwein;
     [SerializeField] private GameObject cornRay;
     private float stoppingDistance = 9f;
+    [SerializeField] private bool isGhost;
+    [SerializeField] private bool isBlackCat;
 
     [SerializeField] private GameObject[] enemiesPrefabs;
     [SerializeField] private GameObject crowPrefab;
@@ -59,10 +61,16 @@ public class mouseBehaviour : MonoBehaviour
     private UltimateBarCharge ultimateBar;
     private bool stopped;
     [SerializeField] private GameObject Supernova;
+    private float ghostSpeed;
+    private bool firing;
+    private bool spriteFiring;
+    [SerializeField] private SpriteRenderer blackCatSpriteRenderer;
 
     private void Start()
     {
         stopped = false;
+        firing = false;
+        spriteFiring = false;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         diceThrowScript = GameObject.FindGameObjectWithTag("DiceManager").GetComponent<DiceThrow>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -70,9 +78,12 @@ public class mouseBehaviour : MonoBehaviour
         ExitHoeWinCondition = GameObject.FindGameObjectWithTag("ExitHoeContainer").GetComponent<ExitHoeContainer>();
         betterEnemySpawner = GameObject.FindGameObjectWithTag("betterEnemySpawner").transform;
 
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
+        if (isGhost == false)
+        {
+            agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+            agent.updateRotation = false;
+            agent.updateUpAxis = false;
+        }
 
         UpdateStats();
         mouseHealth = maxMouseHealth;
@@ -84,6 +95,7 @@ public class mouseBehaviour : MonoBehaviour
         else if (isCowman) { enemyIndex = 1; }
         else if (isHenor) { enemyIndex = 2; }
         else if (isScawy) { enemyIndex = 3; }
+        else if (isBlackCat) { enemyIndex = 4; }
         else if (isSchwein) { StartCoroutine(ShootCornRays()); }
         else { enemyIndex = 0; }
 
@@ -100,8 +112,7 @@ public class mouseBehaviour : MonoBehaviour
             if (playerTransform.position.x > transform.position.x) { animator.SetFloat("moveX", 1); }
             else { animator.SetFloat("moveX", -1);  }
         }
-
-        if (isScawy)
+        else
         {
             if (Vector2.Distance(transform.position, playerTransform.position) <= stoppingDistance && CrowCooldown == false && isMiniBoss == false) { ShootCrow(); }
             else if (Vector2.Distance(transform.position, playerTransform.position) <= stoppingDistance && CrowCooldown == false && isMiniBoss == true) { StartCoroutine(ShootMultipleCrow()); }
@@ -117,6 +128,12 @@ public class mouseBehaviour : MonoBehaviour
             }
         }
 
+        if (isBlackCat && firing == false && Vector2.Distance(transform.position, playerTransform.position) <= 5f) { StartCoroutine(ShootPotion()); }
+
+        if (isBlackCat && spriteFiring == true && playerTransform.position.x > transform.position.x) { blackCatSpriteRenderer.flipX = true; }
+        else if (isBlackCat && spriteFiring == true && playerTransform.position.x <= transform.position.x) { blackCatSpriteRenderer.flipX = false; }
+        else if (isBlackCat && spriteFiring == false) { blackCatSpriteRenderer.flipX = false; }
+
         if(mouseHealth <= 0)
         {   
             if (PlayerPrefs.GetInt("IngameRamen") == 1 && Random.Range(0f, 100f) < 1f + PlayerPrefs.GetInt("ChargedAttacks")*0.07f) 
@@ -124,7 +141,7 @@ public class mouseBehaviour : MonoBehaviour
                 Instantiate(Supernova, transform.position, Quaternion.identity); 
                 FindObjectOfType<AudioManager>().PlaySound("Supernova");
             }
-            if (player.InHealMode == true) { player.UpdateHealth(5); }
+            if (player.InHealMode == true) { player.UpdateHealth(Mathf.RoundToInt(player.maxHealth*0.01f + 0.7f)); FindObjectOfType<AudioManager>().PlaySound("Lifesteal"); }
 
             float RNGWheat = Random.Range(0f, 10f);
             if (RNGWheat <= player.wheatDroprate/10) { Instantiate(wheatDrop, transform.position, Quaternion.identity); }
@@ -134,14 +151,15 @@ public class mouseBehaviour : MonoBehaviour
             if (isMiniBoss == true) { RNGDice = Random.Range(0, 3); }
             if (RNGDice == 0) { Instantiate(dicetypes[Random.Range(0,dicetypes.Length)], transform.position, Quaternion.identity); }
 
-            ExitHoeWinCondition.EnemiesKilled++;
+            if (isGhost == false) { ExitHoeWinCondition.EnemiesKilled++; }
             Destroy(gameObject);
         }
     }
 
     private void FixedUpdate() 
     {
-        if (badSpawn == false && stopped == false) { agent.SetDestination(playerTransform.position); } 
+        if (badSpawn == false && stopped == false && isGhost == false) { agent.SetDestination(playerTransform.position); } 
+        else if (stopped == false && isGhost) { transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, ghostSpeed * Time.deltaTime);}
         else
         {
             agent.isStopped = true;
@@ -149,6 +167,8 @@ public class mouseBehaviour : MonoBehaviour
             agent.velocity = Vector3.zero;
         }
     }
+
+    
 
     private void mouseTakeDamage(int i)
     {
@@ -175,7 +195,7 @@ public class mouseBehaviour : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         bool UndesirableSpawn = collider.gameObject.tag == "MapCollider" || collider.gameObject.tag == "chest" || collider.gameObject.tag == "Player";
-        if (CheckForValidSpawn == true && UndesirableSpawn == true)
+        if (CheckForValidSpawn == true && UndesirableSpawn == true && isGhost == false)
         {
             badSpawn = true;
             Instantiate(enemiesPrefabs[enemyIndex], new Vector3(betterEnemySpawner.position.x + Random.Range(-10f, 10f), betterEnemySpawner.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity);
@@ -204,10 +224,14 @@ public class mouseBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "FakeDice4") { mouseTakeDamage(4); }
             if (collider.gameObject.tag == "FakeDice5") { mouseTakeDamage(5); }
             if (collider.gameObject.tag == "FakeDice6") { mouseTakeDamage(6); }      
+            if (collider.gameObject.tag == "ChargedDice2") { mouseTakeDamage(2); ChargeUlt(2); }   
+            if (collider.gameObject.tag == "ChargedDice4") { mouseTakeDamage(4); ChargeUlt(4); }   
+            if (collider.gameObject.tag == "ChargedDice6") { mouseTakeDamage(6); ChargeUlt(6); }   
             if (collider.gameObject.tag == "FakeDice8") { mouseTakeDamage(8); ChargeUlt(8); }     
             if (collider.gameObject.tag == "FakeDice10") { mouseTakeDamage(10); ChargeUlt(10); }     
             if (collider.gameObject.tag == "FakeDice12") { mouseTakeDamage(12); ChargeUlt(12); }     
             if (collider.gameObject.tag == "FakeDice20") { mouseTakeDamage(20); }   
+
             if (collider.gameObject.tag == "Star") { mouseTakeDamage(UnityEngine.Random.Range(1,4) + Mathf.RoundToInt(((player.maxHealth - player.playerHealth)/player.maxHealth)*5)); }   
             if (collider.gameObject.tag == "100sidedDice") { mouseTakeDamage(UnityEngine.Random.Range(100,200)); }   
         }
@@ -236,7 +260,7 @@ public class mouseBehaviour : MonoBehaviour
     {
         if (collider.gameObject.tag == "TimeCrescent") 
         { 
-            stopped = false;
+            if (spriteFiring == false) { stopped = false; }
             mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); 
         }
         if (collider.gameObject.tag == "6sidedDice1") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
@@ -253,6 +277,9 @@ public class mouseBehaviour : MonoBehaviour
         if (collider.gameObject.tag == "FakeDice5") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
         if (collider.gameObject.tag == "FakeDice6") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
         if (collider.gameObject.tag == "BroomAttack") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
+        if (collider.gameObject.tag == "ChargedDice2") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
+        if (collider.gameObject.tag == "ChargedDice4") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
+        if (collider.gameObject.tag == "ChargedDice6") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
         if (collider.gameObject.tag == "FakeDice8") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
         if (collider.gameObject.tag == "FakeDice10") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
         if (collider.gameObject.tag == "FakeDice12") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
@@ -336,10 +363,40 @@ public class mouseBehaviour : MonoBehaviour
         if (isSchwein) 
         { 
             mouseStrength = Mathf.FloorToInt(level*1.5f + 10f);
-            maxMouseHealth = level*22 + 150;
+            maxMouseHealth = level*20 + 350;
             agent.speed = level*0.1f + 0.8f;
             agent.acceleration = level*0.1f + 3.5f;
         }
+        if (isGhost)
+        {
+            mouseStrength = Mathf.FloorToInt(level*6f + 30f);
+            maxMouseHealth = level*30 + 65;
+            ghostSpeed = level*0.2f + 1.5f;
+        }
+        if (isBlackCat) 
+        { 
+            mouseStrength = Mathf.FloorToInt(level*1f + 5f);
+            maxMouseHealth = level*13 + 30;
+            agent.speed = level*0.3f + 1.4f;
+            agent.acceleration = level*0.1f + 1f;
+        }
+    }
+
+    private IEnumerator ShootPotion()
+    {
+        firing = true;
+        spriteFiring = true;
+        stopped = true;
+        animator.SetBool("Firing", true);
+        yield return new WaitForSeconds(0.7f);
+        for (int i = 0; i < Random.Range(1,4); i++) { Instantiate(cornRay, transform.position, Quaternion.identity); }
+        yield return new WaitForSeconds(5.3f);
+        animator.SetBool("Firing", false);
+        if (mouseSpriteRenderer.material.color != new Color32(255, 187, 0, 255)) { stopped = false; } 
+        spriteFiring = false;
+        yield return new WaitForSeconds(2f);
+        firing = false;
+        yield return null;
     }
 
     private void ShootCrow()

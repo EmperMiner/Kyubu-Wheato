@@ -45845,7 +45845,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2e4a18c45679ab7479c51e4b996f625c, type: 3}
   - {fileID: 21300000, guid: e526b7fa05b799d49a29f99f6bf2c235, type: 3}
   - {fileID: 21300000, guid: c4e599516ea3e444b8af44c45e4aba14, type: 3}
-  healingCooldownTime: 30
+  - {fileID: 21300000, guid: 5d85880bfc3b2d44d94c2bee7a5495d9, type: 3}
   Invincible: 0
   SalmonRiser: {fileID: 189789847}
   MyriadCookies: {fileID: 1700445570050176395, guid: f918fe5c8854ff446988bed6bf6f611a, type: 3}

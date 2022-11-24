@@ -32,21 +32,7 @@ public class TreasureChestScript : MonoBehaviour
         chestSpawnerScript = GameObject.FindGameObjectWithTag("ChestManager").GetComponent<TreasureChestSpawner>();
         CloseEnoughToChest = false;
 
-        if (ChestRarity == 0) 
-        { 
-            if (player.Wheat*0.1f < 20) { WheatCost = 20; }
-            else { WheatCost = Mathf.RoundToInt(player.Wheat*0.1f); }
-        }
-        else if (ChestRarity == 1)
-        {
-            if (player.Wheat*0.15f < 40) { WheatCost = 40; }
-            else { WheatCost = Mathf.RoundToInt(player.Wheat*0.15f); }
-        }
-        else 
-        {
-            if (player.Wheat*0.25f < 70) { WheatCost = 70; }
-            else { WheatCost = Mathf.RoundToInt(player.Wheat*0.25f); }
-        }
+        
 
         StartCoroutine(ValidSpawn());
     }
@@ -56,6 +42,22 @@ public class TreasureChestScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && CloseEnoughToChest) 
         { 
+            if (ChestRarity == 0) 
+            { 
+                if (player.Wheat*0.1f < 20) { WheatCost = 20; }
+                else { WheatCost = Mathf.RoundToInt(player.Wheat*0.1f); }
+            }
+            else if (ChestRarity == 1)
+            {
+                if (player.Wheat*0.15f < 40) { WheatCost = 40; }
+                else { WheatCost = Mathf.RoundToInt(player.Wheat*0.15f); }
+            }
+            else 
+            {
+                if (player.Wheat*0.25f < 70) { WheatCost = 70; }
+                else { WheatCost = Mathf.RoundToInt(player.Wheat*0.25f); }
+            }
+            
             if (player.Wheat >= WheatCost) { OpenTreasureChest(); }
             else { StartCoroutine(NotifTextWarning()); }
         }

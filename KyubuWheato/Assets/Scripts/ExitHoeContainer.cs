@@ -10,7 +10,7 @@ public class ExitHoeContainer : MonoBehaviour
     private PlayerController player;
 
     public int EnemiesKilled;
-    [SerializeField] private int EnemyLimit;
+    public int EnemyLimit;
     [SerializeField] private GameObject ExitHoe;
     public bool notBossFight;
     public bool ArrowVisible;

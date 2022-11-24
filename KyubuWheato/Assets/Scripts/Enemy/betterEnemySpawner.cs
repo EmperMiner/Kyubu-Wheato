@@ -10,15 +10,21 @@ public class betterEnemySpawner : MonoBehaviour
     [SerializeField] private int[] enemyLimits;
     private int[] enemySpawned;
     [SerializeField] private bool isSecretLevel;
+    [SerializeField] private GameObject ghost;
+    private ExitHoeContainer exitScript;
 
     private GameObject[] spawnings;
 
     private void Start()
     {
+        exitScript = GameObject.FindGameObjectWithTag("ExitHoeContainer").GetComponent<ExitHoeContainer>();
         enemySpawned = new int[enemyPrefabs.Length];
         StartCoroutine(SpawnEnemyStartingDelay());
         if (isSecretLevel) { StartCoroutine(SpawnEnemyInCircle()); }
         spawnings = GameObject.FindGameObjectsWithTag("MobSpawner");
+
+        int ghostDecider = Random.Range(0,5);
+        if (ghostDecider == 0) { StartCoroutine(spawnGhosts()); }
     }
 
     private IEnumerator SpawnEnemy(float enemyInterval, GameObject enemy, int enemyLimit, int enemyIndex)
@@ -54,6 +60,16 @@ public class betterEnemySpawner : MonoBehaviour
             Instantiate(enemyPrefabs[i], new Vector3(transform.position.x + Random.Range(-15f, 15f), transform.position.y + Random.Range(-15f, 15f), 0), Quaternion.identity);
         }
         StartCoroutine(SpawnEnemyInCircle());
+        yield return null;
+    }
+
+    private IEnumerator spawnGhosts()
+    {
+        yield return new WaitForSeconds(Random.Range(50f, 100f));
+
+        for (int i = 0; i < Random.Range(1, 9); i++) { Instantiate(ghost, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity); }
+
+        if (exitScript.EnemiesKilled < exitScript.EnemyLimit) { StartCoroutine(spawnGhosts()); }
         yield return null;
     }
 }
