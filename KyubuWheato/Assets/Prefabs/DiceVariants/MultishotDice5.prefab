@@ -158,4 +158,5 @@ MonoBehaviour:
   - {fileID: 703049877083505148, guid: 52ee17dd124558049b20606c6b120eb6, type: 3}
   - {fileID: 7031763220714789967, guid: 3bcfadd9c14a20c44bf0e7d1155f1141, type: 3}
   - {fileID: 6504138965479604041, guid: fadda25175743b645b36b761799b35e8, type: 3}
+  ghost: {fileID: 2928511541386306518, guid: 0c51b4cc7b7e7ba4c9f0084d69cc1626, type: 3}
   pickupable: 0

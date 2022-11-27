@@ -47135,6 +47135,7 @@ MonoBehaviour:
   Invincible: 0
   SalmonRiser: {fileID: 1202611743}
   MyriadCookies: {fileID: 1700445570050176395, guid: f918fe5c8854ff446988bed6bf6f611a, type: 3}
+  WhaleTest: {fileID: 1375204299989451831, guid: 3195d8adedbb20548afbe0bcbc80186f, type: 3}
 --- !u!4 &1405087408
 Transform:
   m_ObjectHideFlags: 0

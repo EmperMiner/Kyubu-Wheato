@@ -128,7 +128,7 @@ MonoBehaviour:
   isGhost: 0
   isBlackCat: 1
   enemiesPrefabs:
-  - {fileID: 912237326712002648}
+  - {fileID: 2928511541386306518, guid: 0c51b4cc7b7e7ba4c9f0084d69cc1626, type: 3}
   - {fileID: 5382777319672248433, guid: bde3eabfc1185154bbacd34a648fb10c, type: 3}
   - {fileID: 3082860963927806209, guid: 4065d84a1526fb643bc599b1fbe954ba, type: 3}
   - {fileID: 1815329666037625875, guid: 460b6b0a664fe41488bdf7a653f220d3, type: 3}

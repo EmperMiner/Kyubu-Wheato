@@ -564,7 +564,7 @@ MonoBehaviour:
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: WhaleLaugh
-    clip: {fileID: 8300000, guid: 9d1eacf0335d32c44adbbb9ef833ff19, type: 3}
+    clip: {fileID: 8300000, guid: 9c988928717e7d1469048a8325c5d9b7, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -585,7 +585,7 @@ MonoBehaviour:
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
   - name: WaterSplash
-    clip: {fileID: 8300000, guid: db26d0064e280b642ba3c2cb288ff29e, type: 3}
+    clip: {fileID: 8300000, guid: c238b76f7de877747ab11be8c095245d, type: 3}
     volume: 0.9
     pitch: 1
     loop: 0

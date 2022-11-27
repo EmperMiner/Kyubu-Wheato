@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviour
 
     private bool FSCInvincible;
     [SerializeField] private GameObject MyriadCookies;
+    [SerializeField] private GameObject WhaleTest;
     private bool lowHealth;
     
     private void Awake()
@@ -270,6 +271,8 @@ public class PlayerController : MonoBehaviour
                 Instantiate(MyriadCookies, transform.position, Quaternion.identity);
                 AudioPlayer.PlaySound("FSC");
             }
+            
+            if (Input.GetKeyDown(KeyCode.X)) { Instantiate(WhaleTest, transform.position, Quaternion.identity); }
 
             if (playerHealth == 0 && PlayerPrefs.GetInt("IngameFSC") > 0) { StartCoroutine(FSC()); }
             else if (playerHealth == 0) { GameOver(); }

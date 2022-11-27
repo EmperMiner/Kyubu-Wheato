@@ -21,6 +21,7 @@ public class diceMagnetize : MonoBehaviour
     [SerializeField] private float directionX;
     [SerializeField] private float directionY;
     [SerializeField] private GameObject[] DiceRayPrefabs;
+    [SerializeField] private GameObject ghost;
     private bool haveCupcake;
     private bool havePastelDeChoclo;
     private Vector2 enemyTargetVector;
@@ -67,6 +68,7 @@ public class diceMagnetize : MonoBehaviour
         }
         pickupable = false;
         StartCoroutine(PickupDelay());
+        StartCoroutine(SpawnGhost());
     }
 
     private void AddTorqueImpulse(float angularChangeInDegrees)
@@ -80,7 +82,22 @@ public class diceMagnetize : MonoBehaviour
         Destroy(gameObject, 1.5f);
     }
 
-    IEnumerator Wait()
+    private IEnumerator PickupDelay()
+    {
+        yield return new WaitForSeconds(0.15f);
+        pickupable = true;
+        yield return null;
+    }
+
+    private IEnumerator SpawnGhost()
+    {
+        yield return new WaitForSeconds(UnityEngine.Random.Range(23f,27f));
+        Instantiate(ghost, new Vector3(transform.position.x + UnityEngine.Random.Range(-10f, 10f), transform.position.y + UnityEngine.Random.Range(-10f, 10f), 0), Quaternion.identity); 
+        StartCoroutine(SpawnGhost());
+        yield return null;
+    }
+
+    private IEnumerator Wait()
     {
         yield return new WaitForSeconds(4f);
         FindObjectOfType<AudioManager>().PlaySound("MagnetizedDice");
@@ -91,7 +108,7 @@ public class diceMagnetize : MonoBehaviour
         yield return null;
     }
     
-    IEnumerator RollExplosionChance()
+    private IEnumerator RollExplosionChance()
     {
         yield return new WaitForSeconds(1f);
         int i = UnityEngine.Random.Range(0,130);
@@ -194,13 +211,6 @@ public class diceMagnetize : MonoBehaviour
         if (other.gameObject.tag == "enemyMouse" && this.gameObject.tag == "FakeDice12" && LifeStolen == false )
         { player.UpdateHealth(Mathf.RoundToInt(player.maxHealth*0.007f*(PlayerPrefs.GetFloat("DiceSpinLevelUp"))));}
         if (other.gameObject.tag == "enemyMouse") { LifeStolen = true; }
-    }
-
-    IEnumerator PickupDelay()
-    {
-        yield return new WaitForSeconds(0.15f);
-        pickupable = true;
-        yield return null;
     }
 
     private void LoadData()

@@ -52,17 +52,6 @@ public class betterEnemySpawner : MonoBehaviour
         yield return null;
     }
 
-    private IEnumerator SpawnEnemyInCircle()
-    {
-        yield return new WaitForSeconds(Random.Range(200f, 300f));
-        for (int i =  0; i < 6; i++)
-        {
-            Instantiate(enemyPrefabs[i], new Vector3(transform.position.x + Random.Range(-15f, 15f), transform.position.y + Random.Range(-15f, 15f), 0), Quaternion.identity);
-        }
-        StartCoroutine(SpawnEnemyInCircle());
-        yield return null;
-    }
-
     private IEnumerator spawnGhosts()
     {
         yield return new WaitForSeconds(Random.Range(50f, 100f));

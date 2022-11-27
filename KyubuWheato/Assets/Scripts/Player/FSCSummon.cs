@@ -20,7 +20,7 @@ public class FSCSummon : MonoBehaviour
         yield return new WaitForSeconds(2f);
         for (int i = 0; i < Random.Range(10,15); i++)
         {
-            Instantiate(FSCRay[Random.Range(0,3)], new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y, transform.position.z), Quaternion.identity);
+            Instantiate(FSCRay[Random.Range(0,3)], new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y, transform.position.z), Quaternion.Euler(0, 0, Random.Range(0,2)*180));
             yield return new WaitForSeconds(Random.Range(0.03f, 0.18f));
         }
         yield return null;

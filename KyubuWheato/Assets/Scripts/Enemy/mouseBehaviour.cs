@@ -130,9 +130,13 @@ public class mouseBehaviour : MonoBehaviour
 
         if (isBlackCat && firing == false && Vector2.Distance(transform.position, playerTransform.position) <= 5f) { StartCoroutine(ShootPotion()); }
 
-        if (isBlackCat && spriteFiring == true && playerTransform.position.x > transform.position.x) { blackCatSpriteRenderer.flipX = true; }
-        else if (isBlackCat && spriteFiring == true && playerTransform.position.x <= transform.position.x) { blackCatSpriteRenderer.flipX = false; }
+        if (isBlackCat && spriteFiring == true) 
+        { 
+            if (playerTransform.position.x > transform.position.x) { blackCatSpriteRenderer.flipX = true; }
+            else { blackCatSpriteRenderer.flipX = false; }
+        }
         else if (isBlackCat && spriteFiring == false) { blackCatSpriteRenderer.flipX = false; }
+       
 
         if(mouseHealth <= 0)
         {   
@@ -369,15 +373,15 @@ public class mouseBehaviour : MonoBehaviour
         }
         if (isGhost)
         {
-            mouseStrength = Mathf.FloorToInt(level*6f + 30f);
-            maxMouseHealth = level*30 + 65;
-            ghostSpeed = level*0.2f + 1.5f;
+            mouseStrength = Mathf.FloorToInt(level*7f + 30f);
+            maxMouseHealth = level*35 + 65;
+            ghostSpeed = level*0.2f + 2f;
         }
         if (isBlackCat) 
         { 
             mouseStrength = Mathf.FloorToInt(level*1f + 5f);
-            maxMouseHealth = level*13 + 30;
-            agent.speed = level*0.3f + 1.4f;
+            maxMouseHealth = level*30 + 50;
+            agent.speed = level*0.4f + 1.2f;
             agent.acceleration = level*0.1f + 1f;
         }
     }
