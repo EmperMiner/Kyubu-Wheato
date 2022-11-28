@@ -99,7 +99,12 @@ public class ShopManager : MonoBehaviour
             SaveData();
         }
 
-        if (Input.GetKeyDown(KeyCode.T)) { PlayerPrefs.SetInt("Infinitruths", 0); }
+        if (Input.GetKeyDown(KeyCode.T)) { PlayerPrefs.SetInt("Infinitruths", 2); }
+        if (Input.GetKeyDown(KeyCode.Y)) { PlayerPrefs.SetInt("Ramen", 1); }
+        if (Input.GetKeyDown(KeyCode.U)) { PlayerPrefs.SetInt("Salmon", 1); }
+        if (Input.GetKeyDown(KeyCode.I)) { PlayerPrefs.SetInt("Steak", 1); }
+        if (Input.GetKeyDown(KeyCode.O)) { PlayerPrefs.SetInt("Cheese", 1); }
+        if (Input.GetKeyDown(KeyCode.P)) { PlayerPrefs.SetInt("FSC", 1); }
     } 
 
     private void MaxShopCheck()

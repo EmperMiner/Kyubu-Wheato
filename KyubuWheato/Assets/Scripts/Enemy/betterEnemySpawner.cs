@@ -9,7 +9,6 @@ public class betterEnemySpawner : MonoBehaviour
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private int[] enemyLimits;
     private int[] enemySpawned;
-    [SerializeField] private bool isSecretLevel;
     [SerializeField] private GameObject ghost;
     private ExitHoeContainer exitScript;
 
@@ -20,7 +19,6 @@ public class betterEnemySpawner : MonoBehaviour
         exitScript = GameObject.FindGameObjectWithTag("ExitHoeContainer").GetComponent<ExitHoeContainer>();
         enemySpawned = new int[enemyPrefabs.Length];
         StartCoroutine(SpawnEnemyStartingDelay());
-        if (isSecretLevel) { StartCoroutine(SpawnEnemyInCircle()); }
         spawnings = GameObject.FindGameObjectsWithTag("MobSpawner");
 
         int ghostDecider = Random.Range(0,5);

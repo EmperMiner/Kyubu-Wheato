@@ -102,7 +102,9 @@ public class PlayerController : MonoBehaviour
 
     private bool FSCInvincible;
     [SerializeField] private GameObject MyriadCookies;
-    [SerializeField] private GameObject WhaleTest;
+    [SerializeField] private GameObject Whale;
+    [SerializeField] private GameObject ChanceWhale;
+    [SerializeField] private float[] WhaleLevelInterval;
     private bool lowHealth;
     
     private void Awake()
@@ -200,6 +202,12 @@ public class PlayerController : MonoBehaviour
 
         healingCooldownTime = 30f;
         lowHealth = false;
+
+        if (level != 11)
+        {
+            StartCoroutine(WhaleChance());
+            StartCoroutine(WhaleForced());
+        }
     }
 
     private void Start()
@@ -208,6 +216,7 @@ public class PlayerController : MonoBehaviour
         BlueWheatIndicator.SetActive(false);
         GreenWheatIndicator.SetActive(false);
         MapDisplay.SetActive(false);
+        
     }
 
     private void Update()
@@ -271,12 +280,38 @@ public class PlayerController : MonoBehaviour
                 Instantiate(MyriadCookies, transform.position, Quaternion.identity);
                 AudioPlayer.PlaySound("FSC");
             }
-            
-            if (Input.GetKeyDown(KeyCode.X)) { Instantiate(WhaleTest, transform.position, Quaternion.identity); }
 
             if (playerHealth == 0 && PlayerPrefs.GetInt("IngameFSC") > 0) { StartCoroutine(FSC()); }
             else if (playerHealth == 0) { GameOver(); }
         }
+    }
+
+    private IEnumerator WhaleForced()
+    {
+        for (int numberOfSummons = 0; numberOfSummons < WhaleLevelInterval.Length; numberOfSummons++)
+        {
+            yield return new WaitForSeconds(WhaleLevelInterval[numberOfSummons]);
+            Instantiate(Whale, transform.position, Quaternion.identity);
+        }
+        yield return null;
+    }
+
+    private IEnumerator WhaleChance()
+    {
+        int level = SceneManager.GetActiveScene().buildIndex - 4;
+        yield return new WaitForSeconds(UnityEngine.Random.Range(25f, 35f) - level/2);
+        int whaleChance = UnityEngine.Random.Range(0,10);
+        if (KeyWheatScript.EnemiesKilled < KeyWheatScript.EnemyLimit && whaleChance == 0)
+        {
+            Instantiate(Whale, transform.position, Quaternion.identity);
+            StartCoroutine(WhaleChance());
+        }
+        yield return null;
+    }
+
+    public void SummonChanceWhale()
+    {
+        Instantiate(ChanceWhale, transform.position, Quaternion.identity);
     }
 
     private IEnumerator FSC()

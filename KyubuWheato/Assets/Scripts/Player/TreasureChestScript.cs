@@ -31,9 +31,6 @@ public class TreasureChestScript : MonoBehaviour
         diceThrowScript = GameObject.FindGameObjectWithTag("DiceManager").GetComponent<DiceThrow>();
         chestSpawnerScript = GameObject.FindGameObjectWithTag("ChestManager").GetComponent<TreasureChestSpawner>();
         CloseEnoughToChest = false;
-
-        
-
         StartCoroutine(ValidSpawn());
     }
 

@@ -13,6 +13,8 @@ public class whaleSummon : MonoBehaviour
     [SerializeField] private GameObject[] obstacles;
     private int enemyLimiter;
     private Animator water;
+    [SerializeField] private int flippedEnemies;
+
     void Start()
     {
         water = GameObject.Find("Water").GetComponent<Animator>();
@@ -36,20 +38,21 @@ public class whaleSummon : MonoBehaviour
         water.SetTrigger("Underwater");
         Instantiate(waterSplash, transform.position, Quaternion.identity);
         FindObjectOfType<AudioManager>().PlaySound("WaterSplash");
-        WhaleSummon(1);
+        WhaleSummon();
         yield return null;
     }
 
-    public void WhaleSummon(int FlippedEnemies)
+    public void WhaleSummon()
     {
-        if (FlippedEnemies == 0) { summonFlippedEnemies(); }
+        int rand = Random.Range(0,10);
+        if (flippedEnemies == 5 && rand == 0) { summonFlippedEnemies(); }
         else { summonEnemies(); }
     }
 
     private void summonEnemies()
     {
         int level = SceneManager.GetActiveScene().buildIndex - 3;
-        for (int i = 0; i < (level*3 + 4); i++)
+        for (int i = 0; i < (level*3 + 4 + flippedEnemies); i++)
         {
             Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length - enemyLimiter)], new Vector3(transform.position.x + Random.Range(-11f, 11f), transform.position.y + Random.Range(-11f, 11f), 0), Quaternion.identity);
         }
