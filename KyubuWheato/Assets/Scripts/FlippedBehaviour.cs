@@ -241,8 +241,13 @@ public class FlippedBehaviour : MonoBehaviour
             else { FindObjectOfType<AudioManager>().PlaySound("Iframe"); }
             player.UpdateHealth(-mouseStrength + Mathf.RoundToInt((mouseStrength * player.defense)/10));
             mouseCanAttack = 0f;
-            if (isC) { StartCoroutine(CSplit()); player.HitByC(); FindObjectOfType<AudioManager>().PlaySound("DefenseDown"); }
-            if (isF) { FindObjectOfType<AudioManager>().PlaySound("FSay");  }
+            if (isC) 
+            { 
+                StartCoroutine(CSplit()); 
+                player.HitByC(); 
+                if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("DefenseDown"); }
+            }
+            if (isF) { if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("FSay"); }  }
         }    
 
         mouseCanAttack += Time.deltaTime; 
@@ -327,7 +332,7 @@ public class FlippedBehaviour : MonoBehaviour
         agent.ResetPath();
         yield return new WaitForSeconds(4f);
         FindObjectOfType<AudioManager>().PlaySound("4thWall");
-        Instantiate(WallPrefab, transform.position, Quaternion.identity);
+        Instantiate(WallPrefab, transform.position, Quaternion.identity, this.transform);
         yield return new WaitForSeconds(2.5f);
         isMoving = true;
         agent.isStopped = false;
@@ -369,11 +374,14 @@ public class FlippedBehaviour : MonoBehaviour
         agent.isStopped = true;
         agent.ResetPath();
         yield return new WaitForSeconds(2f);
-        Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x - 2f, transform.position.y, transform.position.z), Quaternion.identity);
-        Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x + 2f, transform.position.y, transform.position.z), Quaternion.identity);
-        Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z), Quaternion.identity);
-        Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x, transform.position.y - 2f, transform.position.z), Quaternion.identity);
-        FindObjectOfType<AudioManager>().PlaySound("CSplit");
+        GameObject[] enemyAmountOnMap = GameObject.FindGameObjectsWithTag("enemyMouse");
+        if (enemyAmountOnMap.Length < 25) { Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x - 2f, transform.position.y, transform.position.z), Quaternion.identity); FindObjectOfType<AudioManager>().PlaySound("CSplit");}  
+        enemyAmountOnMap = GameObject.FindGameObjectsWithTag("enemyMouse");
+        if (enemyAmountOnMap.Length < 25) { Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x + 2f, transform.position.y, transform.position.z), Quaternion.identity); }
+        enemyAmountOnMap = GameObject.FindGameObjectsWithTag("enemyMouse");
+        if (enemyAmountOnMap.Length < 25) { Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z), Quaternion.identity); }
+        enemyAmountOnMap = GameObject.FindGameObjectsWithTag("enemyMouse");
+        if (enemyAmountOnMap.Length < 25) { Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x, transform.position.y - 2f, transform.position.z), Quaternion.identity); }
         isMoving = true;
         agent.isStopped = false;
         yield return null;

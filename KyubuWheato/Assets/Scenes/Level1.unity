@@ -47138,6 +47138,8 @@ MonoBehaviour:
   Whale: {fileID: 1375204299989451831, guid: 3195d8adedbb20548afbe0bcbc80186f, type: 3}
   ChanceWhale: {fileID: 4957402008532412366, guid: c0ef99a0236e7e4489777b439c732113, type: 3}
   WhaleLevelInterval: []
+  flippedEnemyPrefabs: []
+  whaleJumpscare: {fileID: 0}
 --- !u!4 &1405087408
 Transform:
   m_ObjectHideFlags: 0

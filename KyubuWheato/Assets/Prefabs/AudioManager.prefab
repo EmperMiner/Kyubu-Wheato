@@ -558,7 +558,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: WhaleJumpscare
     clip: {fileID: 8300000, guid: 5166904006e1fe04bb47719d697fd245, type: 3}
-    volume: 0.5
+    volume: 1
     pitch: 1
     loop: 0
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}

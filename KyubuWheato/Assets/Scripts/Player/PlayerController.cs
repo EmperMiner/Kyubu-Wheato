@@ -106,6 +106,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject ChanceWhale;
     [SerializeField] private float[] WhaleLevelInterval;
     private bool lowHealth;
+    [SerializeField] private GameObject[] flippedEnemyPrefabs;
+    [SerializeField] private Image whaleJumpscare;
     
     private void Awake()
     {       
@@ -208,6 +210,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(WhaleChance());
             StartCoroutine(WhaleForced());
         }
+        else { StartCoroutine(DevilishWhale()); }
     }
 
     private void Start()
@@ -280,10 +283,30 @@ public class PlayerController : MonoBehaviour
                 Instantiate(MyriadCookies, transform.position, Quaternion.identity);
                 AudioPlayer.PlaySound("FSC");
             }
+            if (Input.GetKeyDown(KeyCode.X)) 
+            { 
+                StartCoroutine(Ok()); 
+            }
 
             if (playerHealth == 0 && PlayerPrefs.GetInt("IngameFSC") > 0) { StartCoroutine(FSC()); }
             else if (playerHealth == 0) { GameOver(); }
         }
+    }
+
+    private IEnumerator Ok()
+    {
+        AudioPlayer.StopSound("Discord");
+        yield return new WaitForSeconds(3f);
+        AudioPlayer.PlaySound("WindingMusicBox");
+        yield return new WaitForSeconds(11.2f);
+        AudioPlayer.PlaySound("WhaleJumpscare");
+        whaleJumpscare.color = new Color32(255,255,255,255);
+        yield return new WaitForSeconds(2f);
+        whaleJumpscare.color = new Color32(255,255,255,0);
+        summonFlippedEnemies();
+        yield return new WaitForSeconds(UnityEngine.Random.Range(2f,8f));
+        AudioPlayer.PlayJingle("Discord");
+        yield return null;
     }
 
     private IEnumerator WhaleForced()
@@ -307,6 +330,40 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(WhaleChance());
         }
         yield return null;
+    }
+
+    private IEnumerator DevilishWhale()
+    {
+        yield return new WaitForSeconds(UnityEngine.Random.Range(60f, 100f));
+        int whaleChance = UnityEngine.Random.Range(0,2);
+        if  (whaleChance == 0)
+        {
+            AudioPlayer.StopSound("Discord");
+            yield return new WaitForSeconds(3f);
+            AudioPlayer.PlaySound("WindingMusicBox");
+            yield return new WaitForSeconds(11.2f);
+            AudioPlayer.PlaySound("WhaleJumpscare");
+            whaleJumpscare.color = new Color32(255,255,255,255);
+            yield return new WaitForSeconds(2f);
+            whaleJumpscare.color = new Color32(255,255,255,0);
+            summonFlippedEnemies();
+            StartCoroutine(DevilishWhale());
+            yield return new WaitForSeconds(UnityEngine.Random.Range(2f,8f));
+            AudioPlayer.PlayJingle("Discord");
+        }
+        yield return null;
+    }
+
+    private void summonFlippedEnemies()
+    {
+        for (int i = 0; i < UnityEngine.Random.Range(1, 5); i++)
+        {
+            Instantiate(flippedEnemyPrefabs[UnityEngine.Random.Range(0, flippedEnemyPrefabs.Length)], new Vector3(transform.position.x + UnityEngine.Random.Range(-11f, 11f), transform.position.y + UnityEngine.Random.Range(-11f, 11f), 0), Quaternion.identity);
+        }
+        for (int i = 0; i < 6; i++)
+        {
+            Instantiate(flippedEnemyPrefabs[i], new Vector3(transform.position.x + UnityEngine.Random.Range(-11f, 11f), transform.position.y + UnityEngine.Random.Range(-11f, 11f), 0), Quaternion.identity);
+        }
     }
 
     public void SummonChanceWhale()
@@ -534,9 +591,9 @@ public class PlayerController : MonoBehaviour
 
     public void HitByScythe()
     {
-        diceNumber--;
+        if (Invincible == false) { diceNumber--; }
         if (diceNumber < 0) { diceNumber = 0; }
-        MoveSpeed -= 0.5f;
+        if (Invincible == false) { MoveSpeed -= 0.5f; }
         if (MoveSpeed < 2.5f) { MoveSpeed = 2.5f; }
         DiceCounterNumber.text = diceNumber.ToString();
         UpdateValues();
@@ -550,14 +607,14 @@ public class PlayerController : MonoBehaviour
 
     public void HitByHand()
     {
-        MoveSpeed -= 0.25f;
+        if (Invincible == false) { MoveSpeed -= 0.15f; }
         if (MoveSpeed < 2.5f) { MoveSpeed = 2.5f; }
         UpdateValues();
     }
 
     public void HitByC()
     {
-        defense -= 1f;
+        if (Invincible == false) { defense -= 1f; }
         if (defense < 1f) { defense = 1f; }
         UpdateValues();
     }
