@@ -85,6 +85,8 @@ TagManager:
   - ChargedDice2
   - ChargedDice4
   - ChargedDice6
+  - TransitionOut
+  - Timer
   layers:
   - Default
   - TransparentFX

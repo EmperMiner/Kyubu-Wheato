@@ -104,7 +104,7 @@ public class FlippedChestScript : MonoBehaviour
 
     private void ChooseStat()
     {
-        int StatGachaRoll = Random.Range(0, 40);
+        int StatGachaRoll = Random.Range(0, 30);
         if (StatGachaRoll <= 2 && player.MoveSpeed <= 3.4f) { player.MoveSpeed += Random.Range(0.6f, 1.2f); CreateImagePopup(9); }
         else if (StatGachaRoll <= 5) {  int i = Random.Range(2, 6); player.maxHealth += Random.Range(2, 6); player.healthBar.SetMaxHealth(player.maxHealth); player.UpdateHealth(i*3); CreateImagePopup(10); }
         else if (StatGachaRoll <= 8) { player.strength += Random.Range(1f, 3f); CreateImagePopup(11); }
@@ -114,7 +114,7 @@ public class FlippedChestScript : MonoBehaviour
         else if (StatGachaRoll <= 17 && player.wheatDroprate < 100f) { player.wheatDroprate += Random.Range(2f, 5f); CreateImagePopup(15); }
         else if (StatGachaRoll <= 18 && player.diceDroprate > 100) { player.diceDroprate -= Random.Range(50, 100); if(player.diceDroprate < 100) { player.diceDroprate = 100; } CreateImagePopup(16); }
         else if (StatGachaRoll <= 19 && player.dicePreviewerLevel < 5) { player.dicePreviewerLevel += 1; diceThrowScript.UpdateDicePreviewerUI(); CreateImagePopup(17); }
-        else if (StatGachaRoll <= 39) { player.UpdateWheat(Random.Range(180, 250)); CreateImagePopup(18); }
+        else if (StatGachaRoll <= 29) { player.UpdateWheat(Random.Range(200, 300)); CreateImagePopup(18); }
         else { ChooseStat(); }
     }
     

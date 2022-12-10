@@ -108,7 +108,9 @@ public class PlayerController : MonoBehaviour
     private bool lowHealth;
     [SerializeField] private GameObject[] flippedEnemyPrefabs;
     [SerializeField] private Image whaleJumpscare;
-    
+    private GameObject transitionOut;
+    private SpeedrunTimer timerScript;
+
     private void Awake()
     {       
         SalmonStarted = false;
@@ -132,6 +134,7 @@ public class PlayerController : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex != 15) { LevelTextMap.text = "Level " + (SceneManager.GetActiveScene().buildIndex - 3); }
         else { LevelTextMap.text = "Level (#93MS8*-D%LD_-LQ"; }
 
+        timerScript = GameObject.FindGameObjectWithTag("Timer").GetComponent<SpeedrunTimer>();
         AudioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         diceThrower = GameObject.FindGameObjectWithTag("DiceManager");
         crosshair = GameObject.FindGameObjectWithTag("Crosshair");
@@ -205,12 +208,16 @@ public class PlayerController : MonoBehaviour
         healingCooldownTime = 30f;
         lowHealth = false;
 
-        if (level != 11)
+        transitionOut = GameObject.FindGameObjectWithTag("TransitionOut");
+        transitionOut.SetActive(false);
+
+        if (level == 11) { StartCoroutine(DevilishWhaleChance()); }
+        else if (level == 0 || level == 1 ) { }
+        else
         {
             StartCoroutine(WhaleChance());
             StartCoroutine(WhaleForced());
         }
-        else { StartCoroutine(DevilishWhale()); }
     }
 
     private void Start()
@@ -219,7 +226,6 @@ public class PlayerController : MonoBehaviour
         BlueWheatIndicator.SetActive(false);
         GreenWheatIndicator.SetActive(false);
         MapDisplay.SetActive(false);
-        
     }
 
     private void Update()
@@ -332,25 +338,31 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
-    private IEnumerator DevilishWhale()
+    private IEnumerator DevilishWhaleChance()
     {
         yield return new WaitForSeconds(UnityEngine.Random.Range(60f, 100f));
         int whaleChance = UnityEngine.Random.Range(0,2);
         if  (whaleChance == 0)
         {
-            AudioPlayer.StopSound("Discord");
-            yield return new WaitForSeconds(3f);
-            AudioPlayer.PlaySound("WindingMusicBox");
-            yield return new WaitForSeconds(11.2f);
-            AudioPlayer.PlaySound("WhaleJumpscare");
-            whaleJumpscare.color = new Color32(255,255,255,255);
-            yield return new WaitForSeconds(2f);
-            whaleJumpscare.color = new Color32(255,255,255,0);
-            summonFlippedEnemies();
-            StartCoroutine(DevilishWhale());
-            yield return new WaitForSeconds(UnityEngine.Random.Range(2f,8f));
-            AudioPlayer.PlayJingle("Discord");
+            StartCoroutine(SummonDevilishWhale());
+            StartCoroutine(DevilishWhaleChance());
         }
+        yield return null;
+    }
+
+    public IEnumerator SummonDevilishWhale()
+    {
+        AudioPlayer.StopSound("Discord");
+        yield return new WaitForSeconds(3f);
+        AudioPlayer.PlaySound("WindingMusicBox");
+        yield return new WaitForSeconds(11.2f);
+        AudioPlayer.PlaySound("Meow");
+        whaleJumpscare.color = new Color32(255,255,255,255);
+        yield return new WaitForSeconds(0.65f);
+        whaleJumpscare.color = new Color32(255,255,255,0);
+        summonFlippedEnemies();
+        yield return new WaitForSeconds(UnityEngine.Random.Range(2f,8f));
+        AudioPlayer.PlayJingle("Discord");
         yield return null;
     }
 
@@ -415,11 +427,11 @@ public class PlayerController : MonoBehaviour
         
         if (other.gameObject.tag == "GoldenWheat") { Win(); }
 
-        if (other.gameObject.tag == "Level12") { LoadToLevel(12); }
-        if (other.gameObject.tag == "Level2") { LoadToLevel(2); }
-        if (other.gameObject.tag == "Level5") { LoadToLevel(5); }
-        if (other.gameObject.tag == "Level8") { LoadToLevel(8); }
-        if (other.gameObject.tag == "Level10") { LoadToLevel(10); }
+        if (other.gameObject.tag == "Level12") { StartCoroutine(LoadToLevel(12)); }
+        if (other.gameObject.tag == "Level2") { StartCoroutine(LoadToLevel(2)); }
+        if (other.gameObject.tag == "Level5") { StartCoroutine(LoadToLevel(5)); }
+        if (other.gameObject.tag == "Level8") { StartCoroutine(LoadToLevel(8)); }
+        if (other.gameObject.tag == "Level10") { StartCoroutine(LoadToLevel(10)); }
 
         if (other.gameObject.tag == "Tumbleweed") { AudioPlayer.PlaySound("TumbleweedHit"); }
         if (other.gameObject.tag == "4thWall") { AudioPlayer.PlaySound("4thWallHit"); }
@@ -429,7 +441,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "GreenWheat") { UnlockKey("Green"); Destroy(other.gameObject); }
         if (other.gameObject.tag == "ExitHoe") 
         { 
-            if (KeyWheatScript.Level == 1) { ToTheNextLevel(); }
+            if (KeyWheatScript.Level == 1) { StartCoroutine(GoToNextLevel()); }
             else if (KeyWheatScript.Level == 2) 
             { 
                 if (!KeyWheatScript.haveRedWheat)
@@ -438,7 +450,7 @@ public class PlayerController : MonoBehaviour
                     requiredWheat += "Red "; 
                     StartCoroutine(NotifTextWarning());
                 }
-                else { ToTheNextLevel(); }
+                else { StartCoroutine(GoToNextLevel()); }
             }
             else if (KeyWheatScript.Level == 3) 
             { 
@@ -449,7 +461,7 @@ public class PlayerController : MonoBehaviour
                     if (!KeyWheatScript.haveGreenWheat) { requiredWheat += "Green "; }
                     StartCoroutine(NotifTextWarning());
                 }
-                else { ToTheNextLevel(); }
+                else { StartCoroutine(GoToNextLevel()); }
             }        
             else if (!KeyWheatScript.haveRedWheat || !KeyWheatScript.haveBlueWheat || !KeyWheatScript.haveGreenWheat)
             {
@@ -459,15 +471,46 @@ public class PlayerController : MonoBehaviour
                 if (!KeyWheatScript.haveGreenWheat) { requiredWheat += "Green "; }
                 StartCoroutine(NotifTextWarning());
             }
-            else { ToTheNextLevel(); }
+            else { StartCoroutine(GoToNextLevel()); }
         }
     }
 
-    private void ToTheNextLevel()
+    private IEnumerator TransitionInSound()
     {
+        yield return new WaitForSeconds(0.9f);
+        AudioPlayer.PlaySound("ButtonSelect");
+        yield return null;
+    }
+
+    private IEnumerator LoadToLevel(int wantedScene)
+    {
+        transitionOut.SetActive(true);
+        yield return new WaitForSeconds(1.9f);
+        AudioPlayer.PlaySound("ButtonSelect");
+        yield return new WaitForSeconds(0.3f);
+
+        EnterLevelIngameSaveData();
+        PlayerPrefs.SetInt("SavedLevel", wantedScene);
+
+        SceneManager.LoadScene(wantedScene + 3);
+
+        yield return null;
+    }
+
+    private IEnumerator GoToNextLevel()
+    {
+        transitionOut.SetActive(true);
+        yield return new WaitForSeconds(1.9f);
+        AudioPlayer.PlaySound("ButtonSelect");
+        yield return new WaitForSeconds(0.3f);
+
         int current = PlayerPrefs.GetInt("SavedLevel");
         PlayerPrefs.SetInt("SavedLevel", current + 1);
-        NextLevel(SceneManager.GetActiveScene().buildIndex);
+
+        EnterLevelIngameSaveData();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        yield return null;
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -787,20 +830,6 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
-    private void NextLevel(int currentScene)
-    {
-        EnterLevelIngameSaveData();
-        SceneManager.LoadScene(currentScene + 1);
-    }
-    private void LoadToLevel(int wantedScene)
-    {
-        EnterLevelIngameSaveData();
-        PlayerPrefs.SetInt("SavedLevel", wantedScene);
-        SceneManager.LoadScene(wantedScene + 3);
-    }
-
-    
-
     private void LoadData()
     {
         string json = File.ReadAllText(Application.dataPath + "/gameSaveData.json");
@@ -984,6 +1013,7 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetFloat("DiceSpinLevelUpSave", PlayerPrefs.GetFloat("DiceSpinLevelUp"));
         PlayerPrefs.SetFloat("DiceSpinLevelSave", PlayerPrefs.GetFloat("DiceSpinLevel"));
         PlayerPrefs.SetInt("ChargedAttacksSave", PlayerPrefs.GetInt("ChargedAttacks"));
+        PlayerPrefs.SetFloat("Timer", timerScript.time);
 
         string json = JsonUtility.ToJson(savingPlayerData);
         Debug.Log(json);

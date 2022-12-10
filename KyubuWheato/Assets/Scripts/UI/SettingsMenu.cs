@@ -18,6 +18,7 @@ public class SettingsMenu : MonoBehaviour
     private AudioManager AudioPlayer;
 
     [SerializeField] private Resolution[] resolutions;
+    [SerializeField] private Toggle showTimerToggle;
 
     private void Start() 
     { 
@@ -31,6 +32,7 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetInt("FullscreenToggle", Convert.ToInt32(fullscreenToggle.isOn));
         PlayerPrefs.SetFloat("SFXVolume", SFXSlider.value);
         PlayerPrefs.SetFloat("MusicVolume", MusicSlider.value);
+        PlayerPrefs.SetInt("ShowTimerToggle", Convert.ToInt32(showTimerToggle.isOn));
         ApplyChanges();
     }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Totem : MonoBehaviour
 {
     private bool CloseEnoughToTotem;
+    [SerializeField] private bool SecretTotem;
     private PlayerController player; 
     
     private void Start()
@@ -17,10 +18,16 @@ public class Totem : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && CloseEnoughToTotem) 
+        if (Input.GetKeyDown(KeyCode.E) && CloseEnoughToTotem && SecretTotem == false) 
         { 
             player.SummonChanceWhale();
             FindObjectOfType<AudioManager>().PlaySound("CSplit");
+            Destroy(gameObject);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.E) && CloseEnoughToTotem && SecretTotem == true) 
+        { 
+            player.StartCoroutine(player.SummonDevilishWhale());
             Destroy(gameObject);
         }
     }
