@@ -289,30 +289,10 @@ public class PlayerController : MonoBehaviour
                 Instantiate(MyriadCookies, transform.position, Quaternion.identity);
                 AudioPlayer.PlaySound("FSC");
             }
-            if (Input.GetKeyDown(KeyCode.X)) 
-            { 
-                StartCoroutine(Ok()); 
-            }
 
             if (playerHealth == 0 && PlayerPrefs.GetInt("IngameFSC") > 0) { StartCoroutine(FSC()); }
             else if (playerHealth == 0) { GameOver(); }
         }
-    }
-
-    private IEnumerator Ok()
-    {
-        AudioPlayer.StopSound("Discord");
-        yield return new WaitForSeconds(3f);
-        AudioPlayer.PlaySound("WindingMusicBox");
-        yield return new WaitForSeconds(11.2f);
-        AudioPlayer.PlaySound("WhaleJumpscare");
-        whaleJumpscare.color = new Color32(255,255,255,255);
-        yield return new WaitForSeconds(2f);
-        whaleJumpscare.color = new Color32(255,255,255,0);
-        summonFlippedEnemies();
-        yield return new WaitForSeconds(UnityEngine.Random.Range(2f,8f));
-        AudioPlayer.PlayJingle("Discord");
-        yield return null;
     }
 
     private IEnumerator WhaleForced()

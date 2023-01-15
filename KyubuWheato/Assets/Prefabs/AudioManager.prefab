@@ -647,6 +647,27 @@ MonoBehaviour:
     loop: 0
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
+  - name: FarmerShake
+    clip: {fileID: 8300000, guid: d7762758ab9eee7498a35354ad657a5b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: FarmerLimp
+    clip: {fileID: 8300000, guid: 5915bc47439242e409f630de8b69cd65, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: GoldenWheatSpawn
+    clip: {fileID: 8300000, guid: 021d2f8ff0b11a743b187d6daa2a0bfc, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
   isMainMenu: 0
   isBossFight: 0
   isSecretLevel: 0

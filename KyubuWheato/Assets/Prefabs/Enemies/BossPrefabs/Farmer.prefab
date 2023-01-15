@@ -119,7 +119,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.7
-  m_Speed: 2
+  m_Speed: 3.5
   m_Acceleration: 5
   avoidancePriority: 50
   m_AngularSpeed: 150
@@ -151,7 +151,7 @@ MonoBehaviour:
   pfDamagePopupText: {fileID: 62537061617949394, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
   pfDamagePopupCrit: {fileID: 212571527099406956, guid: 7439f9bcb36fa6e4f88ac2a4e65a5199, type: 3}
   pfDamagePopupTextCrit: {fileID: 6614628894609430073, guid: 7439f9bcb36fa6e4f88ac2a4e65a5199, type: 3}
-  GoldenWheat: {fileID: 6849971235156113923, guid: 0ad458132ae7a554fa9d4c6f3b54e2b2, type: 3}
+  GoldenWheat: {fileID: 3030932686689093150, guid: 2acd3751f0efdef48a6fba8efa4f96fe, type: 3}
   mouseHealth: 10000
   RollAttackDelay: 0
   bossDamage: 0

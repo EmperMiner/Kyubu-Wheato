@@ -74,7 +74,9 @@ public class BossRandomAttackGenerator : MonoBehaviour
     {
         if(mouseHealth <= 0)
         { 
+            PlayerPrefs.SetInt("BossDefeated", 1);
             Instantiate(GoldenWheat, transform.position, Quaternion.identity);
+            FindObjectOfType<AudioManager>().PlaySound("FarmerShake");
             bossHealthBar.SetActive(false);
             FindObjectOfType<AudioManager>().StopSound("HEAVYFARMER");
             int i = PlayerPrefs.GetInt("WinCounter");
@@ -130,7 +132,10 @@ public class BossRandomAttackGenerator : MonoBehaviour
              hit = other.gameObject.tag == "6sidedDice1" || other.gameObject.tag == "6sidedDice2" || other.gameObject.tag == "6sidedDice3" || 
                    other.gameObject.tag == "6sidedDice4" || other.gameObject.tag == "6sidedDice5" || other.gameObject.tag == "6sidedDice6" || 
                    other.gameObject.tag == "FakeDice1" || other.gameObject.tag == "FakeDice2" || other.gameObject.tag == "FakeDice3" || 
-                   other.gameObject.tag == "FakeDice4" || other.gameObject.tag == "FakeDice5" || other.gameObject.tag == "FakeDice6" || other.gameObject.tag == "BroomAttack" && inChargingState;
+                   other.gameObject.tag == "FakeDice4" || other.gameObject.tag == "FakeDice5" || other.gameObject.tag == "FakeDice6" || other.gameObject.tag == "BroomAttack" ||
+                   other.gameObject.tag == "ChargedDice2" || other.gameObject.tag == "ChargedDice4" || other.gameObject.tag == "ChargedDice6" || 
+                   other.gameObject.tag == "FakeDice8" || other.gameObject.tag == "FakeDice10" || other.gameObject.tag == "FakeDice12" ||
+                   other.gameObject.tag == "FakeDice20" || other.gameObject.tag == "100sidedDice" && inChargingState;
         if (alreadyDamaged == false)
         {
             if (other.gameObject.tag == "6sidedDice1") { mouseTakeDamage(1); ChargeUlt(6); }
@@ -147,14 +152,14 @@ public class BossRandomAttackGenerator : MonoBehaviour
             if (other.gameObject.tag == "FakeDice4") { mouseTakeDamage(4); }
             if (other.gameObject.tag == "FakeDice5") { mouseTakeDamage(5); }
             if (other.gameObject.tag == "FakeDice6") { mouseTakeDamage(6); }   
-            if (GetComponent<Collider>().gameObject.tag == "ChargedDice2") { mouseTakeDamage(2); ChargeUlt(2); }   
-            if (GetComponent<Collider>().gameObject.tag == "ChargedDice4") { mouseTakeDamage(4); ChargeUlt(4);  }   
-            if (GetComponent<Collider>().gameObject.tag == "ChargedDice6") { mouseTakeDamage(6); ChargeUlt(6); }   
-            if (GetComponent<Collider>().gameObject.tag == "FakeDice8") { mouseTakeDamage(8); ChargeUlt(8); }     
-            if (GetComponent<Collider>().gameObject.tag == "FakeDice10") { mouseTakeDamage(10); ChargeUlt(10); }     
-            if (GetComponent<Collider>().gameObject.tag == "FakeDice12") { mouseTakeDamage(12); ChargeUlt(12); }      
+            if (other.gameObject.tag == "ChargedDice2") { mouseTakeDamage(2); ChargeUlt(2); }   
+            if (other.gameObject.tag == "ChargedDice4") { mouseTakeDamage(4); ChargeUlt(4);  }   
+            if (other.gameObject.tag == "ChargedDice6") { mouseTakeDamage(6); ChargeUlt(6); }   
+            if (other.gameObject.tag == "FakeDice8") { mouseTakeDamage(8); ChargeUlt(8); }     
+            if (other.gameObject.tag == "FakeDice10") { mouseTakeDamage(10); ChargeUlt(10); }     
+            if (other.gameObject.tag == "FakeDice12") { mouseTakeDamage(12); ChargeUlt(12); }      
             if (other.gameObject.tag == "FakeDice20") { mouseTakeDamage(20); }     
-            if (other.gameObject.tag == "100sidedDice") { mouseTakeDamage(UnityEngine.Random.Range(100,200)); }   
+            if (other.gameObject.tag == "100sidedDice") { mouseTakeDamage(UnityEngine.Random.Range(100,200)); Debug.Log("It's hitting him");}   
         }
     }
 
@@ -215,6 +220,9 @@ public class BossRandomAttackGenerator : MonoBehaviour
     public void ReturnToWalk()
     {
         animator.SetTrigger("Charged");
+        inChargingState = false;
+        StartCoroutine(RemoveHeatRiserBuff());
+        animator.ResetTrigger("Hurt");
     }
 
     private void mouseTakeDamage(int i)

@@ -203,6 +203,7 @@ MonoBehaviour:
   isKyubuTile3Left: 0
   isKyubuTile3Right: 0
   isKyubuTile6: 0
+  isStar: 0
   Dice3: {fileID: 0}
   Dice6: []
 --- !u!95 &4718512651228134093

@@ -16,6 +16,7 @@ public class betterEnemySpawner : MonoBehaviour
 
     private void Start()
     {
+        PlayerPrefs.SetInt("BossDefeated", 0);
         exitScript = GameObject.FindGameObjectWithTag("ExitHoeContainer").GetComponent<ExitHoeContainer>();
         enemySpawned = new int[enemyPrefabs.Length];
         StartCoroutine(SpawnEnemyStartingDelay());
@@ -45,7 +46,7 @@ public class betterEnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(5f);
         for (int i = 0; i < enemyPrefabs.Length; i++)
         {
-            StartCoroutine(SpawnEnemy(enemyIntervals[i], enemyPrefabs[i], enemyLimits[i], i));
+            if (PlayerPrefs.GetInt("BossDefeated") == 0) { StartCoroutine(SpawnEnemy(enemyIntervals[i], enemyPrefabs[i], enemyLimits[i], i)); }
         }
         yield return null;
     }

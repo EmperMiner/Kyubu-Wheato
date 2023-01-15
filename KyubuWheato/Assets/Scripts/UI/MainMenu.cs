@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private TextMeshProUGUI LevelNumber; 
     private int LoadingMenuToGame = 1;
     private int Level_1 = 4;
+    private int Tutorial_Scene = 16;
 
     private static Action onLoaderCallback;
 
@@ -20,6 +21,8 @@ public class MainMenu : MonoBehaviour
         if (!PlayerPrefs.HasKey("SavedLevel")) { PlayerPrefs.SetInt("SavedLevel", 1); }
         int check = PlayerPrefs.GetInt("SavedLevel");
         if (check == 0) { PlayerPrefs.SetInt("SavedLevel", 1); }
+
+        if (!PlayerPrefs.HasKey("DisableTutorial")) { PlayerPrefs.SetInt("DisableTutorial", 0); }
     }
 
     private void Start()
@@ -77,6 +80,24 @@ public class MainMenu : MonoBehaviour
     }
 
     IEnumerator StartGameDelay()
+    {
+        if (PlayerPrefs.GetInt("DisableTutorial") == 1) { Tutorial_Scene = 4; }
+        yield return new WaitForSeconds(1f);
+
+        onLoaderCallback = () => { SceneManager.LoadScene(Tutorial_Scene); PlayerPrefs.SetInt("SavedLevel", 1); };
+
+        SceneManager.LoadScene(LoadingMenuToGame);
+
+        yield return null;
+    }
+
+    public void StartGame(bool ShowTutorial)
+    {
+        if (ShowTutorial == false) { PlayerPrefs.SetInt("DisableTutorial", 1); }
+        StartCoroutine(TutorialToGameDelay());
+    }
+
+    IEnumerator TutorialToGameDelay()
     {
         yield return new WaitForSeconds(1f);
 
