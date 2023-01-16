@@ -159,7 +159,7 @@ public class BossRandomAttackGenerator : MonoBehaviour
             if (other.gameObject.tag == "FakeDice10") { mouseTakeDamage(10); ChargeUlt(10); }     
             if (other.gameObject.tag == "FakeDice12") { mouseTakeDamage(12); ChargeUlt(12); }      
             if (other.gameObject.tag == "FakeDice20") { mouseTakeDamage(20); }     
-            if (other.gameObject.tag == "100sidedDice") { mouseTakeDamage(UnityEngine.Random.Range(100,200)); Debug.Log("It's hitting him");}   
+            if (other.gameObject.tag == "100sidedDice") { mouseTakeDamage(UnityEngine.Random.Range(100,200)); }   
         }
     }
 

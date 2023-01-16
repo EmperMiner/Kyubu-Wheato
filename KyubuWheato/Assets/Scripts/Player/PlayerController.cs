@@ -694,6 +694,11 @@ public class PlayerController : MonoBehaviour
         Wheat += 1000;
         AudioPlayer.PlayJingle("YouWon");
         playerAlive = false;
+        SpeedrunTimer TimerScript = GameObject.FindGameObjectWithTag("Timer").GetComponent<SpeedrunTimer>();
+        TimerScript.SetEndingTime();
+        TimerScript.UpdateTimer(1);
+        TimerScript.timerText.color = new Color32(255, 255, 255, 0);
+        if (PlayerPrefs.GetFloat("Timer") < PlayerPrefs.GetFloat("BestTime")) { PlayerPrefs.SetFloat("BestTime", PlayerPrefs.GetFloat("Timer")); }
         SaveData();
         Time.timeScale = 0f;
         crosshair.SetActive(false);

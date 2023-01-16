@@ -45,6 +45,8 @@ public class ShopManager : MonoBehaviour
 
     [SerializeField] private GameObject trophy;
     [SerializeField] private TextMeshProUGUI winsText;
+    [SerializeField] private GameObject bestTimeDisplay;
+    [SerializeField] private TextMeshProUGUI bestTimeText;
     [SerializeField] private GameObject NewEntreeScreen;
 
     private string MaxBought = "Maxed";
@@ -53,6 +55,7 @@ public class ShopManager : MonoBehaviour
 
     private void Awake()
     {
+        if (!PlayerPrefs.HasKey("BestTime")) { PlayerPrefs.SetFloat("BestTime", 999999999); }
         if (!PlayerPrefs.HasKey("WinCounter")) { PlayerPrefs.SetInt("WinCounter", 0); }
         if (!PlayerPrefs.HasKey("NewEntreeScreen")) { PlayerPrefs.SetInt("NewEntreeScreen", 0); }
         if (!PlayerPrefs.HasKey("Ramen")) { PlayerPrefs.SetInt("Ramen", 0); }
@@ -66,8 +69,9 @@ public class ShopManager : MonoBehaviour
     private void Start()
     {
         trophy.SetActive(false);
-        int i = PlayerPrefs.GetInt("WinCounter");
-        if (i > 0) { DisplayTrophy(i); }
+        bestTimeDisplay.SetActive(false);
+        if (PlayerPrefs.GetInt("WinCounter") > 0) 
+        { DisplayTrophyAndBestTime(); }
 
         Time.timeScale = 1f;
         LoadData();
@@ -99,7 +103,7 @@ public class ShopManager : MonoBehaviour
             SaveData();
         }
 
-        if (Input.GetKeyDown(KeyCode.T)) { PlayerPrefs.SetInt("Infinitruths", 2); }
+        if (Input.GetKeyDown(KeyCode.T)) { PlayerPrefs.SetInt("WinCounter", 0); PlayerPrefs.SetFloat("BestTime", 999999999); }
         if (Input.GetKeyDown(KeyCode.Y)) { PlayerPrefs.SetInt("Ramen", 1); }
         if (Input.GetKeyDown(KeyCode.U)) { PlayerPrefs.SetInt("Salmon", 1); }
         if (Input.GetKeyDown(KeyCode.I)) { PlayerPrefs.SetInt("Steak", 1); }
@@ -728,10 +732,29 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    private void DisplayTrophy(int wins)
+    private void DisplayTrophyAndBestTime()
     {
         trophy.SetActive(true);
-        winsText.text = wins.ToString();
+        bestTimeDisplay.SetActive(true);
+        winsText.text = PlayerPrefs.GetInt("WinCounter").ToString();
+
+        int hours = ((int) PlayerPrefs.GetFloat("BestTime")/3600);
+        int minutes = ((int) PlayerPrefs.GetFloat("BestTime")/60)%60;
+        float seconds = (PlayerPrefs.GetFloat("BestTime") % 60);
+
+        string extraHourZero;
+        if (hours < 10) { extraHourZero = "0"; }
+        else { extraHourZero = ""; }
+
+        string extraMinuteZero;
+        if (minutes < 10) { extraMinuteZero = "0"; }
+        else { extraMinuteZero = ""; }
+
+        string extraSecondZero;
+        if (seconds < 10f) { extraSecondZero = "0"; }
+        else { extraSecondZero = ""; }
+
+        bestTimeText.text = extraHourZero + hours.ToString() + ":" + extraMinuteZero + minutes.ToString() + ":" + extraSecondZero + seconds.ToString("f3"); 
     }
 
     IEnumerator NotifTextBuySuccess()

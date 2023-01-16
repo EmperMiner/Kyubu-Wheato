@@ -1600,11 +1600,12 @@ MonoBehaviour:
   graphicsDropdown: {fileID: 2414110339928726942}
   screenSizeDropdown: {fileID: 2414110340124912549}
   fullscreenToggle: {fileID: 2414110339393594650}
+  TimerToggle: {fileID: 0}
   SFXSlider: {fileID: 2414110340169029548}
   SFXMixer: {fileID: 24100000, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
   MusicSlider: {fileID: 2414110340177618124}
   MusicMixer: {fileID: 24100000, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
-  showTimerToggle: {fileID: 0}
+  showTimerToggle: {fileID: 5794536760415103296}
 --- !u!222 &7171940168169970633
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5245,3 +5246,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3326540015158669454, guid: 48be08e94357197488eb697926519b9e, type: 3}
   m_PrefabInstance: {fileID: 2207129570782830581}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5794536760415103296 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5677659092927739573, guid: 48be08e94357197488eb697926519b9e, type: 3}
+  m_PrefabInstance: {fileID: 2207129570782830581}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
