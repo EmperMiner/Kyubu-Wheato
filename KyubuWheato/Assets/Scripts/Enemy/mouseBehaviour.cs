@@ -43,6 +43,7 @@ public class mouseBehaviour : MonoBehaviour
     [SerializeField] private bool isHenor;
     [SerializeField] private bool isScawy;
     [SerializeField] private bool isSchwein;
+    [SerializeField] private bool isSpooder;
     [SerializeField] private GameObject cornRay;
     private float stoppingDistance = 9f;
     [SerializeField] private bool isGhost;
@@ -107,15 +108,16 @@ public class mouseBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (isScawy == false)
+        if (isScawy == false && isSpooder == false)
         {
             if (playerTransform.position.x > transform.position.x) { animator.SetFloat("moveX", 1); }
             else { animator.SetFloat("moveX", -1);  }
         }
         else
         {
-            if (Vector2.Distance(transform.position, playerTransform.position) <= stoppingDistance && CrowCooldown == false && isMiniBoss == false) { ShootCrow(); }
-            else if (Vector2.Distance(transform.position, playerTransform.position) <= stoppingDistance && CrowCooldown == false && isMiniBoss == true) { StartCoroutine(ShootMultipleCrow()); }
+            if (Vector2.Distance(transform.position, playerTransform.position) <= stoppingDistance && CrowCooldown == false && isMiniBoss == false && isSpooder == false) { ShootCrow(); }
+            else if (Vector2.Distance(transform.position, playerTransform.position) <= stoppingDistance && CrowCooldown == false && isMiniBoss == true && isSpooder == false) { StartCoroutine(ShootMultipleCrow()); }
+            else {}
         }
 
         if (CrowCooldown)
@@ -127,6 +129,10 @@ public class mouseBehaviour : MonoBehaviour
                 crowCooldownTimer = 0;
             }
         }
+
+        
+
+        
 
         if (isBlackCat && firing == false && Vector2.Distance(transform.position, playerTransform.position) <= 5f) { StartCoroutine(ShootPotion()); }
 
@@ -364,6 +370,12 @@ public class mouseBehaviour : MonoBehaviour
             maxMouseHealth = level*48 + 60;
             agent.speed = level*0.1f + 2f;
             agent.acceleration = level*0.3f + 4f;
+        }
+        if (isSpooder && isMiniBoss == false) 
+        { 
+            mouseStrength = Mathf.FloorToInt(level*2f + 1f);
+            maxMouseHealth = level*7 + 15;
+            agent.speed = level*0.5f + 3f;
         }
         if (isSchwein) 
         { 

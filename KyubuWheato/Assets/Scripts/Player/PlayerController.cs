@@ -109,6 +109,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject[] flippedEnemyPrefabs;
     [SerializeField] private Image whaleJumpscare;
     [SerializeField] private GameObject WaterContainer;
+
     private GameObject transitionOut;
     private SpeedrunTimer timerScript;
 
@@ -316,7 +317,7 @@ public class PlayerController : MonoBehaviour
     {
         for (int numberOfSummons = 0; numberOfSummons < WhaleLevelInterval.Length; numberOfSummons++)
         {
-            yield return new WaitForSeconds(WhaleLevelInterval[numberOfSummons]);
+            yield return new WaitForSeconds(WhaleLevelInterval[numberOfSummons]*1.5f);
             Instantiate(Whale, transform.position, Quaternion.identity);
         }
         yield return null;

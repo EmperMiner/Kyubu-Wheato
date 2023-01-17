@@ -55,3 +55,6 @@ MonoBehaviour:
   - {fileID: 6882148814188905353, guid: 4062a5eb4f1554546b63e2d8882c8635, type: 3}
   - {fileID: 2760173454840875553, guid: 6e833446f08199d41994c7aacc140093, type: 3}
   - {fileID: 6308753891499002788, guid: 5899ab7e71ba3b149a4d710dd40dc329, type: 3}
+  spiderInterval: 0
+  spiderPrefab: {fileID: 9123488909937170722, guid: 50ff5ba9e1012eb469b9712d1f87c46c, type: 3}
+  spiderLimit: 0

@@ -15,6 +15,11 @@ public class betterEnemySpawner : MonoBehaviour
 
     private GameObject[] spawnings;
 
+    [SerializeField] private float spiderInterval;
+    [SerializeField] private GameObject spiderPrefab;
+    [SerializeField] private int spiderLimit;
+    private int spiderSpawned;
+
     private void Start()
     {
         PlayerPrefs.SetInt("BossDefeated", 0);
@@ -27,6 +32,17 @@ public class betterEnemySpawner : MonoBehaviour
         if (ghostDecider == 0) { StartCoroutine(spawnGhosts()); }
 
         if (PlayerPrefs.GetInt("WinCounter") > 0) { StartCoroutine(FlippedEnemyChance()); }
+
+        if (SceneManager.GetActiveScene().buildIndex > 4) { StartCoroutine(SpawnSpooders());}
+    }
+
+    private IEnumerator SpawnSpooders()
+    {
+        yield return new WaitForSeconds(Random.Range(spiderInterval*0.25f, spiderInterval*1.25f));
+        spiderSpawned++;
+        if (PlayerPrefs.GetInt("BossDefeated") == 0) { Instantiate(spiderPrefab, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity); }
+        if (spiderSpawned < spiderLimit && PlayerPrefs.GetInt("BossDefeated") == 0) { StartCoroutine(SpawnSpooders()); }
+        yield return null;
     }
 
     private IEnumerator SpawnEnemy(float enemyInterval, GameObject enemy, int enemyLimit, int enemyIndex)
@@ -34,14 +50,20 @@ public class betterEnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(enemyInterval*0.25f, enemyInterval*1.25f));
         enemySpawned[enemyIndex]++;
         int rand = Random.Range(0,3);
-        if (rand > 0 || SceneManager.GetActiveScene().buildIndex == 15) { Instantiate(enemy, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity); }
+        if (rand > 0 || SceneManager.GetActiveScene().buildIndex == 15) 
+        { 
+            if (PlayerPrefs.GetInt("BossDefeated") == 0) { Instantiate(enemy, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity); }
+        }
         else 
         { 
-            Vector3 hi = spawnings[Random.Range(0, spawnings.Length)].transform.position;
-            Instantiate(enemy, new Vector3(hi.x, hi.y, 0), Quaternion.identity); 
+            if (PlayerPrefs.GetInt("BossDefeated") == 0)
+            {
+                Vector3 hi = spawnings[Random.Range(0, spawnings.Length)].transform.position;
+                Instantiate(enemy, new Vector3(hi.x, hi.y, 0), Quaternion.identity); 
+            }
         }
 
-        if (enemySpawned[enemyIndex] < enemyLimit) { StartCoroutine(SpawnEnemy(enemyInterval, enemy, enemyLimit, enemyIndex)); }
+        if (enemySpawned[enemyIndex] < enemyLimit && PlayerPrefs.GetInt("BossDefeated") == 0) { StartCoroutine(SpawnEnemy(enemyInterval, enemy, enemyLimit, enemyIndex)); }
     }
 
     private IEnumerator SpawnEnemyStartingDelay()
@@ -58,9 +80,12 @@ public class betterEnemySpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(Random.Range(50f, 100f));
 
-        for (int i = 0; i < Random.Range(1, 9); i++) { Instantiate(ghost, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity); }
+        if (PlayerPrefs.GetInt("BossDefeated") == 0) 
+        {
+            for (int i = 0; i < Random.Range(1, 9); i++) { Instantiate(ghost, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity); }
+        }
 
-        if (exitScript.EnemiesKilled < exitScript.EnemyLimit) { StartCoroutine(spawnGhosts()); }
+        if (exitScript.EnemiesKilled < exitScript.EnemyLimit && PlayerPrefs.GetInt("BossDefeated") == 0) { StartCoroutine(spawnGhosts()); }
         yield return null;
     }
 
@@ -75,7 +100,7 @@ public class betterEnemySpawner : MonoBehaviour
         int increasedFlippedEnemyChance = 20 - PlayerPrefs.GetInt("WinCounter");
         if (increasedFlippedEnemyChance < 0) { increasedFlippedEnemyChance = 0; }
         int flippedChance = UnityEngine.Random.Range(0, increasedFlippedEnemyChance);
-        if  (flippedChance == 0)
+        if  (flippedChance == 0 && PlayerPrefs.GetInt("BossDefeated") == 0)
         {
             StartCoroutine(SummonFlippedEnemy());
             StartCoroutine(FlippedEnemyChance());

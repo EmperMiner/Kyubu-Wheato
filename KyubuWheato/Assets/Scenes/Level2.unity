@@ -61155,6 +61155,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1405087408}
     m_Modifications:
     - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
+      propertyPath: spiderLimit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
+      propertyPath: spiderInterval
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303169879045486088, guid: 2ebac456ce93d3644a124c736b0786b5, type: 3}
       propertyPath: enemyLimits.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -61407,7 +61415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5325896411272710561, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
       propertyPath: EnemyLimit
-      value: 95
+      value: 102
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
@@ -91121,6 +91129,7 @@ MonoBehaviour:
   flippedEnemyPrefabs: []
   whaleJumpscare: {fileID: 0}
   WaterContainer: {fileID: 2854759617916791846, guid: 8d4e9221812d6894e8e4213177a86faf, type: 3}
+  Spooder: {fileID: 0}
   playerAttacked: 0
 --- !u!4 &1405087408
 Transform:

@@ -56,7 +56,7 @@ public class ExitHoeContainer : MonoBehaviour
 
     private void Update()
     {
-        if (EnemiesKilled >= EnemyLimit && ExitHoe.activeSelf == false && notBossFight) { ExitHoe.SetActive(true); FindObjectOfType<AudioManager>().PlaySound("Victory"); ArrowVisible = true; }
+        if (EnemiesKilled >= EnemyLimit && ExitHoe.activeSelf == false && notBossFight) { ExitHoe.SetActive(true); FindObjectOfType<AudioManager>().PlaySound("Victory"); ArrowVisible = true; PlayerPrefs.SetInt("BossDefeated", 1); }
 
         if (player.haveHornScallop && EnemiesKilled >= Mathf.RoundToInt(EnemyLimit/5) && MapImageObject.activeSelf == false && SceneManager.GetActiveScene().buildIndex != 14 && SceneManager.GetActiveScene().buildIndex != 15) { ActivateMap(); }
         else if (player.haveHornScallop == false && EnemiesKilled >= Mathf.RoundToInt(EnemyLimit*3/10) && MapImageObject.activeSelf == false && SceneManager.GetActiveScene().buildIndex != 14 && SceneManager.GetActiveScene().buildIndex != 15) { ActivateMap(); }

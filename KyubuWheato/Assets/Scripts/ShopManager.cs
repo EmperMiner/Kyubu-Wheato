@@ -88,29 +88,29 @@ public class ShopManager : MonoBehaviour
         }
         MaxShopCheck();
     }
-
+/*
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            shopWheat += 999999;
+            shopWheat += 200;
             ShopWheatCounterNumber.text = shopWheat.ToString();
             SaveData();
         } else if (Input.GetKeyDown(KeyCode.R))
         {
-            shopWheat -= 946;
+            shopWheat -= 154164;
             ShopWheatCounterNumber.text = shopWheat.ToString();
             SaveData();
         }
 
         if (Input.GetKeyDown(KeyCode.T)) { PlayerPrefs.SetInt("WinCounter", 0); PlayerPrefs.SetFloat("BestTime", 999999999); }
-        if (Input.GetKeyDown(KeyCode.Y)) { PlayerPrefs.SetInt("Ramen", 1); }
-        if (Input.GetKeyDown(KeyCode.U)) { PlayerPrefs.SetInt("Salmon", 1); }
-        if (Input.GetKeyDown(KeyCode.I)) { PlayerPrefs.SetInt("Steak", 1); }
-        if (Input.GetKeyDown(KeyCode.O)) { PlayerPrefs.SetInt("Cheese", 1); }
-        if (Input.GetKeyDown(KeyCode.P)) { PlayerPrefs.SetInt("FSC", 1); }
+        if (Input.GetKeyDown(KeyCode.Y)) { PlayerPrefs.SetInt("Ramen", 0); PlayerPrefs.SetInt("Infinitruths", 0);}
+        if (Input.GetKeyDown(KeyCode.U)) { PlayerPrefs.SetInt("Salmon", 0); }
+        if (Input.GetKeyDown(KeyCode.I)) { PlayerPrefs.SetInt("Steak", 0); }
+        if (Input.GetKeyDown(KeyCode.O)) { PlayerPrefs.SetInt("Cheese", 0); }
+        if (Input.GetKeyDown(KeyCode.P)) { PlayerPrefs.SetInt("FSC", 0); }
     } 
-
+*/
     private void MaxShopCheck()
     {
         if (shopStrength == 5 && shopDefense == 5 && shopMaxHealth >= 300 && shopMoveSpeed >= 3.99 && shopPlayerCooldownTime <= 5.0 && shopDiceNumber == 30 && shopWheatDroprate == 80.0 && shopDicePreviewerLevel == 5
@@ -727,8 +727,8 @@ public class ShopManager : MonoBehaviour
         {
             int EntreeValue = PlayerPrefs.GetInt("Infinitruths");
             if (EntreeValue == 0) { UpgradesImage[24].sprite = UpgradesSpritesVariants[89]; upgradePriceText[24].text = "???"; }
-            else if (EntreeValue == 1) { UpgradesImage[24].sprite = UpgradesSpritesVariants[90]; upgradePriceText[24].text = "999999"; }
-            else { UpgradesImage[24].sprite = UpgradesSpritesVariants[91]; upgradePriceText[24].text = "999999"; }
+            else if (EntreeValue == 1) { UpgradesImage[24].sprite = UpgradesSpritesVariants[90]; upgradePriceText[24].text = "99999"; }
+            else { UpgradesImage[24].sprite = UpgradesSpritesVariants[91]; upgradePriceText[24].text = "99999"; }
         }
     }
 
