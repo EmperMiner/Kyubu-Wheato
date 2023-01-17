@@ -81,9 +81,7 @@ public class BossRandomAttackGenerator : MonoBehaviour
             FindObjectOfType<AudioManager>().StopSound("HEAVYFARMER");
             int i = PlayerPrefs.GetInt("WinCounter");
             PlayerPrefs.SetInt("WinCounter", (i + 1));
-
-            int nice = UnityEngine.Random.Range(0,2);
-            if (nice == 0 || PlayerPrefs.GetInt("WinCounter") == 0 || PlayerPrefs.GetInt("WinCounter") >= 7) { UnlockEntree(); }
+            UnlockEntree();
             Destroy(gameObject);  
         }
     }
@@ -159,6 +157,8 @@ public class BossRandomAttackGenerator : MonoBehaviour
             if (other.gameObject.tag == "FakeDice10") { mouseTakeDamage(10); ChargeUlt(10); }     
             if (other.gameObject.tag == "FakeDice12") { mouseTakeDamage(12); ChargeUlt(12); }      
             if (other.gameObject.tag == "FakeDice20") { mouseTakeDamage(20); }     
+
+            if (other.gameObject.tag == "Star") { mouseTakeDamage(UnityEngine.Random.Range(1,4) + Mathf.RoundToInt(((player.maxHealth - player.playerHealth)/player.maxHealth)*5)); }  
             if (other.gameObject.tag == "100sidedDice") { mouseTakeDamage(UnityEngine.Random.Range(100,200)); }   
         }
     }
@@ -167,12 +167,13 @@ public class BossRandomAttackGenerator : MonoBehaviour
     {   
         if (other.gameObject.tag != "Player") return;
 
-        if (bossCanAttack >= 0.7f)
+        if (bossCanAttack >= 0.7f && player.playerAttacked == false)
         {
             if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("PlayerHurt"); }
             else { FindObjectOfType<AudioManager>().PlaySound("Iframe"); }
             player.UpdateHealth(-bossDamage);
             bossCanAttack = 0f;
+            player.playerAttacked = true;
         }    
         bossCanAttack += Time.deltaTime; 
 
@@ -203,6 +204,8 @@ public class BossRandomAttackGenerator : MonoBehaviour
         if (collider.gameObject.tag == "FakeDice10") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }
         if (collider.gameObject.tag == "FakeDice12") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
         if (collider.gameObject.tag == "FakeDice20") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
+        
+        if (collider.gameObject.tag == "Star") { alreadyDamaged = false; }  
         if (collider.gameObject.tag == "100sidedDice") { alreadyDamaged = false; mouseSpriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
 
         if (collider.gameObject.tag == "Player") { player.spriteRenderer.material.color = new Color32(255, 255, 255, 255); }  

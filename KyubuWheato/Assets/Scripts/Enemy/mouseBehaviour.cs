@@ -247,12 +247,13 @@ public class mouseBehaviour : MonoBehaviour
         if (other.gameObject.tag == "TimeCrescent") { mouseSpriteRenderer.material.color = new Color32(255, 187, 0, 255); }
         if (other.gameObject.tag != "Player") return;
 
-        if (mouseCanAttack >= mouseAttackSpeed)
+        if (mouseCanAttack >= mouseAttackSpeed && player.playerAttacked == false)
         {
             if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("PlayerHurt"); }
             else { FindObjectOfType<AudioManager>().PlaySound("Iframe"); }
             player.UpdateHealth(-mouseStrength + Mathf.RoundToInt((mouseStrength * player.defense)/10));
             mouseCanAttack = 0f;
+            player.playerAttacked = true;
         }    
 
         mouseCanAttack += Time.deltaTime; 

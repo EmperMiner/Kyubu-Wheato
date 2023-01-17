@@ -88,6 +88,7 @@ TagManager:
   - TransitionOut
   - Timer
   - EndingTimer
+  - HelpButton
   layers:
   - Default
   - TransparentFX

@@ -108,8 +108,13 @@ public class PlayerController : MonoBehaviour
     private bool lowHealth;
     [SerializeField] private GameObject[] flippedEnemyPrefabs;
     [SerializeField] private Image whaleJumpscare;
+    [SerializeField] private GameObject WaterContainer;
     private GameObject transitionOut;
     private SpeedrunTimer timerScript;
+
+    public bool playerAttacked = false;
+    private float playerAttackedTimer = 0f;
+    private float playerAttackedGracePeriod = 1f;
 
     private void Awake()
     {       
@@ -276,6 +281,16 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
+            if (playerAttacked)
+            {    
+                playerAttackedTimer += Time.deltaTime;
+                if (playerAttackedTimer > playerAttackedGracePeriod)
+                {
+                    playerAttacked = false;
+                    playerAttackedTimer = 0f;
+                }
+            }
+
             if ((float)playerHealth <= maxHealth*0.3f && lowHealth == false) { Gasp(); }
 
             if(GameObject.FindGameObjectsWithTag("Star").Length > 25) 
@@ -294,6 +309,8 @@ public class PlayerController : MonoBehaviour
             else if (playerHealth == 0) { GameOver(); }
         }
     }
+
+    
 
     private IEnumerator WhaleForced()
     {
@@ -339,6 +356,7 @@ public class PlayerController : MonoBehaviour
         AudioPlayer.PlaySound("Meow");
         whaleJumpscare.color = new Color32(255,255,255,255);
         yield return new WaitForSeconds(0.65f);
+        Instantiate(WaterContainer, transform.position, Quaternion.identity);
         whaleJumpscare.color = new Color32(255,255,255,0);
         summonFlippedEnemies();
         yield return new WaitForSeconds(UnityEngine.Random.Range(2f,8f));

@@ -10,6 +10,7 @@ public class betterEnemySpawner : MonoBehaviour
     [SerializeField] private int[] enemyLimits;
     private int[] enemySpawned;
     [SerializeField] private GameObject ghost;
+    [SerializeField] private GameObject[] flippedEnemyPrefabs;
     private ExitHoeContainer exitScript;
 
     private GameObject[] spawnings;
@@ -24,13 +25,15 @@ public class betterEnemySpawner : MonoBehaviour
 
         int ghostDecider = Random.Range(0,5);
         if (ghostDecider == 0) { StartCoroutine(spawnGhosts()); }
+
+        if (PlayerPrefs.GetInt("WinCounter") > 0) { StartCoroutine(FlippedEnemyChance()); }
     }
 
     private IEnumerator SpawnEnemy(float enemyInterval, GameObject enemy, int enemyLimit, int enemyIndex)
     {
         yield return new WaitForSeconds(Random.Range(enemyInterval*0.25f, enemyInterval*1.25f));
         enemySpawned[enemyIndex]++;
-        int rand = Random.Range(0,4);
+        int rand = Random.Range(0,3);
         if (rand > 0 || SceneManager.GetActiveScene().buildIndex == 15) { Instantiate(enemy, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity); }
         else 
         { 
@@ -46,7 +49,7 @@ public class betterEnemySpawner : MonoBehaviour
         yield return new WaitForSeconds(5f);
         for (int i = 0; i < enemyPrefabs.Length; i++)
         {
-            if (PlayerPrefs.GetInt("BossDefeated") == 0) { StartCoroutine(SpawnEnemy(enemyIntervals[i], enemyPrefabs[i], enemyLimits[i], i)); }
+            if (PlayerPrefs.GetInt("BossDefeated") == 0) { StartCoroutine(SpawnEnemy(enemyIntervals[i]*1.5f, enemyPrefabs[i], enemyLimits[i], i)); }
         }
         yield return null;
     }
@@ -60,4 +63,35 @@ public class betterEnemySpawner : MonoBehaviour
         if (exitScript.EnemiesKilled < exitScript.EnemyLimit) { StartCoroutine(spawnGhosts()); }
         yield return null;
     }
+
+    //more wins, more flipped enemies
+    private IEnumerator FlippedEnemyChance()
+    {
+        float reducedFlippedSpawningCooldown = 180f - PlayerPrefs.GetInt("WinCounter")*Random.Range(2f, 5f);
+        if (reducedFlippedSpawningCooldown < 100f) { reducedFlippedSpawningCooldown = 100f; }
+
+        yield return new WaitForSeconds(UnityEngine.Random.Range(100f, reducedFlippedSpawningCooldown));
+
+        int increasedFlippedEnemyChance = 20 - PlayerPrefs.GetInt("WinCounter");
+        if (increasedFlippedEnemyChance < 0) { increasedFlippedEnemyChance = 0; }
+        int flippedChance = UnityEngine.Random.Range(0, increasedFlippedEnemyChance);
+        if  (flippedChance == 0)
+        {
+            StartCoroutine(SummonFlippedEnemy());
+            StartCoroutine(FlippedEnemyChance());
+        }
+        yield return null;
+    }
+
+    //spawn flipped enemies on repeated wins
+    private IEnumerator SummonFlippedEnemy()
+    {
+        FindObjectOfType<AudioManager>().PlaySound("FlippedSpawned" + UnityEngine.Random.Range(1,6));
+        for (int i = 0; i < Mathf.FloorToInt(PlayerPrefs.GetInt("WinCounter")/2); i++)
+        {
+            Instantiate(flippedEnemyPrefabs[Random.Range(0,flippedEnemyPrefabs.Length)], new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity);
+        }
+        yield return null;
+    }
+
 }

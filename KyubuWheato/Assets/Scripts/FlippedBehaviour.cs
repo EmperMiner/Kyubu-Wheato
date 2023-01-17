@@ -235,12 +235,13 @@ public class FlippedBehaviour : MonoBehaviour
     {   
         if (other.gameObject.tag != "Player") return;
 
-        if (mouseCanAttack >= mouseAttackSpeed)
+        if (mouseCanAttack >= mouseAttackSpeed && player.playerAttacked == false)
         {
             if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("PlayerHurt"); }
             else { FindObjectOfType<AudioManager>().PlaySound("Iframe"); }
             player.UpdateHealth(-mouseStrength + Mathf.RoundToInt((mouseStrength * player.defense)/10));
             mouseCanAttack = 0f;
+            player.playerAttacked = true;
             if (isC) 
             { 
                 StartCoroutine(CSplit()); 
