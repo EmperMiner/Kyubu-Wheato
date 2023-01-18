@@ -165,7 +165,20 @@ public class FlippedBehaviour : MonoBehaviour
         if (CheckForValidSpawn == true && UndesirableSpawn == true)
         {
             badSpawn = true;
-            Instantiate(enemiesPrefabs[enemyIndex], new Vector3(betterEnemySpawner.position.x + Random.Range(-10f, 10f), betterEnemySpawner.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity);
+
+            float RandomXOffset;
+            float RandomYOffset;   
+
+            int rand1 = Random.Range(0,2);
+            if (rand1 == 0) { RandomXOffset = Random.Range(-10f,-3f); }
+            else { RandomXOffset = Random.Range(3f,10f); }
+
+            int rand2 = Random.Range(0,2);
+            if (rand2 == 0) { RandomYOffset = Random.Range(-10f,-3f); }
+            else { RandomYOffset = Random.Range(3f,10f); }
+
+            Instantiate(enemiesPrefabs[enemyIndex], new Vector3(betterEnemySpawner.position.x + RandomXOffset, betterEnemySpawner.position.y + RandomYOffset, 0), Quaternion.identity);
+
             Destroy(gameObject);
         }  
 

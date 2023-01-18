@@ -25,6 +25,7 @@ public class SettingsMenu : MonoBehaviour
     private void Start() 
     { 
         StartingSettings();
+        ConfirmSettings();
     }
 
     public void ConfirmSettings()

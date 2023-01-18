@@ -54,7 +54,18 @@ public class whaleSummon : MonoBehaviour
         int level = SceneManager.GetActiveScene().buildIndex - 3;
         for (int i = 0; i < (level*3 + 4 + flippedEnemies); i++)
         {
-            Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length - enemyLimiter)], new Vector3(transform.position.x + Random.Range(-11f, 11f), transform.position.y + Random.Range(-11f, 11f), 0), Quaternion.identity);
+            float RandomXOffset;
+            float RandomYOffset;   
+            
+            int rand1 = Random.Range(0,2);
+            if (rand1 == 0) { RandomXOffset = Random.Range(-11f,-2f); }
+            else { RandomXOffset = Random.Range(2f,11f); }
+
+            int rand2 = Random.Range(0,2);
+            if (rand2 == 0) { RandomYOffset = Random.Range(-11f,-2f); }
+            else { RandomYOffset = Random.Range(2f,11f); }
+
+            Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length - enemyLimiter)], new Vector3(transform.position.x + RandomXOffset, transform.position.y + RandomYOffset, 0), Quaternion.identity);
         }
     }
 

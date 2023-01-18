@@ -839,6 +839,7 @@ public class PlayerController : MonoBehaviour
         string json = File.ReadAllText(Application.dataPath + "/gameSaveData.json");
         PlayerData loadedPlayerData = JsonUtility.FromJson<PlayerData>(json);
         
+        
         PlayerPrefs.SetFloat("MoveSpeed", loadedPlayerData.MoveSpeed);
         PlayerPrefs.SetInt("maxHealth", loadedPlayerData.maxHealth);
         PlayerPrefs.SetInt("playerHealth", loadedPlayerData.playerHealth);
@@ -866,6 +867,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerData savingPlayerData = new PlayerData();
 
+        savingPlayerData.firstTime = false;
         savingPlayerData.MoveSpeed = PlayerPrefs.GetFloat("MoveSpeed");
         savingPlayerData.maxHealth = PlayerPrefs.GetInt("maxHealth");
         savingPlayerData.playerHealth = PlayerPrefs.GetInt("playerHealth");
@@ -1064,6 +1066,7 @@ public class PlayerController : MonoBehaviour
 
     private class PlayerData
     {
+        public bool firstTime;
         public float MoveSpeed;
         public int maxHealth;
         public int playerHealth;

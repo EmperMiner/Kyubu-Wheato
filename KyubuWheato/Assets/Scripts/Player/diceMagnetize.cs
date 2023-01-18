@@ -92,7 +92,7 @@ public class diceMagnetize : MonoBehaviour
     private IEnumerator SpawnGhost()
     {
         yield return new WaitForSeconds(UnityEngine.Random.Range(23f,27f));
-        Instantiate(ghost, new Vector3(transform.position.x + UnityEngine.Random.Range(-10f, 10f), transform.position.y + UnityEngine.Random.Range(-10f, 10f), 0), Quaternion.identity); 
+        if (Vector3.Distance(playerTransform.position ,transform.position) < 3f) { Instantiate(ghost, new Vector3(transform.position.x + UnityEngine.Random.Range(-10f, 10f), transform.position.y + UnityEngine.Random.Range(-10f, 10f), 0), Quaternion.identity); } 
         StartCoroutine(SpawnGhost());
         yield return null;
     }

@@ -29,7 +29,7 @@ public class betterEnemySpawner : MonoBehaviour
         spawnings = GameObject.FindGameObjectsWithTag("MobSpawner");
 
         int ghostDecider = Random.Range(0,5);
-        if (ghostDecider == 0) { StartCoroutine(spawnGhosts()); }
+        if (ghostDecider == 0 && PlayerPrefs.GetInt("WinCounter") > 0) { StartCoroutine(spawnGhosts()); }
 
         if (PlayerPrefs.GetInt("WinCounter") > 0) { StartCoroutine(FlippedEnemyChance()); }
 
@@ -40,7 +40,7 @@ public class betterEnemySpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(Random.Range(spiderInterval*0.25f, spiderInterval*1.25f));
         spiderSpawned++;
-        if (PlayerPrefs.GetInt("BossDefeated") == 0) { Instantiate(spiderPrefab, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity); }
+        if (PlayerPrefs.GetInt("BossDefeated") == 0) { Instantiate(spiderPrefab, transform.position, Quaternion.identity); }
         if (spiderSpawned < spiderLimit && PlayerPrefs.GetInt("BossDefeated") == 0) { StartCoroutine(SpawnSpooders()); }
         yield return null;
     }
@@ -52,7 +52,18 @@ public class betterEnemySpawner : MonoBehaviour
         int rand = Random.Range(0,3);
         if (rand > 0 || SceneManager.GetActiveScene().buildIndex == 15) 
         { 
-            if (PlayerPrefs.GetInt("BossDefeated") == 0) { Instantiate(enemy, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity); }
+            float RandomXOffset;
+            float RandomYOffset;   
+
+            int rand1 = Random.Range(0,2);
+            if (rand1 == 0) { RandomXOffset = Random.Range(-10f,-3f); }
+            else { RandomXOffset = Random.Range(3f,10f); }
+
+            int rand2 = Random.Range(0,2);
+            if (rand2 == 0) { RandomYOffset = Random.Range(-10f,-3f); }
+            else { RandomYOffset = Random.Range(3f,10f); }
+
+            if (PlayerPrefs.GetInt("BossDefeated") == 0) { Instantiate(enemy, new Vector3(transform.position.x + RandomXOffset, transform.position.y + RandomYOffset, 0), Quaternion.identity); }
         }
         else 
         { 

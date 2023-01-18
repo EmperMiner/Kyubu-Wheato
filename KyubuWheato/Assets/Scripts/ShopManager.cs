@@ -49,12 +49,17 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI bestTimeText;
     [SerializeField] private GameObject NewEntreeScreen;
 
+    private bool firstTime;
+
     private string MaxBought = "Maxed";
 
     private int refundLoops;
 
     private void Awake()
     {
+        LoadData();
+        if (firstTime) { firstTime = false; PlayerPrefs.DeleteAll(); }
+        SaveData();
         if (!PlayerPrefs.HasKey("BestTime")) { PlayerPrefs.SetFloat("BestTime", 999999999); }
         if (!PlayerPrefs.HasKey("WinCounter")) { PlayerPrefs.SetInt("WinCounter", 0); }
         if (!PlayerPrefs.HasKey("NewEntreeScreen")) { PlayerPrefs.SetInt("NewEntreeScreen", 0); }
@@ -74,7 +79,6 @@ public class ShopManager : MonoBehaviour
         { DisplayTrophyAndBestTime(); }
 
         Time.timeScale = 1f;
-        LoadData();
         AudioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         SettingsScript.StartingSettings();
         UpdateUpgradeUI(420);
@@ -867,6 +871,7 @@ public class ShopManager : MonoBehaviour
         string json = File.ReadAllText(Application.dataPath + "/gameSaveData.json");
         PlayerData loadedPlayerData = JsonUtility.FromJson<PlayerData>(json);
 
+        firstTime = loadedPlayerData.firstTime;
         shopMoveSpeed = loadedPlayerData.MoveSpeed;
         shopMaxHealth = loadedPlayerData.maxHealth;
         shopPlayerHealth = loadedPlayerData.playerHealth;
@@ -895,6 +900,7 @@ public class ShopManager : MonoBehaviour
     private void SaveData()
     {
         PlayerData savingPlayerData = new PlayerData();
+        savingPlayerData.firstTime = firstTime;
         savingPlayerData.MoveSpeed = shopMoveSpeed;
         savingPlayerData.maxHealth = shopMaxHealth;
         savingPlayerData.playerHealth = shopPlayerHealth;
@@ -925,6 +931,7 @@ public class ShopManager : MonoBehaviour
 
     private class PlayerData
     {
+        public bool firstTime;
         public float MoveSpeed;
         public int maxHealth;
         public int playerHealth;
