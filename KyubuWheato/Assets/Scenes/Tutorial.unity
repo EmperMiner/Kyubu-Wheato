@@ -881,7 +881,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1378675466}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: Tutorial Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1199,8 +1199,8 @@ MonoBehaviour:
 
 
     Oh,
-    and don''t leave your dice on the ground for too long if you don''t like ghosts!
-    (Looking at you, campers)'
+    and don''t stand still for too long if you are afraid of ghosts! (Looking at
+    you, campers)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d49ee2d8e448b6341ac5218e82e2f75e, type: 2}
   m_sharedMaterial: {fileID: 5492453401987223161, guid: d49ee2d8e448b6341ac5218e82e2f75e, type: 2}

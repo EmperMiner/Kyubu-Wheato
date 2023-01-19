@@ -710,6 +710,27 @@ MonoBehaviour:
     loop: 0
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
+  - name: TomBlaster
+    clip: {fileID: 8300000, guid: 064ee7a02d911a240b69b2d7795523f3, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: SanesssIntro
+    clip: {fileID: 8300000, guid: 5a1462a8a68dded4f8c81b1c590fad29, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: SanesssHead
+    clip: {fileID: 8300000, guid: b412c0149c5f15f489d05c80e0953076, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
   isMainMenu: 0
   isBossFight: 0
   isSecretLevel: 0

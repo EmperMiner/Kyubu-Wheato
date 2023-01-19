@@ -41,17 +41,17 @@ public class TreasureChestScript : MonoBehaviour
         { 
             if (ChestRarity == 0) 
             { 
-                if (player.Wheat*0.1f < 20) { WheatCost = 20; }
+                if (player.Wheat*0.1f < 10) { WheatCost = 10; }
                 else { WheatCost = Mathf.RoundToInt(player.Wheat*0.1f); }
             }
             else if (ChestRarity == 1)
             {
-                if (player.Wheat*0.15f < 40) { WheatCost = 40; }
+                if (player.Wheat*0.15f < 20) { WheatCost = 20; }
                 else { WheatCost = Mathf.RoundToInt(player.Wheat*0.15f); }
             }
             else 
             {
-                if (player.Wheat*0.25f < 70) { WheatCost = 70; }
+                if (player.Wheat*0.25f < 35) { WheatCost = 35; }
                 else { WheatCost = Mathf.RoundToInt(player.Wheat*0.25f); }
             }
             

@@ -92,7 +92,7 @@ public class ShopManager : MonoBehaviour
         }
         MaxShopCheck();
     }
-/*
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -108,13 +108,17 @@ public class ShopManager : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.T)) { PlayerPrefs.SetInt("WinCounter", 0); PlayerPrefs.SetFloat("BestTime", 999999999); }
-        if (Input.GetKeyDown(KeyCode.Y)) { PlayerPrefs.SetInt("Ramen", 0); PlayerPrefs.SetInt("Infinitruths", 0);}
-        if (Input.GetKeyDown(KeyCode.U)) { PlayerPrefs.SetInt("Salmon", 0); }
-        if (Input.GetKeyDown(KeyCode.I)) { PlayerPrefs.SetInt("Steak", 0); }
-        if (Input.GetKeyDown(KeyCode.O)) { PlayerPrefs.SetInt("Cheese", 0); }
-        if (Input.GetKeyDown(KeyCode.P)) { PlayerPrefs.SetInt("FSC", 0); }
+        if (Input.GetKeyDown(KeyCode.Y)) 
+        { 
+            PlayerPrefs.SetInt("Ramen", 1); 
+            PlayerPrefs.SetInt("Salmon", 1);
+            PlayerPrefs.SetInt("Steak", 1);
+            PlayerPrefs.SetInt("Cheese", 1);
+            PlayerPrefs.SetInt("FSC", 1);
+            PlayerPrefs.SetInt("Infinitruths", 2);
+        }
     } 
-*/
+
     private void MaxShopCheck()
     {
         if (shopStrength == 5 && shopDefense == 5 && shopMaxHealth >= 300 && shopMoveSpeed >= 3.99 && shopPlayerCooldownTime <= 5.0 && shopDiceNumber == 30 && shopWheatDroprate == 80.0 && shopDicePreviewerLevel == 5
