@@ -87,12 +87,12 @@ public class TreasureChestScript : MonoBehaviour
         if (StatChance == 88) 
         { 
             float bro = PlayerPrefs.GetFloat("DiceSpinLevel");
-            PlayerPrefs.SetFloat("DiceSpinLevel", bro + 2f); 
+            PlayerPrefs.SetFloat("DiceSpinLevel", bro + 3f); 
         }
         if (StatChance == 75) 
         { 
             float bro = PlayerPrefs.GetFloat("DiceSpinLevel");
-            PlayerPrefs.SetFloat("DiceSpinLevel", bro + 3f); 
+            PlayerPrefs.SetFloat("DiceSpinLevel", bro + 4f); 
         }
         FindObjectOfType<AudioManager>().PlaySound("ChestOpening");
         player.UpdateWheat(-WheatCost);

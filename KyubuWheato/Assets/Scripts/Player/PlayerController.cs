@@ -111,6 +111,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject WaterContainer;
     [SerializeField] private GameObject ghost;
     [SerializeField] private GameObject TestPrefab;
+    [SerializeField] private GameObject TestPrefab2;
 
     private GameObject transitionOut;
     private SpeedrunTimer timerScript;
@@ -233,6 +234,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 15) { PlayerPrefs.SetInt("SanesssStatus", 0); }
+        PlayerPrefs.SetInt("PlayerStopped", 0);
         Invincible = false;
         RedWheatIndicator.SetActive(false);
         BlueWheatIndicator.SetActive(false);
@@ -319,11 +322,33 @@ public class PlayerController : MonoBehaviour
                 AudioPlayer.PlaySound("FSC");
             }
 
-            if (Input.GetKeyDown(KeyCode.C)) { StartCoroutine(ObstacleHead1()); }
+            if (Input.GetKeyDown(KeyCode.C)) { Instantiate(TestPrefab, transform.position, Quaternion.identity); }
 
             if (playerHealth == 0 && PlayerPrefs.GetInt("IngameFSC") > 0) { StartCoroutine(FSC()); }
             else if (playerHealth == 0) { GameOver(); }
         }
+    }
+
+    private IEnumerator BoneSpin()
+    {
+        for (float i = 0; i < 2f; i++)
+        {
+            Instantiate(TestPrefab, transform.position, Quaternion.Euler(0f,0f, 90f*i));
+        }
+        for (float a = 0; a < 2f; a++)
+        {
+            Instantiate(TestPrefab2, transform.position, Quaternion.Euler(0f,0f, 90f*a + 180f));
+        }
+        yield return null;
+    }
+
+    private IEnumerator BoneStop()
+    {
+        for (float i = 0; i < 4f; i++)
+        {
+            Instantiate(TestPrefab, transform.position, Quaternion.Euler(0f,0f, 90f*i));
+        }
+        yield return null;
     }
 
     private IEnumerator ObstacleHead1()
@@ -490,7 +515,7 @@ public class PlayerController : MonoBehaviour
         summonFlippedEnemies();
         Instantiate(WaterContainer, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(UnityEngine.Random.Range(2f,8f));
-        AudioPlayer.PlayJingle("Discord");
+        if (PlayerPrefs.GetInt("SanesssStatus") != 1) { AudioPlayer.PlayJingle("Discord"); }
         yield return null;
     }
 

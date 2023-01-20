@@ -64,7 +64,7 @@ public class FlippedChestScript : MonoBehaviour
         if (prePlaced == false) { chestSpawnerScript.ChestSpawned--; }
 
         float bro = PlayerPrefs.GetFloat("DiceSpinLevel");
-        PlayerPrefs.SetFloat("DiceSpinLevel", bro + 4f); 
+        PlayerPrefs.SetFloat("DiceSpinLevel", bro + 10f); 
 
         FindObjectOfType<AudioManager>().PlaySound("ChestOpening");
         player.UpdateWheat(-WheatCost);
