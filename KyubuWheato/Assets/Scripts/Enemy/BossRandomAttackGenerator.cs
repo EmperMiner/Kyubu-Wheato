@@ -43,7 +43,7 @@ public class BossRandomAttackGenerator : MonoBehaviour
 
     private void Start()
     {
-        mouseHealth = 18000;
+        mouseHealth = 14000;
         Arrow = GameObject.FindGameObjectWithTag("Arrow");
         Arrow.SetActive(false);
         agent = animator.GetComponent<UnityEngine.AI.NavMeshAgent>();

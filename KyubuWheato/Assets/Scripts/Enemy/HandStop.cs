@@ -36,7 +36,7 @@ public class HandStop : MonoBehaviour
     {
         yield return new WaitForSeconds(2.5f);
         FindObjectOfType<AudioManager>().PlaySound("Bone");
-        yield return new WaitForSeconds(4.5f);
+        yield return new WaitForSeconds(2f);
         FindObjectOfType<AudioManager>().PlaySound("Bone");
         yield return null;
     }

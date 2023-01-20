@@ -110,8 +110,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Image whaleJumpscare;
     [SerializeField] private GameObject WaterContainer;
     [SerializeField] private GameObject ghost;
-    [SerializeField] private GameObject TestPrefab;
-    [SerializeField] private GameObject TestPrefab2;
 
     private GameObject transitionOut;
     private SpeedrunTimer timerScript;
@@ -322,134 +320,9 @@ public class PlayerController : MonoBehaviour
                 AudioPlayer.PlaySound("FSC");
             }
 
-            if (Input.GetKeyDown(KeyCode.C)) { Instantiate(TestPrefab, transform.position, Quaternion.identity); }
-
             if (playerHealth == 0 && PlayerPrefs.GetInt("IngameFSC") > 0) { StartCoroutine(FSC()); }
             else if (playerHealth == 0) { GameOver(); }
         }
-    }
-
-    private IEnumerator BoneSpin()
-    {
-        for (float i = 0; i < 2f; i++)
-        {
-            Instantiate(TestPrefab, transform.position, Quaternion.Euler(0f,0f, 90f*i));
-        }
-        for (float a = 0; a < 2f; a++)
-        {
-            Instantiate(TestPrefab2, transform.position, Quaternion.Euler(0f,0f, 90f*a + 180f));
-        }
-        yield return null;
-    }
-
-    private IEnumerator BoneStop()
-    {
-        for (float i = 0; i < 4f; i++)
-        {
-            Instantiate(TestPrefab, transform.position, Quaternion.Euler(0f,0f, 90f*i));
-        }
-        yield return null;
-    }
-
-    private IEnumerator ObstacleHead1()
-    {
-        for (float x = 0; x < 11; x++)
-        {
-            float RowOffset = 2f*(x%2);
-            AudioPlayer.PlaySound("SanesssHead");
-            for (float y = 0; y < 11; y++)
-            {
-                Instantiate(TestPrefab, new Vector3(transform.position.x + 4*(x-5), transform.position.y + 4*(y-5) + RowOffset, transform.position.z), Quaternion.identity);
-                yield return new WaitForSeconds(0.02f);
-            }
-        }
-        yield return null;
-    }
-
-    private IEnumerator SanessHead1()
-    {
-        for (int a = 0; a < 4; a++)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                Instantiate(TestPrefab, new Vector3(transform.position.x + UnityEngine.Random.Range(-4f, 4f), transform.position.y + UnityEngine.Random.Range(-4f,4f), transform.position.z), Quaternion.identity);
-            }
-            yield return new WaitForSeconds(0.75f);
-        }
-        
-        yield return null;
-    }
-
-    private IEnumerator SanessHead2()
-    {
-        for (int i = 0; i < 20; i++)
-        {
-            Instantiate(TestPrefab, new Vector3(transform.position.x + UnityEngine.Random.Range(-3f,3f), transform.position.y + UnityEngine.Random.Range(-3f,3f), transform.position.z), Quaternion.identity);
-            yield return new WaitForSeconds(0.15f);
-        }
-        yield return null;
-    }
-
-    private IEnumerator TomBlaster1()
-    {
-        for (int a = 0; a < 5; a++)
-        {
-            float DegreeOffset = 22.5f*UnityEngine.Random.Range(0,4);
-            for (float i = 0; i < 4f; i++)
-            {
-                Instantiate(TestPrefab, transform.position, Quaternion.Euler(0f,0f, 90f*i + DegreeOffset));
-            }
-            yield return new WaitForSeconds(0.45f);
-        }
-        yield return null;
-    }
-
-    private IEnumerator TomBlaster2()
-    {
-        for (int a = 0; a < 5; a++)
-        {
-            float XOffset = 1.5f*UnityEngine.Random.Range(0,2);
-            for (int i = 0; i < 7; i++)
-            {
-                Instantiate(TestPrefab, new Vector3(transform.position.x + 3f*(i-2) + XOffset + 0.25f, transform.position.y + 0.2f, transform.position.z), Quaternion.Euler(0f,0f, -90f));
-            }
-            yield return new WaitForSeconds(0.45f);
-        }
-            yield return null;
-    }
-
-    private IEnumerator TomBlaster3()
-    {
-        float DownOrUp = -1f + 2f*UnityEngine.Random.Range(0,2);
-        for (int i = 0; i < 11; i++)
-        {
-            Instantiate(TestPrefab, new Vector3(transform.position.x + 2f*(i%2), transform.position.y + 1f*(i-5)*DownOrUp, transform.position.z), Quaternion.Euler(0f,0f, 180f*(i%2)));
-            yield return new WaitForSeconds(0.2f);
-        }
-        yield return null;
-    }
-
-    private IEnumerator TomBlaster4I()
-    {
-        for (int i = 0; i < 12; i++)
-        {
-            Instantiate(TestPrefab, transform.position, Quaternion.Euler(0f,0f, UnityEngine.Random.Range(0f, 360f)));
-            yield return new WaitForSeconds(0.75f);
-        }
-        yield return null;
-    }
-
-    private IEnumerator TomBlaster4II()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            for (int a = 0; a < 3; a++)
-            {
-                Instantiate(TestPrefab, transform.position, Quaternion.Euler(0f,0f, UnityEngine.Random.Range(0f, 360f)));
-            }
-            yield return new WaitForSeconds(3f);
-        }
-        yield return null;
     }
 
     private IEnumerator CampChecking()
@@ -577,7 +450,8 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "DiceTile5") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile5 = true; this.other = other; }
         if (other.gameObject.tag == "DiceTile6") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile6 = true; this.other = other; }
 
-        
+        if (other.gameObject.tag == "FSCDrop") { if (PlayerPrefs.GetInt("FSC") == 0) { PlayerPrefs.SetInt("FSC", 1); } }
+
         if (other.gameObject.tag == "GoldenWheat") { Win(); }
 
         if (other.gameObject.tag == "Level12") { StartCoroutine(LoadToLevel(12)); }
