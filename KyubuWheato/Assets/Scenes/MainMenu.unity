@@ -4343,14 +4343,14 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1.1
   m_Text: "Lead Programmer: Emper\rDev\nArt Director: Scarborrower\r\nEnemy and Tileset:
-    Scarborrower\r\nInitial Idea: Scarborrower\r\nTeresa-chan and Kyubu Kyubu Dice:
-    eldelnacho\r\nTeresa-chan Pixel Art and Animation: Emper\rDev\nShop Pixel Art:
-    Emper\rDev\nCharacter Art Design: inspired by Holocure\r\nAbilities and Shop:
-    inspired by Holocure\r\nRoguelite theme: inspired by Muck\r\nLevel Design: inspired
-    by DOOM\r\nSome UI Designs: inspired by Minecraft\r\nLighting Ray: inspired by
-    Chicken Invaders \r\nSound Effects: Various Games, Youtube and SFXR\r\nMusic:
-    EmperDev\r and Royalty Free Music\nInspired by eldelnacho, Phat, Dani\nPlaytesters:
-    Khang, eldelnacho, Andrew, Charles, Daniel\nGigachad playtester who got to level
+    Scarborrower\r\nTeresa-chan and Kyubu Kyubu Dice: eldelnacho\r\nTeresa-chan Pixel
+    Art and Animation: Emper\rDev\nShop Pixel Art: Emper\rDev\nCharacter Art Design:
+    inspired by Holocure\r\nAbilities and Shop: inspired by Holocure\r\nRoguelite
+    theme: inspired by Muck\r\nLevel Design: inspired by DOOM\r\nSome UI Designs:
+    inspired by Minecraft\r\nLighting Ray: inspired by Chicken Invaders \r\nSound
+    Effects: Various Games, Youtube and SFXR\r\nMusic: EmperDev\r and Royalty Free
+    Music\nInspired by eldelnacho, Phat, Dani\nPlaytesters: Khang, eldelnacho, Andrew,
+    Charles, Daniel,\nEggsAreAwesome, Sariel\nGigachad playtester who got to level
     6 first: Henry"
 --- !u!222 &365495689
 CanvasRenderer:

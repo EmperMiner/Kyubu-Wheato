@@ -106,10 +106,10 @@ public class FlippedChestScript : MonoBehaviour
     {
         int StatGachaRoll = Random.Range(0, 30);
         if (StatGachaRoll <= 2 && player.MoveSpeed <= 3.4f) { player.MoveSpeed += Random.Range(0.6f, 1.2f); CreateImagePopup(9); }
-        else if (StatGachaRoll <= 5) {  int i = Random.Range(2, 6); player.maxHealth += Random.Range(2, 6); player.healthBar.SetMaxHealth(player.maxHealth); player.UpdateHealth(i*3); CreateImagePopup(10); }
-        else if (StatGachaRoll <= 8) { player.strength += Random.Range(1f, 3f); CreateImagePopup(11); }
-        else if (StatGachaRoll <= 11) { player.defense += Random.Range(0.5f, 1f); CreateImagePopup(12); }
-        else if (StatGachaRoll <= 13) { for (int i = 0; i < Random.Range(3, 5); i++) { player.IncreaseDiceNumber(); }; CreateImagePopup(13); }
+        else if (StatGachaRoll <= 5) {  int i = Random.Range(player.maxHealth*1/5, player.maxHealth*4/5); player.maxHealth += i; player.healthBar.SetMaxHealth(player.maxHealth); player.UpdateHealth(i*3); CreateImagePopup(10); }
+        else if (StatGachaRoll <= 8) { player.strength += Random.Range(0.75f, 2f); CreateImagePopup(11); }
+        else if (StatGachaRoll <= 11) { player.defense += Random.Range(0.75f, 2f); CreateImagePopup(12); }
+        else if (StatGachaRoll <= 13) { for (int i = 0; i < Random.Range(4, 10); i++) { player.IncreaseDiceNumber(); }; CreateImagePopup(13); }
         else if (StatGachaRoll <= 15 && player.playerCooldownTime > 5.0f) { player.playerCooldownTime -= 1f; CreateImagePopup(14); }
         else if (StatGachaRoll <= 17 && player.wheatDroprate < 100f) { player.wheatDroprate += Random.Range(2f, 5f); CreateImagePopup(15); }
         else if (StatGachaRoll <= 18 && player.diceDroprate > 100) { player.diceDroprate -= Random.Range(50, 100); if(player.diceDroprate < 100) { player.diceDroprate = 100; } CreateImagePopup(16); }

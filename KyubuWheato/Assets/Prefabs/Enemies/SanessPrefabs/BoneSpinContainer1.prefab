@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48ddf96928cb5a408e88a78447cb697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 90
+  damage: 100
   isCornRay: 0
   isBossCornRay: 0
   isInvertedCornray: 0
@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d15e48e60b62c4a9faa029fa63c2c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBeforeDestroy: 13.02
+  timeBeforeDestroy: 10.02
   isKyubuTile3Left: 0
   isKyubuTile3Right: 0
   isKyubuTile6: 0

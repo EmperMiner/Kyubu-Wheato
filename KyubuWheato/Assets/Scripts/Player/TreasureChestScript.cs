@@ -134,11 +134,11 @@ public class TreasureChestScript : MonoBehaviour
     private void ChooseStat()
     {
         int StatGachaRoll = Random.Range(0, 20);
-        if (StatGachaRoll <= 2 && player.MoveSpeed <= 3.4f) { player.MoveSpeed += Random.Range(0.1f, 0.3f); CreateImagePopup(9); }
-        else if (StatGachaRoll <= 5) { int i = Random.Range(2, 6); player.maxHealth += i; player.healthBar.SetMaxHealth(player.maxHealth); player.UpdateHealth(i); CreateImagePopup(10); }
-        else if (StatGachaRoll <= 8) { player.strength += Random.Range(0.25f, 0.75f); CreateImagePopup(11); }
-        else if (StatGachaRoll <= 11) { player.defense += Random.Range(0.25f, 0.75f); CreateImagePopup(12); }
-        else if (StatGachaRoll <= 13) { for (int i = 0; i < Random.Range(1, 4); i++) { player.IncreaseDiceNumber(); }; CreateImagePopup(13); }
+        if (StatGachaRoll <= 2 && player.MoveSpeed <= 3.4f) { player.MoveSpeed += Random.Range(0.1f, 0.3f + 0.2f*ChestRarity); CreateImagePopup(9); }
+        else if (StatGachaRoll <= 5) { int i = Random.Range(player.maxHealth*1/10, player.maxHealth*1/2 + (player.maxHealth/5)*ChestRarity); player.maxHealth += i; player.healthBar.SetMaxHealth(player.maxHealth); player.UpdateHealth(i); CreateImagePopup(10); }
+        else if (StatGachaRoll <= 8) { player.strength += Random.Range(0.25f, 0.75f + 0.5f*ChestRarity); CreateImagePopup(11); }
+        else if (StatGachaRoll <= 11) { player.defense += Random.Range(0.25f, 0.75f + 0.5f*ChestRarity); CreateImagePopup(12); }
+        else if (StatGachaRoll <= 13) { for (int i = 0; i < Random.Range(2, 6 + 3*ChestRarity); i++) { player.IncreaseDiceNumber(); }; CreateImagePopup(13); }
         else if (StatGachaRoll <= 15 && player.playerCooldownTime > 5.0f) { player.playerCooldownTime -= 0.5f; CreateImagePopup(14); }
         else if (StatGachaRoll <= 17 && player.wheatDroprate < 100f) { player.wheatDroprate += Random.Range(0.1f, 2.0f); CreateImagePopup(15); }
         else if (StatGachaRoll <= 18 && player.diceDroprate > 1) { player.diceDroprate -= Random.Range(10, 31); CreateImagePopup(16); }

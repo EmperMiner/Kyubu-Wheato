@@ -89,6 +89,7 @@ TagManager:
   - Timer
   - EndingTimer
   - HelpButton
+  - FSCDrop
   layers:
   - Default
   - TransparentFX

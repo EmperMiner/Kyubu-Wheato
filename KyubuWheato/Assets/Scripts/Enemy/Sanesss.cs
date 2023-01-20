@@ -40,18 +40,22 @@ public class Sanesss : MonoBehaviour
     private float RollAttackDelay2;
     private int AttackIndex2;
 
+    private float RollAttackDelay3;
+    private int AttackIndex3;
+
     private float RollAttackDelay4;
     private bool RollAttack4Check;
     private int AttackIndex4;
 
     private float DevilishWhaleDelay;
+    private bool DevilishWhaleCheck;
 
     private void Start()
     {
         FindObjectOfType<AudioManager>().PlaySound("SanesssIntro");
         FindObjectOfType<AudioManager>().PlayJingle("Sanesss");
         PlayerPrefs.SetInt("SanesssStatus", 1);
-        maxMouseHealth = 20000;
+        maxMouseHealth = 50000;
         mouseHealth = maxMouseHealth;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.updateRotation = false;
@@ -61,12 +65,14 @@ public class Sanesss : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
 
-        bossDamage = 100;
-        RollAttackDelay1 = 3f;
-        RollAttackDelay2 = 10f;
-        RollAttackDelay4 = 2f;
+        bossDamage = 110;
+        RollAttackDelay1 = 2f;
+        RollAttackDelay2 = 8.5f;
+        RollAttackDelay3 = 7f;
+        RollAttackDelay4 = 3f;
         RollAttack4Check = false;
-        DevilishWhaleDelay = 40f;
+        DevilishWhaleDelay = 30f;
+        DevilishWhaleCheck = false;
 
         alreadyDamaged = false;
 
@@ -82,7 +88,7 @@ public class Sanesss : MonoBehaviour
 
         StartCoroutine(RollAttack1());
         StartCoroutine(RollAttack2());
-        StartCoroutine(DevilishWhaleCycle());
+        StartCoroutine(RollAttack3());
     }
 
     private void Update()
@@ -117,20 +123,31 @@ public class Sanesss : MonoBehaviour
     {
         yield return new WaitForSeconds(RollAttackDelay2*UnityEngine.Random.Range(0.75f, 1.25f));
         FindObjectOfType<AudioManager>().PlaySound("SanesssTrigger");
-        AttackIndex2 = UnityEngine.Random.Range(0,10);
+        AttackIndex2 = UnityEngine.Random.Range(0,5);
         
         if (AttackIndex2 == 0) { StartCoroutine(TomBlaster1()); }
         if (AttackIndex2 == 1) { StartCoroutine(TomBlaster2()); }
         if (AttackIndex2 == 2) { StartCoroutine(TomBlaster3()); }
         if (AttackIndex2 == 3) { StartCoroutine(TomBlaster4I()); StartCoroutine(TomBlaster4II()); }
         if (AttackIndex2 == 4) { StartCoroutine(BoneStop()); }
-        if (AttackIndex2 == 5) { StartCoroutine(SanessHead1()); }
-        if (AttackIndex2 == 6) { StartCoroutine(SanessHead2()); }
-        if (AttackIndex2 == 7) { StartCoroutine(ObstacleHead()); }
-        if (AttackIndex2 == 8) { StartCoroutine(BoneSpin()); }
-        if (AttackIndex2 == 9) { Instantiate(Summonables[6], playerTransform.position, Quaternion.Euler(0f,0f, UnityEngine.Random.Range(0f, 360f))); }
 
         StartCoroutine(RollAttack2());
+        yield return null;
+    }
+
+    private IEnumerator RollAttack3()
+    {
+        yield return new WaitForSeconds(RollAttackDelay3*UnityEngine.Random.Range(0.75f, 1.25f));
+        FindObjectOfType<AudioManager>().PlaySound("SanesssIntro");
+        AttackIndex3 = UnityEngine.Random.Range(0,5);
+
+        if (AttackIndex3 == 0) { StartCoroutine(SanessHead1()); }
+        if (AttackIndex3 == 1) { StartCoroutine(SanessHead2()); }
+        if (AttackIndex3 == 2) { StartCoroutine(ObstacleHead()); }
+        if (AttackIndex3 == 3) { StartCoroutine(BoneSpin()); }
+        if (AttackIndex3 == 4) { Instantiate(Summonables[6], playerTransform.position, Quaternion.Euler(0f,0f, UnityEngine.Random.Range(0f, 360f))); }
+
+        StartCoroutine(RollAttack3());
         yield return null;
     }
 
@@ -144,11 +161,14 @@ public class Sanesss : MonoBehaviour
         if (AttackIndex4 == 1) { for (int i = 0; i < 4; i++) {Instantiate(Summonables[8], new Vector3(playerTransform.position.x + UnityEngine.Random.Range(-4f, 4f), playerTransform.position.y + UnityEngine.Random.Range(-4f,4f)), Quaternion.identity); } }
         if (AttackIndex4 == 2) { for (int i = 0; i < 5; i++) {Instantiate(Summonables[9], new Vector3(playerTransform.position.x + UnityEngine.Random.Range(-6f, 6f), playerTransform.position.y + UnityEngine.Random.Range(-6f,6f)), Quaternion.identity); } }
         if (AttackIndex4 == 3) { for (int i = 0; i < 5; i++) {Instantiate(Summonables[10], transform.position, Quaternion.Euler(0f,0f, UnityEngine.Random.Range(0f,360f))); } }
+
+        StartCoroutine(RollAttack4());
         yield return null;
     }
 
     private IEnumerator DevilishWhaleCycle()
     {
+        DevilishWhaleCheck = true;
         yield return new WaitForSeconds(DevilishWhaleDelay*UnityEngine.Random.Range(0.75f, 1.25f));
         player.StartCoroutine(player.SummonDevilishWhale());
         StartCoroutine(DevilishWhaleCycle());
@@ -209,9 +229,10 @@ public class Sanesss : MonoBehaviour
 
     private IEnumerator BoneStop()
     {
+        float SquareOffset = UnityEngine.Random.Range(0f,90f);
         for (float i = 0; i < 4f; i++)
         {
-            Instantiate(Summonables[2], playerTransform.position, Quaternion.Euler(0f,0f, 90f*i));
+            Instantiate(Summonables[2], playerTransform.position, Quaternion.Euler(0f,0f, 90f*i + SquareOffset));
         }
         yield return null;
     }
@@ -367,7 +388,10 @@ public class Sanesss : MonoBehaviour
         alreadyDamaged = true;
         bossHealthBarScript.SetHealth(mouseHealth);
         StartCoroutine(FlashingHealthBar());
+        if (DevilishWhaleCheck == false && mouseHealth < maxMouseHealth*7/10) { StartCoroutine(DevilishWhaleCycle()); } 
         if (RollAttack4Check == false && mouseHealth < maxMouseHealth/2) { StartCoroutine(RollAttack4()); } 
+
+        
     }
 
     private void CreateDamagePopup(int damageAmount)

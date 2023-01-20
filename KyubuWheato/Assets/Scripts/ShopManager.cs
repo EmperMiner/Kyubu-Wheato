@@ -92,7 +92,7 @@ public class ShopManager : MonoBehaviour
         }
         MaxShopCheck();
     }
-
+/*
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -118,7 +118,7 @@ public class ShopManager : MonoBehaviour
             PlayerPrefs.SetInt("Infinitruths", 2);
         }
     } 
-
+*/
     private void MaxShopCheck()
     {
         if (shopStrength == 5 && shopDefense == 5 && shopMaxHealth >= 300 && shopMoveSpeed >= 3.99 && shopPlayerCooldownTime <= 5.0 && shopDiceNumber == 30 && shopWheatDroprate == 80.0 && shopDicePreviewerLevel == 5

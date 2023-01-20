@@ -110,6 +110,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Image whaleJumpscare;
     [SerializeField] private GameObject WaterContainer;
     [SerializeField] private GameObject ghost;
+    [SerializeField] private TextMeshProUGUI SanesssIntroText;
+    [SerializeField] private GameObject SanesssPrefab;
 
     private GameObject transitionOut;
     private SpeedrunTimer timerScript;
@@ -232,7 +234,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 15) { PlayerPrefs.SetInt("SanesssStatus", 0); }
+        if (SceneManager.GetActiveScene().buildIndex == 15) { PlayerPrefs.SetInt("SanesssStatus", 0); StartCoroutine(SanesssIntro()); }
         PlayerPrefs.SetInt("PlayerStopped", 0);
         Invincible = false;
         RedWheatIndicator.SetActive(false);
@@ -325,6 +327,82 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private IEnumerator SanesssIntro()
+    {
+        yield return new WaitForSeconds(UnityEngine.Random.Range(270f,330f));
+        AudioPlayer.StopSound("Discord");
+        SanesssIntroText.text = "";
+        SanesssIntroText.text = "Y";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "Yo";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You'";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You'r";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're n";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're no";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're not";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're not s";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're not su";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're not sup";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're not supp";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're not suppo";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're not suppos";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're not suppose";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're not supposed";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're not supposed t";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're not supposed to";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're not supposed to b";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're not supposed to be";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're not supposed to be h";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're not supposed to be he";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're not supposed to be her";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're not supposed to be here";
+        yield return new WaitForSeconds(0.08f);
+        SanesssIntroText.text = "You're not supposed to be here.";
+        yield return new WaitForSeconds(4f);
+        AudioPlayer.StopSound("Discord");
+        SanesssIntroText.text = "Leave. Return to your world immediately.";
+        yield return new WaitForSeconds(6f);
+        AudioPlayer.StopSound("Discord");
+        SanesssIntroText.text = "This is our playground to destroy.";
+        yield return new WaitForSeconds(5f);
+        AudioPlayer.StopSound("Discord");
+        SanesssIntroText.text = "Huh? Not listening?";
+        yield return new WaitForSeconds(3f);
+        AudioPlayer.StopSound("Discord");
+        SanesssIntroText.text = "Then we'll send him in. Good luck, you'll need it.";
+        yield return new WaitForSeconds(6f);
+        SanesssIntroText.text = "";
+        AudioPlayer.StopSound("Discord");
+        transform.position = new Vector3(0f, 0f, -2f);
+        Instantiate(SanesssPrefab, new Vector3(-7f, 0f, -2f), Quaternion.identity);
+        yield return null;
+    }
+
     private IEnumerator CampChecking()
     {
         bool standingOnDiceTile = diceThrowScript.isOnDiceTile1 || diceThrowScript.isOnDiceTile2 || diceThrowScript.isOnDiceTile3 ||
@@ -394,7 +472,7 @@ public class PlayerController : MonoBehaviour
 
     private void summonFlippedEnemies()
     {
-        for (int i = 0; i < UnityEngine.Random.Range(1, 5); i++)
+        for (int a = 0; a < UnityEngine.Random.Range(0, 3); a++)
         {
             Instantiate(flippedEnemyPrefabs[UnityEngine.Random.Range(0, flippedEnemyPrefabs.Length)], new Vector3(transform.position.x + UnityEngine.Random.Range(-11f, 11f), transform.position.y + UnityEngine.Random.Range(-11f, 11f), 0), Quaternion.identity);
         }
@@ -450,7 +528,19 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "DiceTile5") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile5 = true; this.other = other; }
         if (other.gameObject.tag == "DiceTile6") { AudioPlayer.PlaySound("PadOn"); diceThrowScript.isOnDiceTile6 = true; this.other = other; }
 
-        if (other.gameObject.tag == "FSCDrop") { if (PlayerPrefs.GetInt("FSC") == 0) { PlayerPrefs.SetInt("FSC", 1); } }
+        if (other.gameObject.tag == "FSCDrop") 
+        { 
+            if (PlayerPrefs.GetInt("FSC") == 0) 
+            { 
+                PlayerPrefs.SetInt("FSC", 1); 
+                StartCoroutine(MyriadCookiesText());
+            } 
+            PlayerPrefs.SetInt("IngameFSC", 3);
+            AudioPlayer.PlaySound("FSCGang");
+            
+            GameObject FSCDropContainer = GameObject.Find("FSCDropContainer(Clone)");
+            Destroy(FSCDropContainer);
+        }
 
         if (other.gameObject.tag == "GoldenWheat") { Win(); }
 
@@ -556,6 +646,14 @@ public class PlayerController : MonoBehaviour
         AudioPlayer.PlaySound("UIButtonError");
         SmallText.text = "Wait " + cooldown + " before healing again";
         yield return new WaitForSeconds(1.5f);
+        SmallText.text = "";
+        yield return null;
+    }
+
+    private IEnumerator MyriadCookiesText()
+    {
+        SmallText.text = "You got Myriad Cookies!";
+        yield return new WaitForSeconds(4f);
         SmallText.text = "";
         yield return null;
     }
