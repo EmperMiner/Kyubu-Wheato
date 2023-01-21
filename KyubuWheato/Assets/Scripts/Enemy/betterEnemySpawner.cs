@@ -22,6 +22,7 @@ public class betterEnemySpawner : MonoBehaviour
 
     private void Start()
     {
+        spiderInterval = spiderInterval*1.5f;
         PlayerPrefs.SetInt("BossDefeated", 0);
         exitScript = GameObject.FindGameObjectWithTag("ExitHoeContainer").GetComponent<ExitHoeContainer>();
         enemySpawned = new int[enemyPrefabs.Length];

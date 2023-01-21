@@ -65,7 +65,7 @@ public class Sanesss : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
 
-        bossDamage = 110;
+        bossDamage = 120;
         RollAttackDelay1 = 2f;
         RollAttackDelay2 = 8.5f;
         RollAttackDelay3 = 7f;

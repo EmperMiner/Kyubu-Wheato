@@ -26,7 +26,7 @@ public class DicePadSpawner : MonoBehaviour
     IEnumerator SpawnPadCycle()
     {
         triggeredSpawnPadCycle = true;
-        yield return new WaitForSeconds(Random.Range(35f, 70f));
+        yield return new WaitForSeconds(Random.Range(17f, 35f));
         SpawnPad();
         StartCoroutine(SpawnPadCycle());
         yield return null;

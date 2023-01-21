@@ -16,7 +16,7 @@ public class Wheat : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            player.UpdateWheat(WheatAmount + Random.Range(0,2));
+            player.UpdateWheat(WheatAmount);
             Destroy(gameObject);
         }
     }

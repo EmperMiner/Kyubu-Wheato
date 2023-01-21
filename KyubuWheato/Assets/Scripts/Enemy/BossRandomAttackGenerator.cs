@@ -53,7 +53,7 @@ public class BossRandomAttackGenerator : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
 
-        bossDamage = 30;
+        bossDamage = 70;
         agent.speed = 3;
         RollAttackDelay = 5f;
         alreadyDamaged = false;

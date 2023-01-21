@@ -46948,7 +46948,8 @@ MonoBehaviour:
   whaleJumpscare: {fileID: 0}
   WaterContainer: {fileID: 2854759617916791846, guid: 8d4e9221812d6894e8e4213177a86faf, type: 3}
   ghost: {fileID: 2928511541386306518, guid: 0c51b4cc7b7e7ba4c9f0084d69cc1626, type: 3}
-  Spooders: {fileID: 9123488909937170722, guid: 50ff5ba9e1012eb469b9712d1f87c46c, type: 3}
+  SanesssIntroText: {fileID: 0}
+  SanesssPrefab: {fileID: 0}
   playerAttacked: 0
   distancePerSecond: 0
 --- !u!4 &1405087408
@@ -47701,6 +47702,10 @@ PrefabInstance:
     - target: {fileID: 5325896411272710561, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
       propertyPath: EnemyLimit
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5325896411272710561, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
+      propertyPath: TimeTillFailsafe
+      value: 105
       objectReference: {fileID: 0}
     - target: {fileID: 5325896411272710561, guid: d6f5560bed1aa7c47baf5b3cf675fd69, type: 3}
       propertyPath: MapSprites.Array.size

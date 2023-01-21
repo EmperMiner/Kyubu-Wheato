@@ -252,7 +252,9 @@ public class FlippedBehaviour : MonoBehaviour
         {
             if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("PlayerHurt"); }
             else { FindObjectOfType<AudioManager>().PlaySound("Iframe"); }
-            player.UpdateHealth(-mouseStrength + Mathf.RoundToInt((mouseStrength * player.defense)/10));
+            int playerDamageAmount = mouseStrength + Mathf.RoundToInt((mouseStrength * player.defense)/10);
+            if (playerDamageAmount < 1) { playerDamageAmount = 1; } 
+            player.UpdateHealth(-playerDamageAmount);
             mouseCanAttack = 0f;
             player.playerAttacked = true;
             if (isC) 

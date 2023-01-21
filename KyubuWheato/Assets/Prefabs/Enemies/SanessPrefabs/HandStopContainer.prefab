@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 6934062288309066168}
   - component: {fileID: 1932129806607050368}
   - component: {fileID: 5416071430322636097}
+  - component: {fileID: 3378436822456548951}
   m_Layer: 0
   m_Name: HandStopContainer
   m_TagString: Untagged
@@ -253,3 +254,17 @@ MonoBehaviour:
   isStar: 0
   Dice3: {fileID: 0}
   Dice6: []
+--- !u!114 &3378436822456548951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5110636565921490245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a05b94658a1124a84521e4a057d2b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Delay: 2.4
+  isKyubuKombo6: 1

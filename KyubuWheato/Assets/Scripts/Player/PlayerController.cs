@@ -329,7 +329,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator SanesssIntro()
     {
-        yield return new WaitForSeconds(UnityEngine.Random.Range(270f,330f));
+        yield return new WaitForSeconds(UnityEngine.Random.Range(370f,430f));
         AudioPlayer.StopSound("Discord");
         SanesssIntroText.text = "";
         SanesssIntroText.text = "Y";

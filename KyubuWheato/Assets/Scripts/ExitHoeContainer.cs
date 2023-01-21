@@ -26,7 +26,7 @@ public class ExitHoeContainer : MonoBehaviour
     private GameObject playerMap;
     private GameObject MapImageObject;
     public int Level;
-
+    [SerializeField] private float TimeTillFailsafe;
 
     private Image MapImage;
     [SerializeField] private Sprite[] MapSprites;
@@ -52,6 +52,7 @@ public class ExitHoeContainer : MonoBehaviour
         haveRedWheat = false;
         haveBlueWheat = false;
         haveGreenWheat = false;
+        StartCoroutine(Failsafe());
     }
 
     private void Update()
@@ -96,5 +97,12 @@ public class ExitHoeContainer : MonoBehaviour
         player.StartCoroutine(player.NotifTextMapUnlock());
         MapImageObject.SetActive(true);
         MapImage.sprite = MapSprites[2*(SceneManager.GetActiveScene().buildIndex - 4)];
+    }
+
+    private IEnumerator Failsafe()
+    {
+        yield return new WaitForSeconds(TimeTillFailsafe);
+        if (EnemiesKilled < EnemyLimit) { EnemiesKilled = EnemyLimit; }
+        yield return null;
     }
 }
