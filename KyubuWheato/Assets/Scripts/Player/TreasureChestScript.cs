@@ -123,10 +123,10 @@ public class TreasureChestScript : MonoBehaviour
         else if (EntreeGachaRoll == 6 && player.haveChickenNuggets == false) { player.haveChickenNuggets = true; CreateImagePopup(EntreeGachaRoll); }
         else if (EntreeGachaRoll == 7 && player.havePastelDeChoclo == false) { player.havePastelDeChoclo = true; CreateImagePopup(EntreeGachaRoll); }
         else if (EntreeGachaRoll == 8 && player.haveGarlicBread == false) { player.haveGarlicBread = true; CreateImagePopup(EntreeGachaRoll); }
-        else if (EntreeGachaRoll == 9 && PlayerPrefs.GetInt("IngameRamen") == 0 && NewEntreeChance == 0) { PlayerPrefs.SetInt("IngameRamen", 1); CreateImagePopup(EntreeGachaRoll); }
-        else if (EntreeGachaRoll == 10 && PlayerPrefs.GetInt("IngameSalmon") == 0 && NewEntreeChance == 0) { PlayerPrefs.SetInt("IngameSalmon", 1); CreateImagePopup(EntreeGachaRoll); } 
-        else if (EntreeGachaRoll == 11 && PlayerPrefs.GetInt("IngameSteak") == 0 && NewEntreeChance == 0) { PlayerPrefs.SetInt("IngameSteak", 1); CreateImagePopup(EntreeGachaRoll); }
-        else if (EntreeGachaRoll == 12 && PlayerPrefs.GetInt("IngameCheese") == 0 && NewEntreeChance == 0) { PlayerPrefs.SetInt("IngameCheese", 1); CreateImagePopup(EntreeGachaRoll); }
+        else if (EntreeGachaRoll == 9 && PlayerPrefs.GetInt("IngameRamen") == 0 && NewEntreeChance == 0) { PlayerPrefs.SetInt("IngameRamen", 1); CreateImagePopup(EntreeGachaRoll + 9); }
+        else if (EntreeGachaRoll == 10 && PlayerPrefs.GetInt("IngameSalmon") == 0 && NewEntreeChance == 0) { PlayerPrefs.SetInt("IngameSalmon", 1); CreateImagePopup(EntreeGachaRoll + 9); } 
+        else if (EntreeGachaRoll == 11 && PlayerPrefs.GetInt("IngameSteak") == 0 && NewEntreeChance == 0) { PlayerPrefs.SetInt("IngameSteak", 1); CreateImagePopup(EntreeGachaRoll + 9); }
+        else if (EntreeGachaRoll == 12 && PlayerPrefs.GetInt("IngameCheese") == 0 && NewEntreeChance == 0) { PlayerPrefs.SetInt("IngameCheese", 1); CreateImagePopup(EntreeGachaRoll + 9); }
         else if (EntreeGachaRoll <= 8) { ChooseEntree(); }
         else { ChooseStat(); }
     }

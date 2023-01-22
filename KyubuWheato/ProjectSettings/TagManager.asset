@@ -90,6 +90,7 @@ TagManager:
   - EndingTimer
   - HelpButton
   - FSCDrop
+  - PauseMenu
   layers:
   - Default
   - TransparentFX

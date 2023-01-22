@@ -52,7 +52,7 @@ public class ExitHoeContainer : MonoBehaviour
         haveRedWheat = false;
         haveBlueWheat = false;
         haveGreenWheat = false;
-        StartCoroutine(Failsafe());
+        if (SceneManager.GetActiveScene().buildIndex != 15 && SceneManager.GetActiveScene().buildIndex != 14) { StartCoroutine(Failsafe()); }
     }
 
     private void Update()

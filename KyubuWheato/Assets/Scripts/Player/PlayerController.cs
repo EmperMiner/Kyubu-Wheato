@@ -251,8 +251,12 @@ public class PlayerController : MonoBehaviour
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
 
-            if ( movement.x!=0 ) { animator.SetFloat("Horizontal", movement.x); }
-            animator.SetFloat("Speed", movement.sqrMagnitude);
+            if (Time.timeScale == 1f)
+            {
+                if ( movement.x!=0 ) { animator.SetFloat("Horizontal", movement.x); }
+                animator.SetFloat("Speed", movement.sqrMagnitude);
+            }
+                
 
             if (Input.GetKeyDown(KeyCode.R) && inCooldown == false) { CraftBread(); }
             else if (Input.GetKeyDown(KeyCode.R)) { StartCoroutine(CantCraftBread(Mathf.RoundToInt(healingCooldownTime - cooldownTimer))); }
@@ -558,7 +562,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "GreenWheat") { UnlockKey("Green"); Destroy(other.gameObject); }
         if (other.gameObject.tag == "ExitHoe") 
         { 
-            Invincible = true;
+            
             if (KeyWheatScript.Level == 1) { StartCoroutine(GoToNextLevel()); }
             else if (KeyWheatScript.Level == 2) 
             { 
@@ -617,6 +621,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator GoToNextLevel()
     {
+        Invincible = true;
         transitionOut.SetActive(true);
         yield return new WaitForSeconds(1.9f);
         AudioPlayer.PlaySound("ButtonSelect");
@@ -732,8 +737,8 @@ public class PlayerController : MonoBehaviour
     {
         int level = SceneManager.GetActiveScene().buildIndex - 4;
         int lowPrice = Mathf.RoundToInt(Mathf.Pow((float)level, 2f) + 15f); 
-        if (Mathf.RoundToInt(Wheat*0.2f) < lowPrice) { healWheatCost = lowPrice; }
-        else { healWheatCost = Mathf.RoundToInt(Wheat*0.2f); }
+        if (Mathf.RoundToInt(Wheat*0.1f) < lowPrice) { healWheatCost = lowPrice; }
+        else { healWheatCost = Mathf.RoundToInt(Wheat*0.1f); }
 
         if (Wheat < healWheatCost) 
         { 

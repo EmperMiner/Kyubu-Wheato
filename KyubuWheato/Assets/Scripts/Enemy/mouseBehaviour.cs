@@ -337,78 +337,78 @@ public class mouseBehaviour : MonoBehaviour
         if (isMouse && isMiniBoss == false) 
         { 
             mouseStrength = Mathf.FloorToInt(level*1f + 1.5f);
-            maxMouseHealth = level*7 + 4;
+            maxMouseHealth = Mathf.FloorToInt((Mathf.Pow(level, 1.88f) + 4f));
             agent.speed = level*0.2f + 1.5f;
         }
         if (isCowman && isMiniBoss == false) 
         { 
             mouseStrength = Mathf.FloorToInt(level*1f + 4f);
-            maxMouseHealth = level*9 + 2;
+            maxMouseHealth = Mathf.FloorToInt((Mathf.Pow(level, 2f) + 2f));
             agent.speed = level*0.1f + 1.3f;
             agent.acceleration = level*0.1f + 6f;
         }
         if (isHenor && isMiniBoss == false) 
         { 
             mouseStrength = Mathf.FloorToInt(level*2f + 0.5f);
-            maxMouseHealth = level*5 + 1;
+            maxMouseHealth = Mathf.FloorToInt((Mathf.Pow(level, 1.73f) + 1f));
             agent.speed = level*0.5f + 1.5f;
         }
         if (isScawy && isMiniBoss == false) 
         { 
             mouseStrength = Mathf.FloorToInt(level*0.4f + 2f);
-            maxMouseHealth = level*5 + 2;
+            maxMouseHealth = Mathf.FloorToInt((Mathf.Pow(level, 1.75f) + 2f));
             agent.speed = level*0.1f + 2f;
             agent.acceleration = level*0.3f + 4f;
         }
         if (isMouse && isMiniBoss == true) 
         { 
             mouseStrength = Mathf.FloorToInt(level*3f + 1f);
-            maxMouseHealth = level*50 + 50;
+            maxMouseHealth = Mathf.FloorToInt((Mathf.Pow(level, 2.7f) + 50f));
             agent.speed = level*0.2f + 1f;
         }
         if (isCowman && isMiniBoss == true) 
         { 
             mouseStrength = Mathf.FloorToInt(level*3.6f + 3f);
-            maxMouseHealth = level*80 + 90;
+            maxMouseHealth = Mathf.FloorToInt((Mathf.Pow(level, 2.9f) + 90f));
             agent.speed = level*0.15f + 1f;
             agent.acceleration = level*0.2f + 5f;
         }
         if (isHenor && isMiniBoss == true) 
         { 
             mouseStrength = Mathf.FloorToInt(level*1.8f + 1f);
-            maxMouseHealth = level*34 + 10;
+            maxMouseHealth = Mathf.FloorToInt((Mathf.Pow(level, 2.53f) + 10f));
             agent.speed = level*1f + 3f;
         }
         if (isScawy && isMiniBoss == true) 
         { 
             mouseStrength = Mathf.FloorToInt(level*2.8f + 2f);
-            maxMouseHealth = level*42 + 40;
+            maxMouseHealth = Mathf.FloorToInt((Mathf.Pow(level, 2.6f) + 40f));
             agent.speed = level*0.1f + 2f;
             agent.acceleration = level*0.3f + 4f;
         }
         if (isSpooder && isMiniBoss == false) 
         { 
             mouseStrength = Mathf.FloorToInt(level*2f + 1f);
-            maxMouseHealth = level*6 + 15;
+            maxMouseHealth = Mathf.FloorToInt((Mathf.Pow(level, 1.8f) + 15f));
             agent.speed = level*0.5f + 3f;
         }
         if (isSchwein) 
         { 
             mouseStrength = Mathf.FloorToInt(level*1.5f + 10f);
-            maxMouseHealth = level*18 + 350;
+            maxMouseHealth = Mathf.FloorToInt((Mathf.Pow(level, 2.3f) + 350f));
             agent.speed = level*0.1f + 0.8f;
             agent.acceleration = level*0.1f + 3.5f;
         }
         if (isGhost)
         {
             mouseStrength = Mathf.FloorToInt(level*7f + 12f);
-            maxMouseHealth = level*30 + 24;
+            maxMouseHealth = Mathf.FloorToInt((Mathf.Pow(level, 2.5f) + 24f));
             ghostSpeed = level*0.2f + 2f;
         }
         if (isBlackCat) 
         { 
             mouseStrength = Mathf.FloorToInt(level*1f + 5f);
-            maxMouseHealth = level*25 + 50;
+            maxMouseHealth = Mathf.FloorToInt((Mathf.Pow(level, 2.4f) + 50f));
             agent.speed = level*0.4f + 1.2f;
             agent.acceleration = level*0.1f + 1f;
         }

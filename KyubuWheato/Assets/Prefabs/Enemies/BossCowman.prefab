@@ -106,7 +106,7 @@ MonoBehaviour:
   mouseAttackSpeed: 0.4
   mouseSpriteRenderer: {fileID: 4185845393045290312}
   animator: {fileID: 6869386588652125474}
-  wheatDrop: {fileID: 6133570875003662420, guid: 47d5b60bfb15aea49839d118dac8f86c, type: 3}
+  wheatDrop: {fileID: 8502947740103197045, guid: a840e16ed2e57c346a5db7847d2b01c8, type: 3}
   pfDamagePopup: {fileID: 6478138214433248903, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
   pfDamagePopupText: {fileID: 62537061617949394, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
   pfDamagePopupCrit: {fileID: 212571527099406956, guid: 7439f9bcb36fa6e4f88ac2a4e65a5199, type: 3}
@@ -124,7 +124,10 @@ MonoBehaviour:
   isHenor: 0
   isScawy: 0
   isSchwein: 0
+  isSpooder: 0
   cornRay: {fileID: 0}
+  isGhost: 0
+  isBlackCat: 0
   enemiesPrefabs:
   - {fileID: 872457805085809482, guid: 1c778b5f9df8d984c95e6675dcded2c5, type: 3}
   - {fileID: 4185845393045290319}
@@ -132,6 +135,7 @@ MonoBehaviour:
   - {fileID: 2701262824927360893, guid: 2d78fc35c66a4fb43b82aa47962f066d, type: 3}
   crowPrefab: {fileID: 0}
   Supernova: {fileID: 5566907859428112482, guid: 98c1bed42d99fbd41ab765ffb6bf5706, type: 3}
+  blackCatSpriteRenderer: {fileID: 0}
 --- !u!195 &4185845393045290314
 NavMeshAgent:
   m_ObjectHideFlags: 0

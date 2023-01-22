@@ -94,17 +94,17 @@ public class FlippedChestScript : MonoBehaviour
         else if (EntreeGachaRoll == 6 && player.haveChickenNuggets == false) { player.haveChickenNuggets = true; CreateImagePopup(EntreeGachaRoll); }
         else if (EntreeGachaRoll == 7 && player.havePastelDeChoclo == false) { player.havePastelDeChoclo = true; CreateImagePopup(EntreeGachaRoll); }
         else if (EntreeGachaRoll == 8 && player.haveGarlicBread == false) { player.haveGarlicBread = true; CreateImagePopup(EntreeGachaRoll); }
-        else if (EntreeGachaRoll == 9 && PlayerPrefs.GetInt("IngameRamen") == 0) { PlayerPrefs.SetInt("IngameRamen", 1); CreateImagePopup(EntreeGachaRoll + 1); }
-        else if (EntreeGachaRoll == 10 && PlayerPrefs.GetInt("IngameSalmon") == 0) { PlayerPrefs.SetInt("IngameSalmon", 1); CreateImagePopup(EntreeGachaRoll + 1); } 
-        else if (EntreeGachaRoll == 11 && PlayerPrefs.GetInt("IngameSteak") == 0) { PlayerPrefs.SetInt("IngameSteak", 1); CreateImagePopup(EntreeGachaRoll + 1); }
-        else if (EntreeGachaRoll == 12 && PlayerPrefs.GetInt("IngameCheese") == 0) { PlayerPrefs.SetInt("IngameCheese", 1); CreateImagePopup(EntreeGachaRoll + 1); }
+        else if (EntreeGachaRoll == 9 && PlayerPrefs.GetInt("IngameRamen") == 0) { PlayerPrefs.SetInt("IngameRamen", 1); CreateImagePopup(EntreeGachaRoll + 10); }
+        else if (EntreeGachaRoll == 10 && PlayerPrefs.GetInt("IngameSalmon") == 0) { PlayerPrefs.SetInt("IngameSalmon", 1); CreateImagePopup(EntreeGachaRoll + 10); } 
+        else if (EntreeGachaRoll == 11 && PlayerPrefs.GetInt("IngameSteak") == 0) { PlayerPrefs.SetInt("IngameSteak", 1); CreateImagePopup(EntreeGachaRoll + 10); }
+        else if (EntreeGachaRoll == 12 && PlayerPrefs.GetInt("IngameCheese") == 0) { PlayerPrefs.SetInt("IngameCheese", 1); CreateImagePopup(EntreeGachaRoll + 10); }
         else if (EntreeGachaRoll <= 8) { ChooseEntree(); }
         else { ChooseStat(); }
     }
 
     private void ChooseStat()
     {
-        int StatGachaRoll = Random.Range(0, 30);
+        int StatGachaRoll = Random.Range(0, 35);
         if (StatGachaRoll <= 2 && player.MoveSpeed <= 3.4f) { player.MoveSpeed += Random.Range(0.6f, 1.2f); CreateImagePopup(9); }
         else if (StatGachaRoll <= 5) {  int i = Random.Range(player.maxHealth*1/5, player.maxHealth*4/5); player.maxHealth += i; player.healthBar.SetMaxHealth(player.maxHealth); player.UpdateHealth(i*3); CreateImagePopup(10); }
         else if (StatGachaRoll <= 8) { player.strength += Random.Range(0.75f, 2f); CreateImagePopup(11); }
@@ -114,7 +114,7 @@ public class FlippedChestScript : MonoBehaviour
         else if (StatGachaRoll <= 17 && player.wheatDroprate < 100f) { player.wheatDroprate += Random.Range(2f, 5f); CreateImagePopup(15); }
         else if (StatGachaRoll <= 18 && player.diceDroprate > 100) { player.diceDroprate -= Random.Range(50, 100); if(player.diceDroprate < 100) { player.diceDroprate = 100; } CreateImagePopup(16); }
         else if (StatGachaRoll <= 19 && player.dicePreviewerLevel < 5) { player.dicePreviewerLevel += 1; diceThrowScript.UpdateDicePreviewerUI(); CreateImagePopup(17); }
-        else if (StatGachaRoll <= 29) { player.UpdateWheat(Random.Range(300, 500)); CreateImagePopup(18); }
+        else if (StatGachaRoll <= 34) { player.UpdateWheat(Random.Range(300, 500)); CreateImagePopup(18); }
         else { ChooseStat(); }
     }
     
