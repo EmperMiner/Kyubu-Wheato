@@ -387,7 +387,7 @@ public class DiceThrow : MonoBehaviour
         if (KyubuTileValue == 1) 
         { 
             AudioPlayer.PlaySound("KK1");
-            if (isLevel12 == false) { Instantiate(KyubuTiles[0], new Vector3(transform.position.x + UnityEngine.Random.Range(-2f, 2f), transform.position.y + 15.5f + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity); }
+            if (isLevel12 == false) { Instantiate(KyubuTiles[0], new Vector3(transform.position.x + UnityEngine.Random.Range(-1f, 1f), transform.position.y + 15.5f + UnityEngine.Random.Range(-1f, 1f), transform.position.z), Quaternion.identity); }
             else {
                 try
                 { 
@@ -396,7 +396,7 @@ public class DiceThrow : MonoBehaviour
                 }
                 catch (NullReferenceException) 
                 { 
-                    Instantiate(KyubuTiles[0], new Vector3(transform.position.x + UnityEngine.Random.Range(-2f, 2f), transform.position.y + 15.5f + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity); 
+                    Instantiate(KyubuTiles[0], new Vector3(transform.position.x + UnityEngine.Random.Range(-1f, 1f), transform.position.y + 15.5f + UnityEngine.Random.Range(-1f, 1f), transform.position.z), Quaternion.identity); 
                 }
             }
         }
@@ -467,8 +467,8 @@ public class DiceThrow : MonoBehaviour
                 {
                     Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
                     int bruh = UnityEngine.Random.Range(0,2);
-                    if (bruh < 1) { Instantiate(KyubuTiles[9], new Vector3(enemyPosition.position.x + 9f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.y + 6f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.z), Quaternion.identity); }
-                    else { Instantiate(KyubuTiles[10], new Vector3(enemyPosition.position.x - 22f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.y + 12f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.z), Quaternion.identity); }
+                    if (bruh < 1) { Instantiate(KyubuTiles[9], new Vector3(enemyPosition.position.x + 9f + UnityEngine.Random.Range(-1f, 1f), enemyPosition.position.y + 6f + UnityEngine.Random.Range(-1f, 1f), enemyPosition.position.z), Quaternion.identity); }
+                    else { Instantiate(KyubuTiles[10], new Vector3(enemyPosition.position.x - 22f + UnityEngine.Random.Range(-1f, 1f), enemyPosition.position.y + 12f + UnityEngine.Random.Range(-1f, 1f), enemyPosition.position.z), Quaternion.identity); }
                 }
                 catch (NullReferenceException) 
                 { 
@@ -494,8 +494,8 @@ public class DiceThrow : MonoBehaviour
     private void KK2NoTarget()
     {
         int dafuq = UnityEngine.Random.Range(0,2);
-                float randXOffset = UnityEngine.Random.Range(-2f, 2f);
-                float randYOffset = UnityEngine.Random.Range(-2f, 2f);
+                float randXOffset = UnityEngine.Random.Range(-1f, 1f);
+                float randYOffset = UnityEngine.Random.Range(-1f, 1f);
                 if (dafuq < 1) 
                 { 
                     Instantiate(KyubuTiles[1], new Vector3(transform.position.x - 22.63f + randXOffset, transform.position.y + randYOffset, transform.position.z), Quaternion.identity); 

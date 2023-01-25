@@ -64,7 +64,7 @@ public class TreasureChestScript : MonoBehaviour
     {
         bool TouchIllegalObject = other.gameObject.tag == "MapCollider" || other.gameObject.tag == "enemyMouse" || other.gameObject.tag == "chest";
         if (TouchIllegalObject && CheckForValidSpawn) 
-        { 
+        {   
             Instantiate(ChestTypes[Random.Range(0,ChestTypes.Length)], new Vector3(Random.Range(player.LeftMapLimit,player.RightMapLimit), Random.Range(player.LowerMapLimit, player.UpperMapLimit), 0), Quaternion.identity);
             Destroy(gameObject);
         }
@@ -76,7 +76,7 @@ public class TreasureChestScript : MonoBehaviour
         if (other.gameObject.tag == "Player") { CloseEnoughToChest = false; }
     }
 
-    private void OpenTreasureChest()
+    public void OpenTreasureChest()
     {
         if (prePlaced == false) { chestSpawnerScript.ChestSpawned--; }
         if (StatChance == 95) 
@@ -87,12 +87,12 @@ public class TreasureChestScript : MonoBehaviour
         if (StatChance == 88) 
         { 
             float bro = PlayerPrefs.GetFloat("DiceSpinLevel");
-            PlayerPrefs.SetFloat("DiceSpinLevel", bro + 3f); 
+            PlayerPrefs.SetFloat("DiceSpinLevel", bro + 2f); 
         }
         if (StatChance == 75) 
         { 
             float bro = PlayerPrefs.GetFloat("DiceSpinLevel");
-            PlayerPrefs.SetFloat("DiceSpinLevel", bro + 4f); 
+            PlayerPrefs.SetFloat("DiceSpinLevel", bro + 3f); 
         }
         FindObjectOfType<AudioManager>().PlaySound("ChestOpening");
         player.UpdateWheat(-WheatCost);

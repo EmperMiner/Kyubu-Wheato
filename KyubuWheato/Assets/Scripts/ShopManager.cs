@@ -228,7 +228,7 @@ public class ShopManager : MonoBehaviour
         }
         if (UpgradeValue == 102)
         {
-            if (shopHaveCarrotCake == false && shopWheat >= upgradePrices[7]) { shopHaveCarrotCake = true; shopWheat -= upgradePrices[7]; StartCoroutine(NotifTextBuySuccess()); }
+            if (shopHaveCarrotCake == false && shopWheat >= upgradePrices[10]) { shopHaveCarrotCake = true; shopWheat -= upgradePrices[10]; StartCoroutine(NotifTextBuySuccess()); }
             else if (shopHaveCarrotCake == true) { StartCoroutine(NotifTextAlreadyBought()); }
             else { StartCoroutine(NotifTextNotEnoughMoney()); }
         }
@@ -248,7 +248,7 @@ public class ShopManager : MonoBehaviour
         if (UpgradeValue == 105)
         {
             if (shopDicePreviewerLevel == 0) { StartCoroutine(NotifTextNeedDicePreviewer()); }
-            else if (shopHaveBanhmi == false && shopWheat >= upgradePrices[7]) { shopHaveBanhmi = true; shopWheat -= upgradePrices[7]; StartCoroutine(NotifTextBuySuccess()); }
+            else if (shopHaveBanhmi == false && shopWheat >= upgradePrices[10]) { shopHaveBanhmi = true; shopWheat -= upgradePrices[10]; StartCoroutine(NotifTextBuySuccess()); }
             else if (shopHaveBanhmi == true) { StartCoroutine(NotifTextAlreadyBought()); }
             else { StartCoroutine(NotifTextNotEnoughMoney()); }
         }
@@ -278,7 +278,7 @@ public class ShopManager : MonoBehaviour
         }
         if (UpgradeValue == 110)
         {
-            if (shopHaveHornScallop == false && shopWheat >= upgradePrices[7]) { shopHaveHornScallop = true; shopWheat -= upgradePrices[7]; StartCoroutine(NotifTextBuySuccess()); }
+            if (shopHaveHornScallop == false && shopWheat >= upgradePrices[10]) { shopHaveHornScallop = true; shopWheat -= upgradePrices[10]; StartCoroutine(NotifTextBuySuccess()); }
             else if (shopHaveHornScallop == true) { StartCoroutine(NotifTextAlreadyBought()); }
             else { StartCoroutine(NotifTextNotEnoughMoney()); }  
         }
@@ -423,7 +423,7 @@ public class ShopManager : MonoBehaviour
             for (int i = 0; i < refundLoops; i++) { shopWheat += upgradePrices[i]; }    
             if(shopHaveBanhmi) 
                 { 
-                    shopWheat += upgradePrices[7]; 
+                    shopWheat += upgradePrices[10]; 
                     shopHaveBanhmi = false; 
                     UpdateUpgradeUI(RefundValue + 98); 
                 } 
@@ -450,7 +450,7 @@ public class ShopManager : MonoBehaviour
         if (RefundValue == 102 || RefundValue == 420)
         {
             if (shopHaveCarrotCake == false) { if (RefundValue != 420) { StartCoroutine(NotifTextHaveNotBought()); } }
-            else { shopWheat += upgradePrices[7]; AudioPlayer.PlaySound("RefundShop"); }
+            else { shopWheat += upgradePrices[10]; AudioPlayer.PlaySound("RefundShop"); }
             shopHaveCarrotCake = false;
         }
         if (RefundValue == 103 || RefundValue == 420)
@@ -478,7 +478,7 @@ public class ShopManager : MonoBehaviour
         if (RefundValue == 105 || RefundValue == 420)
         {
             if (shopHaveBanhmi == false) { if (RefundValue != 420) { StartCoroutine(NotifTextHaveNotBought()); } }
-            else { shopWheat += upgradePrices[7]; AudioPlayer.PlaySound("RefundShop"); }
+            else { shopWheat += upgradePrices[10]; AudioPlayer.PlaySound("RefundShop"); }
             shopHaveBanhmi = false;
         }
         if (RefundValue == 106 || RefundValue == 420)
@@ -508,7 +508,7 @@ public class ShopManager : MonoBehaviour
         if (RefundValue == 110 || RefundValue == 420)
         {
             if (shopHaveHornScallop == false) { if (RefundValue != 420) { StartCoroutine(NotifTextHaveNotBought()); } }
-            else { shopWheat += upgradePrices[7]; AudioPlayer.PlaySound("RefundShop"); }
+            else { shopWheat += upgradePrices[10]; AudioPlayer.PlaySound("RefundShop"); }
             shopHaveHornScallop = false;
         }
         if (RefundValue == 111 || RefundValue == 420)
@@ -654,7 +654,7 @@ public class ShopManager : MonoBehaviour
         if (UpdateUpgradeUI == 102 || UpdateUpgradeUI == 420)
         {
             if (shopHaveCarrotCake) { UpgradesImage[9].sprite = UpgradesSpritesVariants[51]; upgradePriceText[9].text = MaxBought; }
-            else { UpgradesImage[9].sprite = UpgradesSpritesVariants[50]; upgradePriceText[9].text = upgradePrices[7].ToString(); }
+            else { UpgradesImage[9].sprite = UpgradesSpritesVariants[50]; upgradePriceText[9].text = upgradePrices[10].ToString(); }
         }
         if (UpdateUpgradeUI == 103 || UpdateUpgradeUI == 420)
         {
@@ -669,7 +669,7 @@ public class ShopManager : MonoBehaviour
         if (UpdateUpgradeUI == 105 || UpdateUpgradeUI == 420)
         {
             if (shopHaveBanhmi) { UpgradesImage[12].sprite = UpgradesSpritesVariants[57]; upgradePriceText[12].text = MaxBought; }
-            else { UpgradesImage[12].sprite = UpgradesSpritesVariants[56]; upgradePriceText[12].text = upgradePrices[7].ToString(); }
+            else { UpgradesImage[12].sprite = UpgradesSpritesVariants[56]; upgradePriceText[12].text = upgradePrices[10].ToString(); }
         }
         if (UpdateUpgradeUI == 106 || UpdateUpgradeUI == 420)
         {
@@ -694,7 +694,7 @@ public class ShopManager : MonoBehaviour
         if (UpdateUpgradeUI == 110 || UpdateUpgradeUI == 420)
         {
             if (shopHaveHornScallop) { UpgradesImage[18].sprite = UpgradesSpritesVariants[73]; upgradePriceText[18].text = MaxBought; }
-            else { UpgradesImage[18].sprite = UpgradesSpritesVariants[72]; upgradePriceText[18].text = upgradePrices[7].ToString(); }
+            else { UpgradesImage[18].sprite = UpgradesSpritesVariants[72]; upgradePriceText[18].text = upgradePrices[10].ToString(); }
         }
         if (UpdateUpgradeUI == 111 || UpdateUpgradeUI == 420)
         {

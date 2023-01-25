@@ -38,7 +38,7 @@ public class FlippedChestScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && CloseEnoughToChest) 
         { 
-            if (player.Wheat >= WheatCost) { OpenTreasureChest(); }
+            if (player.Wheat >= WheatCost) { OpenFlippedChest(); }
             else { StartCoroutine(NotifTextWarning()); }
         }
     }
@@ -59,12 +59,12 @@ public class FlippedChestScript : MonoBehaviour
         if (other.gameObject.tag == "Player") { CloseEnoughToChest = false; }
     }
 
-    private void OpenTreasureChest()
+    public void OpenFlippedChest()
     {
         if (prePlaced == false) { chestSpawnerScript.ChestSpawned--; }
 
         float bro = PlayerPrefs.GetFloat("DiceSpinLevel");
-        PlayerPrefs.SetFloat("DiceSpinLevel", bro + 10f); 
+        PlayerPrefs.SetFloat("DiceSpinLevel", bro + 6f); 
 
         FindObjectOfType<AudioManager>().PlaySound("ChestOpening");
         player.UpdateWheat(-WheatCost);

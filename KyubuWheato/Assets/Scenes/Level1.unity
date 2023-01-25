@@ -47579,6 +47579,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33880d9e0175d104b97c8bb5528bb42a, type: 3}
+--- !u!1001 &2433307784665038622
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7480229541710461766, guid: 8586f99441f07734f9ad7f11bf5e32aa, type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480229541710461766, guid: 8586f99441f07734f9ad7f11bf5e32aa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480229541710461766, guid: 8586f99441f07734f9ad7f11bf5e32aa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480229541710461766, guid: 8586f99441f07734f9ad7f11bf5e32aa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480229541710461766, guid: 8586f99441f07734f9ad7f11bf5e32aa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480229541710461766, guid: 8586f99441f07734f9ad7f11bf5e32aa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480229541710461766, guid: 8586f99441f07734f9ad7f11bf5e32aa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480229541710461766, guid: 8586f99441f07734f9ad7f11bf5e32aa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480229541710461766, guid: 8586f99441f07734f9ad7f11bf5e32aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480229541710461766, guid: 8586f99441f07734f9ad7f11bf5e32aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480229541710461766, guid: 8586f99441f07734f9ad7f11bf5e32aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480229541710461771, guid: 8586f99441f07734f9ad7f11bf5e32aa, type: 3}
+      propertyPath: m_Name
+      value: TotemChest
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8586f99441f07734f9ad7f11bf5e32aa, type: 3}
 --- !u!1001 &2762988402620852414
 PrefabInstance:
   m_ObjectHideFlags: 0

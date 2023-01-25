@@ -146,3 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd43564187905774abc930f27b4673ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SecretTotem: 0
+  ChestType:
+  - {fileID: 709161147729212536, guid: 2d74b0eee7093094198110476acd32e3, type: 3}
+  - {fileID: 8630249240337900980, guid: b8fc3be4bf496134c957431e3dead6e3, type: 3}

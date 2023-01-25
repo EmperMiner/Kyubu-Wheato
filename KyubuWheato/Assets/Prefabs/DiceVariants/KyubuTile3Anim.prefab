@@ -151,6 +151,7 @@ MonoBehaviour:
   isKyubuTile3Left: 0
   isKyubuTile3Right: 0
   isKyubuTile6: 0
+  isStar: 0
   Dice3: {fileID: 8739985127247415722, guid: b25dc8c11855e5447ab5de39680483f3, type: 3}
   Dice6: []
 --- !u!95 &6020544594396828608
@@ -186,7 +187,7 @@ GameObject:
   - component: {fileID: 764835114999190605}
   m_Layer: 0
   m_Name: KyubuTile3Anim
-  m_TagString: FakeDice3
+  m_TagString: FakeDice6
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223,6 +224,7 @@ MonoBehaviour:
   isKyubuTile3Left: 1
   isKyubuTile3Right: 0
   isKyubuTile6: 0
+  isStar: 0
   Dice3: {fileID: 8739985127247415722, guid: b25dc8c11855e5447ab5de39680483f3, type: 3}
   Dice6: []
 --- !u!114 &764835114999190605
@@ -238,3 +240,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delay: 0.73
+  isKyubuKombo6: 0

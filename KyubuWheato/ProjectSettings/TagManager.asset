@@ -91,6 +91,7 @@ TagManager:
   - HelpButton
   - FSCDrop
   - PauseMenu
+  - TotemChest
   layers:
   - Default
   - TransparentFX

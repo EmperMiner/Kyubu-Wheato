@@ -203,7 +203,10 @@ public class FlippedBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "FakeDice8" && isD == false && isF == false) { mouseTakeDamage(8); ChargeUlt(8); }     
             if (collider.gameObject.tag == "FakeDice10" && isD == false && isF == false) { mouseTakeDamage(10); ChargeUlt(10); }     
             if (collider.gameObject.tag == "FakeDice12" && isD == false && isF == false) { mouseTakeDamage(12); ChargeUlt(12); }   
-            if (collider.gameObject.tag == "BroomAttack") { mouseTakeDamage(10); ChargeUlt(8); }        
+            if (collider.gameObject.tag == "FakeDice20") { mouseTakeDamage(20); } 
+            if (collider.gameObject.tag == "BroomAttack") { mouseTakeDamage(10); ChargeUlt(8); }   
+            if (collider.gameObject.tag == "Star") { mouseTakeDamage(UnityEngine.Random.Range(1,4) + Mathf.RoundToInt(((player.maxHealth - player.playerHealth)/player.maxHealth)*5)); }  
+            if (collider.gameObject.tag == "100sidedDice") { mouseTakeDamage(UnityEngine.Random.Range(50,100)); }        
 
             if (collider.gameObject.tag == "FakeDice1") { mouseTakeDamage(1); }
             if (collider.gameObject.tag == "FakeDice2") { mouseTakeDamage(2); } 
@@ -211,7 +214,6 @@ public class FlippedBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "FakeDice4") { mouseTakeDamage(4); }
             if (collider.gameObject.tag == "FakeDice5") { mouseTakeDamage(5); }
             if (collider.gameObject.tag == "FakeDice6") { mouseTakeDamage(6); }      
-             
 
             if (collider.gameObject.tag == "6sidedDice1" && isD  == true) { PlayGlitchedSound(); }
             if (collider.gameObject.tag == "6sidedDice2" && isD  == true) { PlayGlitchedSound(); }
@@ -238,8 +240,7 @@ public class FlippedBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "FakeDice8" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
             if (collider.gameObject.tag == "FakeDice10" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
             if (collider.gameObject.tag == "FakeDice12" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
-            if (collider.gameObject.tag == "Star") { mouseTakeDamage(UnityEngine.Random.Range(1,4) + Mathf.RoundToInt(((player.maxHealth - player.playerHealth)/player.maxHealth)*5)); }  
-            if (collider.gameObject.tag == "100sidedDice") { mouseTakeDamage(UnityEngine.Random.Range(50,100)); }   
+            
         }
         if (collider.gameObject.tag == "Player") { mouseCanAttack = mouseAttackSpeed; }
     }

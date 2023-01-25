@@ -8,6 +8,8 @@ public class Totem : MonoBehaviour
     [SerializeField] private bool SecretTotem;
     private PlayerController player; 
     
+    FlippedChestScript flippedChestScript;
+    
     private void Start()
     {
         CloseEnoughToTotem = false;
@@ -21,13 +23,16 @@ public class Totem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && CloseEnoughToTotem && SecretTotem == false) 
         { 
             player.SummonChanceWhale();
-            FindObjectOfType<AudioManager>().PlaySound("CSplit");
+            TreasureChestScript chestScript = GameObject.FindGameObjectWithTag("TotemChest").GetComponent<TreasureChestScript>();
+            chestScript.OpenTreasureChest();
             Destroy(gameObject);
         }
         
         if (Input.GetKeyDown(KeyCode.E) && CloseEnoughToTotem && SecretTotem == true) 
         { 
             player.StartCoroutine(player.SummonDevilishWhale());
+            FlippedChestScript flippedChestScript = GameObject.FindGameObjectWithTag("TotemChest").GetComponent<FlippedChestScript>();
+            flippedChestScript.OpenFlippedChest();
             Destroy(gameObject);
         }
     }

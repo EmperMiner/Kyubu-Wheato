@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7320212580821017811}
   m_Layer: 0
   m_Name: KyubuTile2BottomAnim
-  m_TagString: FakeDice4
+  m_TagString: FakeDice6
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,6 +50,7 @@ MonoBehaviour:
   isKyubuTile3Left: 0
   isKyubuTile3Right: 0
   isKyubuTile6: 0
+  isStar: 0
   Dice3: {fileID: 0}
   Dice6: []
 --- !u!114 &7320212580821017811
@@ -65,6 +66,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Delay: 0.25
+  isKyubuKombo6: 0
 --- !u!1 &3931297714958209560
 GameObject:
   m_ObjectHideFlags: 0
