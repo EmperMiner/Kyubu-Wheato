@@ -120,7 +120,7 @@ public class DiceThrow : MonoBehaviour
                         else if (haveCremeBrulee) { ShootThreeChargedDice(); }
                         else { ShootOneChargedDice(); }
                         DiceCounterNumber.text = diceNumber.ToString();
-                        if (PlayerPrefs.GetInt("IngameCheese") == 1) { ShootStar(UnityEngine.Random.Range(5, 15)); }
+                        if (PlayerPrefs.GetInt("IngameCheese") == 1) { ShootStar(UnityEngine.Random.Range(10, 15)); }
                     }
                     chargedAttack = false;
                     inCooldown = false;

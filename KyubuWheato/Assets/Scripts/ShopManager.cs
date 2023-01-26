@@ -58,7 +58,12 @@ public class ShopManager : MonoBehaviour
     private void Awake()
     {
         LoadData();
-        if (firstTime) { firstTime = false; PlayerPrefs.DeleteAll(); }
+        if (firstTime) 
+        { 
+            PlayerPrefs.DeleteAll();  
+            PlayerPrefs.SetInt("FirstDeath", 0);
+            firstTime = false; 
+        }
         SaveData();
         if (!PlayerPrefs.HasKey("BestTime")) { PlayerPrefs.SetFloat("BestTime", 999999999); }
         if (!PlayerPrefs.HasKey("WinCounter")) { PlayerPrefs.SetInt("WinCounter", 0); }

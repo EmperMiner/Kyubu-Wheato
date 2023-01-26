@@ -271,7 +271,7 @@ public class mouseBehaviour : MonoBehaviour
             if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("PlayerHurt"); }
             else { FindObjectOfType<AudioManager>().PlaySound("Iframe"); }
             int playerDamageAmount = mouseStrength + Mathf.RoundToInt((mouseStrength * player.defense)/10);
-            if (playerDamageAmount < 1) { playerDamageAmount = 1; }
+            if (playerDamageAmount < Mathf.FloorToInt(player.maxHealth/100f)) { playerDamageAmount = Mathf.FloorToInt(player.maxHealth/100f); }
             player.UpdateHealth(-playerDamageAmount);
             mouseCanAttack = 0f;
             player.playerAttacked = true;

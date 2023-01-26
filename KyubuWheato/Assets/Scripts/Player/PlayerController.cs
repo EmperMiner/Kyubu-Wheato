@@ -333,7 +333,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator SanesssIntro()
     {
-        yield return new WaitForSeconds(UnityEngine.Random.Range(370f,430f));
+        yield return new WaitForSeconds(UnityEngine.Random.Range(270f,330f));
         AudioPlayer.StopSound("Discord");
         SanesssIntroText.text = "";
         SanesssIntroText.text = "Y";
@@ -539,6 +539,12 @@ public class PlayerController : MonoBehaviour
                 PlayerPrefs.SetInt("FSC", 1); 
                 StartCoroutine(MyriadCookiesText());
             } 
+            else 
+            {
+                UpdateWheat(20000);
+                StartCoroutine(SanesssBonus());
+            }
+
             PlayerPrefs.SetInt("IngameFSC", 3);
             AudioPlayer.PlaySound("FSCGang");
             
@@ -651,6 +657,14 @@ public class PlayerController : MonoBehaviour
         AudioPlayer.PlaySound("UIButtonError");
         SmallText.text = "Wait " + cooldown + " before healing again";
         yield return new WaitForSeconds(1.5f);
+        SmallText.text = "";
+        yield return null;
+    }
+
+    private IEnumerator SanesssBonus()
+    {
+        SmallText.text = "You got a bonus 20000 Wheat!";
+        yield return new WaitForSeconds(4f);
         SmallText.text = "";
         yield return null;
     }
@@ -775,7 +789,8 @@ public class PlayerController : MonoBehaviour
 
     public void UseChargeAttack()
     {
-        diceNumber -= 3;
+        if (diceNumber/10f <= 3f) { diceNumber -= 3; }
+        else { diceNumber -= Mathf.FloorToInt(diceNumber/10f); }
         UpdateValues();
     }
 
@@ -842,7 +857,7 @@ public class PlayerController : MonoBehaviour
     {
         PlayerPrefs.SetInt("SavedLevel", 1);
         gameOverScript.WinningTrigger(Wheat);
-        Wheat += 1000;
+        Wheat += 5000;
         AudioPlayer.PlayJingle("YouWon");
         playerAlive = false;
         SpeedrunTimer TimerScript = GameObject.FindGameObjectWithTag("Timer").GetComponent<SpeedrunTimer>();

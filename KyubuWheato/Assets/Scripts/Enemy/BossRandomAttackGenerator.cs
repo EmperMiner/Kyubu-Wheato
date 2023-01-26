@@ -43,7 +43,9 @@ public class BossRandomAttackGenerator : MonoBehaviour
 
     private void Start()
     {
-        mouseHealth = 20000;
+        if (player.maxHealth*50 < 25000) { mouseHealth = 25000; }
+        else { mouseHealth = player.maxHealth*50; }
+        
         Arrow = GameObject.FindGameObjectWithTag("Arrow");
         Arrow.SetActive(false);
         agent = animator.GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -53,7 +55,9 @@ public class BossRandomAttackGenerator : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
 
-        bossDamage = 70;
+        if (Mathf.FloorToInt(player.strength*10) < 100) { bossDamage = 100; }
+        else { bossDamage = Mathf.FloorToInt(player.strength*10); }
+        
         agent.speed = 3;
         RollAttackDelay = 5f;
         alreadyDamaged = false;
@@ -171,7 +175,11 @@ public class BossRandomAttackGenerator : MonoBehaviour
         {
             if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("PlayerHurt"); }
             else { FindObjectOfType<AudioManager>().PlaySound("Iframe"); }
-            player.UpdateHealth(-bossDamage);
+
+            int playerDamageAmount = bossDamage;
+            if (playerDamageAmount < Mathf.FloorToInt(player.maxHealth/100f)) { playerDamageAmount = Mathf.FloorToInt(player.maxHealth/100f); }
+            player.UpdateHealth(-playerDamageAmount);
+
             bossCanAttack = 0f;
             player.playerAttacked = true;
         }    

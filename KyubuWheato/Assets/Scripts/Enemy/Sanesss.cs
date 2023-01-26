@@ -55,7 +55,10 @@ public class Sanesss : MonoBehaviour
         FindObjectOfType<AudioManager>().PlaySound("SanesssIntro");
         FindObjectOfType<AudioManager>().PlayJingle("Sanesss");
         PlayerPrefs.SetInt("SanesssStatus", 1);
-        maxMouseHealth = 50000;
+
+        if (player.maxHealth*50 < 100000) { mouseHealth = 100000; }
+        else { mouseHealth = player.maxHealth*50; }
+
         mouseHealth = maxMouseHealth;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.updateRotation = false;
@@ -65,7 +68,9 @@ public class Sanesss : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
 
-        bossDamage = 120;
+        if (Mathf.FloorToInt(player.strength*10) < 200) { bossDamage = 200; }
+        else { bossDamage = Mathf.FloorToInt(player.strength*10); }
+
         RollAttackDelay1 = 2f;
         RollAttackDelay2 = 8.5f;
         RollAttackDelay3 = 7f;
@@ -339,10 +344,14 @@ public class Sanesss : MonoBehaviour
         {
             if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("PlayerHurt"); }
             else { FindObjectOfType<AudioManager>().PlaySound("Iframe"); }
-            player.UpdateHealth(-bossDamage);
+
+            int playerDamageAmount = bossDamage;
+            if (playerDamageAmount < Mathf.FloorToInt(player.maxHealth/100f)) { playerDamageAmount = Mathf.FloorToInt(player.maxHealth/100f); }
+            player.UpdateHealth(-playerDamageAmount);
+
             bossCanAttack = 0f;
             player.playerAttacked = true;
-        }    
+        }      
         bossCanAttack += Time.deltaTime; 
 
         if (bossCanAttack <= 0.3f) {player.spriteRenderer.material.color = new Color32(255, 150, 150, 255);}

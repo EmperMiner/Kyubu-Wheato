@@ -137,13 +137,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48ddf96928cb5a408e88a78447cb697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 24
+  damage: 100
   isCornRay: 0
   isBossCornRay: 0
   isInvertedCornray: 0
   isScytheAttack: 0
   is4thWall: 0
   isHand: 0
+  ignoreDefense: 0
 --- !u!95 &3309688419769658143
 Animator:
   serializedVersion: 4
@@ -213,5 +214,6 @@ MonoBehaviour:
   isKyubuTile3Left: 0
   isKyubuTile3Right: 0
   isKyubuTile6: 0
+  isStar: 0
   Dice3: {fileID: 0}
   Dice6: []

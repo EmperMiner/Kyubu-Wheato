@@ -334,13 +334,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48ddf96928cb5a408e88a78447cb697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 90
+  damage: 220
   isCornRay: 0
   isBossCornRay: 0
   isInvertedCornray: 0
   isScytheAttack: 0
   is4thWall: 0
   isHand: 0
+  ignoreDefense: 0
 --- !u!114 &5220474508296279437
 MonoBehaviour:
   m_ObjectHideFlags: 0

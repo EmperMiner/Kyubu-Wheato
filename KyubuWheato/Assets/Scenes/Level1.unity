@@ -47404,7 +47404,7 @@ MonoBehaviour:
   - {fileID: 7592814316219585266, guid: d8abd4c52bceec54dbc898f74bdc399e, type: 3}
   - {fileID: 751358360935569434, guid: 5b63d21339c6e0849837b7787b6287e5, type: 3}
   - {fileID: 709161147729212536, guid: 2d74b0eee7093094198110476acd32e3, type: 3}
-  ChestLimit: 8
+  ChestLimit: 5
   ChestSpawned: 0
 --- !u!4 &1656680733
 Transform:

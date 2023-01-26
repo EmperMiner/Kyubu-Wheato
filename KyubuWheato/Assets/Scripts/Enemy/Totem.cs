@@ -24,6 +24,7 @@ public class Totem : MonoBehaviour
         { 
             player.SummonChanceWhale();
             TreasureChestScript chestScript = GameObject.FindGameObjectWithTag("TotemChest").GetComponent<TreasureChestScript>();
+            FindObjectOfType<AudioManager>().PlaySound("CSplit");
             chestScript.OpenTreasureChest();
             Destroy(gameObject);
         }
@@ -32,6 +33,7 @@ public class Totem : MonoBehaviour
         { 
             player.StartCoroutine(player.SummonDevilishWhale());
             FlippedChestScript flippedChestScript = GameObject.FindGameObjectWithTag("TotemChest").GetComponent<FlippedChestScript>();
+            FindObjectOfType<AudioManager>().PlaySound("CSplit");
             flippedChestScript.OpenFlippedChest();
             Destroy(gameObject);
         }
