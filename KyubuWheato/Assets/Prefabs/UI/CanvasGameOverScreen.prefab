@@ -254,7 +254,7 @@ MonoBehaviour:
   HUD: {fileID: 0}
   winningScreen: {fileID: 0}
   winningWheatGainedText: {fileID: 0}
-  tipsText: {fileID: 0}
+  tipsText: {fileID: 454818793838764717}
 --- !u!1 &6437636101729773889
 GameObject:
   m_ObjectHideFlags: 0

@@ -333,7 +333,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator SanesssIntro()
     {
-        yield return new WaitForSeconds(UnityEngine.Random.Range(270f,330f));
+        yield return new WaitForSeconds(UnityEngine.Random.Range(5f,10f));
         AudioPlayer.StopSound("Discord");
         SanesssIntroText.text = "";
         SanesssIntroText.text = "Y";
@@ -435,25 +435,25 @@ public class PlayerController : MonoBehaviour
     private IEnumerator WhaleChance()
     {
         int level = SceneManager.GetActiveScene().buildIndex - 4;
-        yield return new WaitForSeconds(UnityEngine.Random.Range(25f, 35f) - level/2);
+        yield return new WaitForSeconds(UnityEngine.Random.Range(25f, 35f) - level/2f);
         int whaleChance = UnityEngine.Random.Range(0,10);
         if (KeyWheatScript.EnemiesKilled < KeyWheatScript.EnemyLimit && whaleChance == 0)
         {
             Instantiate(Whale, transform.position, Quaternion.identity);
-            StartCoroutine(WhaleChance());
         }
+        StartCoroutine(WhaleChance());
         yield return null;
     }
 
     private IEnumerator DevilishWhaleChance()
     {
-        yield return new WaitForSeconds(UnityEngine.Random.Range(60f, 100f));
+        yield return new WaitForSeconds(UnityEngine.Random.Range(90f, 150f));
         int whaleChance = UnityEngine.Random.Range(0,2);
         if  (whaleChance == 0)
         {
             StartCoroutine(SummonDevilishWhale());
-            StartCoroutine(DevilishWhaleChance());
         }
+        StartCoroutine(DevilishWhaleChance());
         yield return null;
     }
 
@@ -554,11 +554,11 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.tag == "GoldenWheat") { Win(); }
 
-        if (other.gameObject.tag == "Level12") { StartCoroutine(LoadToLevel(12)); }
-        if (other.gameObject.tag == "Level2") { StartCoroutine(LoadToLevel(2)); }
-        if (other.gameObject.tag == "Level5") { StartCoroutine(LoadToLevel(5)); }
-        if (other.gameObject.tag == "Level8") { StartCoroutine(LoadToLevel(8)); }
-        if (other.gameObject.tag == "Level10") { StartCoroutine(LoadToLevel(10)); }
+        if (other.gameObject.tag == "Level12" && PlayerPrefs.GetInt("SanesssStatus") != 1) { StartCoroutine(LoadToLevel(12)); }
+        if (other.gameObject.tag == "Level2" && PlayerPrefs.GetInt("SanesssStatus") != 1) { StartCoroutine(LoadToLevel(2)); }
+        if (other.gameObject.tag == "Level5" && PlayerPrefs.GetInt("SanesssStatus") != 1) { StartCoroutine(LoadToLevel(5)); }
+        if (other.gameObject.tag == "Level8" && PlayerPrefs.GetInt("SanesssStatus") != 1) { StartCoroutine(LoadToLevel(8)); }
+        if (other.gameObject.tag == "Level10" && PlayerPrefs.GetInt("SanesssStatus") != 1) { StartCoroutine(LoadToLevel(10)); }
 
         if (other.gameObject.tag == "Tumbleweed") { AudioPlayer.PlaySound("TumbleweedHit"); }
         if (other.gameObject.tag == "4thWall") { AudioPlayer.PlaySound("4thWallHit"); }
@@ -1167,6 +1167,7 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetFloat("DiceSpinLevelSave", PlayerPrefs.GetFloat("DiceSpinLevel"));
         PlayerPrefs.SetInt("ChargedAttacksSave", PlayerPrefs.GetInt("ChargedAttacks"));
         PlayerPrefs.SetFloat("Timer", timerScript.time);
+        PlayerPrefs.SetInt("CrackSave", PlayerPrefs.GetInt("Crack"));
 
         string json = JsonUtility.ToJson(savingPlayerData);
         Debug.Log(json);
@@ -1208,6 +1209,7 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetFloat("DiceSpinLevelUp", PlayerPrefs.GetFloat("DiceSpinLevelUpSave"));
         PlayerPrefs.SetFloat("DiceSpinLevel", PlayerPrefs.GetFloat("DiceSpinLevelSave"));
         PlayerPrefs.SetInt("ChargedAttacks", PlayerPrefs.GetInt("ChargedAttacksSave"));
+        PlayerPrefs.SetInt("Crack", PlayerPrefs.GetInt("CrackSave"));
     }
     
 

@@ -21,6 +21,7 @@ public class TreasureChestScript : MonoBehaviour
     [SerializeField] private SpriteRenderer ImagePopup;
     [SerializeField] private GameObject ImagePopupObject;
     [SerializeField] private bool prePlaced;
+    [SerializeField] private bool dontUpgradeChargedAttack;
     private int WheatCost;
 
     private void Start()
@@ -41,12 +42,12 @@ public class TreasureChestScript : MonoBehaviour
         { 
             if (ChestRarity == 0) 
             { 
-                if (player.Wheat*0.1f < 10) { WheatCost = 10; }
+                if (player.Wheat*0.07f < 10) { WheatCost = 10; }
                 else { WheatCost = Mathf.RoundToInt(player.Wheat*0.1f); }
             }
             else if (ChestRarity == 1)
             {
-                if (player.Wheat*0.15f < 20) { WheatCost = 20; }
+                if (player.Wheat*0.14f < 20) { WheatCost = 20; }
                 else { WheatCost = Mathf.RoundToInt(player.Wheat*0.15f); }
             }
             else 
@@ -79,20 +80,22 @@ public class TreasureChestScript : MonoBehaviour
     public void OpenTreasureChest()
     {
         if (prePlaced == false) { chestSpawnerScript.ChestSpawned--; }
-        if (StatChance == 95) 
-        { 
-            float bro = PlayerPrefs.GetFloat("DiceSpinLevel");
-            PlayerPrefs.SetFloat("DiceSpinLevel", bro + 1f); 
-        }
-        if (StatChance == 88) 
-        { 
-            float bro = PlayerPrefs.GetFloat("DiceSpinLevel");
-            PlayerPrefs.SetFloat("DiceSpinLevel", bro + 2f); 
-        }
-        if (StatChance == 75) 
-        { 
-            float bro = PlayerPrefs.GetFloat("DiceSpinLevel");
-            PlayerPrefs.SetFloat("DiceSpinLevel", bro + 3f); 
+        if (dontUpgradeChargedAttack == false) { 
+            if (StatChance == 95) 
+            { 
+                float bro = PlayerPrefs.GetFloat("DiceSpinLevel");
+                PlayerPrefs.SetFloat("DiceSpinLevel", bro + 1f); 
+            }
+            if (StatChance == 88) 
+            { 
+                float bro = PlayerPrefs.GetFloat("DiceSpinLevel");
+                PlayerPrefs.SetFloat("DiceSpinLevel", bro + 2f); 
+            }
+            if (StatChance == 75) 
+            { 
+                float bro = PlayerPrefs.GetFloat("DiceSpinLevel");
+                PlayerPrefs.SetFloat("DiceSpinLevel", bro + 3f); 
+            }
         }
         FindObjectOfType<AudioManager>().PlaySound("ChestOpening");
         player.UpdateWheat(-WheatCost);
@@ -113,7 +116,7 @@ public class TreasureChestScript : MonoBehaviour
     private void ChooseEntree()
     {
         int EntreeGachaRoll = Random.Range(0, 13);
-        int NewEntreeChance = Random.Range(0, 3);
+        int NewEntreeChance = Random.Range(0, 7);
         if (EntreeGachaRoll == 0 && player.havePizza == false) { player.havePizza = true; CreateImagePopup(EntreeGachaRoll); }
         else if (EntreeGachaRoll == 1 && player.haveCarrotCake == false) { player.haveCarrotCake = true; CreateImagePopup(EntreeGachaRoll); }
         else if (EntreeGachaRoll == 2 && player.haveFlan == false) { player.haveFlan = true; CreateImagePopup(EntreeGachaRoll); }

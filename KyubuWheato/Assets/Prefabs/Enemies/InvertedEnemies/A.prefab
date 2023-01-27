@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxMouseHealth: 500
-  mouseStrength: 1
+  mouseStrength: 200
   mouseAttackSpeed: 1
   mouseSpriteRenderer: {fileID: 1348866234531774446}
   wheatDrop: {fileID: 8311296782179859832, guid: 3cfa3a151773d094e9fc3c0661264258, type: 3}

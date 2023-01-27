@@ -21,6 +21,7 @@ public class FlippedChestScript : MonoBehaviour
     [SerializeField] private SpriteRenderer ImagePopup;
     [SerializeField] private GameObject ImagePopupObject;
     [SerializeField] private bool prePlaced;
+    [SerializeField] private bool dontUpgradeChargedAttack;
 
     private void Start()
     {  
@@ -33,7 +34,6 @@ public class FlippedChestScript : MonoBehaviour
         StartCoroutine(ValidSpawn());
     }
 
-    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && CloseEnoughToChest) 
@@ -62,10 +62,11 @@ public class FlippedChestScript : MonoBehaviour
     public void OpenFlippedChest()
     {
         if (prePlaced == false) { chestSpawnerScript.ChestSpawned--; }
-
-        float bro = PlayerPrefs.GetFloat("DiceSpinLevel");
-        PlayerPrefs.SetFloat("DiceSpinLevel", bro + 6f); 
-
+        if (dontUpgradeChargedAttack == false) 
+        {
+            float bro = PlayerPrefs.GetFloat("DiceSpinLevel");
+            PlayerPrefs.SetFloat("DiceSpinLevel", bro + 6f); 
+        }
         FindObjectOfType<AudioManager>().PlaySound("ChestOpening");
         player.UpdateWheat(-WheatCost);
         if (player.AllEntrees) 

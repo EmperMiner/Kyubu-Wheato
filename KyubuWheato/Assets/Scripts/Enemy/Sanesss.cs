@@ -56,10 +56,7 @@ public class Sanesss : MonoBehaviour
         FindObjectOfType<AudioManager>().PlayJingle("Sanesss");
         PlayerPrefs.SetInt("SanesssStatus", 1);
 
-        if (player.maxHealth*50 < 100000) { mouseHealth = 100000; }
-        else { mouseHealth = player.maxHealth*50; }
-
-        mouseHealth = maxMouseHealth;
+        
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -67,6 +64,11 @@ public class Sanesss : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
+
+        if (player.maxHealth*50 < 100000) { maxMouseHealth = 100000; }
+        else { maxMouseHealth = player.maxHealth*50; }
+
+        mouseHealth = maxMouseHealth;
 
         if (Mathf.FloorToInt(player.strength*10) < 200) { bossDamage = 200; }
         else { bossDamage = Mathf.FloorToInt(player.strength*10); }

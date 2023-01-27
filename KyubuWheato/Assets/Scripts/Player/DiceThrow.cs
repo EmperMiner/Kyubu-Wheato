@@ -455,7 +455,6 @@ public class DiceThrow : MonoBehaviour
         }
         if (KyubuTileValue == 6) 
         { 
-            AudioPlayer.PlaySound("KK6Hang");
             if (isLevel12 == false)
             {
                 int bruh = UnityEngine.Random.Range(0,2);

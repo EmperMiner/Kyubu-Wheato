@@ -80,6 +80,7 @@ MonoBehaviour:
   ImagePopup: {fileID: 5822004289717855711, guid: d2dc4dfb1ee8b0c4192e981fb9e19882, type: 3}
   ImagePopupObject: {fileID: 3641310022112643465, guid: d2dc4dfb1ee8b0c4192e981fb9e19882, type: 3}
   prePlaced: 1
+  dontUpgradeChargedAttack: 1
 --- !u!212 &7480229541710461768
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -104,19 +104,19 @@ public class betterEnemySpawner : MonoBehaviour
     //more wins, more flipped enemies
     private IEnumerator FlippedEnemyChance()
     {
-        float reducedFlippedSpawningCooldown = 180f - PlayerPrefs.GetInt("WinCounter")*Random.Range(2f, 5f);
+        float reducedFlippedSpawningCooldown = 170f - PlayerPrefs.GetInt("WinCounter")*Random.Range(5f, 10f);
         if (reducedFlippedSpawningCooldown < 100f) { reducedFlippedSpawningCooldown = 100f; }
 
         yield return new WaitForSeconds(UnityEngine.Random.Range(100f, reducedFlippedSpawningCooldown));
 
-        int increasedFlippedEnemyChance = 20 - PlayerPrefs.GetInt("WinCounter");
+        int increasedFlippedEnemyChance = 10 - PlayerPrefs.GetInt("WinCounter");
         if (increasedFlippedEnemyChance < 0) { increasedFlippedEnemyChance = 0; }
         int flippedChance = UnityEngine.Random.Range(0, increasedFlippedEnemyChance);
         if  (flippedChance == 0 && PlayerPrefs.GetInt("BossDefeated") == 0)
         {
             StartCoroutine(SummonFlippedEnemy());
-            StartCoroutine(FlippedEnemyChance());
         }
+        StartCoroutine(FlippedEnemyChance());
         yield return null;
     }
 

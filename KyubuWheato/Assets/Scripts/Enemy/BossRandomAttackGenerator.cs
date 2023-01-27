@@ -43,9 +43,6 @@ public class BossRandomAttackGenerator : MonoBehaviour
 
     private void Start()
     {
-        if (player.maxHealth*50 < 25000) { mouseHealth = 25000; }
-        else { mouseHealth = player.maxHealth*50; }
-        
         Arrow = GameObject.FindGameObjectWithTag("Arrow");
         Arrow.SetActive(false);
         agent = animator.GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -54,6 +51,9 @@ public class BossRandomAttackGenerator : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
+
+        if (player.maxHealth*50 < 25000) { mouseHealth = 25000; }
+        else { mouseHealth = player.maxHealth*50; }
 
         if (Mathf.FloorToInt(player.strength*10) < 100) { bossDamage = 100; }
         else { bossDamage = Mathf.FloorToInt(player.strength*10); }
