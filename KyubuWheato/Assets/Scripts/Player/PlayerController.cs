@@ -112,6 +112,43 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject ghost;
     [SerializeField] private TextMeshProUGUI SanesssIntroText;
     [SerializeField] private GameObject SanesssPrefab;
+    [SerializeField] private string[] chestNotification = new string[32]
+    {
+        "You got the ultimate ability!",
+        "You got Kyubu Kombos!",
+        "You can shoot 2 dice!",
+        "You can shoot 3 dice!",
+        "You got Dice Hotkeying!",
+        "Dice returns to you automatically!",
+        "You got Dice Pads!",
+        "Dice now sometimes explode into rays!",
+        "You got your Broom Companion!",
+        "Enemies can explode upon death!",
+        "You may sometimes be invulnerable!",
+        "You can stop enemies!",
+        "You shoot stars alongside dice!",
+        "You got a bit faster!",
+        "Your heart got bigger <3",
+        "Your attacks deal more damage!",
+        "You take slightly less damage!",
+        "You got more dice!",
+        "Dice throwing cooldown decreased!",
+        "Enemies drop wheat more often!",
+        "Enemies drop dice more often!",
+        "You can see more future dice!",
+
+        "You're becoming Usain Bolt!",
+        "Your heart's too much for you!",
+        "Power over 9000!",
+        "You got iron skin!",
+        "Dice overflowing!",
+        "Cooldown greatly reduced!",
+        "You're bathing in Wheat!",
+        "Enemies love giving you dice!",
+        "You can see more future dice!",
+        "You got a bunch of wheat!"
+    };
+    
 
     private GameObject transitionOut;
     private SpeedrunTimer timerScript;
@@ -657,6 +694,14 @@ public class PlayerController : MonoBehaviour
         AudioPlayer.PlaySound("UIButtonError");
         SmallText.text = "Wait " + cooldown + " before healing again";
         yield return new WaitForSeconds(1.5f);
+        SmallText.text = "";
+        yield return null;
+    }
+
+    public IEnumerator ChestNotification(int chestUpgradeIndex)
+    {
+        SmallText.text = chestNotification[chestUpgradeIndex];
+        yield return new WaitForSeconds(3f);
         SmallText.text = "";
         yield return null;
     }

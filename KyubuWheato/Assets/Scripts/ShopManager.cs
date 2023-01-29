@@ -62,6 +62,7 @@ public class ShopManager : MonoBehaviour
         { 
             PlayerPrefs.DeleteAll();  
             PlayerPrefs.SetInt("FirstDeath", 0);
+            PlayerPrefs.SetInt("GoToShop", 0);
             firstTime = false; 
         }
         SaveData();
@@ -78,6 +79,11 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
+        if (PlayerPrefs.GetInt("GoToShop") == 1) 
+        { 
+            GameObject GoToShopPopup = GameObject.FindGameObjectWithTag("GoToShopPopup");
+            GoToShopPopup.SetActive(false);
+        }
         trophy.SetActive(false);
         bestTimeDisplay.SetActive(false);
         if (PlayerPrefs.GetInt("WinCounter") > 0) 
@@ -131,6 +137,11 @@ public class ShopManager : MonoBehaviour
         && shopHaveChickenNuggets == true && shopHavePastelDeChoclo == true && shopHaveGarlicBread == true && shopHaveHornScallop == true && PlayerPrefs.GetInt("Ramen") > 0 && PlayerPrefs.GetInt("Salmon") > 0
         && PlayerPrefs.GetInt("Steak") > 0 && PlayerPrefs.GetInt("Cheese") > 0 && PlayerPrefs.GetInt("FSC") > 0 && PlayerPrefs.GetInt("Infinitruths") == 0) { PlayerPrefs.SetInt("Infinitruths", 1); }
         UpdateUpgradeUI(116);
+    }
+
+    public void GoToShopQuit()
+    {
+        PlayerPrefs.SetInt("GoToShop", 1);
     }
  
     public void Buy(int UpgradeValue)

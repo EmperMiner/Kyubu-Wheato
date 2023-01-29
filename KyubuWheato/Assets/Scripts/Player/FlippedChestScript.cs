@@ -86,19 +86,19 @@ public class FlippedChestScript : MonoBehaviour
     private void ChooseEntree()
     {
         int EntreeGachaRoll = Random.Range(0, 13);
-        if (EntreeGachaRoll == 0 && player.havePizza == false) { player.havePizza = true; CreateImagePopup(EntreeGachaRoll); }
-        else if (EntreeGachaRoll == 1 && player.haveCarrotCake == false) { player.haveCarrotCake = true; CreateImagePopup(EntreeGachaRoll); }
-        else if (EntreeGachaRoll == 2 && player.haveFlan == false) { player.haveFlan = true; CreateImagePopup(EntreeGachaRoll); }
-        else if (EntreeGachaRoll == 3 && player.haveCremeBrulee == false && player.haveFlan == true) { player.haveCremeBrulee = true; CreateImagePopup(EntreeGachaRoll); }
-        else if (EntreeGachaRoll == 4 && player.haveBanhmi == false && player.dicePreviewerLevel > 0) { player.haveBanhmi = true; CreateImagePopup(EntreeGachaRoll); }
-        else if (EntreeGachaRoll == 5 && player.haveCupcake == false) { player.haveCupcake = true; CreateImagePopup(EntreeGachaRoll); }
-        else if (EntreeGachaRoll == 6 && player.haveChickenNuggets == false) { player.haveChickenNuggets = true; CreateImagePopup(EntreeGachaRoll); }
-        else if (EntreeGachaRoll == 7 && player.havePastelDeChoclo == false) { player.havePastelDeChoclo = true; CreateImagePopup(EntreeGachaRoll); }
-        else if (EntreeGachaRoll == 8 && player.haveGarlicBread == false) { player.haveGarlicBread = true; CreateImagePopup(EntreeGachaRoll); }
-        else if (EntreeGachaRoll == 9 && PlayerPrefs.GetInt("IngameRamen") == 0) { PlayerPrefs.SetInt("IngameRamen", 1); CreateImagePopup(EntreeGachaRoll + 10); }
-        else if (EntreeGachaRoll == 10 && PlayerPrefs.GetInt("IngameSalmon") == 0) { PlayerPrefs.SetInt("IngameSalmon", 1); CreateImagePopup(EntreeGachaRoll + 10); } 
-        else if (EntreeGachaRoll == 11 && PlayerPrefs.GetInt("IngameSteak") == 0) { PlayerPrefs.SetInt("IngameSteak", 1); CreateImagePopup(EntreeGachaRoll + 10); }
-        else if (EntreeGachaRoll == 12 && PlayerPrefs.GetInt("IngameCheese") == 0) { PlayerPrefs.SetInt("IngameCheese", 1); CreateImagePopup(EntreeGachaRoll + 10); }
+        if (EntreeGachaRoll == 0 && player.havePizza == false) { player.havePizza = true; CreateImagePopup(EntreeGachaRoll); player.StartCoroutine(player.ChestNotification(EntreeGachaRoll)); }
+        else if (EntreeGachaRoll == 1 && player.haveCarrotCake == false) { player.haveCarrotCake = true; CreateImagePopup(EntreeGachaRoll); player.StartCoroutine(player.ChestNotification(EntreeGachaRoll)); }
+        else if (EntreeGachaRoll == 2 && player.haveFlan == false) { player.haveFlan = true; CreateImagePopup(EntreeGachaRoll); player.StartCoroutine(player.ChestNotification(EntreeGachaRoll)); }
+        else if (EntreeGachaRoll == 3 && player.haveCremeBrulee == false && player.haveFlan == true) { player.haveCremeBrulee = true; CreateImagePopup(EntreeGachaRoll); player.StartCoroutine(player.ChestNotification(EntreeGachaRoll)); }
+        else if (EntreeGachaRoll == 4 && player.haveBanhmi == false && player.dicePreviewerLevel > 0) { player.haveBanhmi = true; CreateImagePopup(EntreeGachaRoll); player.StartCoroutine(player.ChestNotification(EntreeGachaRoll)); }
+        else if (EntreeGachaRoll == 5 && player.haveCupcake == false) { player.haveCupcake = true; CreateImagePopup(EntreeGachaRoll); player.StartCoroutine(player.ChestNotification(EntreeGachaRoll)); }
+        else if (EntreeGachaRoll == 6 && player.haveChickenNuggets == false) { player.haveChickenNuggets = true; CreateImagePopup(EntreeGachaRoll); player.StartCoroutine(player.ChestNotification(EntreeGachaRoll)); }
+        else if (EntreeGachaRoll == 7 && player.havePastelDeChoclo == false) { player.havePastelDeChoclo = true; CreateImagePopup(EntreeGachaRoll); player.StartCoroutine(player.ChestNotification(EntreeGachaRoll)); }
+        else if (EntreeGachaRoll == 8 && player.haveGarlicBread == false) { player.haveGarlicBread = true; CreateImagePopup(EntreeGachaRoll); player.StartCoroutine(player.ChestNotification(EntreeGachaRoll)); }
+        else if (EntreeGachaRoll == 9 && PlayerPrefs.GetInt("IngameRamen") == 0) { PlayerPrefs.SetInt("IngameRamen", 1); CreateImagePopup(EntreeGachaRoll + 10); player.StartCoroutine(player.ChestNotification(EntreeGachaRoll)); }
+        else if (EntreeGachaRoll == 10 && PlayerPrefs.GetInt("IngameSalmon") == 0) { PlayerPrefs.SetInt("IngameSalmon", 1); CreateImagePopup(EntreeGachaRoll + 10); player.StartCoroutine(player.ChestNotification(EntreeGachaRoll)); } 
+        else if (EntreeGachaRoll == 11 && PlayerPrefs.GetInt("IngameSteak") == 0) { PlayerPrefs.SetInt("IngameSteak", 1); CreateImagePopup(EntreeGachaRoll + 10); player.StartCoroutine(player.ChestNotification(EntreeGachaRoll)); }
+        else if (EntreeGachaRoll == 12 && PlayerPrefs.GetInt("IngameCheese") == 0) { PlayerPrefs.SetInt("IngameCheese", 1); CreateImagePopup(EntreeGachaRoll + 10); player.StartCoroutine(player.ChestNotification(EntreeGachaRoll)); }
         else if (EntreeGachaRoll <= 8) { ChooseEntree(); }
         else { ChooseStat(); }
     }
@@ -106,16 +106,16 @@ public class FlippedChestScript : MonoBehaviour
     private void ChooseStat()
     {
         int StatGachaRoll = Random.Range(0, 35);
-        if (StatGachaRoll <= 2 && player.MoveSpeed <= 3.4f) { player.MoveSpeed += Random.Range(0.6f, 1.2f); CreateImagePopup(9); }
-        else if (StatGachaRoll <= 5) {  int i = Random.Range(player.maxHealth*1/5, player.maxHealth*4/5); player.maxHealth += i; player.healthBar.SetMaxHealth(player.maxHealth); player.UpdateHealth(i*3); CreateImagePopup(10); }
-        else if (StatGachaRoll <= 8) { player.strength += Random.Range(0.75f, 2f); CreateImagePopup(11); }
-        else if (StatGachaRoll <= 11) { player.defense += Random.Range(0.75f, 2f); CreateImagePopup(12); }
-        else if (StatGachaRoll <= 13) { for (int i = 0; i < Random.Range(4, 10); i++) { player.IncreaseDiceNumber(); }; CreateImagePopup(13); }
-        else if (StatGachaRoll <= 15 && player.playerCooldownTime > 5.0f) { player.playerCooldownTime -= 1f; CreateImagePopup(14); }
-        else if (StatGachaRoll <= 17 && player.wheatDroprate < 100f) { player.wheatDroprate += Random.Range(2f, 5f); CreateImagePopup(15); }
-        else if (StatGachaRoll <= 18 && player.diceDroprate > 100) { player.diceDroprate -= Random.Range(50, 100); if(player.diceDroprate < 100) { player.diceDroprate = 100; } CreateImagePopup(16); }
-        else if (StatGachaRoll <= 19 && player.dicePreviewerLevel < 5) { player.dicePreviewerLevel += 1; diceThrowScript.UpdateDicePreviewerUI(); CreateImagePopup(17); }
-        else if (StatGachaRoll <= 34) { player.UpdateWheat(Random.Range(300, 500)); CreateImagePopup(18); }
+        if (StatGachaRoll <= 2 && player.MoveSpeed <= 3.4f) { player.MoveSpeed += Random.Range(0.6f, 1.2f); CreateImagePopup(9); player.StartCoroutine(player.ChestNotification(22)); }
+        else if (StatGachaRoll <= 5) {  int i = Random.Range(player.maxHealth*1/5, player.maxHealth*4/5); player.maxHealth += i; player.healthBar.SetMaxHealth(player.maxHealth); player.UpdateHealth(i*3); CreateImagePopup(10); player.StartCoroutine(player.ChestNotification(23)); }
+        else if (StatGachaRoll <= 8) { player.strength += Random.Range(0.75f, 2f); CreateImagePopup(11); player.StartCoroutine(player.ChestNotification(24)); }
+        else if (StatGachaRoll <= 11) { player.defense += Random.Range(0.75f, 2f); CreateImagePopup(12); player.StartCoroutine(player.ChestNotification(25)); }
+        else if (StatGachaRoll <= 13) { for (int i = 0; i < Random.Range(4, 10); i++) { player.IncreaseDiceNumber(); }; CreateImagePopup(13); player.StartCoroutine(player.ChestNotification(26)); }
+        else if (StatGachaRoll <= 15 && player.playerCooldownTime > 5.0f) { player.playerCooldownTime -= 1f; CreateImagePopup(14); player.StartCoroutine(player.ChestNotification(27)); }
+        else if (StatGachaRoll <= 17 && player.wheatDroprate < 100f) { player.wheatDroprate += Random.Range(2f, 5f); CreateImagePopup(15); player.StartCoroutine(player.ChestNotification(28)); }
+        else if (StatGachaRoll <= 18 && player.diceDroprate > 100) { player.diceDroprate -= Random.Range(50, 100); if(player.diceDroprate < 100) { player.diceDroprate = 100; } CreateImagePopup(16); player.StartCoroutine(player.ChestNotification(29)); }
+        else if (StatGachaRoll <= 19 && player.dicePreviewerLevel < 5) { player.dicePreviewerLevel += 1; diceThrowScript.UpdateDicePreviewerUI(); CreateImagePopup(17); player.StartCoroutine(player.ChestNotification(30)); }
+        else if (StatGachaRoll <= 34) { player.UpdateWheat(Random.Range(300, 500)); CreateImagePopup(18); player.StartCoroutine(player.ChestNotification(31)); }
         else { ChooseStat(); }
     }
     

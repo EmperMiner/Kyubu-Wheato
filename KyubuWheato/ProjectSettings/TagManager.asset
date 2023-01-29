@@ -92,6 +92,7 @@ TagManager:
   - FSCDrop
   - PauseMenu
   - TotemChest
+  - GoToShopPopup
   layers:
   - Default
   - TransparentFX
