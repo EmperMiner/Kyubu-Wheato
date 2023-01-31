@@ -29,7 +29,7 @@ public class crowThrow : MonoBehaviour
         Destroy(gameObject, 5f);
         if (isInverted) 
         { 
-            Destroy(gameObject, UnityEngine.Random.Range(1.5f, 5f)); 
+            Destroy(gameObject, UnityEngine.Random.Range(0.5f, 1.25f)); 
             StartCoroutine(ChangeColor());
         }
 
@@ -48,7 +48,7 @@ public class crowThrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "MapCollider" || other.gameObject.tag == "chest") { Destroy(gameObject); }
+        if (other.gameObject.tag == "MapCollider" || other.gameObject.tag == "chest" || other.gameObject.tag == "100sidedDice" || other.gameObject.tag == "TimeCrescent") { Destroy(gameObject); }
         if (other.gameObject.tag == "Player") { crowCanAttack = 3f; }
     }
 
@@ -56,13 +56,18 @@ public class crowThrow : MonoBehaviour
     {   
         if (other.gameObject.tag != "Player") return;
 
-        int attackDamage = 3;
-        if (isInverted) { attackDamage = 10; }
+        int attackDamage = 30;
+        if (isInverted) { attackDamage = 100; }
 
         if (crowCanAttack >= 3f)
         {
-            FindObjectOfType<AudioManager>().PlaySound("PlayerHurt");
-            player.UpdateHealth(-attackDamage + Mathf.RoundToInt((attackDamage * player.defense)/10));
+            if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("PlayerHurt"); }
+            else { FindObjectOfType<AudioManager>().PlaySound("Iframe"); }
+
+            int playerDamageAmount = attackDamage;
+            if (playerDamageAmount < Mathf.FloorToInt(player.maxHealth/100f)) { playerDamageAmount = Mathf.FloorToInt(player.maxHealth/100f); }
+
+            player.UpdateHealth(-playerDamageAmount);
             crowCanAttack = 0f;
         }    
         crowCanAttack += Time.deltaTime; 

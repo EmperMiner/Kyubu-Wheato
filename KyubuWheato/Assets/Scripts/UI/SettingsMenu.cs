@@ -5,12 +5,14 @@ using UnityEngine.UI;
 using UnityEngine.Audio;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 public class SettingsMenu : MonoBehaviour
 {
     [SerializeField] private TMP_Dropdown graphicsDropdown;
     [SerializeField] private TMP_Dropdown screenSizeDropdown;
     [SerializeField] private Toggle fullscreenToggle;
+    [SerializeField] private Toggle TimerToggle;
     [SerializeField] private Slider SFXSlider;
     [SerializeField] private AudioMixer SFXMixer;
     [SerializeField] private Slider MusicSlider;
@@ -18,10 +20,12 @@ public class SettingsMenu : MonoBehaviour
     private AudioManager AudioPlayer;
 
     [SerializeField] private Resolution[] resolutions;
+    [SerializeField] private Toggle showTimerToggle;
 
     private void Start() 
     { 
         StartingSettings();
+        ConfirmSettings();
     }
 
     public void ConfirmSettings()
@@ -31,6 +35,7 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetInt("FullscreenToggle", Convert.ToInt32(fullscreenToggle.isOn));
         PlayerPrefs.SetFloat("SFXVolume", SFXSlider.value);
         PlayerPrefs.SetFloat("MusicVolume", MusicSlider.value);
+        PlayerPrefs.SetInt("ShowTimerToggle", Convert.ToInt32(showTimerToggle.isOn));
         ApplyChanges();
     }
 
@@ -39,6 +44,7 @@ public class SettingsMenu : MonoBehaviour
         screenSizeDropdown.value = PlayerPrefs.GetInt("ResolutionIndex");
         graphicsDropdown.value = PlayerPrefs.GetInt("QualityIndex");
         fullscreenToggle.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("FullscreenToggle"));
+        showTimerToggle.isOn = Convert.ToBoolean(PlayerPrefs.GetInt("ShowTimerToggle"));
         SFXSlider.value = PlayerPrefs.GetFloat("SFXVolume");
         MusicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
 
@@ -48,6 +54,12 @@ public class SettingsMenu : MonoBehaviour
         QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("QualityIndex"));
         SFXMixer.SetFloat("SFXVolume", Mathf.Log10(PlayerPrefs.GetFloat("SFXVolume")) * 20);
         MusicMixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
+
+        if (SceneManager.GetActiveScene().buildIndex > 3) 
+        {
+            SpeedrunTimer TimerScript = GameObject.FindGameObjectWithTag("Timer").GetComponent<SpeedrunTimer>();
+            TimerScript.UpdateTimerVisibility();
+        }
     }
 
     public void ButtonSelect()

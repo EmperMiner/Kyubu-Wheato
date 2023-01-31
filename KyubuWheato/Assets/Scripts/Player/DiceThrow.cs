@@ -8,6 +8,8 @@ using EZCameraShake;
 
 public class DiceThrow : MonoBehaviour
 {
+    private Rigidbody2D playerRB;
+    private Transform playerTransform;
     private Camera mainCam;
     private Vector3 mousePos;
     private PlayerController player;
@@ -18,18 +20,20 @@ public class DiceThrow : MonoBehaviour
     [SerializeField] private GameObject[] MultishotDiceTypes;
     [SerializeField] private GameObject[] FakeMultishotLeftDiceTypes;
     [SerializeField] private GameObject[] FakeMultishotRightDiceTypes;
+    [SerializeField] private GameObject[] chargedDicetypes;
+    [SerializeField] private GameObject[] chargedMultishotDiceTypes;
     [SerializeField] private Transform diceTransform;
     private CooldownBar cooldownBar;
     private UltimateBarCharge ultimateBar;
     private Image[] DicePreviewerImage = new Image[5];
     [SerializeField] private Sprite[] DiceSprites;
     [SerializeField] private GameObject[] KyubuTiles;
-
-    [SerializeField] private int whichever;
+    [SerializeField] private GameObject[] diceSpinPrefabs;
     
     private bool inCooldown = false;
     private float cooldownTimer;
-    
+    private bool chargedAttack;
+
     public int diceNumber;
     private float playerCooldownTime;
     private int dicePreviewerLevel;
@@ -63,9 +67,16 @@ public class DiceThrow : MonoBehaviour
     private int[] FakePreviousDiceValues = new int[6];
 
     [SerializeField] private bool isLevel12;
+    [SerializeField] private GameObject TimeCrescent;
+    private SpriteRenderer TimeCrescentSprite;
+    [SerializeField] private Sprite[] CrescentCracks;
+    [SerializeField] private GameObject starPrefab;
 
     void Start()
     {
+        TimeCrescentSprite = TimeCrescent.GetComponent<SpriteRenderer>();
+        playerRB = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         AudioPlayer = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
@@ -97,9 +108,21 @@ public class DiceThrow : MonoBehaviour
             if (inCooldown)
             {   
                 cooldownBar.SetCooldown(cooldownTimer*10);
-                cooldownTimer += Time.deltaTime; 
+                if (chargedAttack) { cooldownTimer += Time.deltaTime/4; }
+                else { cooldownTimer += Time.deltaTime; }
                 if (cooldownTimer > playerCooldownTime/10)
                 {
+                    if (chargedAttack)
+                    {
+                        PlayerPrefs.SetInt("ChargedAttacks", PlayerPrefs.GetInt("ChargedAttacks") + 1);
+                        AudioPlayer.PlaySound("ThrowDice");
+                        if (haveFlan == true && haveCremeBrulee == false) { ShootTwoChargedDice(); }
+                        else if (haveCremeBrulee) { ShootThreeChargedDice(); }
+                        else { ShootOneChargedDice(); }
+                        DiceCounterNumber.text = diceNumber.ToString();
+                        if (PlayerPrefs.GetInt("IngameCheese") == 1) { ShootStar(UnityEngine.Random.Range(10, 15)); }
+                    }
+                    chargedAttack = false;
                     inCooldown = false;
                     cooldownTimer = 0;
                     cooldownBar.CooldownBarInvisible();
@@ -116,6 +139,13 @@ public class DiceThrow : MonoBehaviour
                 }
             }
 
+            if (Mathf.FloorToInt(PlayerPrefs.GetFloat("DiceSpinLevel")/10f) == Mathf.FloorToInt(PlayerPrefs.GetFloat("DiceSpinLevelUp")) && PlayerPrefs.GetFloat("DiceSpinLevelUp") < 11)
+            {
+                float i = PlayerPrefs.GetFloat("DiceSpinLevelUp");
+                player.StartCoroutine(player.NotifTextChargedATKUpgrade(Mathf.RoundToInt(i)));
+                PlayerPrefs.SetFloat("DiceSpinLevelUp", i + 1f);
+            }
+
             if (Input.GetMouseButton(0) && diceNumber > 0 && inCooldown == false && ultimateBar.ultimateInProgress == false)
             {
                 AudioPlayer.PlaySound("ThrowDice");
@@ -123,12 +153,22 @@ public class DiceThrow : MonoBehaviour
                 if (haveFlan == true && haveCremeBrulee == false) { ShootTwoDice(); }
                 else if (haveCremeBrulee) { ShootThreeDice(); }
                 else { ShootOneDice(); }
+                if (PlayerPrefs.GetInt("IngameCheese") == 1) { ShootStar(UnityEngine.Random.Range(0, 9)); }
                 DiceCounterNumber.text = diceNumber.ToString();
             }
             else if (Input.GetMouseButtonDown(0)) { AudioPlayer.PlaySound("ThrowDiceDisabled"); }
 
+            if (Input.GetMouseButton(1) && diceNumber > 0 && inCooldown == false && ultimateBar.ultimateInProgress == false)
+            {
+                AudioPlayer.PlaySound("DiceShaking");    
+                inCooldown = true;
+                chargedAttack = true;
+            }
+            else if (Input.GetMouseButtonDown(1)) { AudioPlayer.PlaySound("ThrowDiceDisabled"); }
+
             if (Input.GetKeyDown(KeyCode.Q) && ultimateBar.currentUltimateCharge == ultimateBar.maxUltimateCharge && ultimateBar.havePizza == true)
             {
+                AudioPlayer.PlaySound("UltimateActive");
                 ultimateBar.IncreaseUltimateCharge(-ultimateBar.maxUltimateCharge);
                 StartCoroutine(ActivateUltimate());
             }
@@ -136,7 +176,34 @@ public class DiceThrow : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha2) && dicePreviewerLevel >= 3 && haveBanhmi == true) { DiceHotkey(2); }
             if (Input.GetKeyDown(KeyCode.Alpha3) && dicePreviewerLevel >= 4 && haveBanhmi == true) { DiceHotkey(3); }
             if (Input.GetKeyDown(KeyCode.Alpha4) && dicePreviewerLevel >= 5 && haveBanhmi == true) { DiceHotkey(4); }
+
+            if (PlayerPrefs.GetInt("IngameSteak") == 1 && TimeCrescent.activeSelf == false) { StartCrescent(); }
         }  
+    }
+    
+    private void StartCrescent()
+    {
+        TimeCrescent.SetActive(true);
+        AudioPlayer.PlaySound("TimeCrescent");
+        TimeCrescentSprite.sprite = CrescentCracks[Mathf.FloorToInt(PlayerPrefs.GetInt("Crack")/800)];
+    }
+
+    public void CrescentCrack(int crack)
+    {
+        PlayerPrefs.SetInt("PreviousCrack", PlayerPrefs.GetInt("Crack"));
+        PlayerPrefs.SetInt("Crack", PlayerPrefs.GetInt("Crack") + crack);
+        if (PlayerPrefs.GetInt("Crack") < 8000) { TimeCrescentSprite.sprite = CrescentCracks[Mathf.FloorToInt(PlayerPrefs.GetInt("Crack")/800)]; }
+
+        if (PlayerPrefs.GetInt("Crack")/800 >= Mathf.FloorToInt(PlayerPrefs.GetInt("PreviousCrack")/800) + 1) { AudioPlayer.PlaySound("CrescentBreak" + UnityEngine.Random.Range(1,7)); }
+        
+        if (PlayerPrefs.GetInt("Crack") >= 8000)
+        {
+            PlayerPrefs.SetInt("Crack", 0);
+            PlayerPrefs.SetInt("PreviousCrack", 0);
+            PlayerPrefs.SetInt("IngameSteak", 0);
+            TimeCrescentSprite.sprite = CrescentCracks[0];
+            TimeCrescent.SetActive(false);
+        }
     }
 
     private void GetDiceValue()
@@ -299,6 +366,14 @@ public class DiceThrow : MonoBehaviour
         }
     }
 
+    private void ShootStar(int starAmount)
+    {
+        for (int i = 0; i < starAmount; i++)
+        {
+            Instantiate(starPrefab, diceTransform.position, UnityEngine.Random.rotation); 
+        }
+    }
+
     IEnumerator KyubuKombo(int KyubuTileValue)
     {
         if (havePastelDeChoclo) 
@@ -312,7 +387,7 @@ public class DiceThrow : MonoBehaviour
         if (KyubuTileValue == 1) 
         { 
             AudioPlayer.PlaySound("KK1");
-            if (isLevel12 == false) { Instantiate(KyubuTiles[0], new Vector3(transform.position.x + UnityEngine.Random.Range(-2f, 2f), transform.position.y + 15.5f + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity); }
+            if (isLevel12 == false) { Instantiate(KyubuTiles[0], new Vector3(transform.position.x + UnityEngine.Random.Range(-1f, 1f), transform.position.y + 15.5f + UnityEngine.Random.Range(-1f, 1f), transform.position.z), Quaternion.identity); }
             else {
                 try
                 { 
@@ -321,7 +396,7 @@ public class DiceThrow : MonoBehaviour
                 }
                 catch (NullReferenceException) 
                 { 
-                    Instantiate(KyubuTiles[0], new Vector3(transform.position.x + UnityEngine.Random.Range(-2f, 2f), transform.position.y + 15.5f + UnityEngine.Random.Range(-2f, 2f), transform.position.z), Quaternion.identity); 
+                    Instantiate(KyubuTiles[0], new Vector3(transform.position.x + UnityEngine.Random.Range(-1f, 1f), transform.position.y + 15.5f + UnityEngine.Random.Range(-1f, 1f), transform.position.z), Quaternion.identity); 
                 }
             }
         }
@@ -380,7 +455,6 @@ public class DiceThrow : MonoBehaviour
         }
         if (KyubuTileValue == 6) 
         { 
-            AudioPlayer.PlaySound("KK6Hang");
             if (isLevel12 == false)
             {
                 int bruh = UnityEngine.Random.Range(0,2);
@@ -392,8 +466,8 @@ public class DiceThrow : MonoBehaviour
                 {
                     Transform enemyPosition = GameObject.FindWithTag("enemyMouse").GetComponent<Transform>(); 
                     int bruh = UnityEngine.Random.Range(0,2);
-                    if (bruh < 1) { Instantiate(KyubuTiles[9], new Vector3(enemyPosition.position.x + 9f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.y + 6f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.z), Quaternion.identity); }
-                    else { Instantiate(KyubuTiles[10], new Vector3(enemyPosition.position.x - 22f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.y + 12f + UnityEngine.Random.Range(-3f, 3f), enemyPosition.position.z), Quaternion.identity); }
+                    if (bruh < 1) { Instantiate(KyubuTiles[9], new Vector3(enemyPosition.position.x + 9f + UnityEngine.Random.Range(-1f, 1f), enemyPosition.position.y + 6f + UnityEngine.Random.Range(-1f, 1f), enemyPosition.position.z), Quaternion.identity); }
+                    else { Instantiate(KyubuTiles[10], new Vector3(enemyPosition.position.x - 22f + UnityEngine.Random.Range(-1f, 1f), enemyPosition.position.y + 12f + UnityEngine.Random.Range(-1f, 1f), enemyPosition.position.z), Quaternion.identity); }
                 }
                 catch (NullReferenceException) 
                 { 
@@ -419,8 +493,8 @@ public class DiceThrow : MonoBehaviour
     private void KK2NoTarget()
     {
         int dafuq = UnityEngine.Random.Range(0,2);
-                float randXOffset = UnityEngine.Random.Range(-2f, 2f);
-                float randYOffset = UnityEngine.Random.Range(-2f, 2f);
+                float randXOffset = UnityEngine.Random.Range(-1f, 1f);
+                float randYOffset = UnityEngine.Random.Range(-1f, 1f);
                 if (dafuq < 1) 
                 { 
                     Instantiate(KyubuTiles[1], new Vector3(transform.position.x - 22.63f + randXOffset, transform.position.y + randYOffset, transform.position.z), Quaternion.identity); 
@@ -470,11 +544,58 @@ public class DiceThrow : MonoBehaviour
         else { ShootOneDice(); }
     }
 
-    IEnumerator ActivateUltimate()
+    private void ShootOneChargedDice()
+    {
+        diceNumber--;
+        SaveDiceNumber();
+        Instantiate(chargedDicetypes[DiceValues[0]], diceTransform.position, UnityEngine.Random.rotation);
+        CycleThroughDiceValueArray();
+        player.UseChargeAttack();
+        if (PlayerPrefs.GetFloat("DiceSpinLevelUp") < 11f) { Instantiate(diceSpinPrefabs[Mathf.RoundToInt(Mathf.Floor(PlayerPrefs.GetFloat("DiceSpinLevel")/10))], transform.position, Quaternion.identity); }
+        else { Instantiate(diceSpinPrefabs[11], transform.position, Quaternion.identity); }
+    }
+    private void ShootTwoChargedDice()
+    {
+        if (diceNumber >= 2)
+        {
+            diceNumber -= 2;
+            SaveDiceNumber();
+            player.UseChargeAttack();
+            if (PlayerPrefs.GetFloat("DiceSpinLevelUp") < 11f) { Instantiate(diceSpinPrefabs[Mathf.RoundToInt(Mathf.Floor(PlayerPrefs.GetFloat("DiceSpinLevel")/10))], transform.position, Quaternion.identity); }
+            else { Instantiate(diceSpinPrefabs[11], transform.position, Quaternion.identity); }
+            for (int i = 0; i < 2; i++) 
+            { 
+                Instantiate(chargedMultishotDiceTypes[DiceValues[0]], diceTransform.position, UnityEngine.Random.rotation); 
+                CycleThroughDiceValueArray();
+            }
+        }
+        else { ShootOneChargedDice(); }
+    }
+    private void ShootThreeChargedDice()
+    {
+        if (diceNumber >= 3)
+        {
+            diceNumber -= 3;
+            SaveDiceNumber();
+            player.UseChargeAttack();
+            if (PlayerPrefs.GetFloat("DiceSpinLevelUp") < 11f) { Instantiate(diceSpinPrefabs[Mathf.RoundToInt(Mathf.Floor(PlayerPrefs.GetFloat("DiceSpinLevel")/10))], transform.position, Quaternion.identity); }
+            else { Instantiate(diceSpinPrefabs[11], transform.position, Quaternion.identity); }
+            for (int i = 0; i < 3; i++) 
+            { 
+                Instantiate(chargedMultishotDiceTypes[DiceValues[0]], diceTransform.position, UnityEngine.Random.rotation); 
+                CycleThroughDiceValueArray();
+            }
+        }
+        else if (diceNumber == 2) { ShootTwoChargedDice(); }
+        else { ShootOneChargedDice(); }
+    }
+
+    private IEnumerator ActivateUltimate()
     {
         ultimateBar.ultimateInProgress = true;
         yield return new WaitForSeconds(1f);
         CameraShakeInstance bruh = CameraShaker.Instance.StartShake(1f, 4f, .1f);
+        StartCoroutine(AlongUltimate());
         for (float i = 0; i < 5f; i += 0.2f)
         {
             AudioPlayer.PlaySound("ThrowDice");
@@ -499,6 +620,17 @@ public class DiceThrow : MonoBehaviour
         }
         bruh.StartFadeOut(1f);
         ultimateBar.ultimateInProgress = false;
+        yield return null;
+    }
+
+    private IEnumerator AlongUltimate()
+    {
+        for (int i = 0; i < 5; i ++)
+        {
+            if (PlayerPrefs.GetFloat("DiceSpinLevelUp") < 11f) { Instantiate(diceSpinPrefabs[Mathf.RoundToInt(Mathf.Floor(PlayerPrefs.GetFloat("DiceSpinLevel")/10))], transform.position, Quaternion.identity); }
+            else { Instantiate(diceSpinPrefabs[11], transform.position, Quaternion.identity); }
+            yield return new WaitForSeconds(1f);
+        }
         yield return null;
     }
 

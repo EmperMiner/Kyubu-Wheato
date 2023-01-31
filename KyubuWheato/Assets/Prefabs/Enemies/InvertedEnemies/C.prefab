@@ -49,14 +49,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a12c4c090aed54a4693a2a3341c8cc16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMouseHealth: 100
-  mouseStrength: 14
+  maxMouseHealth: 350
+  mouseStrength: 100
   mouseAttackSpeed: 0.5
   mouseSpriteRenderer: {fileID: 7069245806492307280}
   wheatDrop: {fileID: 8311296782179859832, guid: 3cfa3a151773d094e9fc3c0661264258, type: 3}
   worseWheatDrop: {fileID: 6050207175945914611, guid: bd6e79d7487cb67459934b8e6bbb6fb6, type: 3}
   pfDamagePopup: {fileID: 6478138214433248903, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
   pfDamagePopupText: {fileID: 62537061617949394, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
+  pfDamagePopupCrit: {fileID: 212571527099406956, guid: 7439f9bcb36fa6e4f88ac2a4e65a5199, type: 3}
+  pfDamagePopupTextCrit: {fileID: 6614628894609430073, guid: 7439f9bcb36fa6e4f88ac2a4e65a5199, type: 3}
   isA: 0
   isB: 0
   isC: 1
@@ -73,6 +75,7 @@ MonoBehaviour:
   - {fileID: 6308753891499002788, guid: 5899ab7e71ba3b149a4d710dd40dc329, type: 3}
   crowPrefab: {fileID: 7584795839634895823, guid: 387e74060e6d78746bfae2ad2225afd6, type: 3}
   WallPrefab: {fileID: 0}
+  Supernova: {fileID: 5566907859428112482, guid: 98c1bed42d99fbd41ab765ffb6bf5706, type: 3}
 --- !u!212 &7069245806492307280
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -115,7 +118,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 2776d65b1e83e454486f8902681ed18c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -135,10 +138,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.1
-  m_Speed: 6
-  m_Acceleration: 10
+  m_Speed: 3
+  m_Acceleration: 3
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 60
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

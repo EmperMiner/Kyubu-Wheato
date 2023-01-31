@@ -53,6 +53,7 @@ public class FarmerWalk : StateMachineBehaviour
         animator.ResetTrigger("Summon");
         agent.isStopped = true;
         agent.ResetPath();
+        agent.velocity = Vector3.zero;
         randomNumberScript.RollAttack = false;
     }
 }

@@ -50,7 +50,7 @@ MonoBehaviour:
   crowSpriteRenderer: {fileID: 7584795839634895818}
   crowLeft: {fileID: 21300000, guid: 8802fa4a5febec54cb76acb5cb574e53, type: 3}
   crowRight: {fileID: 21300000, guid: 7d0dbeb9eaa8db24f96873d8db74c246, type: 3}
-  crowSpeed: 6
+  crowSpeed: 7
   isInverted: 1
 --- !u!212 &7584795839634895818
 SpriteRenderer:

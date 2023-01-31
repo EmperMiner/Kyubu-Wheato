@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 872457805085809484}
   - component: {fileID: 872457805085809485}
   - component: {fileID: 872457805085809486}
-  - component: {fileID: 7590954893178985252}
   - component: {fileID: 872457805085809487}
   - component: {fileID: 872457805085809480}
   - component: {fileID: 872457805085809481}
@@ -80,7 +79,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: dfd3a397c5e59e942b5544b8d89afbb3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -107,9 +106,11 @@ MonoBehaviour:
   mouseAttackSpeed: 1
   mouseSpriteRenderer: {fileID: 872457805085809485}
   animator: {fileID: 3656608308124204170}
-  wheatDrop: {fileID: 6133570875003662420, guid: 47d5b60bfb15aea49839d118dac8f86c, type: 3}
+  wheatDrop: {fileID: 8502947740103197045, guid: a840e16ed2e57c346a5db7847d2b01c8, type: 3}
   pfDamagePopup: {fileID: 6478138214433248903, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
   pfDamagePopupText: {fileID: 62537061617949394, guid: c5d0e9f4cb70df042855cea0590d4fd6, type: 3}
+  pfDamagePopupCrit: {fileID: 212571527099406956, guid: 7439f9bcb36fa6e4f88ac2a4e65a5199, type: 3}
+  pfDamagePopupTextCrit: {fileID: 6614628894609430073, guid: 7439f9bcb36fa6e4f88ac2a4e65a5199, type: 3}
   dicetypes:
   - {fileID: 5705092907752739581, guid: 6c2e6dd266c647a4ca2e1eb8f9f91cc5, type: 3}
   - {fileID: 8172298123866409655, guid: 973684b318644fe4ebe66418d1493f38, type: 3}
@@ -123,25 +124,18 @@ MonoBehaviour:
   isHenor: 0
   isScawy: 0
   isSchwein: 0
+  isSpooder: 0
   cornRay: {fileID: 0}
+  isGhost: 0
+  isBlackCat: 0
   enemiesPrefabs:
   - {fileID: 872457805085809482}
   - {fileID: 4185845393045290319, guid: 154c0edc21acb694184576fdaae8767d, type: 3}
   - {fileID: 1341395029264087526, guid: 94d8620b534055840a487cf7f4a920eb, type: 3}
   - {fileID: 2701262824927360893, guid: 2d78fc35c66a4fb43b82aa47962f066d, type: 3}
   crowPrefab: {fileID: 0}
---- !u!114 &7590954893178985252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 872457805085809482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f95f391df8103f409607b9da03660c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  Supernova: {fileID: 5566907859428112482, guid: 98c1bed42d99fbd41ab765ffb6bf5706, type: 3}
+  blackCatSpriteRenderer: {fileID: 0}
 --- !u!195 &872457805085809487
 NavMeshAgent:
   m_ObjectHideFlags: 0

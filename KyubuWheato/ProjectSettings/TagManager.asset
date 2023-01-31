@@ -68,6 +68,31 @@ TagManager:
   - Level10
   - PGW
   - 4thWall
+  - RedWheat
+  - BlueWheat
+  - GreenWheat
+  - BL
+  - TR
+  - MobSpawner
+  - Crosshair
+  - FakeDice20
+  - FakeDice8
+  - FakeDice10
+  - FakeDice12
+  - TimeCrescent
+  - Star
+  - 100sidedDice
+  - ChargedDice2
+  - ChargedDice4
+  - ChargedDice6
+  - TransitionOut
+  - Timer
+  - EndingTimer
+  - HelpButton
+  - FSCDrop
+  - PauseMenu
+  - TotemChest
+  - GoToShopPopup
   layers:
   - Default
   - TransparentFX

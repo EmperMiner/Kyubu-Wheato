@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8630249240337900982}
   - component: {fileID: 8630249240337900981}
   - component: {fileID: 3923101535444537635}
+  - component: {fileID: 6949054995782104268}
   m_Layer: 0
   m_Name: FlippedChest
   m_TagString: chest
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 6b396fb1d1c277f4eb13ab512a17a946, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -170,6 +171,30 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1099f7679e9014a44b6df2b9e9fd3234, type: 3}
   - {fileID: 21300000, guid: 6fcb542c4f8438a44bd4c2fe9747a406, type: 3}
   - {fileID: 21300000, guid: 7c40bac5b80f3594a93b24b79e64391d, type: 3}
+  - {fileID: 21300000, guid: a92bc5e6ccafbaa48a388d5b4bea1934, type: 3}
+  - {fileID: 21300000, guid: 6ccf6eb4f462aa845a658064676a642e, type: 3}
+  - {fileID: 21300000, guid: e4258bb49516727439c4995005d36fbd, type: 3}
+  - {fileID: 21300000, guid: d33ce1cde4fd8ad449946b37b2e8a092, type: 3}
   ImagePopup: {fileID: 5822004289717855711, guid: d2dc4dfb1ee8b0c4192e981fb9e19882, type: 3}
   ImagePopupObject: {fileID: 3641310022112643465, guid: d2dc4dfb1ee8b0c4192e981fb9e19882, type: 3}
   prePlaced: 0
+--- !u!95 &6949054995782104268
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8630249240337900980}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 44acf010d7959e7499887055e8756349, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

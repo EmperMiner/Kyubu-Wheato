@@ -167,10 +167,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d15e48e60b62c4a9faa029fa63c2c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBeforeDestroy: 2.9
+  timeBeforeDestroy: 0.9
   isKyubuTile3Left: 0
   isKyubuTile3Right: 0
   isKyubuTile6: 1
+  isStar: 0
   Dice3: {fileID: 0}
   Dice6:
   - {fileID: 7533888912622887414, guid: 856170e105308ba4d8c436d78bdd41a5, type: 3}
@@ -229,6 +230,7 @@ MonoBehaviour:
   isKyubuTile3Left: 0
   isKyubuTile3Right: 0
   isKyubuTile6: 0
+  isStar: 0
   Dice3: {fileID: 0}
   Dice6: []
 --- !u!114 &-218227064334522046
@@ -243,5 +245,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78a05b94658a1124a84521e4a057d2b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Delay: 2.98
+  Delay: 0.98
   isKyubuKombo6: 1

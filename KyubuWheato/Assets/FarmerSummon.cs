@@ -5,6 +5,7 @@ using UnityEngine;
 public class FarmerSummon : StateMachineBehaviour
 {
     [SerializeField] private GameObject[] summonObject;
+    [SerializeField] private GameObject Whale;
     private Transform player;
     private Rigidbody2D bossRB;
     private BossRandomAttackGenerator randomNumberScript;
@@ -63,26 +64,7 @@ public class FarmerSummon : StateMachineBehaviour
         }
         if (attackIndex == 4)
         {
-            int numObjects = 10;
-            int randomEnemyIndex = Random.Range(7,11);
- 
-       //     Vector3 center = player.position;
-            for (int i = 0; i < numObjects; i++)
-            {
-      //          Vector3 pos = RandomCircle(center, 8f);
-     //           Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center-pos);
-                Instantiate(summonObject[randomEnemyIndex], player.position, Quaternion.identity);
-            }
-/*
-            Vector3 RandomCircle ( Vector3 center ,float radius)
-            {
-                float ang = Random.value * 360;
-                Vector3 pos;
-                pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
-                pos.y = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
-                pos.z = center.z;
-                return pos;
-            }*/
+                Instantiate(Whale, player.position, Quaternion.identity);
         }
         if (attackIndex == 5)
         {

@@ -14,6 +14,7 @@ public class StaticObjectDamage : MonoBehaviour
     [SerializeField] private bool isScytheAttack;
     [SerializeField] private bool is4thWall;
     [SerializeField] private bool isHand;
+    [SerializeField] private bool ignoreDefense;
 
     private void Start()
     {
@@ -30,7 +31,8 @@ public class StaticObjectDamage : MonoBehaviour
             objectCanAttack = 0.8f;
             if (is4thWall)
             {
-                FindObjectOfType<AudioManager>().PlaySound("PlayerHurt");
+                if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("PlayerHurt"); }
+                else { FindObjectOfType<AudioManager>().PlaySound("Iframe"); }
                 player.UpdateHealth(-(player.playerHealth/2));
             }
         }
@@ -42,10 +44,15 @@ public class StaticObjectDamage : MonoBehaviour
 
         if (objectCanAttack >= 0.8f)
         {
-            FindObjectOfType<AudioManager>().PlaySound("PlayerHurt");
+            if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("PlayerHurt"); }
+            else { FindObjectOfType<AudioManager>().PlaySound("Iframe"); }
             if (isScytheAttack) { player.HitByScythe(); }
             if (isHand) { player.HitByHand(); }
-            player.UpdateHealth(-damage + Mathf.RoundToInt((damage * player.defense)/10));
+            
+            int playerDamageAmount = damage;
+            
+            if (playerDamageAmount < Mathf.FloorToInt(player.maxHealth/100f)) { playerDamageAmount = Mathf.FloorToInt(player.maxHealth/100f); }
+            player.UpdateHealth(-playerDamageAmount);
             objectCanAttack = 0f;
             
         }    

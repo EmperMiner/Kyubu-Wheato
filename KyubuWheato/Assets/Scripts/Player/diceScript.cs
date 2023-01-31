@@ -21,9 +21,35 @@ public class diceScript : MonoBehaviour
     [SerializeField] private float directionX;
     [SerializeField] private float directionY;
     [SerializeField] private GameObject[] DiceRayPrefabs;
+    [SerializeField] private bool isStar;
+    [SerializeField] private bool isDiceSpin;
+    private byte[,] starColors = new byte[18,3] {
+        { 255, 51, 51 },
+        { 255, 153, 51 },
+        { 255, 255, 51 },
+        { 153, 255, 51 },
+        { 51, 255, 51 },
+        { 51, 255, 153 },
+        { 51, 255, 255 },
+        { 51, 153, 255 },
+        { 51, 51, 255 },
+        { 153, 51, 255 },
+        { 255, 51, 255 },
+        { 255, 51, 153 },
+        { 255, 255, 255 },
+        { 153, 76, 0 },
+        { 204, 255, 255 },
+        { 255, 204, 255 },
+        { 204, 255, 204 },
+        { 255, 255, 204 },
+    };
     private bool havePastelDeChoclo;
     private Vector2 enemyTargetVector;
     private float DiceRayAngleOffset;
+    private SpriteRenderer StarSprite;
+
+    [SerializeField] private bool dontExplode;
+    [SerializeField] private GameObject starItself;
 
     void Start()
     {
@@ -50,6 +76,16 @@ public class diceScript : MonoBehaviour
 
         if (havePastelDeChoclo) { StartCoroutine(RollExplosionChance());}
 
+        if (isStar)
+        {
+            StarSprite = starItself.GetComponent<SpriteRenderer>();
+            int i = UnityEngine.Random.Range(0,starColors.GetLength(0));
+            StarSprite.color = new Color32(starColors[i,0], starColors[i,1], starColors[i,2], 255);
+            float sizeRandom = UnityEngine.Random.Range(0.4f, 2.5f);
+            transform.localScale = new Vector3(sizeRandom, sizeRandom, 1f);
+            rb.velocity = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-70f, 70f)) * new Vector2(direction.x, direction.y).normalized * (fireForce * UnityEngine.Random.Range(0.25f, 1f));
+        }
+
         if (gameObject.tag == "FakeDice1") { DestroyFakeDice(); }
         if (gameObject.tag == "FakeDice2") { DestroyFakeDice(); }
         if (gameObject.tag == "FakeDice3") { DestroyFakeDice(); }
@@ -64,14 +100,14 @@ public class diceScript : MonoBehaviour
     }
     private void DestroyFakeDice()
     {
-        Destroy(gameObject, 1.5f);
+        if (!isDiceSpin) { Destroy(gameObject, 1.5f); }
     }
     IEnumerator RollExplosionChance()
     {
         
         yield return new WaitForSeconds(1f);
-        int i = UnityEngine.Random.Range(0,100);
-        if (i < 30 + diceThrowScript.KyubuStack) { Explode(); }
+        int i = UnityEngine.Random.Range(0,130);
+        if (i < 30 + diceThrowScript.KyubuStack && dontExplode == false) { Explode(); }
         yield return null;
     }
 

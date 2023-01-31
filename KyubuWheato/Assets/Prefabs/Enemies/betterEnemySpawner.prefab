@@ -47,3 +47,14 @@ MonoBehaviour:
   enemyIntervals: []
   enemyPrefabs: []
   enemyLimits: 
+  ghost: {fileID: 2928511541386306518, guid: 0c51b4cc7b7e7ba4c9f0084d69cc1626, type: 3}
+  flippedEnemyPrefabs:
+  - {fileID: 1348866234531774441, guid: 25c3bb9ec6168c846ae626ae76740057, type: 3}
+  - {fileID: 3276073638894901266, guid: 034d3f6be589f8d44b89e7474d496f97, type: 3}
+  - {fileID: 7069245806492307287, guid: 893bb5d87adced049beb2a7b75c014fc, type: 3}
+  - {fileID: 6882148814188905353, guid: 4062a5eb4f1554546b63e2d8882c8635, type: 3}
+  - {fileID: 2760173454840875553, guid: 6e833446f08199d41994c7aacc140093, type: 3}
+  - {fileID: 6308753891499002788, guid: 5899ab7e71ba3b149a4d710dd40dc329, type: 3}
+  spiderInterval: 0
+  spiderPrefab: {fileID: 9123488909937170722, guid: 50ff5ba9e1012eb469b9712d1f87c46c, type: 3}
+  spiderLimit: 0

@@ -15,8 +15,7 @@ public class diceMagnetize : MonoBehaviour
     private PlayerController player;
     private DiceThrow diceThrowScript;
     private Transform playerTransform;
-    private UnityEngine.AI.NavMeshAgent agent;
-    private bool Magnetized = false;
+    
     [SerializeField] private bool DiceIsMultishot;
     [SerializeField] private bool Magnetizable;
     [SerializeField] private float directionX;
@@ -28,9 +27,11 @@ public class diceMagnetize : MonoBehaviour
     private float DiceRayAngleOffset;
 
     public bool pickupable;
+    private bool LifeStolen;
 
     void Start()
     {
+        LifeStolen = false;
         LoadData();
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>(); 
         rb = GetComponent<Rigidbody2D>();
@@ -59,9 +60,6 @@ public class diceMagnetize : MonoBehaviour
         if (gameObject.tag == "FakeDice5") { DestroyFakeDice(); }
         if (gameObject.tag == "FakeDice6") { DestroyFakeDice(); }
 
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
 
         if (Magnetizable && haveCupcake) 
         {
@@ -71,11 +69,6 @@ public class diceMagnetize : MonoBehaviour
         StartCoroutine(PickupDelay());
     }
 
-    private void FixedUpdate()
-    {
-        if (Magnetized) { agent.SetDestination(playerTransform.position); }
-    }
-    
     private void AddTorqueImpulse(float angularChangeInDegrees)
     {
         var impulse = (angularChangeInDegrees * Mathf.Deg2Rad) * rb.inertia;
@@ -87,18 +80,28 @@ public class diceMagnetize : MonoBehaviour
         Destroy(gameObject, 1.5f);
     }
 
-    IEnumerator Wait()
+    private IEnumerator PickupDelay()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(0.15f);
+        pickupable = true;
+        yield return null;
+    }
+
+    private IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(4f);
         FindObjectOfType<AudioManager>().PlaySound("MagnetizedDice");
-        Magnetized = true;
+        yield return new WaitForSeconds(1f);
+        FindObjectOfType<AudioManager>().PlaySound("DicePickup");
+        player.IncreaseDiceNumber();
+        Destroy(gameObject);
         yield return null;
     }
     
-    IEnumerator RollExplosionChance()
+    private IEnumerator RollExplosionChance()
     {
         yield return new WaitForSeconds(1f);
-        int i = UnityEngine.Random.Range(0,100);
+        int i = UnityEngine.Random.Range(0,130);
         if (i < 10  + diceThrowScript.KyubuStack) { Explode(); }
         yield return null;
     }
@@ -180,11 +183,24 @@ public class diceMagnetize : MonoBehaviour
         }
     } 
 
-    IEnumerator PickupDelay()
+    private void OnTriggerEnter2D(Collider2D other) 
     {
-        yield return new WaitForSeconds(0.15f);
-        pickupable = true;
-        yield return null;
+        bool Lifesteal = this.gameObject.tag == "ChargedDice2" || this.gameObject.tag == "ChargedDice2" || this.gameObject.tag == "ChargedDice2" || this.gameObject.tag == "FakeDice8"|| this.gameObject.tag == "FakeDice8"|| this.gameObject.tag == "FakeDice8";
+        if (!Lifesteal) { return; }
+        if (other.gameObject.tag == "enemyMouse" && LifeStolen == false) { FindObjectOfType<AudioManager>().PlaySound("Lifesteal"); }
+        if (other.gameObject.tag == "enemyMouse" && this.gameObject.tag == "ChargedDice2" && LifeStolen == false )
+        { player.UpdateHealth(Mathf.RoundToInt(player.maxHealth*0.007f*(PlayerPrefs.GetFloat("DiceSpinLevelUp")) + 2.5f));}
+        if (other.gameObject.tag == "enemyMouse" && this.gameObject.tag == "ChargedDice4" && LifeStolen == false )
+        { player.UpdateHealth(Mathf.RoundToInt(player.maxHealth*0.007f*(PlayerPrefs.GetFloat("DiceSpinLevelUp")) + 2f));}
+        if (other.gameObject.tag == "enemyMouse" && this.gameObject.tag == "ChargedDice6" && LifeStolen == false )
+        { player.UpdateHealth(Mathf.RoundToInt(player.maxHealth*0.007f*(PlayerPrefs.GetFloat("DiceSpinLevelUp")) + 1.5f));}
+        if (other.gameObject.tag == "enemyMouse" && this.gameObject.tag == "FakeDice8" && LifeStolen == false )
+        { player.UpdateHealth(Mathf.RoundToInt(player.maxHealth*0.007f*(PlayerPrefs.GetFloat("DiceSpinLevelUp")) + 1f));}
+        if (other.gameObject.tag == "enemyMouse" && this.gameObject.tag == "FakeDice10" && LifeStolen == false )
+        { player.UpdateHealth(Mathf.RoundToInt(player.maxHealth*0.007f*(PlayerPrefs.GetFloat("DiceSpinLevelUp")) + 0.5f));}
+        if (other.gameObject.tag == "enemyMouse" && this.gameObject.tag == "FakeDice12" && LifeStolen == false )
+        { player.UpdateHealth(Mathf.RoundToInt(player.maxHealth*0.007f*(PlayerPrefs.GetFloat("DiceSpinLevelUp"))));}
+        if (other.gameObject.tag == "enemyMouse") { LifeStolen = true; }
     }
 
     private void LoadData()

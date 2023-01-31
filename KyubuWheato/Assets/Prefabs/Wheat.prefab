@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WheatAmount: 1
+  isSuperior: 1
 --- !u!95 &7057559606737096971
 Animator:
   serializedVersion: 4

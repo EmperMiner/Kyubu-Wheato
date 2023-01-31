@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TreasureChestSpawner : MonoBehaviour
 {
@@ -23,7 +24,8 @@ public class TreasureChestSpawner : MonoBehaviour
     private IEnumerator SpawnChestCycle()
     {
         triggeredChestSpawningCycle = true;
-        yield return new WaitForSeconds(Random.Range(20f, 40f));
+        if (SceneManager.GetActiveScene().buildIndex != 15) { yield return new WaitForSeconds(Random.Range(12f, 32f)); }
+        else { yield return new WaitForSeconds(Random.Range(3f, 9f)); }
         SpawnChest();
         if (ChestSpawned < ChestLimit) { StartCoroutine(SpawnChestCycle()); }
         else { triggeredChestSpawningCycle = false; }

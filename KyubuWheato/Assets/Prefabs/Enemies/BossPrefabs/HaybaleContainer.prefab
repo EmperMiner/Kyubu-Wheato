@@ -146,10 +146,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48ddf96928cb5a408e88a78447cb697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 30
+  damage: 90
   isCornRay: 0
   isBossCornRay: 0
+  isInvertedCornray: 0
   isScytheAttack: 0
+  is4thWall: 0
+  isHand: 0
+  ignoreDefense: 0
 --- !u!1 &3014875349800989114
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,10 +200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d15e48e60b62c4a9faa029fa63c2c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBeforeDestroy: 10
+  timeBeforeDestroy: 8
   isKyubuTile3Left: 0
   isKyubuTile3Right: 0
   isKyubuTile6: 0
+  isStar: 0
   Dice3: {fileID: 0}
   Dice6: []
 --- !u!95 &4718512651228134093

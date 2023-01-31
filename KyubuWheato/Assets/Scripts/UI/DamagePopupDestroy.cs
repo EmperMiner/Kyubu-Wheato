@@ -8,6 +8,7 @@ public class DamagePopupDestroy : MonoBehaviour
     [SerializeField] private bool isKyubuTile3Left;
     [SerializeField] private bool isKyubuTile3Right;
     [SerializeField] private bool isKyubuTile6;
+    [SerializeField] private bool isStar;
     [SerializeField] private GameObject Dice3;
     [SerializeField] private GameObject[] Dice6;
     
@@ -16,12 +17,8 @@ public class DamagePopupDestroy : MonoBehaviour
         if (isKyubuTile3Left) { StartCoroutine(Summon3Dice(-4.0f)); }
         if (isKyubuTile3Right) { StartCoroutine(Summon3Dice(4.0f)); }
         if (isKyubuTile6) { StartCoroutine(Summon6Dice()); }
+        if (isStar) { timeBeforeDestroy = Random.Range(1f, 3f); }
         Destroy(gameObject, timeBeforeDestroy);
-    }
-
-    void Update()
-    {
-        
     }
 
     IEnumerator Summon3Dice(float offset)
@@ -34,7 +31,7 @@ public class DamagePopupDestroy : MonoBehaviour
 
     IEnumerator Summon6Dice()
     {
-        yield return new WaitForSeconds(2.85f);
+        yield return new WaitForSeconds(0.85f);
         FindObjectOfType<AudioManager>().PlaySound("KK6Land");
         for (int i = 0; i < 6; i++) { Instantiate(Dice6[i], transform.position, Random.rotation);  }
         yield return null;

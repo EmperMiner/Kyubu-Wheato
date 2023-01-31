@@ -138,7 +138,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: KK6Land
     clip: {fileID: 8300000, guid: a027e165e29c75046a58b08d7c208125, type: 3}
-    volume: 0.434
+    volume: 0.25
     pitch: 1
     loop: 0
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
@@ -152,7 +152,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: MagnetizedDice
     clip: {fileID: 8300000, guid: d163d959917745740a4bd00bb38b1ddf, type: 3}
-    volume: 0.47
+    volume: 0.23
     pitch: 1
     loop: 0
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
@@ -353,13 +353,6 @@ MonoBehaviour:
     loop: 0
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
-  - name: Discord
-    clip: {fileID: 8300000, guid: 667a98e72b590664b9590b2f5230da06, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 1
-    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
-    source: {fileID: 0}
   - name: TumbleweedHit
     clip: {fileID: 8300000, guid: c3dc76f110646ac419b209bac6196209, type: 3}
     volume: 1
@@ -437,8 +430,316 @@ MonoBehaviour:
     loop: 0
     group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
     source: {fileID: 0}
+  - name: LevelName
+    clip: {fileID: 8300000, guid: 3276b1a396baf2d4598e0d94a1463271, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: MapUnlock
+    clip: {fileID: 8300000, guid: 25711da12c7fb6a4f88cb0f045bc61bf, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: DiceShaking
+    clip: {fileID: 8300000, guid: 76d9780080ad352429ea32fc49be0818, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: Discord
+    clip: {fileID: 8300000, guid: 667a98e72b590664b9590b2f5230da06, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
+    source: {fileID: 0}
+  - name: BGM1
+    clip: {fileID: 8300000, guid: 21765e9024a037844a429b1f12160356, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
+    source: {fileID: 0}
+  - name: BGM2
+    clip: {fileID: 8300000, guid: d6082f5a7c9167a4fbf399db42c852f5, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
+    source: {fileID: 0}
+  - name: BGM3
+    clip: {fileID: 8300000, guid: 1cc099dfb168877459e05ef5f8d6b932, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
+    source: {fileID: 0}
+  - name: Sanesss
+    clip: {fileID: 8300000, guid: 4b90a7f0842bbfe43bfd3484fa3c1916, type: 3}
+    volume: 0.15
+    pitch: 1
+    loop: 1
+    group: {fileID: 24300002, guid: f9bb35d09c01f1c409376d6a5985b104, type: 2}
+    source: {fileID: 0}
   - name: DefenseDown
     clip: {fileID: 8300000, guid: c0279fc12d1263b46bb2971bd4ad4a85, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: CrescentBreak1
+    clip: {fileID: 8300000, guid: 1f876d802ff89e446b5a5019c8d87782, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: CrescentBreak2
+    clip: {fileID: 8300000, guid: 0669d11fc1c7dc640bcf4f561c34b07e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: CrescentBreak3
+    clip: {fileID: 8300000, guid: 00f0c4688cacb684b91d2668eea5a6d4, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: CrescentBreak4
+    clip: {fileID: 8300000, guid: fb38e4a33861fee46a93a9e304078d1f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: CrescentBreak5
+    clip: {fileID: 8300000, guid: b41ce29037a4f3d4e820f6e4e0d52e1e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: CrescentBreak6
+    clip: {fileID: 8300000, guid: 8d9ab440753a3c749bafa99b223c1590, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: UnlockEntree
+    clip: {fileID: 8300000, guid: beae25f590eadb949b2d7da71f0a67df, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: TimeCrescent
+    clip: {fileID: 8300000, guid: 9f050bac17ee6e74fb52e508d8dd08c2, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: Iframe
+    clip: {fileID: 8300000, guid: 5a3da2794676d764c86adf6fc4c06217, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: WhaleJumpscare
+    clip: {fileID: 8300000, guid: 5166904006e1fe04bb47719d697fd245, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: WhaleLaugh
+    clip: {fileID: 8300000, guid: 9c988928717e7d1469048a8325c5d9b7, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: WindingMusicBox
+    clip: {fileID: 8300000, guid: 7cd8341e4d4732f44b527de04c77c18a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: WitchPotion
+    clip: {fileID: 8300000, guid: d0157fc1b2f1a444dbeba05ebca158fc, type: 3}
+    volume: 0.65
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: WaterSplash
+    clip: {fileID: 8300000, guid: c238b76f7de877747ab11be8c095245d, type: 3}
+    volume: 0.9
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: UltimateCharged
+    clip: {fileID: 8300000, guid: a8a8cb7d2c44eb24cb7fff709f889c1c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: UltimateActive
+    clip: {fileID: 8300000, guid: 66a3b903b298a3b4791b58bab5e79990, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: Supernova
+    clip: {fileID: 8300000, guid: 47741b504a979124eb8988496ac3a63c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: FSC
+    clip: {fileID: 8300000, guid: cb937004e403c3e4aa08f20ae1f0ceeb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: LilD
+    clip: {fileID: 8300000, guid: e101282db4c5e8a42865b929f7dd3255, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: Gasp
+    clip: {fileID: 8300000, guid: 7a631995057e21c41b291eb386fe1e5c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: Lifesteal
+    clip: {fileID: 8300000, guid: e0412493f5656dc42af2fd026445914e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: Meow
+    clip: {fileID: 8300000, guid: 2863cf76b2e466c4785fa46d1200c43f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: FarmerShake
+    clip: {fileID: 8300000, guid: d7762758ab9eee7498a35354ad657a5b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: FarmerLimp
+    clip: {fileID: 8300000, guid: 5915bc47439242e409f630de8b69cd65, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: GoldenWheatSpawn
+    clip: {fileID: 8300000, guid: 021d2f8ff0b11a743b187d6daa2a0bfc, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: FlippedSpawned1
+    clip: {fileID: 8300000, guid: 6a597cff7d04f4a488d2686fdbce800d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: FlippedSpawned2
+    clip: {fileID: 8300000, guid: e96617fc114ceba49a857df483e63feb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: FlippedSpawned3
+    clip: {fileID: 8300000, guid: dd1e802766c2f8848962834fe5da9c66, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: FlippedSpawned4
+    clip: {fileID: 8300000, guid: 80035f4ac2f6cc344ba14d99ce3ed8f1, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: FlippedSpawned5
+    clip: {fileID: 8300000, guid: 8a457590e4902f04892804be9a177d53, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: SpooderSpawned
+    clip: {fileID: 8300000, guid: fa395ca2ebdc71a4f8dc1bb3d7c4c501, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: TomBlaster
+    clip: {fileID: 8300000, guid: 064ee7a02d911a240b69b2d7795523f3, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: SanesssIntro
+    clip: {fileID: 8300000, guid: 5a1462a8a68dded4f8c81b1c590fad29, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: SanesssHead
+    clip: {fileID: 8300000, guid: b412c0149c5f15f489d05c80e0953076, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: SanesssTrigger
+    clip: {fileID: 8300000, guid: 71ef13efdcb8b154aa9185066ffbbec1, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    group: {fileID: 24300002, guid: bebd5c300f48dcd4abf8b4c7a63367bb, type: 2}
+    source: {fileID: 0}
+  - name: FSCGang
+    clip: {fileID: 8300000, guid: d69513a5387e174448e49ff945302f58, type: 3}
     volume: 1
     pitch: 1
     loop: 0

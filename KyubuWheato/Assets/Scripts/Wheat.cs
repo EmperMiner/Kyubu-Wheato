@@ -6,6 +6,8 @@ public class Wheat : MonoBehaviour
 {
     private PlayerController player;
     [SerializeField] private int WheatAmount;
+    [SerializeField] private bool isSuperior;
+    private int bonus;
 
     void Start()
     {
@@ -16,7 +18,10 @@ public class Wheat : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            player.UpdateWheat(WheatAmount);
+            if (isSuperior) { bonus = Random.Range(0,3); }
+            else { bonus = 0; }
+
+            player.UpdateWheat(WheatAmount + bonus);
             Destroy(gameObject);
         }
     }

@@ -30,6 +30,8 @@ public class FlippedBehaviour : MonoBehaviour
     [SerializeField] private GameObject worseWheatDrop;
     [SerializeField] private Transform pfDamagePopup;
     [SerializeField] private TextMeshPro pfDamagePopupText;
+    [SerializeField] private Transform pfDamagePopupCrit;
+    [SerializeField] private TextMeshPro pfDamagePopupTextCrit;
 
     [SerializeField] private bool isA;
     [SerializeField] private bool isB;
@@ -54,13 +56,17 @@ public class FlippedBehaviour : MonoBehaviour
     private bool CheckForValidSpawn;
 
     private Transform betterEnemySpawner;
-
     private UltimateBarCharge ultimateBar;
+    private bool stopped;
+    private DiceThrow diceThrowScript;
+    [SerializeField] private GameObject Supernova;
 
     private void Start()
     {
+        stopped = false;
         isMoving = true;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        diceThrowScript = GameObject.FindGameObjectWithTag("DiceManager").GetComponent<DiceThrow>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
         betterEnemySpawner = GameObject.FindGameObjectWithTag("betterEnemySpawner").transform;
@@ -86,6 +92,7 @@ public class FlippedBehaviour : MonoBehaviour
         ShotWall = false;
         
         StartCoroutine(ValidSpawn());
+        StartCoroutine(RandomSpeedOffset());
     }
 
     private void Update()
@@ -106,10 +113,15 @@ public class FlippedBehaviour : MonoBehaviour
 
         if(mouseHealth <= 0)
         {   
-            if (player.InHealMode == true) { player.UpdateHealth(15); }
+            if (PlayerPrefs.GetInt("IngameRamen") == 1 && Random.Range(0f, 100f) < 3f + PlayerPrefs.GetInt("ChargedAttacks")*0.1f) 
+            { 
+                Instantiate(Supernova, transform.position, Quaternion.identity); 
+                FindObjectOfType<AudioManager>().PlaySound("Supernova");
+            }
+            if (player.InHealMode == true) { player.UpdateHealth(Mathf.RoundToInt(player.maxHealth*0.03f + 0.7f)); FindObjectOfType<AudioManager>().PlaySound("Lifesteal");}
 
-            if (isC) { Instantiate(worseWheatDrop, transform.position, Quaternion.identity); }
-            else { Instantiate(wheatDrop, transform.position, Quaternion.identity); }
+            if (isC) { for (int i = 0; i < Random.Range(0,5); i++) { Instantiate(worseWheatDrop, transform.position, Quaternion.identity); } }
+            else { for (int i = 0; i < Random.Range(1,4); i++) { Instantiate(wheatDrop, transform.position, Quaternion.identity); } }
 
             Destroy(gameObject);
         }
@@ -117,7 +129,13 @@ public class FlippedBehaviour : MonoBehaviour
 
     private void FixedUpdate() 
     {
-       if (badSpawn == false && isMoving) { agent.SetDestination(playerTransform.position); } 
+        if (badSpawn == false && isMoving && stopped == false) { agent.SetDestination(playerTransform.position); } 
+        else
+        {
+            agent.isStopped = true;
+            agent.ResetPath();
+            agent.velocity = Vector3.zero;
+        }
     }
 
     private void mouseTakeDamage(int i)
@@ -131,7 +149,9 @@ public class FlippedBehaviour : MonoBehaviour
     private void CreateDamagePopup(int damageAmount)
     {
         pfDamagePopupText.text = damageAmount.ToString();
-        Instantiate(pfDamagePopup, transform.position, Quaternion.identity);
+        pfDamagePopupTextCrit.text = damageAmount.ToString();
+        if (damageAmount/player.strength <= 6) { Instantiate(pfDamagePopup, transform.position, Quaternion.identity); }
+        else { Instantiate(pfDamagePopupCrit, transform.position, Quaternion.identity); }
     }
 
     private void ChargeUlt(int ChargeAmount)
@@ -145,9 +165,29 @@ public class FlippedBehaviour : MonoBehaviour
         if (CheckForValidSpawn == true && UndesirableSpawn == true)
         {
             badSpawn = true;
-            Instantiate(enemiesPrefabs[enemyIndex], new Vector3(betterEnemySpawner.position.x + Random.Range(-10f, 10f), betterEnemySpawner.position.y + Random.Range(-10f, 10f), 0), Quaternion.identity);
+
+            float RandomXOffset;
+            float RandomYOffset;   
+
+            int rand1 = Random.Range(0,2);
+            if (rand1 == 0) { RandomXOffset = Random.Range(-10f,-3f); }
+            else { RandomXOffset = Random.Range(3f,10f); }
+
+            int rand2 = Random.Range(0,2);
+            if (rand2 == 0) { RandomYOffset = Random.Range(-10f,-3f); }
+            else { RandomYOffset = Random.Range(3f,10f); }
+
+            Instantiate(enemiesPrefabs[enemyIndex], new Vector3(betterEnemySpawner.position.x + RandomXOffset, betterEnemySpawner.position.y + RandomYOffset, 0), Quaternion.identity);
+
             Destroy(gameObject);
         }  
+
+        if (collider.gameObject.tag == "TimeCrescent")
+        {
+            stopped = true;
+            diceThrowScript.CrescentCrack(400);
+            FindObjectOfType<AudioManager>().PlaySound("CrescentBreak" + UnityEngine.Random.Range(1,7));
+        }
 
         if (alreadyDamaged == false)
         {
@@ -157,7 +197,16 @@ public class FlippedBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "6sidedDice4" && isD == false && isF == false) { mouseTakeDamage(4); ChargeUlt(3); }
             if (collider.gameObject.tag == "6sidedDice5" && isD == false && isF == false) { mouseTakeDamage(5); ChargeUlt(2); }
             if (collider.gameObject.tag == "6sidedDice6" && isD == false && isF == false) { mouseTakeDamage(6); ChargeUlt(1); }
-            if (collider.gameObject.tag == "BroomAttack") { mouseTakeDamage(10); ChargeUlt(8); }        
+            if (collider.gameObject.tag == "ChargedDice2" && isD == false && isF == false) { mouseTakeDamage(2); ChargeUlt(2); }   
+            if (collider.gameObject.tag == "ChargedDice4" && isD == false && isF == false) { mouseTakeDamage(4); ChargeUlt(4); }   
+            if (collider.gameObject.tag == "ChargedDice6" && isD == false && isF == false) { mouseTakeDamage(6); ChargeUlt(6);}   
+            if (collider.gameObject.tag == "FakeDice8" && isD == false && isF == false) { mouseTakeDamage(8); ChargeUlt(8); }     
+            if (collider.gameObject.tag == "FakeDice10" && isD == false && isF == false) { mouseTakeDamage(10); ChargeUlt(10); }     
+            if (collider.gameObject.tag == "FakeDice12" && isD == false && isF == false) { mouseTakeDamage(12); ChargeUlt(12); }   
+            if (collider.gameObject.tag == "FakeDice20") { mouseTakeDamage(20); } 
+            if (collider.gameObject.tag == "BroomAttack") { mouseTakeDamage(10); ChargeUlt(8); }   
+            if (collider.gameObject.tag == "Star") { mouseTakeDamage(UnityEngine.Random.Range(1,4) + Mathf.RoundToInt(((player.maxHealth - player.playerHealth)/player.maxHealth)*5)); }  
+            if (collider.gameObject.tag == "100sidedDice") { mouseTakeDamage(UnityEngine.Random.Range(50,100)); }        
 
             if (collider.gameObject.tag == "FakeDice1") { mouseTakeDamage(1); }
             if (collider.gameObject.tag == "FakeDice2") { mouseTakeDamage(2); } 
@@ -172,6 +221,12 @@ public class FlippedBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "6sidedDice4" && isD  == true) { PlayGlitchedSound(); }
             if (collider.gameObject.tag == "6sidedDice5" && isD  == true) { PlayGlitchedSound(); }
             if (collider.gameObject.tag == "6sidedDice6" && isD  == true) { PlayGlitchedSound(); }
+            if (collider.gameObject.tag == "ChargedDice2" && isD  == true) { PlayGlitchedSound(); }
+            if (collider.gameObject.tag == "ChargedDice4" && isD  == true) { PlayGlitchedSound(); }
+            if (collider.gameObject.tag == "ChargedDice6" && isD  == true) { PlayGlitchedSound(); }
+            if (collider.gameObject.tag == "FakeDice8" && isD  == true) { PlayGlitchedSound(); }
+            if (collider.gameObject.tag == "FakeDice10" && isD  == true) { PlayGlitchedSound(); }
+            if (collider.gameObject.tag == "FakeDice12" && isD  == true) { PlayGlitchedSound(); }
 
             if (collider.gameObject.tag == "6sidedDice1" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp"); }
             if (collider.gameObject.tag == "6sidedDice2" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
@@ -179,6 +234,13 @@ public class FlippedBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "6sidedDice4" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
             if (collider.gameObject.tag == "6sidedDice5" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
             if (collider.gameObject.tag == "6sidedDice6" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
+            if (collider.gameObject.tag == "ChargedDice2" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp"); }
+            if (collider.gameObject.tag == "ChargedDice4" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
+            if (collider.gameObject.tag == "ChargedDice6" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
+            if (collider.gameObject.tag == "FakeDice8" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
+            if (collider.gameObject.tag == "FakeDice10" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
+            if (collider.gameObject.tag == "FakeDice12" && isF  == true) { Destroy(collider.gameObject); FindObjectOfType<AudioManager>().PlaySound("Burp");  }
+            
         }
         if (collider.gameObject.tag == "Player") { mouseCanAttack = mouseAttackSpeed; }
     }
@@ -187,13 +249,22 @@ public class FlippedBehaviour : MonoBehaviour
     {   
         if (other.gameObject.tag != "Player") return;
 
-        if (mouseCanAttack >= mouseAttackSpeed)
+        if (mouseCanAttack >= mouseAttackSpeed && player.playerAttacked == false)
         {
-            FindObjectOfType<AudioManager>().PlaySound("PlayerHurt");
-            player.UpdateHealth(-mouseStrength + Mathf.RoundToInt((mouseStrength * player.defense)/10));
+            if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("PlayerHurt"); }
+            else { FindObjectOfType<AudioManager>().PlaySound("Iframe"); }
+            int playerDamageAmount = mouseStrength + Mathf.RoundToInt((mouseStrength * player.defense)/10);
+            if (playerDamageAmount < Mathf.FloorToInt(player.maxHealth/100f)) { playerDamageAmount = Mathf.FloorToInt(player.maxHealth/100f); } 
+            player.UpdateHealth(-playerDamageAmount);
             mouseCanAttack = 0f;
-            if (isC) { StartCoroutine(CSplit()); player.HitByC(); FindObjectOfType<AudioManager>().PlaySound("DefenseDown"); }
-            if (isF) { FindObjectOfType<AudioManager>().PlaySound("FSay");  }
+            player.playerAttacked = true;
+            if (isC) 
+            { 
+                StartCoroutine(CSplit()); 
+                player.HitByC(); 
+                if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("DefenseDown"); }
+            }
+            if (isF) { if (player.Invincible == false) { FindObjectOfType<AudioManager>().PlaySound("FSay"); }  }
         }    
 
         mouseCanAttack += Time.deltaTime; 
@@ -203,6 +274,10 @@ public class FlippedBehaviour : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collider)
     {
+        if (collider.gameObject.tag == "TimeCrescent") 
+        { 
+            stopped = false;
+        }
         if (collider.gameObject.tag == "6sidedDice1") { alreadyDamaged = false; }
         if (collider.gameObject.tag == "6sidedDice2") { alreadyDamaged = false; } 
         if (collider.gameObject.tag == "6sidedDice3") { alreadyDamaged = false; }
@@ -217,8 +292,25 @@ public class FlippedBehaviour : MonoBehaviour
         if (collider.gameObject.tag == "FakeDice5") { alreadyDamaged = false; }
         if (collider.gameObject.tag == "FakeDice6") { alreadyDamaged = false; }  
         if (collider.gameObject.tag == "BroomAttack") { alreadyDamaged = false; }  
+        if (collider.gameObject.tag == "ChargedDice2") { alreadyDamaged = false;}
+        if (collider.gameObject.tag == "ChargedDice4") { alreadyDamaged = false;}
+        if (collider.gameObject.tag == "ChargedDice6") { alreadyDamaged = false;}
+        if (collider.gameObject.tag == "FakeDice8") { alreadyDamaged = false; }  
+        if (collider.gameObject.tag == "FakeDice10") { alreadyDamaged = false; }  
+        if (collider.gameObject.tag == "FakeDice12") { alreadyDamaged = false; }  
+        if (collider.gameObject.tag == "FakeDice20") { alreadyDamaged = false; }  
+        if (collider.gameObject.tag == "Star") { alreadyDamaged = false; }  
+        if (collider.gameObject.tag == "100sidedDice") { alreadyDamaged = false;}  
 
         if (collider.gameObject.tag == "Player") { player.spriteRenderer.material.color = new Color32(255, 255, 255, 255); }  
+    }
+
+    private IEnumerator RandomSpeedOffset()
+    {
+        yield return new WaitForSeconds(Random.Range(1f, 18f));
+        agent.speed += Random.Range(-0.3f, 2f);
+        if (agent.speed < 1f) { agent.speed = 1; }
+        yield return null;
     }
 
     private IEnumerator ValidSpawn()
@@ -257,7 +349,7 @@ public class FlippedBehaviour : MonoBehaviour
         agent.ResetPath();
         yield return new WaitForSeconds(4f);
         FindObjectOfType<AudioManager>().PlaySound("4thWall");
-        Instantiate(WallPrefab, transform.position, Quaternion.identity);
+        Instantiate(WallPrefab, transform.position, Quaternion.identity, this.transform);
         yield return new WaitForSeconds(2.5f);
         isMoving = true;
         agent.isStopped = false;
@@ -299,11 +391,14 @@ public class FlippedBehaviour : MonoBehaviour
         agent.isStopped = true;
         agent.ResetPath();
         yield return new WaitForSeconds(2f);
-        Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x - 2f, transform.position.y, transform.position.z), Quaternion.identity);
-        Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x + 2f, transform.position.y, transform.position.z), Quaternion.identity);
-        Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z), Quaternion.identity);
-        Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x, transform.position.y - 2f, transform.position.z), Quaternion.identity);
-        FindObjectOfType<AudioManager>().PlaySound("CSplit");
+        GameObject[] enemyAmountOnMap = GameObject.FindGameObjectsWithTag("enemyMouse");
+        if (enemyAmountOnMap.Length < 25) { Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x - 2f, transform.position.y, transform.position.z), Quaternion.identity); FindObjectOfType<AudioManager>().PlaySound("CSplit");}  
+        enemyAmountOnMap = GameObject.FindGameObjectsWithTag("enemyMouse");
+        if (enemyAmountOnMap.Length < 25) { Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x + 2f, transform.position.y, transform.position.z), Quaternion.identity); }
+        enemyAmountOnMap = GameObject.FindGameObjectsWithTag("enemyMouse");
+        if (enemyAmountOnMap.Length < 25) { Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z), Quaternion.identity); }
+        enemyAmountOnMap = GameObject.FindGameObjectsWithTag("enemyMouse");
+        if (enemyAmountOnMap.Length < 25) { Instantiate(enemiesPrefabs[enemyIndex], new Vector3(transform.position.x, transform.position.y - 2f, transform.position.z), Quaternion.identity); }
         isMoving = true;
         agent.isStopped = false;
         yield return null;

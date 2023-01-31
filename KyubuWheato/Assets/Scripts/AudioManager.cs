@@ -27,7 +27,16 @@ public class AudioManager : MonoBehaviour
         if (isMainMenu) { PlayJingle("MainMenu"); }
         else if (isBossFight) { }
         else if (isSecretLevel) { PlayJingle("Discord"); }
-        else { StartCoroutine(PlayGameOST()); }
+        else 
+        { 
+            int bgmChoice = UnityEngine.Random.Range(0,10);
+            if (bgmChoice == 0) { StartCoroutine(PlayGameOST()); }
+            else if (bgmChoice <= 3) { PlayJingle("BGM1"); }
+            else if (bgmChoice <= 6) { PlayJingle("BGM2"); }
+            else { PlayJingle("BGM3"); }
+        }
+
+        if (isMainMenu == false) { PlaySound("LevelName");  } 
     }
 
     
@@ -40,6 +49,16 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.PlayOneShot(s.clip);
+    }
+    public void StopSound(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + name + " Not Found");
+            return;
+        }
+        s.source.Stop();
     }
     public void PlayJingle(string name)
     {

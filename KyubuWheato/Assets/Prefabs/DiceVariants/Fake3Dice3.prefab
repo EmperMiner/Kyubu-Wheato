@@ -155,6 +155,10 @@ MonoBehaviour:
   directionX: 0
   directionY: 0
   DiceRayPrefabs: []
+  isStar: 0
+  isDiceSpin: 0
+  dontExplode: 0
+  starItself: {fileID: 0}
 --- !u!114 &5939119155120805969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,5 +175,6 @@ MonoBehaviour:
   isKyubuTile3Left: 0
   isKyubuTile3Right: 0
   isKyubuTile6: 0
+  isStar: 0
   Dice3: {fileID: 0}
   Dice6: []
