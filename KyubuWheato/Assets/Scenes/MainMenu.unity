@@ -1424,7 +1424,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &114751974
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11235,7 +11235,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &932938863
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24659,6 +24659,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 195166939}
     m_Modifications:
+    - target: {fileID: 9131414748548893321, guid: 1d3d8e598fefdbf4c8af40e3347c93c1, type: 3}
+      propertyPath: normalBG.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131414748548893321, guid: 1d3d8e598fefdbf4c8af40e3347c93c1, type: 3}
+      propertyPath: normalBG.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 38d6a224b6b0c2840b439a6b96444036, type: 3}
+    - target: {fileID: 9131414748548893321, guid: 1d3d8e598fefdbf4c8af40e3347c93c1, type: 3}
+      propertyPath: normalBG.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: a46e3b8dc822d7346b7e1c3c351f48ea, type: 3}
+    - target: {fileID: 9131414748548893321, guid: 1d3d8e598fefdbf4c8af40e3347c93c1, type: 3}
+      propertyPath: normalBG.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: a9b892f9d3c5c1340b38a407dd80d74e, type: 3}
+    - target: {fileID: 9131414748548893321, guid: 1d3d8e598fefdbf4c8af40e3347c93c1, type: 3}
+      propertyPath: normalBG.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 8d9177078daa4354383eabf60c766d80, type: 3}
+    - target: {fileID: 9131414748548893321, guid: 1d3d8e598fefdbf4c8af40e3347c93c1, type: 3}
+      propertyPath: normalBG.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: 5f7026b3583b966418afbfd7e6e4f4a6, type: 3}
+    - target: {fileID: 9131414748548893321, guid: 1d3d8e598fefdbf4c8af40e3347c93c1, type: 3}
+      propertyPath: normalBG.Array.data[5]
+      value: 
+      objectReference: {fileID: 21300000, guid: a9984d73725dc7c4b953e92f8c15ea0c, type: 3}
+    - target: {fileID: 9131414748548893321, guid: 1d3d8e598fefdbf4c8af40e3347c93c1, type: 3}
+      propertyPath: normalBG.Array.data[6]
+      value: 
+      objectReference: {fileID: 21300000, guid: ed7f3dbc92088704391eebc8dfb92283, type: 3}
+    - target: {fileID: 9131414748548893321, guid: 1d3d8e598fefdbf4c8af40e3347c93c1, type: 3}
+      propertyPath: normalBG.Array.data[7]
+      value: 
+      objectReference: {fileID: 21300000, guid: 800094d66d8a6f34aa24c0ea0c4453b4, type: 3}
+    - target: {fileID: 9131414748548893321, guid: 1d3d8e598fefdbf4c8af40e3347c93c1, type: 3}
+      propertyPath: normalBG.Array.data[8]
+      value: 
+      objectReference: {fileID: 21300000, guid: 7edd81b1f0f60d24fba54bc9fce83362, type: 3}
     - target: {fileID: 9131414748548893324, guid: 1d3d8e598fefdbf4c8af40e3347c93c1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

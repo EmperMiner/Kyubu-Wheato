@@ -46950,6 +46950,39 @@ MonoBehaviour:
   ghost: {fileID: 2928511541386306518, guid: 0c51b4cc7b7e7ba4c9f0084d69cc1626, type: 3}
   SanesssIntroText: {fileID: 0}
   SanesssPrefab: {fileID: 0}
+  chestNotification:
+  - You got the ultimate ability!
+  - You got Kyubu Kombos!
+  - You can shoot 2 dice!
+  - You can shoot 3 dice!
+  - You got Dice Hotkeying!
+  - Dice returns to you automatically!
+  - You got Dice Pads!
+  - Dice now sometimes explode into rays!
+  - You got your Broom Companion!
+  - Enemies can explode upon death!
+  - You may sometimes be invulnerable!
+  - You can stop enemies!
+  - You shoot stars alongside dice!
+  - You got a bit faster!
+  - Your heart got bigger <3
+  - Your attacks deal more damage!
+  - You take slightly less damage!
+  - You got more dice!
+  - Dice throwing cooldown decreased!
+  - Enemies drop wheat more often!
+  - Enemies drop dice more often!
+  - You can see more future dice!
+  - You're becoming Usain Bolt!
+  - Your heart's too much for you!
+  - Power over 9000!
+  - You got iron skin!
+  - Dice overflowing!
+  - Cooldown greatly reduced!
+  - You're bathing in Wheat!
+  - Enemies love giving you dice!
+  - You can see more future dice!
+  - You got a bunch of wheat!
   playerAttacked: 0
   distancePerSecond: 0
 --- !u!4 &1405087408
