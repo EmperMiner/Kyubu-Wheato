@@ -130,10 +130,6 @@ public class mouseBehaviour : MonoBehaviour
             }
         }
 
-        
-
-        
-
         if (isBlackCat && firing == false && Vector2.Distance(transform.position, playerTransform.position) <= 5f) { StartCoroutine(ShootPotion()); }
 
         if (isBlackCat && spriteFiring == true) 
@@ -158,7 +154,7 @@ public class mouseBehaviour : MonoBehaviour
             if (isMiniBoss) { for (int i = 0; i < Random.Range(2,7); i++) { Instantiate(wheatDrop, new Vector3(transform.position.x + UnityEngine.Random.Range(-0.5f, 0.5f), transform.position.y + UnityEngine.Random.Range(-0.5f, 0.5f), transform.position.z), Quaternion.identity); } }
 
             int RNGDice = Random.Range(0, player.diceDroprate);
-            if (isMiniBoss == true) { RNGDice = Random.Range(0, 3); }
+            if (isMiniBoss == true) { RNGDice = Random.Range(0, 10); }
             if (RNGDice == 0) { Instantiate(dicetypes[Random.Range(0,dicetypes.Length)], transform.position, Quaternion.identity); }
 
             if (isGhost == false) { ExitHoeWinCondition.EnemiesKilled++; }
@@ -247,12 +243,12 @@ public class mouseBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "FakeDice4") { mouseTakeDamage(4); }
             if (collider.gameObject.tag == "FakeDice5") { mouseTakeDamage(5); }
             if (collider.gameObject.tag == "FakeDice6") { mouseTakeDamage(6); }      
-            if (collider.gameObject.tag == "ChargedDice2") { mouseTakeDamage(2); ChargeUlt(2); }   
-            if (collider.gameObject.tag == "ChargedDice4") { mouseTakeDamage(4); ChargeUlt(4); }   
-            if (collider.gameObject.tag == "ChargedDice6") { mouseTakeDamage(6); ChargeUlt(6); }   
-            if (collider.gameObject.tag == "FakeDice8") { mouseTakeDamage(8); ChargeUlt(8); }     
-            if (collider.gameObject.tag == "FakeDice10") { mouseTakeDamage(10); ChargeUlt(10); }     
-            if (collider.gameObject.tag == "FakeDice12") { mouseTakeDamage(12); ChargeUlt(12); }     
+            if (collider.gameObject.tag == "ChargedDice2") { mouseTakeDamage(2); ChargeUlt(24); }   
+            if (collider.gameObject.tag == "ChargedDice4") { mouseTakeDamage(4); ChargeUlt(20); }   
+            if (collider.gameObject.tag == "ChargedDice6") { mouseTakeDamage(6); ChargeUlt(16); }   
+            if (collider.gameObject.tag == "FakeDice8") { mouseTakeDamage(8); ChargeUlt(12); }     
+            if (collider.gameObject.tag == "FakeDice10") { mouseTakeDamage(10); ChargeUlt(8); }     
+            if (collider.gameObject.tag == "FakeDice12") { mouseTakeDamage(12); ChargeUlt(4); }     
             if (collider.gameObject.tag == "FakeDice20") { mouseTakeDamage(20); }   
 
             if (collider.gameObject.tag == "Star") { mouseTakeDamage(UnityEngine.Random.Range(1,4) + Mathf.RoundToInt(((player.maxHealth - player.playerHealth)/player.maxHealth)*5)); }   

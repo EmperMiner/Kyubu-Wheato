@@ -325,12 +325,12 @@ public class Sanesss : MonoBehaviour
             if (other.gameObject.tag == "FakeDice4") { mouseTakeDamage(4); }
             if (other.gameObject.tag == "FakeDice5") { mouseTakeDamage(5); }
             if (other.gameObject.tag == "FakeDice6") { mouseTakeDamage(6); }   
-            if (other.gameObject.tag == "ChargedDice2") { mouseTakeDamage(2); ChargeUlt(2); }   
-            if (other.gameObject.tag == "ChargedDice4") { mouseTakeDamage(4); ChargeUlt(4);  }   
-            if (other.gameObject.tag == "ChargedDice6") { mouseTakeDamage(6); ChargeUlt(6); }   
-            if (other.gameObject.tag == "FakeDice8") { mouseTakeDamage(8); ChargeUlt(8); }     
-            if (other.gameObject.tag == "FakeDice10") { mouseTakeDamage(10); ChargeUlt(10); }     
-            if (other.gameObject.tag == "FakeDice12") { mouseTakeDamage(12); ChargeUlt(12); }      
+            if (other.gameObject.tag == "ChargedDice2") { mouseTakeDamage(2); ChargeUlt(24); }   
+            if (other.gameObject.tag == "ChargedDice4") { mouseTakeDamage(4); ChargeUlt(20);  }   
+            if (other.gameObject.tag == "ChargedDice6") { mouseTakeDamage(6); ChargeUlt(16); }   
+            if (other.gameObject.tag == "FakeDice8") { mouseTakeDamage(8); ChargeUlt(12); }     
+            if (other.gameObject.tag == "FakeDice10") { mouseTakeDamage(10); ChargeUlt(8); }     
+            if (other.gameObject.tag == "FakeDice12") { mouseTakeDamage(12); ChargeUlt(4); }      
             if (other.gameObject.tag == "FakeDice20") { mouseTakeDamage(20); }     
 
             if (other.gameObject.tag == "Star") { mouseTakeDamage(UnityEngine.Random.Range(1,4) + Mathf.RoundToInt(((player.maxHealth - player.playerHealth)/player.maxHealth)*5)); }  

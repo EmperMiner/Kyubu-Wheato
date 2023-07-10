@@ -124,6 +124,7 @@ MonoBehaviour:
   isHenor: 0
   isScawy: 0
   isSchwein: 0
+  isSpooder: 0
   cornRay: {fileID: 7159845285500764364, guid: eeea2bf033c09d04eb086a2a3a9e9ad3, type: 3}
   isGhost: 0
   isBlackCat: 1

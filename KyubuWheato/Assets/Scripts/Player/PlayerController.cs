@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour
     private float playerAttackedTimer = 0f;
     private float playerAttackedGracePeriod = 1f;
 
-    public float distancePerSecond = 0;
+    public float distancePerSecond = 0f;
     private Vector3 previousLoc;
 
     private void Awake()
@@ -451,7 +451,7 @@ public class PlayerController : MonoBehaviour
         if (PlayerPrefs.GetInt("BossDefeated") == 0)
         {
             yield return new WaitForSeconds(1f);
-            if (distancePerSecond < 0.3f && UnityEngine.Random.Range(0,50) == 0 && standingOnDiceTile) { Instantiate(ghost, new Vector3(transform.position.x + UnityEngine.Random.Range(-10f, 10f), transform.position.y + UnityEngine.Random.Range(-10f, 10f), 0), Quaternion.identity); }
+            if (distancePerSecond < 0.2f && UnityEngine.Random.Range(0,50) == 0 && !standingOnDiceTile) {  Instantiate(ghost, new Vector3(transform.position.x + UnityEngine.Random.Range(-10f, 10f), transform.position.y + UnityEngine.Random.Range(-10f, 10f), -2), Quaternion.identity); }
             distancePerSecond = 0;
             StartCoroutine(CampChecking());
         }

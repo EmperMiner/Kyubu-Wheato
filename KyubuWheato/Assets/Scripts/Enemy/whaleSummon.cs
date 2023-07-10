@@ -19,7 +19,6 @@ public class whaleSummon : MonoBehaviour
     {
         water = GameObject.Find("Water").GetComponent<Animator>();
         enemyLimiter = 0;
-        if (SceneManager.GetActiveScene().buildIndex < 4) { enemyLimiter += 1; }
         if (SceneManager.GetActiveScene().buildIndex < 5) { enemyLimiter += 2; }
         if (SceneManager.GetActiveScene().buildIndex < 6) { enemyLimiter += 2; }
         if (SceneManager.GetActiveScene().buildIndex < 7) { enemyLimiter += 1; }

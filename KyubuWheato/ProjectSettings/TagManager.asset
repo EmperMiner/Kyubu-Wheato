@@ -93,6 +93,9 @@ TagManager:
   - PauseMenu
   - TotemChest
   - GoToShopPopup
+  - BigDice2
+  - BigDice4
+  - BigDice6
   layers:
   - Default
   - TransparentFX

@@ -197,12 +197,12 @@ public class FlippedBehaviour : MonoBehaviour
             if (collider.gameObject.tag == "6sidedDice4" && isD == false && isF == false) { mouseTakeDamage(4); ChargeUlt(3); }
             if (collider.gameObject.tag == "6sidedDice5" && isD == false && isF == false) { mouseTakeDamage(5); ChargeUlt(2); }
             if (collider.gameObject.tag == "6sidedDice6" && isD == false && isF == false) { mouseTakeDamage(6); ChargeUlt(1); }
-            if (collider.gameObject.tag == "ChargedDice2" && isD == false && isF == false) { mouseTakeDamage(2); ChargeUlt(2); }   
-            if (collider.gameObject.tag == "ChargedDice4" && isD == false && isF == false) { mouseTakeDamage(4); ChargeUlt(4); }   
-            if (collider.gameObject.tag == "ChargedDice6" && isD == false && isF == false) { mouseTakeDamage(6); ChargeUlt(6);}   
-            if (collider.gameObject.tag == "FakeDice8" && isD == false && isF == false) { mouseTakeDamage(8); ChargeUlt(8); }     
-            if (collider.gameObject.tag == "FakeDice10" && isD == false && isF == false) { mouseTakeDamage(10); ChargeUlt(10); }     
-            if (collider.gameObject.tag == "FakeDice12" && isD == false && isF == false) { mouseTakeDamage(12); ChargeUlt(12); }   
+            if (collider.gameObject.tag == "ChargedDice2" && isD == false && isF == false) { mouseTakeDamage(2); ChargeUlt(24); }   
+            if (collider.gameObject.tag == "ChargedDice4" && isD == false && isF == false) { mouseTakeDamage(4); ChargeUlt(20); }   
+            if (collider.gameObject.tag == "ChargedDice6" && isD == false && isF == false) { mouseTakeDamage(6); ChargeUlt(16);}   
+            if (collider.gameObject.tag == "FakeDice8" && isD == false && isF == false) { mouseTakeDamage(8); ChargeUlt(12); }     
+            if (collider.gameObject.tag == "FakeDice10" && isD == false && isF == false) { mouseTakeDamage(10); ChargeUlt(8); }     
+            if (collider.gameObject.tag == "FakeDice12" && isD == false && isF == false) { mouseTakeDamage(12); ChargeUlt(4); }   
             if (collider.gameObject.tag == "FakeDice20") { mouseTakeDamage(20); } 
             if (collider.gameObject.tag == "BroomAttack") { mouseTakeDamage(10); ChargeUlt(8); }   
             if (collider.gameObject.tag == "Star") { mouseTakeDamage(UnityEngine.Random.Range(1,4) + Mathf.RoundToInt(((player.maxHealth - player.playerHealth)/player.maxHealth)*5)); }  
@@ -415,7 +415,7 @@ public class FlippedBehaviour : MonoBehaviour
     {
         agent.speed = UnityEngine.Random.Range(3f, 8f);
         agent.acceleration = UnityEngine.Random.Range(2f, 6f);
-        mouseStrength = UnityEngine.Random.Range(10, 50);
+        mouseStrength += UnityEngine.Random.Range(1, 20);
         yield return new WaitForSeconds(UnityEngine.Random.Range(0.4f, 3f));
         StartCoroutine(ChangeSpeedATK());
         yield return null;

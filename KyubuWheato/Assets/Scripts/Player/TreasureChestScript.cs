@@ -137,14 +137,14 @@ public class TreasureChestScript : MonoBehaviour
     private void ChooseStat()
     {
         int StatGachaRoll = Random.Range(0, 20);
-        if (StatGachaRoll <= 2 && player.MoveSpeed <= 3.4f) { player.MoveSpeed += Random.Range(0.1f, 0.3f + 0.2f*ChestRarity); CreateImagePopup(9); player.StartCoroutine(player.ChestNotification(13)); }
-        else if (StatGachaRoll <= 5) { int i = Random.Range(player.maxHealth*1/10, player.maxHealth*1/2 + (player.maxHealth/5)*ChestRarity); player.maxHealth += i; player.healthBar.SetMaxHealth(player.maxHealth); player.UpdateHealth(i); CreateImagePopup(10); player.StartCoroutine(player.ChestNotification(14)); }
+        if (StatGachaRoll <= 2 && player.MoveSpeed <= 3.5f) { player.MoveSpeed += Random.Range(0.1f, 0.3f + 0.2f*ChestRarity); CreateImagePopup(9); player.StartCoroutine(player.ChestNotification(13)); }
+        else if (StatGachaRoll <= 5) { int i = Random.Range(player.maxHealth*1/10, player.maxHealth*1/4 + (player.maxHealth/5)*ChestRarity); player.maxHealth += i; player.healthBar.SetMaxHealth(player.maxHealth); player.UpdateHealth(i); CreateImagePopup(10); player.StartCoroutine(player.ChestNotification(14)); }
         else if (StatGachaRoll <= 8) { player.strength += Random.Range(0.25f, 0.75f + 0.5f*ChestRarity); CreateImagePopup(11); player.StartCoroutine(player.ChestNotification(15)); }
         else if (StatGachaRoll <= 11) { player.defense += Random.Range(0.25f, 0.75f + 0.5f*ChestRarity); CreateImagePopup(12); player.StartCoroutine(player.ChestNotification(16)); }
         else if (StatGachaRoll <= 13) { for (int i = 0; i < Random.Range(2, 6 + 3*ChestRarity); i++) { player.IncreaseDiceNumber(); }; CreateImagePopup(13); player.StartCoroutine(player.ChestNotification(17)); }
         else if (StatGachaRoll <= 15 && player.playerCooldownTime > 5.0f) { player.playerCooldownTime -= 0.5f; CreateImagePopup(14); player.StartCoroutine(player.ChestNotification(18)); }
-        else if (StatGachaRoll <= 17 && player.wheatDroprate < 100f) { player.wheatDroprate += Random.Range(0.1f, 2.0f); CreateImagePopup(15); player.StartCoroutine(player.ChestNotification(19)); }
-        else if (StatGachaRoll <= 18 && player.diceDroprate > 1) { player.diceDroprate -= Random.Range(10, 31); CreateImagePopup(16); player.StartCoroutine(player.ChestNotification(20)); }
+        else if (StatGachaRoll <= 17 && player.wheatDroprate < 100f) { player.wheatDroprate += Random.Range(0.5f, 2.0f + 0.5f*ChestRarity); CreateImagePopup(15); player.StartCoroutine(player.ChestNotification(19)); }
+        else if (StatGachaRoll <= 18 && player.diceDroprate > 1) { player.diceDroprate -= Mathf.RoundToInt(Random.Range(player.diceDroprate*0.03f, player.diceDroprate*0.06f)); CreateImagePopup(16); player.StartCoroutine(player.ChestNotification(20)); }
         else if (StatGachaRoll <= 19 && player.dicePreviewerLevel < 5) { player.dicePreviewerLevel += 1; diceThrowScript.UpdateDicePreviewerUI(); CreateImagePopup(17); player.StartCoroutine(player.ChestNotification(21)); }
         else { ChooseStat(); }
     }
