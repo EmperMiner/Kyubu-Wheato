@@ -399,8 +399,8 @@ public class Sanesss : MonoBehaviour
         alreadyDamaged = true;
         bossHealthBarScript.SetHealth(mouseHealth);
         StartCoroutine(FlashingHealthBar());
-        if (DevilishWhaleCheck == false && mouseHealth < maxMouseHealth*7/10) { StartCoroutine(DevilishWhaleCycle()); } 
-        if (RollAttack4Check == false && mouseHealth < maxMouseHealth/2) { StartCoroutine(RollAttack4()); } 
+        if (DevilishWhaleCheck == false && mouseHealth < maxMouseHealth*7/10) { StartCoroutine(DevilishWhaleCycle()); agent.speed += 2f; } 
+        if (RollAttack4Check == false && mouseHealth < maxMouseHealth/2) { StartCoroutine(RollAttack4()); agent.speed += 2f; } 
 
         
     }

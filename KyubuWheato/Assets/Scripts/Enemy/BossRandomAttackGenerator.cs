@@ -55,8 +55,7 @@ public class BossRandomAttackGenerator : MonoBehaviour
         if (player.maxHealth*50 < 25000) { mouseHealth = 25000; }
         else { mouseHealth = player.maxHealth*50; }
 
-        if (Mathf.FloorToInt(player.strength*10) < 100) { bossDamage = 100; }
-        else { bossDamage = Mathf.FloorToInt(player.strength*10); }
+        SetBossStrength();
         
         agent.speed = 3;
         RollAttackDelay = 5f;
@@ -88,6 +87,12 @@ public class BossRandomAttackGenerator : MonoBehaviour
             UnlockEntree();
             Destroy(gameObject);  
         }
+    }
+
+    public void SetBossStrength()
+    {
+        if (Mathf.FloorToInt(player.strength*10) < 100) { bossDamage = 100; }
+        else { bossDamage = Mathf.FloorToInt(player.strength*10); }
     }
 
     private void UnlockEntree()
@@ -222,9 +227,9 @@ public class BossRandomAttackGenerator : MonoBehaviour
     public IEnumerator RemoveHeatRiserBuff()
     {
         yield return new WaitForSeconds(20f);
-        bossDamage = 20;
-        agent.speed = 2;
-        RollAttackDelay = 6f;
+        SetBossStrength();
+        agent.speed = 3;
+        RollAttackDelay = 5f;
         yield return null;
     }
 

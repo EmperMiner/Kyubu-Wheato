@@ -20,10 +20,7 @@ MonoBehaviour:
   - {fileID: 4185845393045290319, guid: 154c0edc21acb694184576fdaae8767d, type: 3}
   - {fileID: 1341395029264087526, guid: 94d8620b534055840a487cf7f4a920eb, type: 3}
   - {fileID: 2701262824927360893, guid: 2d78fc35c66a4fb43b82aa47962f066d, type: 3}
-  - {fileID: 4514144088407996268, guid: 04c9d96d27fb36e419276ec3f71d15a5, type: 3}
-  - {fileID: 5382777319672248433, guid: bde3eabfc1185154bbacd34a648fb10c, type: 3}
-  - {fileID: 3082860963927806209, guid: 4065d84a1526fb643bc599b1fbe954ba, type: 3}
-  - {fileID: 1815329666037625875, guid: 460b6b0a664fe41488bdf7a653f220d3, type: 3}
+  - {fileID: 8935550308493363971, guid: f7298d553c12714419ce8623b1dd38ca, type: 3}
   Whale: {fileID: 1375204299989451831, guid: 3195d8adedbb20548afbe0bcbc80186f, type: 3}
   HaybaleOffsetX:
   - 12
@@ -74,7 +71,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -2042354673146899616}
-    m_Position: {x: 650, y: 10, z: 0}
+    m_Position: {x: 650, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5155744441952980316}
     m_Position: {x: 360, y: 120, z: 0}

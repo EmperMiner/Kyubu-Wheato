@@ -68,9 +68,9 @@ public class FarmerSummon : StateMachineBehaviour
         }
         if (attackIndex == 5)
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 5; i++)
             {
-                Instantiate(summonObject[Random.Range(3,7)], new Vector3(player.position.x + Random.Range(-7f, 7f), player.position.y + Random.Range(-7f, 7f), player.position.z), Quaternion.identity);
+                Instantiate(summonObject[Random.Range(3,8)], new Vector3(player.position.x + Random.Range(-7f, 7f), player.position.y + Random.Range(-7f, 7f), player.position.z), Quaternion.identity);
             }
         }
     }

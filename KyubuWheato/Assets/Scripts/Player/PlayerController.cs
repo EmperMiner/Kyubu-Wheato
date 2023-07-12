@@ -370,7 +370,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator SanesssIntro()
     {
-        yield return new WaitForSeconds(UnityEngine.Random.Range(5f,10f));
+        yield return new WaitForSeconds(UnityEngine.Random.Range(250f,350f));
         AudioPlayer.StopSound("Discord");
         SanesssIntroText.text = "";
         SanesssIntroText.text = "Y";
@@ -484,14 +484,17 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator DevilishWhaleChance()
     {
-        yield return new WaitForSeconds(UnityEngine.Random.Range(90f, 150f));
-        int whaleChance = UnityEngine.Random.Range(0,2);
-        if  (whaleChance == 0)
+        if (PlayerPrefs.GetInt("SanesssStatus") != 1) 
         {
-            StartCoroutine(SummonDevilishWhale());
+            yield return new WaitForSeconds(UnityEngine.Random.Range(90f, 150f));
+            int whaleChance = UnityEngine.Random.Range(0,2);
+            if  (whaleChance == 0)
+            {
+                StartCoroutine(SummonDevilishWhale());
+            }
+            StartCoroutine(DevilishWhaleChance());
+            yield return null;
         }
-        StartCoroutine(DevilishWhaleChance());
-        yield return null;
     }
 
     public IEnumerator SummonDevilishWhale()

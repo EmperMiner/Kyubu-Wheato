@@ -13,8 +13,8 @@ public class FarmerCharging : StateMachineBehaviour
     {
         bossRB = animator.GetComponent<Rigidbody2D>();
         randomNumberScript = animator.GetComponent<BossRandomAttackGenerator>();
-        randomNumberScript.bossDamage = 20;
-        randomNumberScript.agent.speed = 4;
+        randomNumberScript.bossDamage += randomNumberScript.bossDamage;
+        randomNumberScript.agent.speed = 6;
         randomNumberScript.RollAttackDelay = 3f;
         randomNumberScript.inChargingState = true;
         hitWhileCharging = false;
@@ -29,9 +29,9 @@ public class FarmerCharging : StateMachineBehaviour
             randomNumberScript.hit = false;
             GameObject HeatRiserOnMap = GameObject.FindGameObjectWithTag("HeatRiser");
             Destroy(HeatRiserOnMap);
-            randomNumberScript.bossDamage = 50;
-            randomNumberScript.agent.speed = 2;
-            randomNumberScript.RollAttackDelay = 6f;
+            randomNumberScript.SetBossStrength();
+            randomNumberScript.agent.speed = 3;
+            randomNumberScript.RollAttackDelay = 5f;
             hitWhileCharging = true;
         }
     }
