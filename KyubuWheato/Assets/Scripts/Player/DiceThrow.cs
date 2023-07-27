@@ -72,6 +72,8 @@ public class DiceThrow : MonoBehaviour
     [SerializeField] private Sprite[] CrescentCracks;
     [SerializeField] private GameObject starPrefab;
 
+    [SerializeField] private GameObject PersonaCutInUI;
+
     void Start()
     {
         TimeCrescentSprite = TimeCrescent.GetComponent<SpriteRenderer>();
@@ -593,6 +595,8 @@ public class DiceThrow : MonoBehaviour
     private IEnumerator ActivateUltimate()
     {
         ultimateBar.ultimateInProgress = true;
+        AudioPlayer.PlaySound("PersonaCutIn");
+        Instantiate(PersonaCutInUI, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(1f);
         CameraShakeInstance bruh = CameraShaker.Instance.StartShake(1f, 4f, .1f);
         StartCoroutine(AlongUltimate());
