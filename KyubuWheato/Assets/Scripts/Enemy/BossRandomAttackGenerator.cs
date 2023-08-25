@@ -52,8 +52,8 @@ public class BossRandomAttackGenerator : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         ultimateBar = GameObject.FindGameObjectWithTag("Ultimate Bar").GetComponent<UltimateBarCharge>();
 
-        if (player.maxHealth*50 < 25000) { mouseHealth = 25000; }
-        else { mouseHealth = player.maxHealth*50; }
+        if (player.maxHealth*10 < 20000) { mouseHealth = 20000; }
+        else { mouseHealth = player.maxHealth*10; }
 
         SetBossStrength();
         
@@ -244,6 +244,7 @@ public class BossRandomAttackGenerator : MonoBehaviour
     private void mouseTakeDamage(int i)
     {
         i = (int) (i * player.strength);
+        if (i < 20) { i = 20; }
         CreateDamagePopup(i);
         mouseHealth -= i;
         mouseSpriteRenderer.material.color = new Color32(255, 150, 150, 255); 
