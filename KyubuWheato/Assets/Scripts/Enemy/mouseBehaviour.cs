@@ -67,6 +67,8 @@ public class mouseBehaviour : MonoBehaviour
     private bool spriteFiring;
     [SerializeField] private SpriteRenderer blackCatSpriteRenderer;
 
+    [SerializeField] private bool isTutorialMob;
+
     private void Start()
     {
         stopped = false;
@@ -407,6 +409,12 @@ public class mouseBehaviour : MonoBehaviour
             maxMouseHealth = Mathf.FloorToInt((Mathf.Pow(level, 2.4f) + 50f));
             agent.speed = level*0.4f + 1.2f;
             agent.acceleration = level*0.1f + 1f;
+        }
+        if (isTutorialMob)
+        {
+            mouseStrength = 1;
+            maxMouseHealth = 1;
+            agent.speed = 0.2f;
         }
     }
 

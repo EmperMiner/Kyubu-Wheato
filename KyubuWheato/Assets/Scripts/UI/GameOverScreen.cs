@@ -10,6 +10,7 @@ public class GameOverScreen : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private TextMeshProUGUI WheatGainedText;
+    [SerializeField] private TextMeshProUGUI HarvestersRoadText;
     [SerializeField] private GameObject HUD;
     [SerializeField] private GameObject winningScreen;
     [SerializeField] private TextMeshProUGUI winningWheatGainedText;
@@ -87,10 +88,11 @@ public class GameOverScreen : MonoBehaviour
         HUD.SetActive(true);
     }
 
-    public void GameOverTrigger(int WheatGained)
+    public void GameOverTrigger(int WheatGained, int level)
     {
         HUD.SetActive(false);
         WheatGainedText.text = "Wheats Harvested:" + WheatGained.ToString(); 
+        HarvestersRoadText.text = "Harvester's road bonus:" + (level*200).ToString() + " Wheats";
         gameOverScreen.SetActive(true); 
         if (PlayerPrefs.GetInt("FirstDeath") == 0)
         {

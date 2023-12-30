@@ -34,7 +34,7 @@ public class betterEnemySpawner : MonoBehaviour
 
         if (PlayerPrefs.GetInt("WinCounter") > 0) { StartCoroutine(FlippedEnemyChance()); }
 
-        if (SceneManager.GetActiveScene().buildIndex > 4 && SceneManager.GetActiveScene().buildIndex != 15) { StartCoroutine(SpawnSpooders());}
+        if (SceneManager.GetActiveScene().buildIndex > 4 && SceneManager.GetActiveScene().buildIndex >= 15) { StartCoroutine(SpawnSpooders());}
     }
 
     private IEnumerator SpawnSpooders()

@@ -272,6 +272,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         if (SceneManager.GetActiveScene().buildIndex == 15) { PlayerPrefs.SetInt("SanesssStatus", 0); StartCoroutine(SanesssIntro()); }
+        if (SceneManager.GetActiveScene().buildIndex == 16) { StartCoroutine(Tutorial()); }
         PlayerPrefs.SetInt("PlayerStopped", 0);
         Invincible = false;
         RedWheatIndicator.SetActive(false);
@@ -441,6 +442,46 @@ public class PlayerController : MonoBehaviour
         AudioPlayer.StopSound("Discord");
         transform.position = new Vector3(0f, 0f, -2f);
         Instantiate(SanesssPrefab, new Vector3(-7f, 0f, -2f), Quaternion.identity);
+        yield return null;
+    }
+
+    private IEnumerator Tutorial()
+    {
+        PlayerPrefs.SetInt("DisableTutorial", 1);
+        SanesssIntroText.text = "Welcome to Kyubu Wheato! This level will be a quick tutorial level.";
+        yield return new WaitForSeconds(6f);
+        SanesssIntroText.text = "Try walking around with W A S and D.";
+        transform.position = new Vector3(0f, 15f, -2f);
+        yield return new WaitForSeconds(5f);
+        SanesssIntroText.text = "Now, an enemy will spawn. Aim your mouse at it and press left click.";
+        transform.position = new Vector3(0f, 15f, -2f);
+        Instantiate(SanesssPrefab, new Vector3(-2f, 15f, 0f), Quaternion.identity);
+        yield return new WaitForSeconds(12f);
+        SanesssIntroText.text = "Good. Next, you can use E to interact with objects, like chests and scarecrows, when you are next to them.";
+        yield return new WaitForSeconds(16f);
+        SanesssIntroText.text = "Alright. Now, how about using a charged attack with right click. It consumes 2 dice, charges a while and unleashes a big dice and spinning dice.";
+        Instantiate(Whale, new Vector3(3f, 15f, 0f), Quaternion.identity);
+        Instantiate(Whale, new Vector3(-3f, 15f, 0f), Quaternion.identity);
+        Instantiate(Whale, new Vector3(0f, 12f, 0f), Quaternion.identity);
+        yield return new WaitForSeconds(4f);
+        transform.position = new Vector3(0f, 15f, -2f);
+        Instantiate(SanesssPrefab, new Vector3(-3f, 15f, 0f), Quaternion.identity);
+        Instantiate(SanesssPrefab, new Vector3(-3f, 12f, 0f), Quaternion.identity);
+        Instantiate(SanesssPrefab, new Vector3(-3f, 18f, 0f), Quaternion.identity);
+        Instantiate(SanesssPrefab, new Vector3(3f, 12f, 0f), Quaternion.identity);
+        Instantiate(SanesssPrefab, new Vector3(3f, 18f, 0f), Quaternion.identity);
+        Instantiate(SanesssPrefab, new Vector3(3f, 15f, 0f), Quaternion.identity);
+        yield return new WaitForSeconds(12f);
+        SanesssIntroText.text = "The more chests you open, the better the charged attack gets.";
+        yield return new WaitForSeconds(6f);
+        SanesssIntroText.text = "Finally, some maps are very big, and so they usually have Overflowers (portals) somewhere on the edge, so you can instantly teleport to the other side.";
+        yield return new WaitForSeconds(12f);
+        SanesssIntroText.text = "If you get lost, press Tab to toggle the Map. It only shows up after you have defeated some enemies (unavailable on the tutorial level).";
+        yield return new WaitForSeconds(10f);
+        SanesssIntroText.text = "And before exiting, some levels require you to find colored keys in the shape of Wheat before exiting. You may need to explore around the map to find them.";
+        yield return new WaitForSeconds(12f);
+        SanesssIntroText.text = "You're good to go. Exit by going into the Exit Hoe.";
+        
         yield return null;
     }
 
@@ -677,7 +718,8 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetInt("SavedLevel", current + 1);
 
         EnterLevelIngameSaveData();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (SceneManager.GetActiveScene().buildIndex != 16) { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); }
+        else { SceneManager.LoadScene(4); }
 
         yield return null;
     }
@@ -898,7 +940,7 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 0f;
         crosshair.SetActive(false);
         diceThrower.SetActive(false);
-        gameOverScript.GameOverTrigger(Wheat);
+        gameOverScript.GameOverTrigger(Wheat, SceneManager.GetActiveScene().buildIndex - 4);
     }
 
     private void Win()
@@ -1067,7 +1109,7 @@ public class PlayerController : MonoBehaviour
         savingPlayerData.maxHealth = PlayerPrefs.GetInt("maxHealth");
         savingPlayerData.playerHealth = PlayerPrefs.GetInt("playerHealth");
         savingPlayerData.strength = PlayerPrefs.GetFloat("strength");
-        savingPlayerData.Wheat = PlayerPrefs.GetInt("Wheat") + Wheat;
+        savingPlayerData.Wheat = PlayerPrefs.GetInt("Wheat") + Wheat + (SceneManager.GetActiveScene().buildIndex - 4)*200;
         savingPlayerData.diceNumber = PlayerPrefs.GetInt("diceNumber");
         savingPlayerData.playerCooldownTime = PlayerPrefs.GetFloat("playerCooldownTime");
         savingPlayerData.defense = PlayerPrefs.GetFloat("defense");
