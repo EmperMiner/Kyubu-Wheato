@@ -8,7 +8,7 @@ A collaboration between the roguelite top-down shooter and the isometric arcade 
 She uses her trusty Kyubu Kyubu Dice to obliterate her enemies, taking back the wheat that once belonged to Steve the farmer. Unlock powerful (and delicious) entrees that grant useful abilities in taking down enemies. Combine strategy with utter randomness and chaos to use a rather unique combat system!
 
 # Levels
-Being not randomly generated but rather manually constructed and DOOM-like, it consists of 10 main levels, including a boss level at the end. Teresa-chan's goal is to retrieve that precious golden wheat bundle while stuffing the baddies' faces with dice, and her own face with Pastel de Choclo.
+Unlike roguelites with procedural generations, this game consists of 10 main handcrafted levels, including a boss level at the end. Teresa-chan's goal is to retrieve that precious golden wheat bundle while stuffing the baddies' faces with dice, and her own face with Pastel de Choclo.
 
 # Boss Fight!
 Can you defeat the almighty farmer who stole the golden wheat away from Steve? With 8 unique and brutal attacks up his sleeves, it seems that you might have to play smarter, not harde- nah just spam dice and get really buffed beforehand
